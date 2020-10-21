@@ -17,6 +17,6 @@ Ruby, Rails, JavaScript, PostgreSQL, MySQL, RSpec, MiniTest, Git flow
 
 
 <!-- Calendly inline widget begin -->
-<div class="calendly-inline-widget" data-url="https://calendly.com/hopman/gesprek" style="min-width:320px;height:975px;"></div>
+<div class="calendly-inline-widget" data-url="https://calendly.com/hopman/gesprek" style="min-width:320px;height:995px;"></div>
 <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js"></script>
 <!-- Calendly inline widget end -->
