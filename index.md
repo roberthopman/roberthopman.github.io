@@ -7,7 +7,7 @@ layout: default
 
 ## Introductie
 
-Als software ontwikkelaar vind ik het leuk om dingen te bouwen die zorgen voor een mooi resultaat. Meer omzet. Minder kosten.
+Als software ontwikkelaar vind ik het leuk om producten en teams te bouwen die zorgen voor een mooi resultaat. 
 
 <br>
 
