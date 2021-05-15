@@ -15,8 +15,16 @@ Als software ontwikkelaar vind ik het leuk om producten en teams te bouwen die z
 
 Ruby, Rails, JavaScript, PostgreSQL, MySQL, RSpec, MiniTest, Git flow
 
+<br>
 
-<!-- Calendly inline widget begin -->
-<div class="calendly-inline-widget" data-url="https://calendly.com/hopman/gesprek" style="min-width:320px;height:995px;"></div>
-<script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js"></script>
-<!-- Calendly inline widget end -->
+## Artikelen
+
+<ul style="list-style-type: none; margin: 0;">
+  {% for post in site.posts %}
+    <li>
+      <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+  {% endfor %}
+</ul>
+
+<br>

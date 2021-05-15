@@ -14,7 +14,7 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 title: Robert Hopman
-email: hopman.r@gmail.com
+email: robert@bonaroo.nl
 description: >- 
   Software ontwikkelaar
 baseurl: "" # the subpath of your site, e.g. /blog
@@ -31,7 +31,7 @@ show_excerpts: false
 
 author:
   name: Robert Hopman
-  email: "hopman.r@gmail.com"
+  email: "robert@bonaroo.nl"
 
 disqus:
   shortname: roberthopman

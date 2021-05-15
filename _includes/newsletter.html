@@ -1,3 +1,26 @@
+
+<button onclick="toggleDisplay()">Plan gesprek</button>
+
+<div id="calendlyWidget" style="display:none;">
+  <!-- Calendly inline widget begin -->
+  <div class="calendly-inline-widget" data-url="https://calendly.com/hopman/gesprek" style="min-width:320px;height:995px;"></div>
+  <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js"></script>
+  <!-- Calendly inline widget end -->
+</div>
+
+<script type="text/javascript">
+  function toggleDisplay() {
+    var x = document.getElementById("calendlyWidget");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+  }
+</script>
+
+
+<hr>
 <!-- Begin Mailchimp Signup Form -->
 <link href="//cdn-images.mailchimp.com/embedcode/classic-10_7.css" rel="stylesheet" type="text/css">
 <style type="text/css">
