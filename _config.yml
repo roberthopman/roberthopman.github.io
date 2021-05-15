@@ -15,8 +15,9 @@
 # in the templates via {{ site.myvariable }}.
 title: Robert Hopman
 email: robert@bonaroo.nl
+legal_entity: Charper Bonaroo B.V.
 description: >- 
-  Software ontwikkelaar
+  
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://roberthopman.com/" # the base hostname & protocol for your site, e.g. http://example.com
 permalink: /:title/
