@@ -7,7 +7,7 @@ layout: default
 
 ## Introductie
 
-Als software ontwikkelaar vind ik het leuk om producten en teams te bouwen die zorgen voor een mooi resultaat. 
+Mijn missie is vastgelopen IT projecten uit de brand helpen. 
 
 <br>
 
