@@ -13,7 +13,7 @@ Mijn missie is vastgelopen IT projecten uit de brand helpen.
 
 ## Welke technieken gebruik je?
 
-Ruby, Rails, JavaScript, PostgreSQL, MySQL, RSpec, MiniTest, Git flow
+Ruby, Rails, JavaScript, PostgreSQL, MySQL, RSpec, Minitest, Git flow
 
 <br>
 
