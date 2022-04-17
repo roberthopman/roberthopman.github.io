@@ -5,7 +5,7 @@
 layout: default
 ---
 
-Onderhoud en begeleiding van veilige software projecten.
+Onderhoud en begeleiding van veilige, geborgde en gecontroleerde software projecten.
 
 ## Artikelen
 
