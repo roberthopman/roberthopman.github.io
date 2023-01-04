@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Building WEM widgets: custom code in a no-code application (EN)"
+title:  "Building WEM widgets: custom code in a no-code application"
 ---
 
 WEM is a no-code application development platform. Asked to work on widgets for a client, I entered the ecosystem. It meant learning about the platform first to get a high-level overview. Then at each step closer to the task, I started to see familiar parts. On the first step I observed a GUI to create interaction nodes for a set of DOM elements, databases, logic and information flows. A second step deeper into the platform the nodes had their own custom widget editor, consisting of a script, layout and references to the interaction node.

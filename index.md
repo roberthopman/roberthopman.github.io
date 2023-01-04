@@ -5,10 +5,6 @@
 layout: default
 ---
 
-Onderhoud en begeleiding van veilige, geborgde en gecontroleerde software projecten.
-
-## Artikelen
-
 <ul style="list-style-type: none; margin: 0;">
   {% for post in site.posts %}
     <li>
