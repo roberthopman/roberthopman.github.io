@@ -37,7 +37,7 @@ Next, the steps to upgrade the application:
 - upgrade or downgrade gems, as required and read the (depreciation) messages afterwards on the command line, even if there are no explicit warnings.
 - run the `rails app:update`: "This will help you with the creation of new files and changes of old files in an interactive session." <https://guides.rubyonrails.org/upgrading_ruby_on_rails.html#the-update-task>
 - Have an acceptance environment to deploy and explore results, and a rollback plan.
-- Finally, there will a deploy to production. 
+- Finally, there will be a deploy to production. 
 
 Resources for the upgrade process:
 - <https://www.ruby-lang.org/en/downloads/branches/>
