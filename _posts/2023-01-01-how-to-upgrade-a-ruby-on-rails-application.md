@@ -22,7 +22,7 @@ Production parts to be considered:
 - ruby version
 - rails version
 - gem versions
-- branche
+- branch
 - deployment
 
 Next, the steps to upgrade the application:
