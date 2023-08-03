@@ -6,10 +6,10 @@ layout: default
 ---
 
 <svg id="clock" xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
-  <circle cx="100" cy="100" r="95" fill="none" stroke="black" stroke-width="5" />
-  <line id="hour" x1="100" y1="100" x2="100" y2="50" stroke="black" stroke-width="8" stroke-linecap="round" />
-  <line id="minute" x1="100" y1="100" x2="100" y2="30" stroke="black" stroke-width="6" stroke-linecap="round" />
-  <line id="second" x1="100" y1="100" x2="100" y2="20" stroke="red" stroke-width="4" stroke-linecap="round" />
+  <circle cx="100" cy="100" r="95" fill="none" stroke="black" stroke-width="1" />
+  <line id="hour" x1="100" y1="100" x2="100" y2="50" stroke="black" stroke-width="4" stroke-linecap="round" />
+  <line id="minute" x1="100" y1="100" x2="100" y2="30" stroke="black" stroke-width="2" stroke-linecap="round" />
+  <line id="second" x1="100" y1="100" x2="100" y2="20" stroke="red" stroke-width="1" stroke-linecap="round" />
   <circle cx="100" cy="100" r="5" fill="black" />
 </svg>
 
