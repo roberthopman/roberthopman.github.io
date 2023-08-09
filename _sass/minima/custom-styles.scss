@@ -1,2 +1,36 @@
 // Placeholder to allow defining custom styles that override everything else.
 // (Use `_sass/minima/custom-variables.scss` to override variable defaults)
+
+// index page
+.site-header, .page-content, .site-footer {
+  background-color: #eee;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+a {
+  color: #2b71ff;
+  text-decoration: underline; 
+}
+
+li {
+  padding-bottom: 1px;
+}
+
+code {
+  background-color: #ddd;
+}
+
+.language-rb, .highlighter-rouge {
+  .highlight {
+    background-color: #ddd;
+  }
+}
+
+// post show page
+.post-header {
+  border-bottom: 1px solid #999;
+}
+
+.post-title {
+  font-size: 1.2rem;
+}

@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Collecting creditcard details in Stripe with SetupIntent "
+title:  "Collecting creditcard details in Stripe with SetupIntent"
 ---
 
 #### What is a SetupIntent?

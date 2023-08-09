@@ -153,9 +153,7 @@ Step 6: make them available for association with the relevant Model:
 
 - a. Add to the MODEL: `acts_as_taggable_on :document_tags`
 - b. Add to controller: `before_action :set_tags, only: %i[new edit update]` and 
-
 ```rb
-
   private
     def set_tags
       @categories_collection = ActsAsTaggableOn::Tag.where(id: TagSetting.publications.active.select(:tag_id))
