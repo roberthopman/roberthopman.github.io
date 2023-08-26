@@ -4,9 +4,9 @@ title:  "Enter a debugging session when test run fails"
 ---
 
 Using:
-- Cuprite - https://github.com/rubycdp/cuprite
-- Capybara - https://github.com/teamcapybara/capybara
-- Minitest - https://github.com/minitest/minitest
+- Cuprite - [https://github.com/rubycdp/cuprite](https://github.com/rubycdp/cuprite)
+- Capybara - [https://github.com/teamcapybara/capybara](https://github.com/teamcapybara/capybara)
+- Minitest - [https://github.com/minitest/minitest](https://github.com/minitest/minitest)
 
 
 In a local development environment, when a line in this code fails, the execution stops:
@@ -23,7 +23,7 @@ class MainFeaturesTest < ApplicationSystemTestCase
 end
 ```
 
-When a line in the next file fails, the execution halts at debug. In order to explore context, the rele a screenshot was also taken before that.
+When a line the below file fails, the execution halts at debug. In order to explore context, the relevant backtrace was printed and a screenshot was also taken before that.
 
 We run this with `DEBUG_TESTS=true rails test test/system/main_features_test.rb:2`:
 
@@ -55,13 +55,14 @@ end
 **Note:** halting execution to enter debug mode may not be desired or even possible in a production environment, especially in continuous integration or other automated environments.
 
 
-Besides the above, and more relevant, you want to be enabled to log:
+### Addendum I: Evidence-based decision making
+
+Besides the above, and more relevant, you want to be enabled to see what is actually happening. During interactions with the system (either via human or machine) that can be done with:
 - Database transactions
 - Browser events
 
-## Database transactions
 
-In `application_record.rb`:
+For database transactions, in `application_record.rb`:
 ```
   before_save :log_info, if: :testing_environment?
 
@@ -76,20 +77,27 @@ In `application_record.rb`:
   end
 ```
 
-## Browser events:
+For browser events:
 
-Was curious which browser events could be happening:
+Example ferrum console loggers, to get the console output, can be found here:
+- [https://github.com/rubycdp/cuprite/issues/113#issuecomment-753609213](https://github.com/rubycdp/cuprite/issues/113#issuecomment-753609213)
+- [https://github.com/bullet-train-co/bullet_train/blob/main/test/support/ferrum_console_logger.rb](https://github.com/bullet-train-co/bullet_train/blob/main/test/support/ferrum_console_logger.rb)
 
-https://developer.mozilla.org/en-US/docs/Web/Events
+### Addendum II: Events
 
-Let's see the titles:
+Was also curious which (browser) events could be happening: [https://developer.mozilla.org/en-US/docs/Web/Events](https://developer.mozilla.org/en-US/docs/Web/Events)
 
+To get the event types:
+
+```js
 let tbody = document.querySelector('tbody');
 let results = Array.from(tbody.querySelectorAll('tr')).map(row => Array.from(row.querySelectorAll('td')).map(td => td.textContent));
 console.log(results.map(arr => arr[0])); 
-console.log(results); 
-
+console.log(results);
 ```
+
+Which results in:
+```html
 ['Animation', 'Asynchronous data fetching', 'Clipboard', 'Composition', 'CSS transition', 'Database',
 'DOM mutation', "Drag'n'drop, Wheel", 'Focus', 'Form', 'Fullscreen', 'Gamepad', 'Gestures', 'History',
 'HTML element content display management', 'Inputs', 'Keyboard', 'Loading/unloading documents',
@@ -98,6 +106,3 @@ console.log(results);
 'RTC (real time communication)', 'Server-sent events', 'Speech', 'Workers']
 ```
 
-Examples of ferrum console loggers:
-- https://github.com/rubycdp/cuprite/issues/113#issuecomment-753609213
-- https://github.com/bullet-train-co/bullet_train/blob/main/test/support/ferrum_console_logger.rb
