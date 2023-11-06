@@ -3,7 +3,7 @@ layout: post
 title:  "Questions for maintenance with checklist"
 ---
 
-## Questions for maintenance
+**Questions for maintenance**
 
 Here are five main areas with questions to ask when taking over an application for maintenance. 
 
@@ -32,7 +32,7 @@ Here are five main areas with questions to ask when taking over an application f
    - Are there any unique or non-standard features of the application that might be relevant during maintenance tasks?
 
 
-## Checklist Testing
+**Checklist Testing**
 
 Monitoring the health of a test suite is crucial to ensure the reliability of your application. Here are some best practices:
 
@@ -68,7 +68,7 @@ Monitoring the health of a test suite is crucial to ensure the reliability of yo
     - Conduct test suite health retrospectives to identify patterns in failures, flaky tests, and other issues. Use these insights to continuously improve the suite.
 
 
-## Checklist general
+**Checklist general**
 
 Production
 * Hosting
