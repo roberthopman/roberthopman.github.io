@@ -39,10 +39,12 @@ disqus:
 
 minima:
   social_links:
+    github: roberthopman
     stackoverflow: "6430382"
     twitter: roberthopman
-    github: roberthopman
     
+    
+
 google_analytics: 'G-J0HMLHK67L'
 
 # Exclude from processing.
