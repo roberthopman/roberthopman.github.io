@@ -7,6 +7,21 @@
   font-family: 'Courier New', Courier, monospace;
 }
 
+hr {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+p {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+h4 {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
 a {
   color: #2b71ff;
 }
@@ -16,12 +31,12 @@ li {
 }
 
 code {
-  background-color: #ddd;
+  background-color: #eee;
 }
 
 .language-rb, .highlighter-rouge {
   .highlight {
-    background-color: #ddd;
+    background-color: #eee;
   }
 }
 
@@ -48,3 +63,4 @@ code {
   float: left;
   width: 80%;
 }
+
