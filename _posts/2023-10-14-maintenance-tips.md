@@ -34,7 +34,11 @@ Structure:
 #### Read documentation
 <hr>
 - Documentation is a representation of the language (im)possibilities. 
-- Documentation can be found at [https://docs.ruby-lang.org/en/master/index.html](https://docs.ruby-lang.org/en/master/index.html) and at [https://rubyapi.org](https://rubyapi.org).
+- Documentation can be found at
+  - [https://docs.ruby-lang.org/en/master/index.html](https://docs.ruby-lang.org/en/master/index.html)
+  - [https://rubyapi.org](https://rubyapi.org).
+  - via ruby info `ri` command in terminal, e.g. `ri Array#map` or `ri .map`
+  - via `help` command in interactive ruby. First `irb` then `help Array#map` or `help .map`
 - ruby-lang.org search shows more results from the documentation, rubyapi.org shows less results.
 - Class methods are called on the class itself and are defined with self. Instance methods are called on an instance of a class and are defined without self.
 - `::` is a scope resolution operator. It is used to reference a constant, module, or class defined within another class or module. It is documented as a class method.
@@ -63,7 +67,7 @@ Basic literals:
 'That\'s right', "double quotes", "Interpolation like #{2+2}"
 
 # Symbols (immutable strings)
-:pending, :"rejected", :"#{'var'}_name"
+:pending, :"rejected", :"#{var}_name"
 
 # Arrays
 [1, 2, 3, 4, 5]
@@ -85,6 +89,18 @@ a_variable = <<HEREDOC
   This is a heredoc
   It is used for multi-line strings
 HEREDOC
+```
+
+[Regex](https://docs.ruby-lang.org/en/master/Regexp.html)
+```ruby
+# Regular Expression
+# A regular expression (also called a regex or regexp) 
+# is a match pattern (also simply called a pattern). 
+# Regex can be used for pattern matching and pattern replacement. 
+re = /red/
+re.match?('redirect') # => true   # Match at beginning of target.
+re.match?('bored')    # => true   # Match at end of target.
+re.match?('foo')      # => false  # No match.
 ```
 
 Type conversion:
