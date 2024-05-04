@@ -51,8 +51,12 @@ code {
 }
 
 .main {
-  margin-top: 160px;
-  margin-bottom: 16px;
+  margin-top: 120px;
+  padding-bottom: 40px;
+
+  .main-posts {
+    margin-top: 20px;
+  }
 
   .title {
     font-weight: 900;

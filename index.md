@@ -14,7 +14,7 @@ layout: default
   {% assign eighteen_months_ago = "now" | date: "%s" | minus: 15552000 | plus: 0 %}
 
   {% if post_date >= eighteen_months_ago %}
-    <div>Posts:</div>  
+    <div class="main-posts">Posts:</div>  
     <div class='column-date'>{{ post.date | date: "%d-%m-%Y" }}</div>
     <div class='column-title'><a href="{{ post.url }}">{{ post.title }}</a></div>
   {% endif %}
