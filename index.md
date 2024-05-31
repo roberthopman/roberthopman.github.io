@@ -7,7 +7,8 @@ layout: default
 
 <div class="main">
   <div class="title">Hello</div>
-  <div>I develop software.</div>
+  <div>I develop software. <a href="/why-do-we-program/">So what, why write code?</a></div>
+
   <div class="main-posts">Posts:</div>  
   {% for post in site.posts %}
   {% assign post_date = post.date | date: "%s" | plus: 0 %}
