@@ -52,6 +52,144 @@ For debugging use `p` instead of `puts`.
 - `print` (prints without trailing new line)
 - `puts` (prints expression and nil)
 
+#### Shebang on Unix
+<hr>
+
+The shebang is the `#!` at the beginning of a script. It tells the system what interpreter to use to run the script, e.g. file `hi.rb`:
+```ruby
+#!/usr/bin/env ruby
+puts 'Hello, world!'
+```
+
+#### Reserved keywords
+- Version: [3.3](https://docs.ruby-lang.org/en/3.3/keywords_rdoc.html)
+- With definition: [https://ruby-doc.org/docs/keywords/1.9/](https://ruby-doc.org/docs/keywords/1.9/)
+
+```md
+__ENCODING__ 
+The script encoding of the current file.
+
+__LINE__
+The line number of this keyword in the current file.
+
+__FILE__
+The path to the current file.
+
+BEGIN
+Runs before any other code in the current file. 
+
+END
+Runs after any other code in the current file. 
+
+alias
+Creates an alias between two methods (and other things). 
+
+and
+Short-circuit Boolean and with lower precedence than &&
+
+begin
+Starts an exception handling block. 
+
+break
+Leaves a block early. 
+
+case
+Starts a case expression. 
+
+class
+Creates or opens a class. 
+
+def
+Defines a method. 
+
+defined?
+Returns a string describing its argument. 
+
+do
+Starts a block.
+
+else
+The unhandled condition in case, if and unless expressions. 
+
+elsif
+An alternate condition for an if expression. 
+
+end
+The end of a syntax block. Used by classes, modules, methods, exception handling and control expressions.
+
+ensure
+Starts a section of code that is always run when an exception is raised. 
+
+false
+Boolean false. 
+
+for
+A loop that is similar to using the each method. 
+
+if
+Used for if and modifier if statements. 
+
+in
+Used to separate the iterable object and iterator variable in a for loop. It also serves as a pattern in a case expression. 
+
+module
+Creates or opens a module. 
+
+next
+Skips the rest of the block. 
+
+nil
+A false value usually indicating “no value” or “unknown”. 
+
+not
+Inverts the following boolean expression. Has a lower precedence than !
+
+or
+Boolean or with lower precedence than ||
+
+redo
+Restarts execution in the current block. 
+
+rescue
+Starts an exception section of code in a begin block. 
+
+retry
+Retries an exception block. 
+
+return
+Exits a method. If met in top-level scope, immediately stops interpretation of the current file.
+
+self
+The object the current method is attached to. 
+
+super
+Calls the current method in a superclass. 
+
+then
+Indicates the end of conditional blocks in control structures. 
+
+true
+Boolean true. 
+
+undef
+Prevents a class or module from responding to a method call. 
+
+unless
+Used for unless and modifier unless statements. 
+
+until
+Creates a loop that executes until the condition is true. 
+
+when
+A condition in a case expression. 
+
+while
+Creates a loop that executes while the condition is true. 
+
+yield
+Starts execution of the block sent to the current method. 
+```
+
 #### Literals
 <hr>
 [Literals at https://docs.ruby-lang.org](https://docs.ruby-lang.org/en/master/syntax/literals_rdoc.html)
