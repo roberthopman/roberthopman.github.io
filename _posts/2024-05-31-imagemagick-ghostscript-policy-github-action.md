@@ -8,7 +8,8 @@ When using ImageMagick in GitHub Actions, you may encounter the following error:
 ```sh
 MiniMagick::Error: `convert -density 300 -quality 90 /home/runner/.../foobar.pdf[0] 
 -resize 500x500> /home/runner/.../thumbnail/foobar.jpg 
-failed with error: convert-im6.q16: no images defined `/home/runner/.../thumbnail/foobar.jpg' @ error/convert.c/ConvertImageCommand/3229.
+failed with error: convert-im6.q16: no images defined 
+`/home/runner/.../thumbnail/foobar.jpg' @ error/convert.c/ConvertImageCommand/3229.
 ```
 
 Observing a possible solution here: [https://github.com/orgs/community/discussions/26600](https://github.com/orgs/community/discussions/26600)
