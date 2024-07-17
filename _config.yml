@@ -13,7 +13,7 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: Blog
+title: My Blog
 email: robert@bonaroo.nl
 legal_entity: Charper Bonaroo B.V.
 description: >- 
@@ -27,6 +27,7 @@ markdown: kramdown
 theme: minima
 plugins:
   - jekyll-feed
+  - jekyll-gist
 
 show_excerpts: false
 

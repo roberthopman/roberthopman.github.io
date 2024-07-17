@@ -6,10 +6,10 @@ layout: default
 ---
 
 <div class="main">
-  <div class="title">Hello</div>
-  <div>I develop software. <a href="/why-do-we-program/">So what, why write code?</a></div>
-
-  <div class="main-posts">Posts:</div>  
+  <div class="title">Welcome</div>
+  <div>I build company saving software.</div>
+  <br>
+  <div class="main-posts">Posts:</div>
   {% for post in site.posts %}
   {% assign post_date = post.date | date: "%s" | plus: 0 %}
   {% assign eighteen_months_ago = "now" | date: "%s" | minus: 15552000 | plus: 0 %}
