@@ -1,7 +1,16 @@
 ---
-layout: post
-title:  "A set of precisely defined rules, potentially enforceable, to guide and regulate behavior in coding"
+layout: default
+title:  Syntax
 ---
+
+# Syntax rules
+
+Language consists of a system:
+
+- [Semantics](https://en.wikipedia.org/wiki/Semantics) studies the aspects of meaning.
+- [Syntax](https://en.wikipedia.org/wiki/Syntax) studies the structure, principles and relationships.
+
+Besides the syntax, we can have general guidelines to describe common knowledge.
 
 **General rules**
 

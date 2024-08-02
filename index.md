@@ -1,7 +1,4 @@
 ---
-# Feel free to add content and custom Front Matter to this file.
-# To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
-
 layout: default
 ---
 
@@ -9,7 +6,7 @@ layout: default
   <div class="title">Welcome</div>
   <div>I build company saving software.</div>
   <br>
-  <div class="main-posts">Posts:</div>
+  <div class="main-posts title">Posts:</div>
   {% for post in site.posts %}
   {% assign post_date = post.date | date: "%s" | plus: 0 %}
   {% assign eighteen_months_ago = "now" | date: "%s" | minus: 15552000 | plus: 0 %}
@@ -21,4 +18,4 @@ layout: default
   {% endfor %}
 </div>
 
-<a href="/archive">Archived Posts</a>
+<div><a href="/archive">Archived Posts</a></div>

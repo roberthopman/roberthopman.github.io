@@ -3,11 +3,12 @@
 # To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 
 layout: default
+title: T.I.L.
 ---
 
 <div class="main">
   <div class="title">T.I.L.</div>
-   <a href="https://ruby-doc.org/3.3.4/Kernel.html#method-i-tap">Kernel#tap</a> is a method that yields self to the block and returns self. It is useful for debugging or for chaining methods together.
+  <a href="https://ruby-doc.org/3.3.4/Kernel.html#method-i-tap">Kernel#tap</a> is a method that yields self to the block and returns self. It is useful for debugging or for chaining methods together.
 
 {% highlight ruby %}
 (1..10)

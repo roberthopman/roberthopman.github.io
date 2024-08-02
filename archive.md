@@ -4,7 +4,7 @@ title: Archive
 ---
 
 <div class="main">
-  <div>Archive:</div>
+  <div class="title">Archive:</div>
   {% for post in site.posts %}
   {% assign post_date = post.date | date: "%s" | plus: 0 %}
   {% assign eighteen_months_ago = "now" | date: "%s" | minus: 15552000 | plus: 0 %}
