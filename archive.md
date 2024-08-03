@@ -10,8 +10,10 @@ title: Archive
   {% assign eighteen_months_ago = "now" | date: "%s" | minus: 15552000 | plus: 0 %}
 
   {% if post_date < eighteen_months_ago %}
+  <div class='post-row'>
     <div class='column-date'>{{ post.date | date: "%d-%m-%Y" }}</div>
     <div class='column-title'><a href="{{ post.url }}">{{ post.title }}</a></div>
+  </div>
   {% endif %}
 {% endfor %}
 </div>

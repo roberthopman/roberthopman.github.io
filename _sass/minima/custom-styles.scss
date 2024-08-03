@@ -67,13 +67,17 @@ code {
   }
 }
 
+.post-row {
+  display: block;
+}
+
 .column-date {
-  float: left;
-  width: 20%;
+  display: inline;
+  width: 10%;
 }
 .column-title {
-  float: left;
-  width: 80%;
+  display: inline;
+  width: 90%;
 }
 
 // post show page
