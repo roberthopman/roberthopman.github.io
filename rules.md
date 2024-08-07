@@ -39,6 +39,8 @@ Structure:
 - [Variables](#variables)
 - [Control flow](#control-flow)
 - [Methods](#methods)
+- [Classes](#classes)
+- [Collections](#collections)
 
 #### Read documentation
 <hr>
@@ -246,7 +248,8 @@ HEREDOC
 ```ruby
 # Regular Expression
 # A regular expression (also called a regex or regexp) 
-# is a match pattern (also simply called a pattern). 
+# is a way of specifying a set of characters that matches a string or part of a string.
+# It is a match pattern (also simply called a pattern).
 # Regex can be used for pattern matching and pattern replacement. 
 re = /red/
 re.match?('redirect') # => true   # Match at beginning of target.
@@ -260,6 +263,97 @@ Type conversion:
 1.to_s 
 # to integer
 '1'.to_i
+```
+
+Blocks
+Code block is a chunk of code that can be passed to a method, as if the block were another parameter.
+```ruby
+[1,2].each { puts 'x' }
+[1,2].each do puts 'x' end
+# parameters first, only one block after.
+object.say("dave") { puts 'hello' }
+
+# The act of doing something to all objects in a collection is called enumeration in Ruby; in other languages it is called iteration.
+# e.g. each, sort_by, group_by, map, reduce 
+# (https://ruby-doc.org/3.3.4/IO.html#method-i-print)[https://ruby-doc.org/3.3.4/IO.html#method-i-print]
+names.each { |x| print(name, " ") }
+``` 
+
+# Control flow
+
+[https://ruby-doc.org/3.3.4/syntax/control_expressions_rdoc.html](https://ruby-doc.org/3.3.4/syntax/control_expressions_rdoc.html)
+
+
+Conditional branches:
+```ruby
+# if/elsif/else
+if condition1
+  # code
+elsif condition2
+  # code
+else
+  # code
+end
+
+# ternary operator
+condition ? true_value : false_value
+
+# unless. As reminder: if not
+unless expression
+  # some code to be executed if the expression is FALSE
+else
+  # some code to be executed if the expression is true
+end
+
+# case
+case expression
+when condition1
+  # code
+when condition2
+  # code
+else
+  # code
+end
+```
+
+Loops:
+
+[https://ruby-doc.org/3.3.4/Kernel.html#method-i-loop](https://ruby-doc.org/3.3.4/Kernel.html#method-i-loop)
+```ruby
+# a method defined in Kernel, but it looks like a control structure.
+# loop
+# iteration over api endpoint that is paginated
+page = 1
+collection = []
+loop do
+  # response = send_request(:get, '/endpoint', page)
+  # collection += response[:data]
+  # page += 1
+  # break if page > response.dig(:pagination, :total_pages)
+end
+
+# while (do keyword is optional)
+a = 0
+while a < 10 do
+  p a
+  a += 1
+end
+p a
+
+# until. As reminder: while not
+until condition
+  # loop as long as condition is false
+end
+```
+Break, next:
+- Use break to leave a block early.
+- Use next to skip the rest of the current iteration.
+
+```ruby
+loop do
+  next if condition_1
+  break if condition_2
+end
 ```
 
 Expressions and Return Values:
@@ -282,7 +376,8 @@ puts 1+1
 
 #### Variables
 <hr>
-[Variables at https://docs.ruby-lang.org](https://docs.ruby-lang.org/en/master/doc/syntax/assignment_rdoc.html)
+
+[https://docs.ruby-lang.org/en/master/doc/syntax/assignment_rdoc.html](https://docs.ruby-lang.org/en/master/doc/syntax/assignment_rdoc.html)
 
 A variable is an identifier that is assigned to an object, and which may hold a value. A local variable name may contain letters, numbers, an _ (underscore or low line) or a character with the eighth bit set.
 
@@ -465,3 +560,291 @@ Environment
 Embedded Data 
   DATA
 ```
+
+# Methods
+
+https://docs.ruby-lang.org/en/master/syntax/methods_rdoc.html
+
+A method is invoked using dot syntax: `receiver.method`
+
+In other words: 
+- We ask the object to perform an action.
+- The object receives a message.
+- We send a message to the object.
+
+Preference to use parentheses in all but the simplest cases. This would be idiomatic, it means in line with the language's conventions.
+
+```ruby
+def hello
+  puts 'hi'
+end
+
+Since Ruby 3.0 endless method:
+def a_method(arg) = puts arg
+```
+
+Defined by keyword `def`. You can undefine by `undef`
+
+Can begin with lowercase or underscore, followed by letters, numbers or underscores. May end with ?, !, =. 
+- Predicate methods end with a ? and return a boolean result. 
+- Bang methods end with a ! and modify the object in some way. E.g. String .reverse or .reverse!. The first one returns a modified string and the second one modifies the receiver in place.
+- Assignment methods end with = and modify the object in some way.
+
+Parentheses are optional: `def hello; end` is the same as `def hello() end`.
+
+### Method arguments
+
+```ruby
+def hello(greeting = "hi", name = "bob", question, *args)
+  puts "#{greeting} #{name} #{question} #{args}"
+end
+
+- `greeting` is a default argument.
+- `name` is a default argument.
+- `question` is a required argument.
+- `args` is a splat argument. It collects all remaining arguments into an array.
+```
+
+class method: `def self.method_name`
+instance method: `def method_name`
+
+keyword arguments: `def method_name(city: "value", state:)`
+When calling the method, you can pass the arguments in any order, but each keyword argument must be part of the call:
+`method_name(state: "CA", city: "San Francisco")`
+Collect arguments into Hash with double-splat, or **: `def method_name(**args)`
+
+
+# Classes
+
+In object oriented programming, a class is a blueprint for a domain concept.
+
+Instances are created by a constructor. The standard constructor method is called `new`. When you call Bike.new, Ruby holds an uninitialized object and calls that objects `initialize` method, passing all arguments from `.new`. This sets up the object's state. Instances have a unique object_id (object identifier).
+
+`#<Class:object_id>` is the default string representation of an object.
+
+```ruby
+class Bike
+  def initialize(price)
+    @price = price
+  end
+end
+bike = Bike.new(100)
+puts bike 
+#<Bike:0x000000011063ea50>
+p bike
+#<Bike:0x000000011063ea50 @price="100">
+```
+`p` calls the inspect method on the object. It's a good way to see the object's state.
+
+```ruby
+class Bike
+  def initialize(price)
+    @price = Float(price)
+  end
+
+  def to_s
+    "I'm a bike and my price is #{@price} hours of work."
+  end
+end
+bike = Bike.new(100)
+puts bike 
+#I'm a bike and my price is 100.0 hours of work.
+```
+
+## Object and attributes
+
+Creating an `accesor` method is a common pattern in Ruby. Below, the `def price` is a getter method, which can also be rewritten to the shortcut `attr_reader :price`. It allows you to read the value of an instance variable. Below, `def price=(price)` is a setter method, shortcut (but rare) `attr_writer :price`. It allows you to write to the value of an instance variable. Generally, use `attr_accessor :price` for both reading and writing, for a given attribute (e.g. an instance variable). Below as example `price_in_cents` is a virtual instance variable or calculated value. An attribute is just a method that is called when you use dot syntax and is an implementation of the `uniform access principle`. 
+
+As summary:
+- State is held in instance variables. 
+- External state is exposed through methods via attributes. 
+- Other actions your class can perform are just regular methods. 
+
+```ruby
+# bike.rb
+class Bike
+  attr_reader :price
+
+  def initialize(price)
+    @price = Float(price)
+  end
+
+  def price
+    @price
+  end
+
+  def price=(new_price)
+    @price = price
+  end
+
+  def price_in_cents
+    (price * 100).round
+  end
+
+  def price_in_cents=(cents)
+    @price = cents / 100.0
+  end
+end
+```
+
+Classes working with other classes:
+
+With the following `1.csv` file:
+```
+price
+123
+321
+```
+
+We look at the following `bike_stats.rb` file:
+```ruby
+require 'csv'
+require_relative 'bike'
+
+bikes = []
+
+ARGV.each do |csv|
+  $stderr.puts "Processing file: #{csv}"
+  CSV.foreach(csv, headers: true) do |row|
+    $stderr.puts "Processing row: #{row}"
+    bike = Bike.new(row['price'])
+    bikes << bike
+  end
+end
+
+p bikes.count
+
+# run with:
+# ruby bike_stats.rb 1.csv
+```
+`require_relative` means that the file is loaded relative to the path of the current file.
+`ARGV` is an array of command line arguments.
+`$stderr` is the standard error stream.
+
+## Specifying access control
+
+Classes increasingly depending on other classes is called coupling. Coupling is a bad thing. It makes it hard to change one class without breaking another. Ruby gives 3 levels of access control: public methods, private methods, and protected methods (rare).
+
+`Public methods` can be called by anyone, no access control is enforced.
+`Protected methods` can be called only by objects of the defining class or subclasses. Access is within the family.
+`Private methods` can not be called with an explicit receiver, it is always in the context of the current object, known as `self`.
+
+```ruby
+class Door
+  def initialize(locked)
+    @locked = locked
+  end
+
+  # subsequent methods will be public again
+  def open 
+    unlock
+    walking 
+  end
+  
+  def close
+    lock 
+  end
+
+  def next_is_locked?(other)
+    if locked?
+      "you can only see the current door"
+    else
+      other.locked?
+    end
+  end
+
+  protected
+  # subsequent methods will be protected, only usable to class or subclass
+  def locked?
+    @locked
+  end
+  
+  private
+  # subsequent methods will be private, only usable within the instance
+  def unlock
+    @locked = false
+  end
+
+  def lock
+    @locked = true
+    return 'locked'
+  end
+
+  public
+  # subsequent methods will be public again, usually public is not needed
+
+  # this private is preferred, because it's more explicit
+  # also possible, only usable within the instance
+  private def walking
+    puts 'walking'
+  end
+end
+# door = Door.new(true)
+# door.open
+# door.close
+# door.next_is_open?(Door.new(true))
+```
+
+### preference: per method explicit access control
+
+## Variables
+A variable is not an object in Ruby. It is a reference to an object.
+Assignment aliases objects, potentially giving multiple variables that reference the same object.
+
+String#dup will create a new string object with the same content.
+String#freeze will make a string immutable.
+Numbers and symbols are always frozen (immutable) in Ruby.
+
+## Reopening Classes
+
+`Monkey-patching`: Process of reopening classes to add or change (utility) methods. Use with caution.
+
+# Collections
+
+Most real programs manage collections of data. Ruby has a number of built-in classes for managing collections: arrays and hashes. Both classes have large interfaces and many methods.
+
+## Arrays
+
+Array.new, Array.[], create a new array.
+```ruby
+# class methods
+a = Array.new(1,2,3)
+b = Array.[](1, 2, 3)
+
+# instance methods below
+b[0] or b.[](0) are both fine, though b[0] will be much more common.
+
+# assignment
+b[0]=4 or b.[]=(0, 4) are both fine, though b[0]=4 will be much more common.
+```
+Some assignments:
+b[1, 0] = [5, 6] at index 1, for 0 elements, will insert 5 and 6, shifting the rest of the array to the right.
+b[1, 1] = [5, 6] at index 1, for 1 element, will replace, with 5 and 6.
+b[0, 2] = [5, 6] at index 0 for 2 elements, will replace, with 5 and 6.
+b[0..1] = [] at index 0 to 1, will remove the elements.
+b[6..7] = 99, 98, will insert 99 and 98 at index 6 and 7 e.g. [1, 2, 3, nil, nil, nil, 99, 98]
+
+Reminder: array of words = %w{one two three}, array of symbols = %i{one two three}
+
+## Hashes
+Hashes known as associative arrays, maps, dictionaries, key-value stores. They are collections of key-value pairs. The index in a hash is called a key. The value or entry is the object that the key points to. Retrieve the entry by indexing the hash with the key value.
+
+hash literals are created with curly braces, e.g. {:key => "value", "key_2" => "value_2"}
+`=>` is called hashrocket.
+
+```ruby
+foo = "bar"
+baz = {foo:} 
+# ruby will assume the key and value are the same
+puts baz
+# => {:foo=>"bar"}
+
+```
+
+## Digging
+`dig` is a method that allows you to access nested elements of a hash. It is a safe way to access nested elements. It will return nil if any intermediate element is nil. A method on a hash, array, or struct.
+
+----
+
+Abbreviations:
+- CSV = Comma Separated Values
