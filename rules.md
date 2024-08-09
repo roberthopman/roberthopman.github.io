@@ -266,18 +266,141 @@ Type conversion:
 ```
 
 Blocks
-Code block is a chunk of code that can be passed to a method, as if the block were another parameter.
+Code block is a chunk of code that can be passed to a method. You can think of a block as somewhat like the body of an anonymous method, as if the block were another parameter passed to that method. Usually between braces on one line and do/end when block spans multiple lines. Parameters to a block are separated by commas, and they are always local to the block. You can define block-local variables using the `;` character in the block's parameter list. 
+
 ```ruby
+# general syntax
 [1,2].each { puts 'x' }
 [1,2].each do puts 'x' end
-# parameters first, only one block after.
+[1,2].each { |x| puts x }
+[1,2].each { puts _1 } # _1 first positional argument, _2, _3 etc.
+
+# block-local variable y (syntax is rare)
+y = 100
+sum = 0
+[1,2].each do |x; y| 
+  y = x*x
+  sum += y
+end
+puts sum
+puts y
+
+# method say first, then parameters, only one block after.
 object.say("dave") { puts 'hello' }
 
 # The act of doing something to all objects in a collection is called enumeration in Ruby; in other languages it is called iteration.
-# e.g. each, sort_by, group_by, map, reduce 
+# e.g. each, find, map, sort_by, group_by, map, reduce 
+# https://ruby-doc.org/3.3.4/Enumerator.html#method-i-each
+# https://ruby-doc.org/3.3.4/Enumerable.html#method-i-find
 # (https://ruby-doc.org/3.3.4/IO.html#method-i-print)[https://ruby-doc.org/3.3.4/IO.html#method-i-print]
 names.each { |x| print(name, " ") }
-``` 
+
+# Ruby remembers the context of an object, local variables, block, and so on, this is called `binding`. Within the method, the block may be invoked, using the `yield` statement. A block returns a value to the method that yields to it. The value of the last expressions evaluated in the block is passed back to the method as the value of the yield expression.
+def two_times 
+  yield
+  yield
+end
+two_times { puts "Hello" }
+Hello 
+Hello
+
+`.tap` # is a no-op, it taps into the object and returns the object. It is useful for debugging e.g.: 
+`.tap { |result| puts "result: #{result}\n\n" }`
+
+# map implementation looks something like this, which constructs a new array
+class Array
+  def map
+    result = []
+    each do |value| 
+      result << yield(value) 
+    end
+    result 
+  end
+end
+```
+
+If the last parameter is prefixed by `&` (such as `&action`), that code block is converted to an object of class `Proc`. The `Proc` object is then assigned to the parameter. This allows you to pass a code block to a method as if it were a regular parameter. 
+
+https://docs.ruby-lang.org/en/master/Proc.html
+https://docs.ruby-lang.org/en/master/Kernel.html#method-i-lambda
+
+```ruby
+# Long
+class ProcObject
+  def pass_in(&action)
+    @stored_proc = action
+  end
+
+  def use_proc(parameter)
+    @stored_proc.call(parameter)
+  end
+end
+foo = ProcObject.new
+foo.pass_in{ |paramz| puts "Hello, #{paramz}!" }
+foo.use_proc("Dave")
+
+# shorter
+def create_block_object(&block)
+  block
+end
+bl = create_block_object { |x| puts "Hello, #{x}!" }
+bl.call('Dave')
+
+# shortest
+# stabby lambda
+bl = -> (param) { puts "you called with #{param}" }
+bl.call("Dave")
+
+# short: lambda (Ruby Kernal method)
+bl = lambda { |param| puts "you called with #{param}" }
+bl.call("Dave")
+
+# short: Kernal method proc
+bl = proc { |param| puts "you called with #{param}" }
+bl.call("Dave")
+
+# Proc.new (not the preferred method)
+bl = Proc.new { |param| puts "you called with #{param}" }
+bl.call("Dave")
+```
+
+Blocks as closures
+Variables in the surrounding scope that are referenced in a block remain acessible for the life of that block and the life of any Proc object created from that block. 
+```ruby
+def n_times(thing)
+  ->(n) { puts thing * n }
+end
+p1 = n_times("Hello,")
+p1.call(3)
+# => Hello,Hello,Hello,
+
+# Parameter list
+# it can take default values, splat arguments, keywords arguments, and block parameters.
+-> (parameter list) { block }
+
+# Example
+proc2 = -> (x, *y, &z) do 
+  puts x
+  puts y
+  z.call
+end
+
+proc2.call(1, 2, 3, 4) { puts "Hello, World!" }
+# => 1
+# => [2, 3, 4]
+# => Hello, World!
+```
+
+Enumerators: can iterate over two collections in parallel.
+Enumerator class is not to be confused with the Enumerable module. The Enumerator class is used to create custom external iterator.
+```ruby
+short_enum = [1,2,3].to_enum
+long_enum = ('a'..'z').to_enum
+loop do 
+  # will end after the 3rd iteration, this will terminate cleanly
+  puts "#{short_enum.next} - #{long_enum.next}"
+end
+```
 
 # Control flow
 
@@ -565,6 +688,16 @@ Embedded Data
 
 https://docs.ruby-lang.org/en/master/syntax/methods_rdoc.html
 
+Defined by keyword `def`. You can undefine by `undef`
+
+Can begin with lowercase or underscore, followed by letters, numbers or underscores. May end with ?, !, =. 
+
+- `Predicate` methods end with a ? and return a boolean result. 
+- `Bang` methods end with a ! and modify the object in some way. E.g. String .reverse or .reverse!. The first one returns a modified string and the second one modifies the receiver in place.
+- `Assignment` methods end with = and modify the object in some way.
+
+Parentheses are optional: `def hello; end` is the same as `def hello() end`.
+
 A method is invoked using dot syntax: `receiver.method`
 
 In other words: 
@@ -583,15 +716,6 @@ Since Ruby 3.0 endless method:
 def a_method(arg) = puts arg
 ```
 
-Defined by keyword `def`. You can undefine by `undef`
-
-Can begin with lowercase or underscore, followed by letters, numbers or underscores. May end with ?, !, =. 
-- Predicate methods end with a ? and return a boolean result. 
-- Bang methods end with a ! and modify the object in some way. E.g. String .reverse or .reverse!. The first one returns a modified string and the second one modifies the receiver in place.
-- Assignment methods end with = and modify the object in some way.
-
-Parentheses are optional: `def hello; end` is the same as `def hello() end`.
-
 ### Method arguments
 
 ```ruby
@@ -605,14 +729,94 @@ end
 - `args` is a splat argument. It collects all remaining arguments into an array.
 ```
 
-class method: `def self.method_name`
-instance method: `def method_name`
+A class method: `def self.method_name` and an instance method: `def method_name`.
 
-keyword arguments: `def method_name(city: "value", state:)`
-When calling the method, you can pass the arguments in any order, but each keyword argument must be part of the call:
-`method_name(state: "CA", city: "San Francisco")`
-Collect arguments into Hash with double-splat, or **: `def method_name(**args)`
+Positional arguments: are passed to the method based on their position.
+Keyword arguments: are passed based on the keyword and can be listed in any order.
+Keyword arguments: `def method_name(city: "value", state:)` When calling the method, you can pass the arguments in any order, but each keyword argument must be part of the call: `method_name(state: "CA", city: "San Francisco")`. 
 
+Collect arguments into Hash with double-splat, or **: `def method_name(**args)`. A bare single splat will catch positional arguments, bare double splat will catch keyword arguments.
+
+```ruby
+def do_stuff(*)
+  # anonymous splat parameter 
+  do_stuff_2(*)
+end
+
+def do_stuff_2(*array_args)
+  array_args
+end
+
+def do_stuff_3(first, *, last)
+  puts "first: #{first}, last: #{last}"
+end
+
+# passing bare & character to pass block
+class Child < Parent
+  def do_it(&)
+    do_it_2(&)
+  end
+end
+
+# will catch all arguments.
+def do_it(*args, **kwargs, &block); end 
+
+# the triple dot syntax will catch and pass all arguments, in a simpler anonymous way.
+def do_it(...)
+  do_it_2(...)
+end
+```
+
+Calling a method.
+
+```ruby
+connection.download_mp3("jazz", speed: :slow) { |p| show_progress(p) }
+# receiver.method(postional_parameter, keyword_parameter: "value") { |block_parameter| block_code(block_parameter) }
+# 1. object invokes method
+# 2. inside that method, self is set to that (receiver) object
+# 3. method body is executed, possibly the block is called as well
+
+# Ruby allows you to omit the receiver, in which case Ruby will default to use `self`.
+class Thing
+  def hello
+    self.greet
+    greet
+  end
+
+  private def greet
+    puts 'hi'
+  end
+end
+Thing.new.hello
+# "hi"
+# "hi"
+# => nil
+```
+Method calls without parentheses are sometimes called commands.
+
+## rule: If in doubt, use parentheses. 
+
+A `return` statement exists from the currently executing method. It can be used to return a value from a method. If no value is specified, nil is returned.
+
+```ruby
+def method_name(city:, country:)
+  puts city
+  puts country
+end
+data = {city: "ab", country: "bb"}
+method_name(**data)
+#ok
+
+city = "cc"
+country = "aac"
+method_name(city:, country:)
+#ok
+
+# Passing block arguments:
+["a", "f"].map(&:upcase)
+# take the argument to this proc, and call the method whose name matches this symbol.
+# the class Symbol implements the to_proc method, returning a Proc method.
+```
 
 # Classes
 
@@ -818,11 +1022,13 @@ b[0] or b.[](0) are both fine, though b[0] will be much more common.
 b[0]=4 or b.[]=(0, 4) are both fine, though b[0]=4 will be much more common.
 ```
 Some assignments:
-b[1, 0] = [5, 6] at index 1, for 0 elements, will insert 5 and 6, shifting the rest of the array to the right.
-b[1, 1] = [5, 6] at index 1, for 1 element, will replace, with 5 and 6.
-b[0, 2] = [5, 6] at index 0 for 2 elements, will replace, with 5 and 6.
-b[0..1] = [] at index 0 to 1, will remove the elements.
-b[6..7] = 99, 98, will insert 99 and 98 at index 6 and 7 e.g. [1, 2, 3, nil, nil, nil, 99, 98]
+```ruby
+b[1, 0] = [5, 6] # at index 1, for 0 elements, will insert 5 and 6, shifting the rest of the array to the right.
+b[1, 1] = [5, 6] # at index 1, for 1 element, will replace, with 5 and 6.
+b[0, 2] = [5, 6] # at index 0 for 2 elements, will replace, with 5 and 6.
+b[0..1] = [] # at index 0 to 1, will remove the elements.
+b[6..7] = 99, 98 # will insert 99 and 98 at index 6 and 7 e.g. [1, 2, 3, nil, nil, nil, 99, 98]
+```
 
 Reminder: array of words = %w{one two three}, array of symbols = %i{one two three}
 
@@ -838,7 +1044,6 @@ baz = {foo:}
 # ruby will assume the key and value are the same
 puts baz
 # => {:foo=>"bar"}
-
 ```
 
 ## Digging
