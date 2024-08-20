@@ -816,6 +816,14 @@ method_name(city:, country:)
 ["a", "f"].map(&:upcase)
 # take the argument to this proc, and call the method whose name matches this symbol.
 # the class Symbol implements the to_proc method, returning a Proc method.
+
+
+# https://ruby-doc.org/3.3.4/Object.html#method-i-method
+# objects have a method named method, which takes a symbol and returns the object's method of the same name
+number = 2
+method = number.method(:*)
+(1..3).map(&method)
+# => [2, 4, 6]
 ```
 
 # Classes
@@ -1046,8 +1054,207 @@ puts baz
 # => {:foo=>"bar"}
 ```
 
+## Override methods:
+```
+def Child
+  def initialize(name)
+    @name = name
+  end
+
+  def to_s
+    "the name: #{@name}"
+  end
+end
+puts Child.new('Foo') # => "the name: Foo"
+```
+
 ## Digging
 `dig` is a method that allows you to access nested elements of a hash. It is a safe way to access nested elements. It will return nil if any intermediate element is nil. A method on a hash, array, or struct.
+
+
+# Inheritance
+## Sharing functionality: Inheritance, Modules, and Mixins
+
+inheritance allows you to create a class that's a specialization of another class: e.g. subclass and superclass, child and parent.
+
+```ruby
+def Child < Parent
+end
+Child.superclass # => Parent
+Parent.superclass # => Object
+Object.superclass # => BasicObject
+BasicObject.superclass # => nil
+# BasicObject is the root class eventually of any ruby application.
+
+# To use subclassing is common. E.g. with `ActionController::Base` from Ruby on Rails.
+
+# Instead of:
+
+def chatty_string(resource)
+  case resource.element
+  when "fire" then "I bring light"
+  when "water" then "I bring water"
+  when "earth" then "I provide ground"
+  end
+end
+
+# we can have a module.rb
+class Element
+  def self.for(element_string)
+    case element_string
+    when "fire" then Fire.new
+    when "water" then Water.new
+    when "earth" then Earth.new
+    end
+  end
+
+  def hot? = false
+
+  def chatty_string = raise NotImplementedError
+end
+
+class Fire < Element
+  def to_s = "fire"
+
+  def hot? = true
+
+  def chatty_string = "I bring fire"
+end
+
+class Water < Element
+  def to_s = "water"
+
+  def chatty_string = "I bring water"
+end
+
+class Earth < Element
+  def to_s = "earth"
+
+  def chatty_string = "I provide earth"
+end
+
+# Element.for(resource.element).chatty_string
+# if there is a Parent, like Element, having `def chatty_string raise NotImplementedError` it signals that subclasses must define this method.
+```
+
+# Modules
+Modules can do everything a class can do, except create instances. They are a way to group methods, classes and constants. Two benefits: 1. a namespace and prevent name clashes, 2. can be included in other classes, known as a `mixin`. Module names are like class names, both are global constants with a n initial uppercase letter. use them with the require or require_relative method. Module constants are referenced using two colons, the `scope resultion operator`, e.g. Thing::SAY.
+
+An `include` is a method of the Module class. The `require` call is at the file level, the `include` call is at the class level. 
+
+Example module is `Kernel` which is included in `Object`. Another is Comparable, which assumes that any class that uses it  defines the method `<=>` (the `spaceship operator`).
+
+Some Object-Oriented languages like Python support multiple inheritance (Powerful and dangerous), some like JavaScript support single inheritance (cleaner and easier to implement). Ruby is a single inheritance language, which mixins to support controlled multiple-inheriticance-like capability.
+
+
+```ruby
+module Thing
+  SAY = "word"
+  def self.method_1; end
+end
+
+module OtherThing
+  def self.method_1; end
+end
+
+module Debug
+  def who_am_i?
+    "#{self.class.name} (id: #{self.object_id}): #{self.name}"
+  end
+end
+
+class Child
+  include Debug
+
+  attr_reader :name
+
+  def initialize(name)
+    @name = name
+  end
+end
+
+Child.new("FOO").who_am_i? # => "Child (id: 123456789): FOO"
+```
+
+Ruby provides two mechanisms for mixing in module behaviour. The first is `include`, which is used to add methods as instance methods to a class, and those will be looked up after the class itself is checked for a method. The second is `extend`, which is used to add methods directly to the receiver of extend rather than as instance methods of a class. Ruby also provides another mechanism, `prepend`, which is used to add methods as class methods to a class, and those will be looked up before the class itself is checked for a method. Prepend is often used for logging or other logistical information to classes.
+
+In general, a mixin that requires its own state isn't a mixin, it should be written as a class.
+
+## Method lookup
+With multiple ways to define methods, Ruby will look for a method in the following order:
+1. methods specifically added to that instance using `foo=Foo.new` and 1. `def foo.bar; end`, or via 2. `class << foo; def bar; end; end`
+2. Any module added to the receiver's class using `prepend`, the last module added is checked first.
+3. Methods defined in the receiver's class.
+4. Modules added in the receiver's class using `include`, the last module added is checked first.
+5. If not found, the same loop will happen in the receiver's superclass.
+
+This continues until the method is found or the end of the inheritance structure is reached. If the method is not found, Ruby will try again from the receiver's class, now looking for `method_missing`, if no `method_missing` is found to handle the mesage, a `NameError` is thrown. Entire list of classes and modules in this lookup path can be accessed by calling the method `foo.ancestors`.
+
+## Super lookup
+
+when executing a method, if Ruby encounters keyword `super`, it method lookup for `super` starts one step after the points where the method being executed is lcoated. (e.g. if in step 2, it will start at step 3). If `super` has no argument list, Ruby will pass the arguments that were passed to the method that called `super`. If `super` has an argument list, even an empty one, those arguments will be passed.
+
+```ruby
+module Sound
+  def execute
+    puts "zing"
+    super
+  end
+end
+
+module Process
+  def execute
+    puts "start"
+    super
+  end
+end
+
+class Animal
+  def execute
+    puts "animal"
+  end
+end
+
+class Zebra < Animal
+  prepend Sound
+  include Process
+
+  def execute
+    puts "zebra"
+    super
+  end
+end
+
+puts Zebra.new.execute
+=> zing
+=> zebra
+=> start
+=> animal
+```
+
+References:
+- https://www.rafaelmontas.com/ruby-method-lookup-path/
+- https://gist.github.com/robturtle/b20c5e1077ef6ab1cb73605aff0d6b1c
+- https://gist.github.com/damien-roche/351bf4e7991449714533
+
+## Inheritance, Mixins, and Design
+
+For subclassing look for `is-a` relationships or hierarchies. However, for `has-a` or `uses-a` relationships, use composition. Ruby on Rails makes use of inheritance, e.g. with Person inheriting from a DatabaseWrapper class (ActiveRecord). As inheritance represents an incredibly tight coupling, it should be used sparingly. It's easy to break. Composition is more flexible, however can get messy fast.
+
+```ruby
+# Composition
+class Person
+  include Persistable
+  # ..
+end
+
+# Inheritance
+class Person < DatabaseWrapper
+  # ..
+end
+```
+
+
 
 ----
 
