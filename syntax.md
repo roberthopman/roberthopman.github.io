@@ -10,29 +10,10 @@ Language consists of a system:
 - [Semantics](https://en.wikipedia.org/wiki/Semantics) studies the aspects of meaning.
 - [Syntax](https://en.wikipedia.org/wiki/Syntax) studies the structure, principles and relationships.
 
-Besides the syntax, we can have general guidelines to describe common knowledge.
-
-**General rules**
-
-- Limit lines to 80 characters.
-- Pass no more than four parameters into a method. Hash options are parameters.
-- Methods can be no longer than five lines of code.
-- Classes can be no longer than one hundred lines of code.
-- Controllers can instantiate only one object. Therefore, views can only know about one instance variable and views should only send messages to that object (@object.collaborator.value is not allowed).
-
-**References**
-
-- [https://github.com/hopsoft/rails_standards/tree/rails-4-X](https://github.com/hopsoft/rails_standards/tree/rails-4-X)
-- [https://github.com/leahneukirchen/styleguide/blob/master/RUBY-STYLE](https://github.com/leahneukirchen/styleguide/blob/master/RUBY-STYLE)
-- [https://github.com/thoughtbot/guides/blob/main/ruby/README.md](https://github.com/thoughtbot/guides/blob/main/ruby/README.md)
-- [https://thoughtbot.com/blog/sandi-metz-rules-for-developers#only-instantiate-one-object-in-the-controller](https://thoughtbot.com/blog/sandi-metz-rules-for-developers#only-instantiate-one-object-in-the-controller)
-- [https://zenspider.com/ruby/quickref.html](https://zenspider.com/ruby/quickref.html)
-- [ruby-style-guide](https://github.com/rubocop/ruby-style-guide)
-- [rails-style-guide](https://github.com/rubocop/rails-style-guide)
-
 ## Quick reference
 
 Structure:
+- [References](#references)
 - [Read documentation (API)](#read-documentation)
 - [Debugging](#debugging)
 - [Literals](#literals)
@@ -41,6 +22,8 @@ Structure:
 - [Methods](#methods)
 - [Classes](#classes)
 - [Collections](#collections)
+- [Inheritance](#inheritance)
+- [General rules](#general-rules)
 
 #### Read documentation
 <hr>
@@ -60,7 +43,8 @@ Structure:
 
 #### Debugging
 <hr>
-For debugging use `p` instead of `puts`. 
+
+For debugging use `p` instead of `puts`:
 - `p` (print the value of the expression, including the value of the expression)
 - `pp` (pretty print the value of the expression)
 - `print` (prints without trailing new line)
@@ -206,8 +190,8 @@ Starts execution of the block sent to the current method.
 
 #### Literals
 <hr>
-[https://docs.ruby-lang.org/en/master/syntax/literals_rdoc.html](https://docs.ruby-lang.org/en/master/syntax/literals_rdoc.html)
 
+[https://docs.ruby-lang.org/en/master/syntax/literals_rdoc.html](https://docs.ruby-lang.org/en/master/syntax/literals_rdoc.html)
 
 A literal is any notation that lets you represent a fixed value in source code. 
 
@@ -257,6 +241,59 @@ re.match?('bored')    # => true   # Match at end of target.
 re.match?('foo')      # => false  # No match.
 ```
 
+#### Numbers
+Ruby supports integers, floating-point, rational and complex numbers. Intergers are assumed to be decimal base 10, but can be specified with a leading sign, as base indicatar: 0 for octal, 0x for hexadecimal and 0b for binary (and 0d for decimal), followed by a string of digits in the appropriate base.
+
+```ruby
+12345       => 12345  # base 10
+0d12345     => 12345  # base 10
+123_456     => 123456 # base 10
+-543        => -543   # base 10
+0xaabb      => 43707  # base 16 (hexadecimal)
+0377        => 255    # base 8  (octal)
+-0b10_1010  => -42    # base 2  (binary)
+1_2_3       => 123    # base 10
+```
+
+BigDecimal is Ruby's high-precision decimal number class.
+
+Rational numbers are the ratio of two integers (they are fractions) and therefor have an exact representation:
+```ruby
+3/4             #=> 0
+3/4r            #=> (3/4)
+0.75r           #=> (3/4)
+"3/4".to_r      #=> (3/4)
+Rational(3,4)   #=> (3/4)
+Rational("3/4") #=> (3/4)
+```
+Complex numbers represent points on the complex plane, and have 2 components: the real and imaginary parts.
+```ruby
+1+2i            # => (1+2i)
+"1+2i".to_c     # => (1+2i)
+Complex(1,2)    # => (1+2i)
+Complex("1+2i") # => (1+2i)
+```
+
+Looping using Numbers
+```ruby
+3.times { print "A " }
+1.upto(5) { |i| print i, " " }
+99.downto(97) { |i| print i, " " }
+50.step(60, 5) { |i| print i, " " }
+
+# A A A 1 2 3 4 5 99 98 97 50 55 60
+```
+
+
+#### Strings
+Ruby strings are sequences of characters and instances of class String.
+
+escaping characters inside single-quote:
+```ruby
+'hi \\' # => hi \
+'hi\'s' # => hi's
+```
+
 Type conversion:
 ```ruby
 # to string
@@ -265,7 +302,7 @@ Type conversion:
 '1'.to_i
 ```
 
-Blocks
+#### Blocks
 Code block is a chunk of code that can be passed to a method. You can think of a block as somewhat like the body of an anonymous method, as if the block were another parameter passed to that method. Usually between braces on one line and do/end when block spans multiple lines. Parameters to a block are separated by commas, and they are always local to the block. You can define block-local variables using the `;` character in the block's parameter list. 
 
 ```ruby
@@ -406,7 +443,6 @@ end
 
 [https://ruby-doc.org/3.3.4/syntax/control_expressions_rdoc.html](https://ruby-doc.org/3.3.4/syntax/control_expressions_rdoc.html)
 
-
 Conditional branches:
 ```ruby
 # if/elsif/else
@@ -442,6 +478,7 @@ end
 Loops:
 
 [https://ruby-doc.org/3.3.4/Kernel.html#method-i-loop](https://ruby-doc.org/3.3.4/Kernel.html#method-i-loop)
+
 ```ruby
 # a method defined in Kernel, but it looks like a control structure.
 # loop
@@ -1055,7 +1092,8 @@ puts baz
 ```
 
 ## Override methods:
-```
+
+```ruby
 def Child
   def initialize(name)
     @name = name
@@ -1254,9 +1292,31 @@ class Person < DatabaseWrapper
 end
 ```
 
-
-
 ----
 
 Abbreviations:
 - CSV = Comma Separated Values
+
+----
+
+Besides the syntax, we can have general guidelines to describe common knowledge.
+
+# General rules
+
+- Limit lines to 80 characters.
+- Pass no more than four parameters into a method. Hash options are parameters.
+- Methods can be no longer than five lines of code.
+- Classes can be no longer than one hundred lines of code.
+- Controllers can instantiate only one object. Therefore, views can only know about one instance variable and views should only send messages to that object (@object.collaborator.value is not allowed).
+
+
+# References
+
+- [https://github.com/hopsoft/rails_standards/tree/rails-4-X](https://github.com/hopsoft/rails_standards/tree/rails-4-X)
+- [https://github.com/leahneukirchen/styleguide/blob/master/RUBY-STYLE](https://github.com/leahneukirchen/styleguide/blob/master/RUBY-STYLE)
+- [https://github.com/thoughtbot/guides/blob/main/ruby/README.md](https://github.com/thoughtbot/guides/blob/main/ruby/README.md)
+- [https://thoughtbot.com/blog/sandi-metz-rules-for-developers#only-instantiate-one-object-in-the-controller](https://thoughtbot.com/blog/sandi-metz-rules-for-developers#only-instantiate-one-object-in-the-controller)
+- [https://zenspider.com/ruby/quickref.html](https://zenspider.com/ruby/quickref.html)
+- [ruby styleguide](https://github.com/rubocop/ruby-style-guide)
+- [rails styleguide](https://github.com/rubocop/rails-style-guide)
+- [cookpad styleguide](https://github.com/cookpad/styleguide/blob/master/ruby.en.md)

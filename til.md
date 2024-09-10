@@ -1,7 +1,4 @@
 ---
-# Feel free to add content and custom Front Matter to this file.
-# To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
-
 layout: default
 title: T.I.L.
 ---
@@ -26,5 +23,11 @@ title: T.I.L.
   # evens:    [2, 4, 6, 8, 10]
   # squares:  [4, 16, 36, 64, 100]
   # => [4, 16, 36, 64, 100]
+{% endhighlight %}
+
+Fix failure due to architecture arm64:
+{% highlight shell %}
+bundle config build.gem_name "--with-cflags=-Wno-error=incompatible-function-pointer-types"
+bundle install
 {% endhighlight %}
 </div>
