@@ -3,7 +3,7 @@ layout: default
 title:  Syntax
 ---
 
-# Syntax rules
+# Syntax
 
 Language consists of a system:
 
@@ -228,17 +228,49 @@ a_variable = <<HEREDOC
 HEREDOC
 ```
 
-[Regex](https://docs.ruby-lang.org/en/master/Regexp.html)
+#### Regular Expression - [Regex](https://docs.ruby-lang.org/en/master/Regexp.html)
+A regular expression (also called a regex or regexp) is pattern that can be matched against a string. It is a way of specifying a set of characters that matches a string or part of a string. It is a match pattern (also simply called a pattern). Regex can be used for pattern matching and pattern replacement. Specific patterns can be defined with: Anchors, word boundaries, character classes, repetition, alternation and grouping.
+
 ```ruby
-# Regular Expression
-# A regular expression (also called a regex or regexp) 
-# is a way of specifying a set of characters that matches a string or part of a string.
-# It is a match pattern (also simply called a pattern).
-# Regex can be used for pattern matching and pattern replacement. 
-re = /red/
+re = /red/ # or %r{red}
 re.match?('redirect') # => true   # Match at beginning of target.
 re.match?('bored')    # => true   # Match at end of target.
 re.match?('foo')      # => false  # No match.
+"bored".match?(re)    # => true  
+```
+
+The following are metacharacters with specific meaning: 
+`. ? - + * ^ \ | $ ( ) [ ] { }` https://docs.ruby-lang.org/en/master/Regexp.html#class-Regexp-label-Special+Characters
+
+Operater =~ returns characters offset of beginning:
+```ruby
+/cat/  =~ 'dog and cat' # => 8
+/cat/ =~ 'cat' # => 0
+'cat' =~ /cat/ # => 0
+```
+
+!~ is the negative match operator, which returns true if the string does not match the pattern:
+```ruby
+/cat/ !~ 'dog and cat' # => false
+```
+Changing strings with patterns: .sub, .gsub, .sub!, and .gsub!. Sub is for the first match, gsub is for all matches.
+
+Regex has modifiers, with the `x` you can add newlines, whitespace and comments inside to make it more readable:
+```ruby
+/cat/i # => case insensitive
+/cat/m # => multiline
+/cat/s # => single line
+%r{(\d{5}),         # 5 digits followed by comma
+        \s,         # a whitespace
+    ([A-Z])         # 1 character
+  }x # => extended
+```
+
+After a succesful match via Regexp#match or =~ it returns a MatchData object, which is a collection of information about the match:
+https://docs.ruby-lang.org/en/master/MatchData.html
+```ruby
+/all/.match("all things")
+=> #<MatchData "all">
 ```
 
 #### Numbers
@@ -353,10 +385,7 @@ print <<-S1, <<-S2
   S2
 ```
 
-Encoding is a mechanism for translating bits into characters.
-For many years, most developers who used English used ASCII, a 7-bit encoding of English characters, such as binary 101 to capital A.
-Later, an 8-bit representation called Latin-1 that inclueded most characters in European languages became common. 
-All of these were superseded by Unicode, a global standard for all text characters used in all languages: https://home.unicode.org/
+Encoding is a mechanism for translating bits into characters. For many years, most developers who used English used ASCII, a 7-bit encoding of English characters, such as binary 101 to capital A. Later, an 8-bit representation called Latin-1 that included most characters in European languages became common. All of these were superseded by Unicode, a global standard for all text characters used in all languages: https://home.unicode.org/
 
 Type conversion:
 ```ruby
@@ -364,6 +393,21 @@ Type conversion:
 1.to_s 
 # to integer
 '1'.to_i
+```
+
+#### Struct
+A `Struct` is a class that is used to create objects that have attributes.
+
+#### Ranges
+Ranges represent a range of values. Ruby uses ranges to implement sequences and intervals.
+
+```ruby
+arr = [1,2,3,4,5]
+arr[..2] # => [1,2,3]
+arr[2..] # => [3,4,5]
+arr === 3 # => true
+arr === 6 # => false
+arr.include?(3) # => true
 ```
 
 #### Blocks
