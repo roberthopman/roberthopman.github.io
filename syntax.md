@@ -13,7 +13,6 @@ Language consists of a system:
 ## Quick reference
 
 Structure:
-- [References](#references)
 - [Read documentation (API)](#read-documentation)
 - [Debugging](#debugging)
 - [Literals](#literals)
@@ -24,6 +23,7 @@ Structure:
 - [Collections](#collections)
 - [Inheritance](#inheritance)
 - [General rules](#general-rules)
+- [References](#references)
 
 #### Read documentation
 <hr>
@@ -36,7 +36,7 @@ Structure:
   - [https://rubyapi.org](https://rubyapi.org)
   - via ruby info `ri` command in terminal, e.g. `ri Array#map` or `ri .map`
   - via `help` command in interactive ruby. First `irb` then `help Array#map` or `help .map`
-- ruby-lang.org search shows more results from the documentation, rubyapi.org shows less results.
+- `ruby-lang.org` search shows more results from the documentation, `rubyapi.org` shows less results.
 - Class methods are called on the class itself and are defined with self. Instance methods are called on an instance of a class and are defined without self.
 - `::` is a scope resolution operator. It is used to reference a constant, module, or class defined within another class or module. It is documented as a class method.
 - `#` is a method call operator. It is documented as an instance method.
@@ -286,13 +286,77 @@ Looping using Numbers
 
 
 #### Strings
-Ruby strings are sequences of characters and instances of class String.
+Ruby strings are sequences of characters and instances of class `String`.
 
-escaping characters inside single-quote:
+Usually strings are created using string literals - sequences of characters between single or double quotes (delimiters). How the string literal is created, defines the amount of processing that is done on the characters in the string. 
+
+Escaping characters inside single-quote is a form of processing:
 ```ruby
 'hi \\' # => hi \
-'hi\'s' # => hi's
+'that\'s right' # => that's right
+'hi "\\"' # => hi "\"
 ```
+
+Double-quoted strings support
+- many escape sequences, e.g. `\n` the newline character.
+- string interpolation, which means you can use any ruby code into a string using `#{ expression }`.
+- global, class or instance variables: #$foo, #@@foo or #@foo.
+
+Not recommended:
+```ruby
+puts "now is #{ 
+  def the(a)
+    'the ' + a
+  end
+  the('time')
+} for all bad coders..."
+```
+Produces: `now is the time for all bad coders...`
+
+Some style guides prefer single quotes, if interpolation isn't used, because they are faster.
+
+Syntax to create a string literal can also be as follows, with any nonalphanumeric or nonmultibyte character: 
+```ruby
+%q/abc/         #=> abc
+%Q!abc!         #=> abc
+%Q{abc #{2*3}}  #=> abc 6
+%!abc!          #=> abc
+%{abc #{2*3}}   #=> abc 6
+# usually current style guides suggest this:
+%q(abc)         #=> abc 
+```
+
+Finally, you can construct a string using a here doucment, or heredoc. 
+```ruby
+string = <<END_OF_STRING
+  This is a string
+  with two lines.
+END_OF_STRING
+
+# with a minus sign, you can indent the terminator
+string = <<-END_OF_STRING
+This is a string
+with two lines.
+  END_OF_STRING
+
+# with tilde, ruby will strip the indentation, to enable long strings
+string = <<~END_OF_STRING
+  This is a string
+  with two lines.
+END_OF_STRING
+
+# Or generally considered super confusing:
+print <<-S1, <<-S2
+  Concat
+    S1
+  enate
+  S2
+```
+
+Encoding is a mechanism for translating bits into characters.
+For many years, most developers who used English used ASCII, a 7-bit encoding of English characters, such as binary 101 to capital A.
+Later, an 8-bit representation called Latin-1 that inclueded most characters in European languages became common. 
+All of these were superseded by Unicode, a global standard for all text characters used in all languages: https://home.unicode.org/
 
 Type conversion:
 ```ruby
