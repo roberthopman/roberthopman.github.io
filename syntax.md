@@ -547,50 +547,101 @@ loop do
 end
 ```
 
-# Control flow
+# Control flow and Expressions
 
-[https://ruby-doc.org/3.3.4/syntax/control_expressions_rdoc.html](https://ruby-doc.org/3.3.4/syntax/control_expressions_rdoc.html)
+[https://docs.ruby-lang.org/en/master/syntax/control_expressions_rdoc.html](https://docs.ruby-lang.org/en/master/syntax/control_expressions_rdoc.html)
 
-Conditional branches:
+Ruby has a variety of ways to control execution. All the expressions described here return a value.
+
+Expressions and Return Values:
 ```ruby
-# if/elsif/else
-if condition1
+# Expression is evaluated
+1 + 1
+# and will return a value
+1 + 1 
+=> 2
+# => is called a hash rocket
+# 2 is returned
+
+puts 1+1
+2
+=> nil
+# expression puts 1+1 is evaluated
+# 2 is printed
+# nil is returned
+```
+
+- Basic Operator Expressions: `+ - * / % **`
+- Command Expressions: string with backquotes or backticks will be executed as command by OS. `ls`.split will give array of content of the current folder. Copying , using `` `echo 'hi' | pbopy` `` will copy the output of echo to clipboard, which is the same as `system("echo '123' | pbcopy")`. 
+Copying resource attributes: `` `echo "#{User.first.id}" | pbcopy` ``.
+- Assignment is setting the lvalue (left value) to refer to the rvalue (right value), and returns rvalue. Ruby has 2 forms of assignment: first an object reference to a variable or constant, ABC = 4. Second is object attribute or element reference on the left side of the assignment operator, ABC[1] = 4. Also possible, is the rightward assignment, since ruby 3.0: data => variable (e.g. 2=>x). 
+- For parallel assignment, to swap vales: 
+```ruby
+a, b = 1, 2 
+a, b = b, a
+```
+- Splats and assignment: for rvalues `a,b,c,d,e = *(1..2), 3 # a=1, b=2, c=3, d=nil, e=nil` and greedy for splat for lvalue `a, *b = 1,2,3,4,5 # a=1, b=[2,3,4,5]` or `*a, b = 1,2,3,4,5 # a=[1,2,3,4], b=5` or `first, *, last = [1,2,3,4,5] # first=1, last=5` 
+- Nested assignments: `a, (b, c) = 1, [2, 3] # a=1, b=2, c=3` or `a, (b, c), d = 1, [2, 3, 4], 5 # a=1, b=2, c=3, d=5`.
+
+#### Conditional Execution
+- boolean expressions: Ruby has simple definition of truth: any value that is 1. not `nil`, or 2. the constant `false`, is true. So, `"c", 9, 0, :a`, are true, also, `"", [], {}` are true. The set of false values are sometimes referred to as falsey and set of true values are referred to as truthy. `nil && 99` returns `nil`, `"c" && 99` returns `99`. When it's false, the first argument is returned, when it's truee, the second argument is returned (short circuit evaluation). There is a difference in using `&&` and `and`, terms of precedence compared to the assignment. Examples: `result = "" && [], which returns the #=> []`, and will show `result #=> []`, however `result = "" and [] which returns the #=> []` and will show `result # => ""`.
+- the `defined?` Keyword: `defined? 1 #=> "expression"` and `defined? a #=> nil` and `defined? a = 1 #=> "assignment"`.
+- Comparing objects: == equal value, ===, <=>, <, >, <=, >=, =~, eql? (equal type and value), equal? (same object id).
+- if and unless: 
+```ruby
+# then is optional
+if condition then 
   # code
-elsif condition2
+elsif condition2 then
   # code
 else
   # code
 end
 
+# also possible
+if condition then #code
+elsif condition2 then #code
+else #code
+end
+
+# assignment
+variable = 
+  if condition then #code
+  elsif condition2 then #code
+  else #code
+  end
+
 # ternary operator
 condition ? true_value : false_value
 
-# unless. As reminder: if not
+# unless. Negated if statement. As reminder: if not
 unless expression
   # some code to be executed if the expression is FALSE
 else
   # some code to be executed if the expression is true
 end
 
+# also possible
+if not false then true end #=> true
+
 # case
 case expression
-when condition1
-  # code
+when condition1 then # code
 when condition2
   # code
-else
-  # code
+else # code
 end
 ```
+Safe navigation operator: `&.`, also called the lonely operator. It returns nil if the object is nil.
 
-Loops:
+#### Loops and iterators:
 
-[https://ruby-doc.org/3.3.4/Kernel.html#method-i-loop](https://ruby-doc.org/3.3.4/Kernel.html#method-i-loop)
+[https://docs.ruby-lang.org/en/master/Kernel.html#method-i-loop](https://docs.ruby-lang.org/en/master/Kernel.html#method-i-loop)
 
 ```ruby
 # a method defined in Kernel, but it looks like a control structure.
 # loop
-# iteration over api endpoint that is paginated
+# e.g. iteration over api endpoint that is paginated
 page = 1
 collection = []
 loop do
@@ -614,8 +665,8 @@ until condition
 end
 ```
 Break, next:
-- Use break to leave a block early.
-- Use next to skip the rest of the current iteration.
+- Use `break` to leave a block early.
+- Use `next` to skip the rest of the current iteration.
 
 ```ruby
 loop do
@@ -624,23 +675,35 @@ loop do
 end
 ```
 
-Expressions and Return Values:
+Iterators:
 ```ruby
-# Expression is evaluated
-1 + 1
-# and will return a value
-1 + 1 
-=> 2
-# => is called a hash rocket
-# 2 is returned
-
-puts 1+1
-2
-=> nil
-# expression puts 1+1 is evaluated
-# 2 is printed
-# nil is returned
+2.times do; puts 'Hello' end # => Hello Hello
+2.times { puts 'Hello' } # => Hello Hello
+0.upto(5) { |i| puts i } # => 0 1 2 3 4 5
+0.step(10, 2) { |i| puts i } # => 0 2 4 6 8 10
 ```
+
+A different way to write an each loop with a Ruby built-in looping primitive:
+```ruby
+for i in 0..5
+  puts i
+end
+# => 0 1 2 3 4 5
+```
+
+Block local variables: 
+```ruby
+square = 'start'
+[1,2].each do |i; square| # square is now also a block local variable
+  square = i * i
+  i += square
+end
+puts square # => start
+```
+
+#### Pattern Matching
+[https://docs.ruby-lang.org/en/master/doc/syntax/pattern_matching_rdoc.html](https://docs.ruby-lang.org/en/master/doc/syntax/pattern_matching_rdoc.html)
+Pattern matching compares a target which can be any Ruby object to a pattern. If the target matches the pattern, the target is deconstructed into the pattern, setting the value of those variables.
 
 #### Variables
 <hr>
