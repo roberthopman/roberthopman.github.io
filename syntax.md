@@ -623,14 +623,6 @@ end
 
 # also possible
 if not false then true end #=> true
-
-# case
-case expression
-when condition1 then # code
-when condition2
-  # code
-else # code
-end
 ```
 Safe navigation operator: `&.`, also called the lonely operator. It returns nil if the object is nil.
 
@@ -696,7 +688,6 @@ Block local variables:
 square = 'start'
 [1,2].each do |i; square| # square is now also a block local variable
   square = i * i
-  i += square
 end
 puts square # => start
 ```
@@ -704,6 +695,98 @@ puts square # => start
 #### Pattern Matching
 [https://docs.ruby-lang.org/en/master/doc/syntax/pattern_matching_rdoc.html](https://docs.ruby-lang.org/en/master/doc/syntax/pattern_matching_rdoc.html)
 Pattern matching compares a target which can be any Ruby object to a pattern. If the target matches the pattern, the target is deconstructed into the pattern, setting the value of those variables.
+
+```ruby
+"abc" in "abc" # => true
+"abc" in "def" # => false
+3 in 3 # => true
+3 in 4 # => false
+3 in 1..5 # => true
+"abc" in String # => true
+"abc" in Integer # => false
+[1,2,3] in [Integer, Integer, Integer] # => true
+{a: 1, b: "3"} in {a: Integer, b: String } # => true
+
+# or
+[1,2] in [Integer, Integer] | [Integer, String] # => true
+```
+
+Variable binding: Assign values in the target to variables in the pattern and then use those variables in the pattern.
+```ruby
+value in pattern => variable
+puts variable # => value
+
+# example
+"aaa" in String => var
+puts var # => aaa
+
+# short
+"baa" => var
+puts var # => baa
+
+# another way
+"abc" in var
+puts var # => abc
+```
+
+Case pattern matching:
+```ruby
+# case, with when clause
+case expression
+when condition1 then # code
+when condition2
+  # code
+else # code
+end
+
+# case, with in clause
+case expression
+in condition1 then # code
+in condition2 then # code
+else # code
+end
+
+# pinning values, in a case statemen. With the pin operator ^ : It will pin the value to the part of the pattern..
+def get_status(idea_to_look_for, status_to_look_for, list)
+  case list
+  in [*, {idea: ^idea_to_look_for, status: }, *] then puts "#{idea_to_look_for} is #{status_to_look_for}"
+  in [*, {idea:, status: ^status_to_look_for}, *] then puts "second"
+  else # code
+end
+
+puts get_status('idea1', 'status1', 
+  [{idea: 'idea1', status: 'status1'}, 
+  {idea: 'idea2', status: 'status2'}
+])
+#=> idea1 is status1
+
+# guard clause, additionally to the pattern matching, it checks the condition
+case expression
+in pattern if condition # code
+else # code
+end
+
+# pattern matching against a class, requires a deconstruct_keys or deconstruct
+class MyClass
+  attr_accessor :name
+
+  def initialize(name)
+    @name = name
+  end
+
+  def deconstruct_keys(keys)
+    {name: @name}
+  end
+end
+
+my_object = MyClass.new('my_object')
+
+case my_object
+in {name: /^my/} then puts "starts with my"
+in {name: /^your/} then puts "starts with your"
+else # code
+end
+```
 
 #### Variables
 <hr>
