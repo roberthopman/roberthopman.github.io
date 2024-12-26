@@ -25,8 +25,7 @@ Structure:
 - [General rules](#general-rules)
 - [References](#references)
 
-#### Read documentation
-<hr>
+## Read documentation
 
 - Documentation is a representation of the language (im)possibilities. 
 - Documentation can be found at
@@ -41,7 +40,7 @@ Structure:
 - `::` is a scope resolution operator. It is used to reference a constant, module, or class defined within another class or module. It is documented as a class method.
 - `#` is a method call operator. It is documented as an instance method.
 
-#### Debugging
+## Debugging
 <hr>
 
 For debugging use `p` instead of `puts`:
@@ -50,16 +49,7 @@ For debugging use `p` instead of `puts`:
 - `print` (prints without trailing new line)
 - `puts` (prints expression and nil)
 
-#### Shebang on Unix
-<hr>
-
-The shebang is the `#!` at the beginning of a script. It tells the system what interpreter to use to run the script, e.g. file `hi.rb`:
-```ruby
-#!/usr/bin/env ruby
-puts 'Hello, world!'
-```
-
-#### Reserved keywords
+### Reserved keywords
 - Version: [3.3](https://docs.ruby-lang.org/en/3.3/keywords_rdoc.html)
 - With definition: [https://ruby-doc.org/docs/keywords/1.9/](https://ruby-doc.org/docs/keywords/1.9/)
 
@@ -188,8 +178,7 @@ yield
 Starts execution of the block sent to the current method. 
 ```
 
-#### Literals
-<hr>
+## Literals
 
 [https://docs.ruby-lang.org/en/master/syntax/literals_rdoc.html](https://docs.ruby-lang.org/en/master/syntax/literals_rdoc.html)
 
@@ -228,7 +217,7 @@ a_variable = <<HEREDOC
 HEREDOC
 ```
 
-#### Regular Expression - [Regex](https://docs.ruby-lang.org/en/master/Regexp.html)
+### Regular Expression - [Regex](https://docs.ruby-lang.org/en/master/Regexp.html)
 A regular expression (also called a regex or regexp) is pattern that can be matched against a string. It is a way of specifying a set of characters that matches a string or part of a string. It is a match pattern (also simply called a pattern). Regex can be used for pattern matching and pattern replacement. Specific patterns can be defined with: Anchors, word boundaries, character classes, repetition, alternation and grouping.
 
 ```ruby
@@ -239,8 +228,9 @@ re.match?('foo')      # => false  # No match.
 "bored".match?(re)    # => true  
 ```
 
-The following are metacharacters with specific meaning: 
-`. ? - + * ^ \ | $ ( ) [ ] { }` https://docs.ruby-lang.org/en/master/Regexp.html#class-Regexp-label-Special+Characters
+The following are metacharacters with specific meaning: `. ? - + * ^ \ | $ ( ) [ ] { }`
+
+[https://docs.ruby-lang.org/en/master/Regexp.html#class-Regexp-label-Special+Characters](https://docs.ruby-lang.org/en/master/Regexp.html#class-Regexp-label-Special+Characters)
 
 Operater =~ returns characters offset of beginning:
 ```ruby
@@ -255,7 +245,7 @@ Operater =~ returns characters offset of beginning:
 ```
 Changing strings with patterns: .sub, .gsub, .sub!, and .gsub!. Sub is for the first match, gsub is for all matches.
 
-Regex has modifiers, with the `x` you can add newlines, whitespace and comments inside to make it more readable:
+Regex has modifiers, with the `x` at the last example below, you can add newlines, whitespace and comments inside to make it more readable:
 ```ruby
 /cat/i # => case insensitive
 /cat/m # => multiline
@@ -273,7 +263,7 @@ https://docs.ruby-lang.org/en/master/MatchData.html
 => #<MatchData "all">
 ```
 
-#### Numbers
+### Numbers
 Ruby supports integers, floating-point, rational and complex numbers. Intergers are assumed to be decimal base 10, but can be specified with a leading sign, as base indicatar: 0 for octal, 0x for hexadecimal and 0b for binary (and 0d for decimal), followed by a string of digits in the appropriate base.
 
 ```ruby
@@ -316,8 +306,7 @@ Looping using Numbers
 # A A A 1 2 3 4 5 99 98 97 50 55 60
 ```
 
-
-#### Strings
+### Strings
 Ruby strings are sequences of characters and instances of class `String`.
 
 Usually strings are created using string literals - sequences of characters between single or double quotes (delimiters). How the string literal is created, defines the amount of processing that is done on the characters in the string. 
@@ -358,7 +347,7 @@ Syntax to create a string literal can also be as follows, with any nonalphanumer
 %q(abc)         #=> abc 
 ```
 
-Finally, you can construct a string using a here doucment, or heredoc. 
+Finally, you can construct a string using a here document, or heredoc. 
 ```ruby
 string = <<END_OF_STRING
   This is a string
@@ -385,8 +374,6 @@ print <<-S1, <<-S2
   S2
 ```
 
-Encoding is a mechanism for translating bits into characters. For many years, most developers who used English used ASCII, a 7-bit encoding of English characters, such as binary 101 to capital A. Later, an 8-bit representation called Latin-1 that included most characters in European languages became common. All of these were superseded by Unicode, a global standard for all text characters used in all languages: https://home.unicode.org/
-
 Type conversion:
 ```ruby
 # to string
@@ -395,10 +382,13 @@ Type conversion:
 '1'.to_i
 ```
 
-#### Struct
+### Encoding
+Encoding is a mechanism for translating bits into characters. For many years, most developers who used English used ASCII, a 7-bit encoding of English characters, such as binary 101 to capital A. Later, an 8-bit representation called Latin-1 that included most characters in European languages became common. All of these were superseded by Unicode, a global standard for all text characters used in all languages: https://home.unicode.org/
+
+### Struct
 A `Struct` is a class that is used to create objects that have attributes.
 
-#### Ranges
+### Ranges
 Ranges represent a range of values. Ruby uses ranges to implement sequences and intervals.
 
 ```ruby
@@ -410,12 +400,12 @@ arr === 6 # => false
 arr.include?(3) # => true
 ```
 
-#### Blocks
-Code block is a chunk of code that can be passed to a method. You can think of a block as somewhat like the body of an anonymous method, as if the block were another parameter passed to that method. Usually between braces on one line and do/end when block spans multiple lines. Parameters to a block are separated by commas, and they are always local to the block. You can define block-local variables using the `;` character in the block's parameter list. 
+## Blocks
+A code block is a chunk of code that can be passed to a method. You can think of a block as somewhat like the body of an anonymous method, as if the block were another parameter passed to that method. Usually between braces on one line and do/end when block spans multiple lines. Parameters to a block are separated by commas, and they are always local to the block. You can define block-local variables using the `;` character in the block's parameter list. 
 
 ```ruby
 # general syntax
-[1,2].each { puts 'x' }
+[1,2].each { puts 'x' } 
 [1,2].each do puts 'x' end
 [1,2].each { |x| puts x }
 [1,2].each { puts _1 } # _1 first positional argument, _2, _3 etc.
@@ -432,15 +422,12 @@ puts y
 
 # method say first, then parameters, only one block after.
 object.say("dave") { puts 'hello' }
+```
+The act of doing something to all objects in a collection is called enumeration in Ruby; in other languages it is called iteration. e.g. [each](https://ruby-doc.org/3.3.4/Enumerator.html#method-i-each), [find](https://ruby-doc.org/3.3.4/Enumerable.html#method-i-find), map, sort_by, group_by, map, reduce. 
 
-# The act of doing something to all objects in a collection is called enumeration in Ruby; in other languages it is called iteration.
-# e.g. each, find, map, sort_by, group_by, map, reduce 
-# https://ruby-doc.org/3.3.4/Enumerator.html#method-i-each
-# https://ruby-doc.org/3.3.4/Enumerable.html#method-i-find
-# (https://ruby-doc.org/3.3.4/IO.html#method-i-print)[https://ruby-doc.org/3.3.4/IO.html#method-i-print]
-names.each { |x| print(name, " ") }
+Ruby remembers the context of an object, local variables, block, and so on, this is called `binding`. Within the method, the block may be invoked, using the `yield` statement. A block returns a value to the method that yields to it. The value of the last expressions evaluated in the block is passed back to the method as the value of the yield expression.
 
-# Ruby remembers the context of an object, local variables, block, and so on, this is called `binding`. Within the method, the block may be invoked, using the `yield` statement. A block returns a value to the method that yields to it. The value of the last expressions evaluated in the block is passed back to the method as the value of the yield expression.
+```ruby
 def two_times 
   yield
   yield
@@ -466,8 +453,8 @@ end
 
 If the last parameter is prefixed by `&` (such as `&action`), that code block is converted to an object of class `Proc`. The `Proc` object is then assigned to the parameter. This allows you to pass a code block to a method as if it were a regular parameter. 
 
-https://docs.ruby-lang.org/en/master/Proc.html
-https://docs.ruby-lang.org/en/master/Kernel.html#method-i-lambda
+- https://docs.ruby-lang.org/en/master/Proc.html
+- https://docs.ruby-lang.org/en/master/Kernel.html#method-i-lambda
 
 ```ruby
 # Long
@@ -483,6 +470,7 @@ end
 foo = ProcObject.new
 foo.pass_in{ |paramz| puts "Hello, #{paramz}!" }
 foo.use_proc("Dave")
+# => Hello, Dave!
 
 # shorter
 def create_block_object(&block)
@@ -490,27 +478,33 @@ def create_block_object(&block)
 end
 bl = create_block_object { |x| puts "Hello, #{x}!" }
 bl.call('Dave')
+# => Hello, Dave!
 
 # shortest
 # stabby lambda
 bl = -> (param) { puts "you called with #{param}" }
 bl.call("Dave")
+# => Hello, Dave!
 
 # short: lambda (Ruby Kernal method)
 bl = lambda { |param| puts "you called with #{param}" }
 bl.call("Dave")
+# => Hello, Dave!
 
 # short: Kernal method proc
 bl = proc { |param| puts "you called with #{param}" }
 bl.call("Dave")
+# => Hello, Dave!
 
 # Proc.new (not the preferred method)
 bl = Proc.new { |param| puts "you called with #{param}" }
 bl.call("Dave")
+# => Hello, Dave!
 ```
 
-Blocks as closures
-Variables in the surrounding scope that are referenced in a block remain acessible for the life of that block and the life of any Proc object created from that block. 
+### Blocks as closures
+Variables in the surrounding scope that are referenced in a block remain accessible for the life of that block and the life of any Proc object created from that block. This is called a closure. More on closures: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures
+
 ```ruby
 def n_times(thing)
   ->(n) { puts thing * n }
@@ -536,8 +530,8 @@ proc2.call(1, 2, 3, 4) { puts "Hello, World!" }
 # => Hello, World!
 ```
 
-Enumerators: can iterate over two collections in parallel.
-Enumerator class is not to be confused with the Enumerable module. The Enumerator class is used to create custom external iterator.
+### Enumerators
+Can iterate over two collections in parallel. Enumerator class is not to be confused with the Enumerable module. The Enumerator class is used to create custom external iterator.
 ```ruby
 short_enum = [1,2,3].to_enum
 long_enum = ('a'..'z').to_enum
@@ -547,7 +541,7 @@ loop do
 end
 ```
 
-# Control flow and Expressions
+## Control Flow and Expressions
 
 [https://docs.ruby-lang.org/en/master/syntax/control_expressions_rdoc.html](https://docs.ruby-lang.org/en/master/syntax/control_expressions_rdoc.html)
 
@@ -572,7 +566,7 @@ puts 1+1
 ```
 
 - Basic Operator Expressions: `+ - * / % **`
-- Command Expressions: string with backquotes or backticks will be executed as command by OS. `ls`.split will give array of content of the current folder. Copying , using `` `echo 'hi' | pbopy` `` will copy the output of echo to clipboard, which is the same as `system("echo '123' | pbcopy")`. 
+- Command Expressions: string with backquotes or backticks will be executed as command by OS. `ls`.split will give array of content of the current folder. Copying , using `` `echo 'hi' | pbcopy` `` will copy the output of echo to clipboard, which is the same as `system("echo '123' | pbcopy")`. 
 Copying resource attributes: `` `echo "#{User.first.id}" | pbcopy` ``.
 - Assignment is setting the lvalue (left value) to refer to the rvalue (right value), and returns rvalue. Ruby has 2 forms of assignment: first an object reference to a variable or constant, ABC = 4. Second is object attribute or element reference on the left side of the assignment operator, ABC[1] = 4. Also possible, is the rightward assignment, since ruby 3.0: data => variable (e.g. 2=>x). 
 - For parallel assignment, to swap vales: 
@@ -580,10 +574,29 @@ Copying resource attributes: `` `echo "#{User.first.id}" | pbcopy` ``.
 a, b = 1, 2 
 a, b = b, a
 ```
-- Splats and assignment: for rvalues `a,b,c,d,e = *(1..2), 3 # a=1, b=2, c=3, d=nil, e=nil` and greedy for splat for lvalue `a, *b = 1,2,3,4,5 # a=1, b=[2,3,4,5]` or `*a, b = 1,2,3,4,5 # a=[1,2,3,4], b=5` or `first, *, last = [1,2,3,4,5] # first=1, last=5` 
-- Nested assignments: `a, (b, c) = 1, [2, 3] # a=1, b=2, c=3` or `a, (b, c), d = 1, [2, 3, 4], 5 # a=1, b=2, c=3, d=5`.
+- Splats and assignment: 
+  - for rvalues `a,b,c,d,e = *(1..2), 3 # a=1, b=2, c=3, d=nil, e=nil` 
+  - greedy for splat for lvalue:
+```  ruby
+a, *b = 1,2,3,4,5 
+# a=1, b=[2,3,4,5]
 
-#### Conditional Execution
+*a, b = 1,2,3,4,5 
+# a=[1,2,3,4], b=5
+
+first, *, last = [1,2,3,4,5] 
+# first=1, last=5 
+```    
+- Nested assignments: 
+```ruby
+a, (b, c) = 1, [2, 3] 
+# a=1, b=2, c=3
+
+a, (b, c), d = 1, [2, 3, 4], 5 
+# a=1, b=2, c=3, d=5
+```
+
+### Conditional Execution
 - boolean expressions: Ruby has simple definition of truth: any value that is 1. not `nil`, or 2. the constant `false`, is true. So, `"c", 9, 0, :a`, are true, also, `"", [], {}` are true. The set of false values are sometimes referred to as falsey and set of true values are referred to as truthy. `nil && 99` returns `nil`, `"c" && 99` returns `99`. When it's false, the first argument is returned, when it's truee, the second argument is returned (short circuit evaluation). There is a difference in using `&&` and `and`, terms of precedence compared to the assignment. Examples: `result = "" && [], which returns the #=> []`, and will show `result #=> []`, however `result = "" and [] which returns the #=> []` and will show `result # => ""`.
 - the `defined?` Keyword: `defined? 1 #=> "expression"` and `defined? a #=> nil` and `defined? a = 1 #=> "assignment"`.
 - Comparing objects: == equal value, ===, <=>, <, >, <=, >=, =~, eql? (equal type and value), equal? (same object id).
@@ -626,7 +639,7 @@ if not false then true end #=> true
 ```
 Safe navigation operator: `&.`, also called the lonely operator. It returns nil if the object is nil.
 
-#### Loops and iterators:
+### Loops and iterators:
 
 [https://docs.ruby-lang.org/en/master/Kernel.html#method-i-loop](https://docs.ruby-lang.org/en/master/Kernel.html#method-i-loop)
 
@@ -692,8 +705,10 @@ end
 puts square # => start
 ```
 
-#### Pattern Matching
+### Pattern Matching
+
 [https://docs.ruby-lang.org/en/master/doc/syntax/pattern_matching_rdoc.html](https://docs.ruby-lang.org/en/master/doc/syntax/pattern_matching_rdoc.html)
+
 Pattern matching compares a target which can be any Ruby object to a pattern. If the target matches the pattern, the target is deconstructed into the pattern, setting the value of those variables.
 
 ```ruby
@@ -788,12 +803,13 @@ else # code
 end
 ```
 
-#### Variables
-<hr>
+## Variables
 
 [https://docs.ruby-lang.org/en/master/doc/syntax/assignment_rdoc.html](https://docs.ruby-lang.org/en/master/doc/syntax/assignment_rdoc.html)
 
-A variable is an identifier that is assigned to an object, and which may hold a value. A local variable name may contain letters, numbers, an _ (underscore or low line) or a character with the eighth bit set.
+A variable is an identifier that is assigned to an object, and which may hold a value. A variable is not an object in Ruby, so it is a reference to an object. A local variable name may contain letters, numbers, an _ (underscore or low line) or a character with the eighth bit set.
+
+Assignment aliases objects, potentially giving multiple variables that reference the same object. String#dup will create a new string object with the same content. String#freeze will make a string immutable. Numbers and symbols are always frozen (immutable) in Ruby.
 
 Examples:
 ```ruby
@@ -871,7 +887,7 @@ p $b # => 'accessible everywhere'
 x, y, z = 100, 200, 500
 ```
 
-#### Pseudo Variables
+### Pseudo Variables
 They provide information about the program's execution environment or serve specific purposes within Ruby.
 Characteristics: Predefined, read-only and available throughout the program.
 
@@ -885,7 +901,7 @@ __FILE__ # The name of the current source file.
 __LINE__ # The current line number in the source file.
 ```
 
-#### Pre-defined global variables
+### Pre-defined global variables
 
 - [https://docs.ruby-lang.org/en/master/globals_rdoc.html](https://docs.ruby-lang.org/en/master/globals_rdoc.html)
 - [https://github.com/ruby/ruby/blob/HEAD/spec/ruby/language/predefined_spec.rb](https://github.com/ruby/ruby/blob/HEAD/spec/ruby/language/predefined_spec.rb)
@@ -975,11 +991,11 @@ Embedded Data
   DATA
 ```
 
-# Methods
+## Methods 
 
 https://docs.ruby-lang.org/en/master/syntax/methods_rdoc.html
 
-Defined by keyword `def`. You can undefine by `undef`
+Defined by keyword `def`. You can undefine by `undef`.
 
 Can begin with lowercase or underscore, followed by letters, numbers or underscores. May end with ?, !, =. 
 
@@ -1085,7 +1101,7 @@ Thing.new.hello
 ```
 Method calls without parentheses are sometimes called commands.
 
-## rule: If in doubt, use parentheses. 
+### rule: If in doubt, use parentheses. 
 
 A `return` statement exists from the currently executing method. It can be used to return a value from a method. If no value is specified, nil is returned.
 
@@ -1117,7 +1133,7 @@ method = number.method(:*)
 # => [2, 4, 6]
 ```
 
-# Classes
+## Classes
 
 In object oriented programming, a class is a blueprint for a domain concept.
 
@@ -1154,7 +1170,7 @@ puts bike
 #I'm a bike and my price is 100.0 hours of work.
 ```
 
-## Object and attributes
+### Object and attributes
 
 Creating an `accesor` method is a common pattern in Ruby. Below, the `def price` is a getter method, which can also be rewritten to the shortcut `attr_reader :price`. It allows you to read the value of an instance variable. Below, `def price=(price)` is a setter method, shortcut (but rare) `attr_writer :price`. It allows you to write to the value of an instance variable. Generally, use `attr_accessor :price` for both reading and writing, for a given attribute (e.g. an instance variable). Below as example `price_in_cents` is a virtual instance variable or calculated value. An attribute is just a method that is called when you use dot syntax and is an implementation of the `uniform access principle`. 
 
@@ -1224,7 +1240,7 @@ p bikes.count
 `ARGV` is an array of command line arguments.
 `$stderr` is the standard error stream.
 
-## Specifying access control
+### Specifying access control
 
 Classes increasingly depending on other classes is called coupling. Coupling is a bad thing. It makes it hard to change one class without breaking another. Ruby gives 3 levels of access control: public methods, private methods, and protected methods (rare).
 
@@ -1290,23 +1306,16 @@ end
 
 ### preference: per method explicit access control
 
-## Variables
-A variable is not an object in Ruby. It is a reference to an object.
-Assignment aliases objects, potentially giving multiple variables that reference the same object.
 
-String#dup will create a new string object with the same content.
-String#freeze will make a string immutable.
-Numbers and symbols are always frozen (immutable) in Ruby.
-
-## Reopening Classes
+### Reopening Classes
 
 `Monkey-patching`: Process of reopening classes to add or change (utility) methods. Use with caution.
 
-# Collections
+## Collections
 
 Most real programs manage collections of data. Ruby has a number of built-in classes for managing collections: arrays and hashes. Both classes have large interfaces and many methods.
 
-## Arrays
+### Arrays
 
 Array.new, Array.[], create a new array.
 ```ruby
@@ -1331,7 +1340,7 @@ b[6..7] = 99, 98 # will insert 99 and 98 at index 6 and 7 e.g. [1, 2, 3, nil, ni
 
 Reminder: array of words = %w{one two three}, array of symbols = %i{one two three}
 
-## Hashes
+### Hashes
 Hashes known as associative arrays, maps, dictionaries, key-value stores. They are collections of key-value pairs. The index in a hash is called a key. The value or entry is the object that the key points to. Retrieve the entry by indexing the hash with the key value.
 
 hash literals are created with curly braces, e.g. {:key => "value", "key_2" => "value_2"}
@@ -1345,7 +1354,7 @@ puts baz
 # => {:foo=>"bar"}
 ```
 
-## Override methods:
+### Override methods:
 
 ```ruby
 def Child
@@ -1360,12 +1369,12 @@ end
 puts Child.new('Foo') # => "the name: Foo"
 ```
 
-## Digging
+### Digging
 `dig` is a method that allows you to access nested elements of a hash. It is a safe way to access nested elements. It will return nil if any intermediate element is nil. A method on a hash, array, or struct.
 
 
-# Inheritance
-## Sharing functionality: Inheritance, Modules, and Mixins
+## Inheritance
+### Sharing functionality: Inheritance, Modules, and Mixins
 
 inheritance allows you to create a class that's a specialization of another class: e.g. subclass and superclass, child and parent.
 
@@ -1429,7 +1438,7 @@ end
 # if there is a Parent, like Element, having `def chatty_string raise NotImplementedError` it signals that subclasses must define this method.
 ```
 
-# Modules
+## Modules
 Modules can do everything a class can do, except create instances. They are a way to group methods, classes and constants. Two benefits: 1. a namespace and prevent name clashes, 2. can be included in other classes, known as a `mixin`. Module names are like class names, both are global constants with a n initial uppercase letter. use them with the require or require_relative method. Module constants are referenced using two colons, the `scope resultion operator`, e.g. Thing::SAY.
 
 An `include` is a method of the Module class. The `require` call is at the file level, the `include` call is at the class level. 
@@ -1472,7 +1481,7 @@ Ruby provides two mechanisms for mixing in module behaviour. The first is `inclu
 
 In general, a mixin that requires its own state isn't a mixin, it should be written as a class.
 
-## Method lookup
+### Method lookup
 With multiple ways to define methods, Ruby will look for a method in the following order:
 1. methods specifically added to that instance using `foo=Foo.new` and 1. `def foo.bar; end`, or via 2. `class << foo; def bar; end; end`
 2. Any module added to the receiver's class using `prepend`, the last module added is checked first.
@@ -1482,7 +1491,7 @@ With multiple ways to define methods, Ruby will look for a method in the followi
 
 This continues until the method is found or the end of the inheritance structure is reached. If the method is not found, Ruby will try again from the receiver's class, now looking for `method_missing`, if no `method_missing` is found to handle the mesage, a `NameError` is thrown. Entire list of classes and modules in this lookup path can be accessed by calling the method `foo.ancestors`.
 
-## Super lookup
+### Super lookup
 
 when executing a method, if Ruby encounters keyword `super`, it method lookup for `super` starts one step after the points where the method being executed is lcoated. (e.g. if in step 2, it will start at step 3). If `super` has no argument list, Ruby will pass the arguments that were passed to the method that called `super`. If `super` has an argument list, even an empty one, those arguments will be passed.
 
@@ -1529,7 +1538,7 @@ References:
 - https://gist.github.com/robturtle/b20c5e1077ef6ab1cb73605aff0d6b1c
 - https://gist.github.com/damien-roche/351bf4e7991449714533
 
-## Inheritance, Mixins, and Design
+### Inheritance, Mixins, and Design
 
 For subclassing look for `is-a` relationships or hierarchies. However, for `has-a` or `uses-a` relationships, use composition. Ruby on Rails makes use of inheritance, e.g. with Person inheriting from a DatabaseWrapper class (ActiveRecord). As inheritance represents an incredibly tight coupling, it should be used sparingly. It's easy to break. Composition is more flexible, however can get messy fast.
 
@@ -1546,25 +1555,107 @@ class Person < DatabaseWrapper
 end
 ```
 
+## Exceptions
+
+Ruby uses exceptions to solve the problem of responding to errors in a program. They let you package information about an error into an object, in ruby of class `Exception` or in one of `Exception` subclasses. Documentation is https://docs.ruby-lang.org/en/master/Exception.html. Most important subclass is `StandardError`, which along with its subclasses, should be used to capture all errors in code. The other subclasses are used to indicate specific types of errors, e.g. Ruby internals or system-level problems.
+
+Every `Exception` object has: 
+- The type (the exception’s class): StandardError, RuntimeError, etc.
+- Optional message: "This is the message"
+- Optional backtrace: An array of strings, e.g. ["file:line", "file:line", ...] https://docs.ruby-lang.org/en/master/Exception.html#method-i-backtrace
+
+How to raise an exception:
+```sh
+irb # or rails console
+raise StandardError.new("This is a test error")
+# => StandardError: This is a test error
+raise "This is a test error"
+# => RuntimeError: This is a test error
+```
+
+### Handling exceptions
+
+We enclose the code that could raise an exception in a `begin/end` block and use one or more `rescue` clauses to handle the types of exceptions.
+
+Below is an example of a `begin/rescue/end` block. We catch all exceptions related to `StandardError` and its children, and re-raise them. The global variable `$!` contains the exception object. The `warn` method is used to print to standard error. The `raise` method is used to re-raise the exception. The exclamation point `!` presumably is used to indicate our surprise that _our_ code failed. You can have multiple `rescue` clauses, and the first one that matches will be executed. The `rescue` clause can have a variable name, which will be assigned the exception object, usually named `e`, like: `rescue StandardError => e`. If you write `rescue` without a parameter, it will default to catch all StandardError exceptions. If you need to guarantee that a certain processing is done at the end of a block of code, with or without an exception being raised, use `ensure`. The `else` clause is only executed if no exceptions are raised.
+
+If no rescue clause matches or if an exception is raised outside of a `begin/end` block, Ruby moves up the stack, looking for an exception handler in the caller, and so on until it finds one. If no exception handler is found, the program typically halts.
+
+Sometimes you want to use the `retry` clause. This will repeat the entire `begin/end` block, so can create infinitie loops and therefor best used with a counter.
+
+```ruby
+begin
+  puts 0/0
+rescue SyntaxError => e
+  $stderr.warn "Failed #{$!}" 
+  # warn "Failed #{$!}"
+  # warn "Failed #{e}"
+  raise
+rescue StandardError => e
+  print "Error: #{e}"
+  raise
+else
+  puts "No errors"
+ensure
+  puts "This is always executed"
+end
+```
+
+### Raising exceptions
+
+You can raise exception with `raise` or `fail`. 
+
+```ruby
+raise
+raise "keyboard failed"
+raise InterfaceError, "keyboard failed"
+raise InterfaceError, "keyboard failed", caller
+```
+`raise` simple reraises the exception. `raise` with a string argument will create a new RuntimeError exception. `raise` with a class name will create a new exception of that class, with the second argument as the message. `raise` with a class name, a message, and a `Kernel#caller` stack trace, will allow to edit the stack backtrace as well: `raise InterfaceError, "keyboard failed", caller[0..-2]`.
+
+You can also define your own exceptions by subclassing `Exception` or one of its subclasses, to hold more information about the error, or possibly add additional behavior.
+
+### Using Catch and Throw
+`catch` defines a block that is labeled with given name (Symbol or String) and is normally executed until a `throw` is encountered. When throw is encountered, the block is exited and returns nil or, when second parameter is passed, that value is returned.
+```ruby
+catch(:done) do
+  while true
+    print "Input: "
+    line = gets
+    throw :done if line =~ /quit/i
+    throw(:done, line) if line.size > 3
+  end
+end
+```
+
 ----
 
-Abbreviations:
+
+### Shebang on Unix
+
+The shebang is the `#!` at the beginning of a script. It tells the system what interpreter to use to run the script, e.g. file `hi.rb`:
+```ruby
+#!/usr/bin/env ruby
+puts 'Hello, world!'
+```
+
+## Abbreviations:
 - CSV = Comma Separated Values
 
 ----
 
 Besides the syntax, we can have general guidelines to describe common knowledge.
 
-# General rules
+## General rules
 
 - Limit lines to 80 characters.
-- Pass no more than four parameters into a method. Hash options are parameters.
-- Methods can be no longer than five lines of code.
-- Classes can be no longer than one hundred lines of code.
-- Controllers can instantiate only one object. Therefore, views can only know about one instance variable and views should only send messages to that object (@object.collaborator.value is not allowed).
+- Pass no more than 4 parameters into a method. Hash options are parameters.
+- Methods can be no longer than 5 lines of code.
+- Classes can be no longer than 100 lines of code.
+- Controllers can instantiate only 1 object. Therefore, views can only know about one instance variable and views should only send messages to that object (@object.collaborator.value is not allowed).
 
 
-# References
+## References
 
 - [https://github.com/hopsoft/rails_standards/tree/rails-4-X](https://github.com/hopsoft/rails_standards/tree/rails-4-X)
 - [https://github.com/leahneukirchen/styleguide/blob/master/RUBY-STYLE](https://github.com/leahneukirchen/styleguide/blob/master/RUBY-STYLE)
