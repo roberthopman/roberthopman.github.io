@@ -22,6 +22,8 @@ Structure:
 - [Classes](#classes)
 - [Collections](#collections)
 - [Inheritance](#inheritance)
+- [Modules](#modules)
+- [Exceptions](#exceptions)
 - [General rules](#general-rules)
 - [References](#references)
 
@@ -41,7 +43,6 @@ Structure:
 - `#` is a method call operator. It is documented as an instance method.
 
 ## Debugging
-<hr>
 
 For debugging use `p` instead of `puts`:
 - `p` (print the value of the expression, including the value of the expression)
@@ -52,6 +53,9 @@ For debugging use `p` instead of `puts`:
 ### Reserved keywords
 - Version: [3.3](https://docs.ruby-lang.org/en/3.3/keywords_rdoc.html)
 - With definition: [https://ruby-doc.org/docs/keywords/1.9/](https://ruby-doc.org/docs/keywords/1.9/)
+
+<details>
+<summary>Keywords</summary>
 
 ```md
 __ENCODING__ 
@@ -177,6 +181,8 @@ Creates a loop that executes while the condition is true.
 yield
 Starts execution of the block sent to the current method. 
 ```
+
+</details>
 
 ## Literals
 
