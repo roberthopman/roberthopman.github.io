@@ -55,9 +55,10 @@ For debugging use `p` instead of `puts`:
 - With definition: [https://ruby-doc.org/docs/keywords/1.9/](https://ruby-doc.org/docs/keywords/1.9/)
 
 <details>
-<summary>Keywords</summary>
+  <summary>Keywords</summary>
+  <div markdown=1>
 
-```md
+```
 __ENCODING__ 
 The script encoding of the current file.
 
@@ -181,7 +182,7 @@ Creates a loop that executes while the condition is true.
 yield
 Starts execution of the block sent to the current method. 
 ```
-
+  </div>
 </details>
 
 ## Literals
