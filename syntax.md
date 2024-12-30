@@ -185,6 +185,7 @@ Starts execution of the block sent to the current method.
   </div>
 </details>
 
+
 ## Literals
 
 [https://docs.ruby-lang.org/en/master/syntax/literals_rdoc.html](https://docs.ruby-lang.org/en/master/syntax/literals_rdoc.html)
