@@ -24,6 +24,7 @@ Structure:
 - [Inheritance](#inheritance)
 - [Modules](#modules)
 - [Exceptions](#exceptions)
+- [Input and output](#input-and-output)
 - [General rules](#general-rules)
 - [References](#references)
 
@@ -51,8 +52,6 @@ For debugging use `p` instead of `puts`:
 - `puts` (prints expression and nil)
 
 ### Reserved keywords
-- Version: [3.3](https://docs.ruby-lang.org/en/3.3/keywords_rdoc.html)
-- With definition: [https://ruby-doc.org/docs/keywords/1.9/](https://ruby-doc.org/docs/keywords/1.9/)
 
 <details>
   <summary>Keywords</summary>
@@ -184,6 +183,9 @@ Starts execution of the block sent to the current method.
 ```
   </div>
 </details>
+
+- Version: [3.3](https://docs.ruby-lang.org/en/3.3/keywords_rdoc.html)
+- With definition: [https://ruby-doc.org/docs/keywords/1.9/](https://ruby-doc.org/docs/keywords/1.9/)
 
 
 ## Literals
@@ -1636,19 +1638,135 @@ catch(:done) do
 end
 ```
 
-----
+## Input and output
 
+https://docs.ruby-lang.org/en/master/IO.html
 
-### Shebang on Unix
+I/O or IO methods are implemented in the Kernel module, including `gets, open, print, printf, putc, puts ,readline, readlines`, and `test`.
+These are available to all objects. There is also Ruby's `IO` class, with subclasses `File` and `BasicSocket` with more specialized methods. The IO object is a bidirectional stream between a Ruby program and some external resource.
 
-The shebang is the `#!` at the beginning of a script. It tells the system what interpreter to use to run the script, e.g. file `hi.rb`:
+### Open and Close files
+
 ```ruby
-#!/usr/bin/env ruby
-puts 'Hello, world!'
+# file = File.new("file_name", "mode string")
+# mode string lets you declare if you're opening the file for reading, writing or both.
+
+file = File.new("testfile", "r")
+# ... process the file
+file.close
+
+# or File.open, 
+# which will close the file automatically, also when an exception is raised
+File.open("testfile", "r") do |file|
+  # ... process the file
+end
 ```
 
-## Abbreviations:
-- CSV = Comma Separated Values
+### Read and Write files
+
+`Kernel#gets` reads a line from the standard input (or from a specified file), `File#gets` reads a line from a file.
+
+Reading from console:
+```ruby
+# copy.rb
+while (line = gets)
+  puts line
+end
+```
+
+Reading from a file, line by line:
+```ruby
+File.open("testfile") do |file|
+  while line = (file.gets)
+    puts line
+  end
+end
+```
+
+From a file with `IO#each_line` with `String#dump` to show the line:
+```ruby
+File.open("testfile") do |file|
+  file.each_line { |line| puts "Got #{line.dump}" }
+end
+=> Got "This is line one\n"
+```
+
+Giving `each_line` an argument will split the line on that argument:
+```ruby
+File.open("testfile") do |file|
+  file.each_line("e") { |line| puts "Got #{line}" }
+end
+=> Got "This is line"
+=> Got " one\n"
+```
+
+Iterator with autoclosing block feature:
+```ruby
+File.foreach("testfile") { |line| puts "Got #{line}" }
+```
+
+Reading a file into a string:
+```ruby
+str = IO.read("testfile")
+str.length # => ..
+str[0, 8] # => "This..."
+```
+
+Reading a file into an array:
+```ruby
+arr = IO.readlines("testfile")
+arr.length # => ..
+arr[0] # => "This is line one\n"
+```
+
+Writing to a file:
+```ruby
+File.open("output.txt", "w") do |file|
+  file.puts "Hi"
+  file.puts "1 + 2 = #{1+2}"
+end
+puts File.read("output.txt")
+# Hi
+# 1 + 2 = 3
+```
+
+Every object you pass to `puts` is converted to a string with `to_s` method. Note: `puts` adds newline after the output, `print` does not. 
+
+```ruby
+File.open("output.txt", "w") do |file|
+  file.write "Hi"
+  file.write "1 + 2 = #{1+2}"
+end
+puts File.read("output.txt")
+# Hi1 + 2 = 3
+```
+
+### Find files
+```ruby
+__FILE__ relative name of the file
+__dir__ absolute pathname of that file
+File.realpath returns absolute path to a file
+File.realpath(__FILE_) gives absolute path to the current file
+```
+
+StringIO behaves like other IO objects, but they read and write strings, not files. https://docs.ruby-lang.org/en/master/StringIO.html
+
+```ruby
+require 'stringio'
+io = StringIO.new("abc")
+io.read # => "abc"
+io.write("def")
+io.string # => "abcdef"
+io.close
+io.closed? # => true
+```
+
+### Talking to Networks
+
+At the network level, Ruby comes with a set of classes in the the socket library. https://docs.ruby-lang.org/en/master/Socket.html These give access to TCP, UDP, SOCKS, and Unix domain sockets, and additional socket types. At a higher level of the OSI model, the "lib/net" here https://docs.ruby-lang.org/en/master/Net.html and https://github.com/ruby/ruby/tree/master/lib/net, provides application level protocols (such as HTTP, HTTPS, FTP, POP, IMAP, and SMTP). `Net::HTTP` for example: https://docs.ruby-lang.org/en/master/Net/HTTP.html or at a higher-level the `open-uri` library is a wrapper for Net::HTTP, Net::HTTPS and Net::FTP, and handles redirects automatically: https://docs.ruby-lang.org/en/master/OpenURI.html
+
+IO is however slow and blocks programs, a common workaround is to use threading to do multiple things at once.
+
 
 ----
 
