@@ -38,10 +38,10 @@ Resources for the upgrade process:
 - <https://infinum.com/handbook/rails/workflows/rails-upgrades>
 - <https://www.fastruby.io/blog/rails/upgrade/rails-upgrade-series.html> 
 - <https://rormaas.com/maintenance.html#our-maintenance-process>
-- <https://jeromezng.com/work/research-and-development/engineering/development/upgrading-rails>
 - <http://www.t27duck.com/posts/8-how-i-upgrade-ruby-on-rails>
 - <https://github.com/jwo/rails-upgrade_checklist/blob/master/app/views/pages/list.markdown>
 - <https://railsapps.github.io/updating-rails.html>
+- <https://web.archive.org/web/20240725023959/https://jeromezng.com/work/research-and-development/engineering/development/upgrading-rails>
 - Dual booting: <https://github.com/fastruby/next_rails> and <https://github.com/shopify/bootboot>
 
 
