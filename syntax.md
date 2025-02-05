@@ -615,6 +615,7 @@ a, (b, c), d = 1, [2, 3, 4], 5
 - the `defined?` Keyword: `defined? 1 #=> "expression"` and `defined? a #=> nil` and `defined? a = 1 #=> "assignment"`.
 - Comparing objects: == equal value, ===, <=>, <, >, <=, >=, =~, eql? (equal type and value), equal? (same object id).
 - if and unless: 
+
 ```ruby
 # then is optional
 if condition then 
@@ -1835,6 +1836,39 @@ Fibers are a block of code that can be stopped and restarted, which is sometimes
 https://docs.ruby-lang.org/en/master/Ractor.html
 
 Ractors are a way to bypass the GIL and have 'true' multiple threading using Ruby. Ractor is a chunk of code that has a single input port and a single output port. So like a physical room, with a single entrance and a single exit door. The entrance door could have a queue to get in. Ractor is created via Ractor.new and is `isolated`, the code inside the block won't be able to acces any variables that aren't defined in the block (no globals and no external locals).
+
+## Testing
+
+Why?
+
+- To ensure maintenance and ongoing changes are not breaking existing code.
+
+The options for testing are:
+
+### No framework, just Ruby:
+
+```ruby
+# ./no_framework.rb
+class Roman
+  def initialize(value)
+    @value = value
+  end
+
+  def to_s
+    @value
+  end
+end
+
+# ./test_no_framework.rb
+require_relative "no_framework.rb"
+r = Roman.new(1)
+fail "'I' expected but got #{r.to_s}" if r.to_s != 'I'
+
+# produces
+ruby test_no_framework.rb
+Traceback (most recent call last):
+test_no_framework.rb:3:in `<main>': 'I' expected but got 1 (RuntimeError)
+```
 
 
 ----
