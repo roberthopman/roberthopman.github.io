@@ -25,6 +25,7 @@ Structure:
 - [Modules](#modules)
 - [Exceptions](#exceptions)
 - [Input and output](#input-and-output)
+- [Concurrency](#concurrency)
 - [General rules](#general-rules)
 - [References](#references)
 
@@ -244,7 +245,7 @@ The following are metacharacters with specific meaning: `. ? - + * ^ \ | $ ( ) [
 
 Operater =~ returns characters offset of beginning:
 ```ruby
-/cat/  =~ 'dog and cat' # => 8
+/cat/ =~ 'dog and cat' # => 8
 /cat/ =~ 'cat' # => 0
 'cat' =~ /cat/ # => 0
 ```
@@ -587,7 +588,8 @@ a, b = b, a
 - Splats and assignment: 
   - for rvalues `a,b,c,d,e = *(1..2), 3 # a=1, b=2, c=3, d=nil, e=nil` 
   - greedy for splat for lvalue:
-```  ruby
+
+```ruby
 a, *b = 1,2,3,4,5 
 # a=1, b=[2,3,4,5]
 
@@ -597,7 +599,9 @@ a, *b = 1,2,3,4,5
 first, *, last = [1,2,3,4,5] 
 # first=1, last=5 
 ```    
+
 - Nested assignments: 
+
 ```ruby
 a, (b, c) = 1, [2, 3] 
 # a=1, b=2, c=3
@@ -1449,13 +1453,13 @@ end
 ```
 
 ## Modules
-Modules can do everything a class can do, except create instances. They are a way to group methods, classes and constants. Two benefits: 1. a namespace and prevent name clashes, 2. can be included in other classes, known as a `mixin`. Module names are like class names, both are global constants with a n initial uppercase letter. use them with the require or require_relative method. Module constants are referenced using two colons, the `scope resultion operator`, e.g. Thing::SAY.
+Modules can do everything a class can do, except create instances. They are a way to group methods, classes and constants. Two benefits: 1. a namespace and prevent name clashes, 2. can be included in other classes, known as a `mixin`. Module names are like class names, both are global constants with an initial uppercase letter. use them with the require or require_relative method. Module constants are referenced using two colons, the `scope resultion operator`, e.g. Thing::SAY.
 
 An `include` is a method of the Module class. The `require` call is at the file level, the `include` call is at the class level. 
 
 Example module is `Kernel` which is included in `Object`. Another is Comparable, which assumes that any class that uses it  defines the method `<=>` (the `spaceship operator`).
 
-Some Object-Oriented languages like Python support multiple inheritance (Powerful and dangerous), some like JavaScript support single inheritance (cleaner and easier to implement). Ruby is a single inheritance language, which mixins to support controlled multiple-inheriticance-like capability.
+Some Object-Oriented languages like Python support multiple inheritance (Powerful and dangerous), some like JavaScript support single inheritance (cleaner and easier to implement). Ruby is a single inheritance language, which mixins to support controlled multiple-inheritance-like capability.
 
 
 ```ruby
@@ -1492,6 +1496,7 @@ Ruby provides two mechanisms for mixing in module behaviour. The first is `inclu
 In general, a mixin that requires its own state isn't a mixin, it should be written as a class.
 
 ### Method lookup
+
 With multiple ways to define methods, Ruby will look for a method in the following order:
 1. methods specifically added to that instance using `foo=Foo.new` and 1. `def foo.bar; end`, or via 2. `class << foo; def bar; end; end`
 2. Any module added to the receiver's class using `prepend`, the last module added is checked first.
@@ -1499,7 +1504,7 @@ With multiple ways to define methods, Ruby will look for a method in the followi
 4. Modules added in the receiver's class using `include`, the last module added is checked first.
 5. If not found, the same loop will happen in the receiver's superclass.
 
-This continues until the method is found or the end of the inheritance structure is reached. If the method is not found, Ruby will try again from the receiver's class, now looking for `method_missing`, if no `method_missing` is found to handle the mesage, a `NameError` is thrown. Entire list of classes and modules in this lookup path can be accessed by calling the method `foo.ancestors`.
+This continues until the method is found or the end of the inheritance structure is reached. If the method is not found, Ruby will try again from the receiver's class, now looking for `method_missing`, if no `method_missing` is found to handle the message, a `NameError` is thrown. Entire list of classes and modules in this lookup path can be accessed by calling the method `foo.ancestors`.
 
 ### Super lookup
 
@@ -1766,6 +1771,70 @@ io.closed? # => true
 At the network level, Ruby comes with a set of classes in the the socket library. https://docs.ruby-lang.org/en/master/Socket.html These give access to TCP, UDP, SOCKS, and Unix domain sockets, and additional socket types. At a higher level of the OSI model, the "lib/net" here https://docs.ruby-lang.org/en/master/Net.html and https://github.com/ruby/ruby/tree/master/lib/net, provides application level protocols (such as HTTP, HTTPS, FTP, POP, IMAP, and SMTP). `Net::HTTP` for example: https://docs.ruby-lang.org/en/master/Net/HTTP.html or at a higher-level the `open-uri` library is a wrapper for Net::HTTP, Net::HTTPS and Net::FTP, and handles redirects automatically: https://docs.ruby-lang.org/en/master/OpenURI.html
 
 IO is however slow and blocks programs, a common workaround is to use threading to do multiple things at once.
+
+## Concurrency
+
+When writing programs that are doing multiple things at once, each thing is called a thread. And the goal is to have thread safety, meaning the code will execute correctly no matter what order the threads operate. When the order of operations matters, we call it a race condition, and it's bad because it can lead to hard-to-find bugs. Ruby programs have a Global Interpreter Lock (GIL), which means that only one thread can executed by Ruby at any time. This is one way to protect thread safety and prevent race conditions.
+
+The `Thread` class is the basic unit of multithreaded behavior in Ruby. Ruby also allows you to spawn processes out to the underlying operating system, and mulithread those processes. `Fibers` are an additional abstraction, to suspend the executation of one part of a program and run some other part. The `Ractor` library allows you to bypass the GIL and have 'true' multiple threading using Ruby.
+
+### Threads
+
+https://docs.ruby-lang.org/en/master/Thread.html
+
+The lowest-level mechanism is the `Thread` class. Mostly you will see one thread executing, and another waiting on an I/O operation. A thread shares all global, instance, and local variables that are in existence and available at the time the thread starts. Threads are immediately executed. Local variables created in the thread's block are truly local ot that thread. Thread.join will ensure the main program waits for the threads to finish, you can also give the thread a timeout, and it will return nil if the thread does not finish in time. Normally, building timing dependencies in a multithreaded program is a bad idea. However, if you need to do this, you can use the `Mutex` (mutually exclusive) class, which creates areas of code that can only be accessed by one thread at a time. Some of the relevant methods to enable this: Mutex#lock, Mutex#unlock, and the block version Mutex#synchronize, and the Mutex#try_lock method.
+
+### Multiple external processes
+
+Kernel#system executes given commmand in a subprocess and returns true if the command was found and executed properly. If it fails, it returns false and the subprocess's exit code is in `$?`.
+
+```ruby
+system(`tar xzf test.tgz`) #=> false
+span("date")               #=> "Mon Jan 20 23:04:23 UTC 2025\n"
+`date`                     #=> "Mon Jan 20 23:04:23 UTC 2025\n"
+```
+
+When we want to have more control, we can use the IO.popen method, which returns an IO object.
+
+```ruby
+reader = IO.popen("cat", "w+") 
+reader.puts "hello world"
+reader.close_write
+puts reader.gets
+
+# or, give it a command as argument and optional block
+IO.popen("date") { |f| puts "Date is #{f.gets}" }
+```
+
+Sometimes we can run a subprocess independently:
+
+```ruby
+pid = spawn("sort textfile.txt > output.txt")
+# carry on with the program
+Process.wait(pid)
+
+# or if you want to be notified when the subprocess terminates
+trap("CLD") do 
+  pid = Process.wait
+  puts "Child #{pid}: terminated"
+end
+spawn("sort textfile.txt > output.txt")
+# do other things
+# returns:
+Child pid 3828: terminated
+```
+
+### Fibers
+
+https://docs.ruby-lang.org/en/master/Fiber.html
+
+Fibers are a block of code that can be stopped and restarted, which is sometimes called a coroutine. They are cooperatively multitasked, meaning that the responsibility of control is with the fibers and not the OS. Fibers are not immediately executed. When `resume` is called, the fiber will execute until it hits a `yield` statement, which suspends execution. The last expression evaluted will be the return value of the Fiber.
+
+### Ractors
+
+https://docs.ruby-lang.org/en/master/Ractor.html
+
+Ractors are a way to bypass the GIL and have 'true' multiple threading using Ruby. Ractor is a chunk of code that has a single input port and a single output port. So like a physical room, with a single entrance and a single exit door. The entrance door could have a queue to get in. Ractor is created via Ractor.new and is `isolated`, the code inside the block won't be able to acces any variables that aren't defined in the block (no globals and no external locals).
 
 
 ----
