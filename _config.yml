@@ -28,6 +28,7 @@ theme: minima
 plugins:
   - jekyll-feed
   - jekyll-gist
+  - jekyll-seo-tag
 
 show_excerpts: false
 

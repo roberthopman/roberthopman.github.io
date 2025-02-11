@@ -30,3 +30,6 @@ gem "standard", group: [:development, :test]
 
 # github gists
 gem 'jekyll-gist'
+
+# https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
+gem 'jekyll-seo-tag'

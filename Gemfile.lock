@@ -294,6 +294,7 @@ DEPENDENCIES
   github-pages
   jekyll-feed (~> 0.6)
   jekyll-gist
+  jekyll-seo-tag
   minima (~> 2.0)
   standard
   tzinfo-data

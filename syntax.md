@@ -1,6 +1,7 @@
 ---
 layout: default
 title:  Syntax
+description: Describing the Ruby language structure
 ---
 
 # Syntax
@@ -1848,7 +1849,7 @@ The options for testing are:
 ### No framework, just Ruby:
 
 ```ruby
-# ./no_framework.rb
+# ./roman.rb
 class Roman
   def initialize(value)
     @value = value
@@ -1860,7 +1861,7 @@ class Roman
 end
 
 # ./test_no_framework.rb
-require_relative "no_framework.rb"
+require_relative "roman.rb"
 r = Roman.new(1)
 fail "'I' expected but got #{r.to_s}" if r.to_s != 'I'
 
@@ -1870,27 +1871,88 @@ Traceback (most recent call last):
 test_no_framework.rb:3:in `<main>': 'I' expected but got 1 (RuntimeError)
 ```
 
+### Minitest
+
+Gives you three facilities wrapped into a package:
+- a way of expressing individual tests
+- framework for organizing tests
+- flexible ways of invoking tests
+
+Instead of `if` or `unless`, we write assertions.
+
+The minitest/autorun module includes minitest itself, which has most of the features we've talked about and call `Minitest.autorun`, which calls the test runner. Test files are being executed as plain Ruby files. Unit tests are organized into higher-level groupings, called test cases (around of facility or feature). Test cases are organized into test suites. 
+Classes that represent test cases must be subclasses of `Minitest::Test`. Methods that begin with `test_` are test methods.
+
+The idea of unit tests is fast-running, context-independent, and easy to maintain.
+
+```ruby
+require_relative "roman.rb"
+require "minitest/autorun"
+
+# initial test with duplication
+class TestRoman < Minitest::Test
+  def test_simple
+    assert_equal("I", Roman.new(1).to_s)
+    assert_equal("II", Roman.new(2).to_s)
+    assert_equal("IV", Roman.new(4).to_s)
+    assert_equal("V", Roman.new(5).to_s)
+  end
+end
+
+# refactored to make it DRY, with a custom assertion
+class TestRoman < Minitest::Test
+  def assert_roman_value(roman_value, arabic_numeral)
+    assert_equal(roman_value, Roman.new(arabic_numeral).to_s)
+  end
+
+  def test_simple
+    assert_roman_value("I", 1)
+    assert_roman_value("II", 2)
+    assert_roman_value("IV", 4)
+    assert_roman_value("V", 5)
+  end
+end
+```
 
 ----
 
-Besides the syntax, we can have general guidelines to describe common knowledge.
+Besides the syntax, we can have general rules to describe common sense.
 
 ## General rules
 
-- Limit lines to 80 characters.
-- Pass no more than 4 parameters into a method. Hash options are parameters.
-- Methods can be no longer than 5 lines of code.
-- Classes can be no longer than 100 lines of code.
-- Controllers can instantiate only 1 object. Therefore, views can only know about one instance variable and views should only send messages to that object (@object.collaborator.value is not allowed).
+- Line:        limit lines to 80 characters.
+- Parameters:  no more than 4 parameters into a method. Hash options are parameters.
+- Methods:     can be no longer than 5 lines of code.
+- Classes:     can be no longer than 100 lines of code.
+- Controllers: can instantiate only 1 object. Therefore, views can only know about one instance variable and views should only send messages to that object (@object.collaborator.value is not allowed).
+
+Organizing a Model:
+
+```ruby
+class MyModel < ActiveRecord::Base
+  # extends ...................................................................
+  # includes ..................................................................
+  # relationships .............................................................
+  # validations ...............................................................
+  # callbacks .................................................................
+  # scopes ....................................................................
+  # additional config (i.e. accepts_nested_attribute_for etc...) ..............
+  # class methods .............................................................
+  # public instance methods ...................................................
+  # protected instance methods ................................................
+  # private instance methods ..................................................
+end
+```
 
 
 ## References
 
+- [cookpad ruby styleguide](https://github.com/cookpad/styleguide/blob/master/ruby.en.md)
+- [rubocop ruby styleguide](https://github.com/rubocop/ruby-style-guide)
+- [shopify ruby styleguide](https://github.com/Shopify/ruby-style-guide)
+- [thoughtbot ruby styleguide](https://github.com/thoughtbot/guides/blob/main/ruby/README.md)
+- [rails styleguide](https://github.com/rubocop/rails-style-guide)
 - [https://github.com/hopsoft/rails_standards/tree/rails-4-X](https://github.com/hopsoft/rails_standards/tree/rails-4-X)
 - [https://github.com/leahneukirchen/styleguide/blob/master/RUBY-STYLE](https://github.com/leahneukirchen/styleguide/blob/master/RUBY-STYLE)
-- [https://github.com/thoughtbot/guides/blob/main/ruby/README.md](https://github.com/thoughtbot/guides/blob/main/ruby/README.md)
 - [https://thoughtbot.com/blog/sandi-metz-rules-for-developers#only-instantiate-one-object-in-the-controller](https://thoughtbot.com/blog/sandi-metz-rules-for-developers#only-instantiate-one-object-in-the-controller)
 - [https://zenspider.com/ruby/quickref.html](https://zenspider.com/ruby/quickref.html)
-- [ruby styleguide](https://github.com/rubocop/ruby-style-guide)
-- [rails styleguide](https://github.com/rubocop/rails-style-guide)
-- [cookpad styleguide](https://github.com/cookpad/styleguide/blob/master/ruby.en.md)
