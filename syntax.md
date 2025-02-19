@@ -1881,7 +1881,7 @@ Gives you three facilities wrapped into a package:
 Instead of `if` or `unless`, we write assertions.
 
 The minitest/autorun module includes minitest itself, which has most of the features we've talked about and call `Minitest.autorun`, which calls the test runner. Test files are being executed as plain Ruby files. Unit tests are organized into higher-level groupings, called test cases (around of facility or feature). Test cases are organized into test suites. 
-Classes that represent test cases must be subclasses of `Minitest::Test`. Methods that begin with `test_` are test methods.
+Classes that represent test cases must be subclasses of `Minitest::Test`. Methods that begin with `test_` are test methods. We can use shared code in `setup` and `teardown` methods, which for setup will run before each and every test method, or with teardown, after each test method finishes.
 
 The idea of unit tests is fast-running, context-independent, and easy to maintain.
 
@@ -1913,6 +1913,80 @@ class TestRoman < Minitest::Test
   end
 end
 ```
+
+Minitest allows you to create `mock objects`, which simulate the API of an (existing) object, providing a canned response instead of a more expensive or context-dependent real response. Mock objects can be verified to ensure that they were called with the correct parameters. We test the behavior of the object, not the return value.
+
+[From the minitest repository:](https://github.com/minitest/minitest?tab=readme-ov-file#mocks-)
+
+```ruby
+# test_meme_asker.rb
+class Meme
+  def i_can_has_cheezburger?
+    "OHAI!"
+  end
+
+  def will_it_blend?
+    "YES!"
+  end
+end
+
+class MemeAsker
+  def initialize(meme)
+    @meme = meme
+  end
+
+  def ask(question)
+    method = question.tr(" ", "_") + "?"
+    @meme.__send__(method)
+  end
+end
+
+require "minitest/autorun"
+
+class TestMemeAsker < Minitest::Test
+  def test_asks_unpunctuated_question_mock
+    @meme = Minitest::Mock.new
+    @meme_asker = MemeAsker.new(@meme)
+    @meme.expect(:will_it_blend?, :return_value)
+
+    @meme_asker.ask("will it blend")
+
+    @meme.verify 
+  end
+end
+```
+
+Minitest mock objects can take an optional third argument, which is an array of arguments, and an optional block argument.
+If those arguments are used, then the mock object only accepts the method calls that match the arguments and block. If not, it raises an `MockExpectationError`. More documentation in the [minitest mock class](https://github.com/minitest/minitest/blob/master/lib/minitest/mock.rb#L62)
+
+It's common to want to orride one method on an existing object rather than create an entire mock object. In minitest, you can do this with the `stub` method, which is added to `Object`, so it's available to all objects. More documentation in the [minitest Object class extension with stub](https://github.com/minitest/minitest/blob/master/lib/minitest/mock.rb#L279)
+
+The first argument to `stub` is the name of the method you want to intercept, as a symbol. The second argument is the value that should be returned, or you can pass a block argument. The return value of the stub is one of these:
+ - value returned of the the block
+ - result of the `second_arg.call`, if `second_arg` responds to `call`, meaning it's usually a `Proc` or `lambda`
+ - the second argument itself, if neither of the above
+
+```ruby
+# with Meme and MemeAsker classes
+# test_meme_asker.rb
+class TestMemeAsker < Minitest::Test
+  def test_asks_unpunctuated_question_stub_with_singleton_method
+    meme = Meme.new
+    def meme.will_it_blend?; :no; end
+    
+    result = MemeAsker.new(meme).ask("will it blend")
+    
+    assert_equal :no, result
+  end
+end
+```
+
+To have control over the depth of runnin tests, be able to run tests with: 
+
+- an exact match: `test test_file_name.rb -n exact_match`
+- a pattern: `test test_file_name.rb -n /all_with_pattern/`
+- a single file: `test test_file_name.rb`
+- a group of files into a test suite; create a file with a name for a test suite and require the test files: `test test_suite_name.rb`
 
 ----
 
