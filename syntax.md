@@ -1988,6 +1988,101 @@ To have control over the depth of runnin tests, be able to run tests with:
 - a single file: `test test_file_name.rb`
 - a group of files into a test suite; create a file with a name for a test suite and require the test files: `test test_suite_name.rb`
 
+### RSpec
+
+Some history: [https://stevenrbaker.com/tech/history-of-rspec.html](https://stevenrbaker.com/tech/history-of-rspec.html)
+
+RSpec started as a teaching tool, but it was so popular that it became a real tool. The goal of RSpec is to express thinking as close to natural language. RSpec is concerned with driving the design, as such, words like expectation and specifcation are used, and usually RSpec is used before you write the implementation. A 'spec' is a specification, a description of how something should work, and written before implementation, an 'assertion' is used to test what already exists. 
+
+To be clear, you can use both RSpec after you write code, and Minitest (also with specs) before you write code.
+
+An example specification file: 
+- that describes how a Roman class should behave
+- that groups based on 'converting arabic numerals to roman numerals':
+- the group shows 4 expectations that start with 'it'
+
+```ruby
+# ./ex1_rspec.rb
+RSpec.describe "Roman" do 
+  describe "converting arabic numerals to roman numerals" do
+    it "converts 1 to I"
+    it "converts 2 to II"
+    it "converts 4 to IV"
+    it "converts 5 to V"
+  end
+end
+```
+
+It is helpful to see With parenthesis and implicit `self` message receivers (self.describe, self.it, self.expect, and self.eq):
+
+```ruby
+# ./ex2_rspec.rb
+require_relative "roman.rb"
+RSpec.describe(Roman) do  
+  self.describe("converting arabic numerals to roman numerals") do
+    self.it("converts 1 to I") do 
+      roman = Roman.new
+      self.expect(roman.convert(1)).to(self.eq("I"))
+    end
+
+    self.it("converts 2 to II")
+    self.it("converts 4 to IV")
+    self.it("converts 5 to V")
+  end
+end
+```
+The `expect(something).to eq(something_else)` is the most common way to write an expectation in RSpec. The result of a call to `eq` is a `matcher`. More in Github rspec expectations: [https://github.com/rspec/rspec-expectations?tab=readme-ov-file#built-in-matchers](https://github.com/rspec/rspec-expectations?tab=readme-ov-file#built-in-matchers)
+
+Using a `before` method is first step to prevent duplication in setup of tests.
+
+```ruby
+before(:example) do 
+  @roman = Roman.new
+end
+```
+
+However, RSpec gives the `let` method as alternative and preferred way to setup tests. The `let` block is only evaluated when the variable is used, and the block is evaluated once, and further uses use the value of the first evaluation.
+
+```ruby
+RSpec.describe Roman do  
+  describe "converting arabic numerals to roman numerals" do
+    let(:roman) { Roman.new }
+    
+    it "converts 1 to I" do 
+      expect(roman.convert(1)).to eq("I")
+    end
+  end
+end
+```
+
+In RSpec, the term for a fake object is `test double`, the object that stands in for the real object (stunt double) [https://github.com/rspec/rspec-mocks?tab=readme-ov-file#test-doubles](https://github.com/rspec/rspec-mocks?tab=readme-ov-file#test-doubles). You can create a double and assign it a method to respond to, and a value to return, with `allow`. You can limit the arguments to the method with `with`. You can also define multiple methods with `receive_messages`. In Minitest we validated a mock being called, in RSpec we manage this by using `expect`. `Expect` behaves the same as `allow`, however RSpec automatically verifies that the method was called, if not it fails the spec. However this is implicit and at the end, so might be harder to find. You can also use `allow` and `expect` as `stub` on object that are not test-doubles.
+
+```ruby
+obj = double
+allow(obj).to receive(:some_method).and_return(:a_value)
+allow(obj).to receive(:some_other_method).with("table").and_return(:b_value)
+allow(obj).to receive_messages(what: :c_value, why: :d_value)
+expect(obj).to receive(:must_be_called).and_return(:some_value)
+obj.some_method
+obj.some_other_method("table")
+obj.what
+obj.why
+obj.must_be_called
+
+# Or simplify to:
+obj2 = double(some_method: :a_value, some_other_method: :b_value)
+
+# with explicit validation of mock method calls
+allow(obj2).to receive(:must_be_called).and_return(:some_value)
+obj2.must_be_called
+expect(obj2).to have_received(:must_be_called)
+
+# stubbing
+meme = Meme.new
+allow(meme).to receive(:meme_url).and_return("url")
+meme.meme_url
+```
+
 ----
 
 Besides the syntax, we can have general rules to describe common sense.
