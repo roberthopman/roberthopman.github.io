@@ -1,10 +1,10 @@
 ---
 layout: default
-title:  Syntax
+title:  Ruby Syntax
 description: Describing the Ruby language structure
 ---
 
-# Syntax
+# Ruby syntax
 
 Language consists of a system:
 
