@@ -27,6 +27,7 @@ Structure:
 - [Exceptions](#exceptions)
 - [Input and output](#input-and-output)
 - [Concurrency](#concurrency)
+- [Testing](#testing)
 - [General rules](#general-rules)
 - [References](#references)
 
