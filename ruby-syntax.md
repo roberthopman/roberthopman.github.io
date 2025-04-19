@@ -49,6 +49,7 @@ Structure:
 ## Debugging
 
 For debugging use `p` instead of `puts`:
+
 - `p` (print the value of the expression, including the value of the expression)
 - `pp` (pretty print the value of the expression)
 - `print` (prints without trailing new line)
@@ -195,7 +196,13 @@ Starts execution of the block sent to the current method.
 
 [https://docs.ruby-lang.org/en/master/syntax/literals_rdoc.html](https://docs.ruby-lang.org/en/master/syntax/literals_rdoc.html)
 
-A literal is any notation that lets you represent a fixed value in source code. 
+A literal is any notation that lets you represent a fixed value in source code ([wikipedia](https://en.wikipedia.org/wiki/Literal_(computer_programming))). 
+
+What does that even mean?
+
+The notation is it's direct or literal value: e.g. `1` is a literal for the number 1, `"hello"` is a literal for the string `"hello"`, `[1, 2, 3]` is a literal for the array `[1, 2, 3]`. It's a constant or fixed value, it doesn't change. (e.g. `1` is always 1, `"hello"` is always `"hello"`, `[1, 2, 3]` is always `[1, 2, 3]`). It's the primary way to introduce values into a program.
+
+This is different from the indirect or variable notation: `x = 1` where `x` is a variable which refers to 1, which can change. Or for Constants `FOO = 1`, Expressions `(1 + 2)`, or Methods `def foo; puts 1 end` which all have indirect or computed values.
 
 Basic literals:
 ```ruby
@@ -331,7 +338,8 @@ Escaping characters inside single-quote is a form of processing:
 'hi "\\"' # => hi "\"
 ```
 
-Double-quoted strings support
+Double-quoted strings support:
+
 - many escape sequences, e.g. `\n` the newline character.
 - string interpolation, which means you can use any ruby code into a string using `#{ expression }`.
 - global, class or instance variables: #$foo, #@@foo or #@foo.
@@ -466,8 +474,8 @@ end
 
 If the last parameter is prefixed by `&` (such as `&action`), that code block is converted to an object of class `Proc`. The `Proc` object is then assigned to the parameter. This allows you to pass a code block to a method as if it were a regular parameter. 
 
-- https://docs.ruby-lang.org/en/master/Proc.html
-- https://docs.ruby-lang.org/en/master/Kernel.html#method-i-lambda
+- [https://docs.ruby-lang.org/en/master/Proc.html](https://docs.ruby-lang.org/en/master/Proc.html)
+- [https://docs.ruby-lang.org/en/master/Kernel.html#method-i-lambda](https://docs.ruby-lang.org/en/master/Kernel.html#method-i-lambda)
 
 ```ruby
 # Long
@@ -516,7 +524,7 @@ bl.call("Dave")
 ```
 
 ### Blocks as closures
-Variables in the surrounding scope that are referenced in a block remain accessible for the life of that block and the life of any Proc object created from that block. This is called a closure. More on closures: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures
+Variables in the surrounding scope that are referenced in a block remain accessible for the life of that block and the life of any Proc object created from that block. This is called a closure. More on closures: [https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures)
 
 ```ruby
 def n_times(thing)
@@ -1010,7 +1018,7 @@ Embedded Data
 
 ## Methods 
 
-https://docs.ruby-lang.org/en/master/syntax/methods_rdoc.html
+[https://docs.ruby-lang.org/en/master/syntax/methods_rdoc.html](https://docs.ruby-lang.org/en/master/syntax/methods_rdoc.html)
 
 Defined by keyword `def`. You can undefine by `undef`.
 
