@@ -277,7 +277,7 @@ Regex has modifiers, with the `x` at the last example below, you can add newline
 ```
 
 After a succesful match via Regexp#match or =~ it returns a MatchData object, which is a collection of information about the match:
-https://docs.ruby-lang.org/en/master/MatchData.html
+[https://docs.ruby-lang.org/en/master/MatchData.html](https://docs.ruby-lang.org/en/master/MatchData.html)
 ```ruby
 /all/.match("all things")
 => #<MatchData "all">
@@ -404,7 +404,7 @@ Type conversion:
 ```
 
 ### Encoding
-Encoding is a mechanism for translating bits into characters. For many years, most developers who used English used ASCII, a 7-bit encoding of English characters, such as binary 101 to capital A. Later, an 8-bit representation called Latin-1 that included most characters in European languages became common. All of these were superseded by Unicode, a global standard for all text characters used in all languages: https://home.unicode.org/
+Encoding is a mechanism for translating bits into characters. For many years, most developers who used English used ASCII, a 7-bit encoding of English characters, such as binary 101 to capital A. Later, an 8-bit representation called Latin-1 that included most characters in European languages became common. All of these were superseded by Unicode, a global standard for all text characters used in all languages: [https://home.unicode.org/](https://home.unicode.org/)
 
 ### Struct
 A `Struct` is a class that is used to create objects that have attributes.
@@ -1656,7 +1656,7 @@ end
 
 ## Input and output
 
-https://docs.ruby-lang.org/en/master/IO.html
+[https://docs.ruby-lang.org/en/master/IO.html](https://docs.ruby-lang.org/en/master/IO.html)
 
 I/O or IO methods are implemented in the Kernel module, including `gets, open, print, printf, putc, puts ,readline, readlines`, and `test`.
 These are available to all objects. There is also Ruby's `IO` class, with subclasses `File` and `BasicSocket` with more specialized methods. The IO object is a bidirectional stream between a Ruby program and some external resource.
@@ -1779,7 +1779,7 @@ io.closed? # => true
 
 ### Talking to Networks
 
-At the network level, Ruby comes with a set of classes in the the socket library. https://docs.ruby-lang.org/en/master/Socket.html These give access to TCP, UDP, SOCKS, and Unix domain sockets, and additional socket types. At a higher level of the OSI model, the "lib/net" here https://docs.ruby-lang.org/en/master/Net.html and https://github.com/ruby/ruby/tree/master/lib/net, provides application level protocols (such as HTTP, HTTPS, FTP, POP, IMAP, and SMTP). `Net::HTTP` for example: https://docs.ruby-lang.org/en/master/Net/HTTP.html or at a higher-level the `open-uri` library is a wrapper for Net::HTTP, Net::HTTPS and Net::FTP, and handles redirects automatically: https://docs.ruby-lang.org/en/master/OpenURI.html
+At the network level, Ruby comes with a set of classes in the the socket library. [https://docs.ruby-lang.org/en/master/Socket.html](https://docs.ruby-lang.org/en/master/Socket.html) These give access to TCP, UDP, SOCKS, and Unix domain sockets, and additional socket types. At a higher level of the OSI model, the "lib/net" here [https://docs.ruby-lang.org/en/master/Net.html](https://docs.ruby-lang.org/en/master/Net.html) and [https://github.com/ruby/ruby/tree/master/lib/net](https://github.com/ruby/ruby/tree/master/lib/net), provides application level protocols (such as HTTP, HTTPS, FTP, POP, IMAP, and SMTP). `Net::HTTP` for example: [https://docs.ruby-lang.org/en/master/Net/HTTP.html](https://docs.ruby-lang.org/en/master/Net/HTTP.html) or at a higher-level the `open-uri` library is a wrapper for Net::HTTP, Net::HTTPS and Net::FTP, and handles redirects automatically: [https://docs.ruby-lang.org/en/master/OpenURI.html](https://docs.ruby-lang.org/en/master/OpenURI.html)
 
 IO is however slow and blocks programs, a common workaround is to use threading to do multiple things at once.
 
@@ -1791,7 +1791,7 @@ The `Thread` class is the basic unit of multithreaded behavior in Ruby. Ruby als
 
 ### Threads
 
-https://docs.ruby-lang.org/en/master/Thread.html
+[https://docs.ruby-lang.org/en/master/Thread.html](https://docs.ruby-lang.org/en/master/Thread.html)
 
 The lowest-level mechanism is the `Thread` class. Mostly you will see one thread executing, and another waiting on an I/O operation. A thread shares all global, instance, and local variables that are in existence and available at the time the thread starts. Threads are immediately executed. Local variables created in the thread's block are truly local ot that thread. Thread.join will ensure the main program waits for the threads to finish, you can also give the thread a timeout, and it will return nil if the thread does not finish in time. Normally, building timing dependencies in a multithreaded program is a bad idea. However, if you need to do this, you can use the `Mutex` (mutually exclusive) class, which creates areas of code that can only be accessed by one thread at a time. Some of the relevant methods to enable this: Mutex#lock, Mutex#unlock, and the block version Mutex#synchronize, and the Mutex#try_lock method.
 
@@ -1837,13 +1837,13 @@ Child pid 3828: terminated
 
 ### Fibers
 
-https://docs.ruby-lang.org/en/master/Fiber.html
+[https://docs.ruby-lang.org/en/master/Fiber.html](https://docs.ruby-lang.org/en/master/Fiber.html)
 
 Fibers are a block of code that can be stopped and restarted, which is sometimes called a coroutine. They are cooperatively multitasked, meaning that the responsibility of control is with the fibers and not the OS. Fibers are not immediately executed. When `resume` is called, the fiber will execute until it hits a `yield` statement, which suspends execution. The last expression evaluted will be the return value of the Fiber.
 
 ### Ractors
 
-https://docs.ruby-lang.org/en/master/Ractor.html
+[https://docs.ruby-lang.org/en/master/Ractor.html](https://docs.ruby-lang.org/en/master/Ractor.html)
 
 Ractors are a way to bypass the GIL and have 'true' multiple threading using Ruby. Ractor is a chunk of code that has a single input port and a single output port. So like a physical room, with a single entrance and a single exit door. The entrance door could have a queue to get in. Ractor is created via Ractor.new and is `isolated`, the code inside the block won't be able to acces any variables that aren't defined in the block (no globals and no external locals).
 
@@ -2123,14 +2123,21 @@ end
 ```
 
 
-## References
+## References 
 
 - [cookpad ruby styleguide](https://github.com/cookpad/styleguide/blob/master/ruby.en.md)
+- [cookpad global style guides: ruby](https://github.com/cookpad/global-style-guides/blob/main/ruby/README.md)
+- [cookpad global style guides: rails](https://github.com/cookpad/global-style-guides/blob/main/rails/README.md)
 - [rubocop ruby styleguide](https://github.com/rubocop/ruby-style-guide)
 - [shopify ruby styleguide](https://github.com/Shopify/ruby-style-guide)
 - [thoughtbot ruby styleguide](https://github.com/thoughtbot/guides/blob/main/ruby/README.md)
-- [rails styleguide](https://github.com/rubocop/rails-style-guide)
-- [https://github.com/hopsoft/rails_standards/tree/rails-4-X](https://github.com/hopsoft/rails_standards/tree/rails-4-X)
+- [thoughtbot rails styleguide](https://github.com/thoughtbot/guides/blob/main/rails/README.md)
+- [rubocop rails styleguide](https://github.com/rubocop/rails-style-guide)
 - [https://github.com/leahneukirchen/styleguide/blob/master/RUBY-STYLE](https://github.com/leahneukirchen/styleguide/blob/master/RUBY-STYLE)
-- [https://thoughtbot.com/blog/sandi-metz-rules-for-developers#only-instantiate-one-object-in-the-controller](https://thoughtbot.com/blog/sandi-metz-rules-for-developers#only-instantiate-one-object-in-the-controller)
 - [https://zenspider.com/ruby/quickref.html](https://zenspider.com/ruby/quickref.html)
+
+### various
+
+- [hopsoft rails standards rails-4-X](https://github.com/hopsoft/rails_standards/tree/rails-4-X)
+- [https://thoughtbot.com/blog/sandi-metz-rules-for-developers#only-instantiate-one-object-in-the-controller](https://thoughtbot.com/blog/sandi-metz-rules-for-developers#only-instantiate-one-object-in-the-controller)
+- [controllers should only use CRUD actions](https://jeromedalbert.com/how-dhh-organizes-his-rails-controllers/)
