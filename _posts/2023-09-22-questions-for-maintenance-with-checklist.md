@@ -134,3 +134,4 @@ Coordination
 * Access to communication; Slack, Email, Telephone
 
 
+Finally, see the article on [how to upgrade ruby on rails]({% post_url 2023-01-01-how-to-upgrade-a-ruby-on-rails-application %}).

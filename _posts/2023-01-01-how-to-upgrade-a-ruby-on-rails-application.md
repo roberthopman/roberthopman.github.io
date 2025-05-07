@@ -21,7 +21,17 @@ Next, the steps to upgrade the application:
 - Assess if upgrading the gems is possible via: <https://railsbump.org/> for an overview of rails versions and their compatibility with ruby versions: <https://www.fastruby.io/blog/ruby/rails/versions/compatibility-table.html>
 - Assume there are a range of tools that enable or block upgrading, such as: automated tests, test coverage, continuous integration, application code security vulnerability analysis, code best practices checking and code style consistency rules.
 - Assume the handful of critical business processes are covered by tests. They are usually not, so run the tests. Detect failures early and often. 
-- If the tests are not covering the handful of critical business processes, run the application manually and test the handful of critical business processes manually. Decide for additional tests if needed.
+- If the tests are not covering the handful of critical business processes, run the application manually and test the handful of critical business processes manually. Think about happy paths, edge cases, and error handling. Decide for additional tests if needed.
+- Parts that could be considered:
+  - Web application
+  - Mobile application
+  - API endpoints
+  - Background jobs or tasks
+    - Manual
+    - Scheduled
+  - Middleware
+  - Supporting pages like: admin dashboard, status page
+
 - Upgrade the Ruby version. Could be in small steps or big steps, depending on factors. Use rbenv/RVM/asdf to manage multiple ruby versions, download the version, change version in the Gemfile, and run `bundle update`.
 - Run necessary checks, like the test suite and/or manually test the handful of critical business processes.
 - Upgrade the Rails version, test the application doesn't work anymore as required for the handful of critical business processes. Implicitly, this means you need to fix it.
@@ -66,4 +76,4 @@ The goal is the starting point for the upgrade process.
 
 Example goal could be: Secure the continuity of the critical business processes.
 
-See the [maintenance checklist]({% post_url 2023-09-22-questions-for-maintenance-with-checklist %}) article for a general checklist of things to consider.
+Finally, see the [maintenance checklist]({% post_url 2023-09-22-questions-for-maintenance-with-checklist %}) for how to prioritize maintenance.

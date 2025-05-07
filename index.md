@@ -6,6 +6,9 @@ layout: default
   <div class="title">Welcome</div>
   <div>I build company saving software.</div>
   <br>
+  <div>To establish a process, see the 
+    <a href="{% post_url 2023-09-22-questions-for-maintenance-with-checklist %}">maintenance checklist</a>.
+  </div>
   <div class="main-posts title">Posts:</div>
   {% for post in site.posts %}
   {% assign post_date = post.date | date: "%s" | plus: 0 %}
