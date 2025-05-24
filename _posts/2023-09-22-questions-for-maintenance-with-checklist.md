@@ -32,7 +32,9 @@ Here are five main areas with questions to ask when taking over an application f
    - Are there any unique or non-standard features of the application that might be relevant during maintenance tasks?
 
 
-**Checklist general**
+<details>
+  <summary>General Checklist</summary>
+  <div markdown=1>
 
 Production
 * Hosting

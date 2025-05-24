@@ -42,7 +42,6 @@ disqus:
 minima:
   social_links:
     github: roberthopman
-    stackoverflow: "6430382"
     twitter: roberthopman
     
 google_analytics: 'G-J0HMLHK67L'
