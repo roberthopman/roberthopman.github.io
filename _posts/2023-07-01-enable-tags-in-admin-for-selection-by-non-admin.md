@@ -197,5 +197,5 @@ Archive Tag:
 - Archived tags are hidden from the selection list.
 
 Select Tag(s) for a Model (Publication):
-- User can assign one or more tags to a model (publication) from the available tags.
-- User can remove tags from a model (publication).
+- User can assign one or more tags to a model from the available tags.
+- User can remove tags from a model.
