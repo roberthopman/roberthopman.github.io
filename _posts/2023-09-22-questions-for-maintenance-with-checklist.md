@@ -3,6 +3,18 @@ layout: post
 title:  "Questions for maintenance with checklist"
 ---
 
+**Maintenance Strategy Framework**
+
+How to approach maintenance? 
+Have a handbook, framework or routine to organize the work based on a prioritization. For example, you can prioritize based on the urgency (temporal status) and predictability:
+
+| **Category**                                      | **Temporal Status**                                                                             | **Predictability**                                                                  | **Actions**                                                                                                                                                                         |
+| ------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Now**<br>(Immediate-Critical)                   | • Issue is actively occurring<br>• Failure is ongoing or imminent                               | • Fully observable<br>• Probability ≈ 1.0<br>• No forecasting needed                | • Do a quick, low-cost fix to keep it safe and functioning<br>• Avoid expensive replacements unless safety is at risk<br>• Record what broke and what the full solution would require<br>• Focus on stopping things from getting worse |
+| **Upcoming & Expected**<br>(Predictable-Critical) | • Failure expected in days or weeks<br>• Based on wear, inspections, or history                 | • High confidence (P > 0.7)<br>• Supported by trend data or experience              | • Start small: plan the work with important and inexpensive parts<br>• Defer costly labor until more capital is available<br>• Spread out effort to avoid a financial spike<br>• Use estimates and planning to argue for budget now                       |
+| **Upcoming & Unexpected**<br>(Potential-Critical) | • No current failure<br>• Some early signs or weak signals<br>• Could happen in weeks or months | • Low to moderate confidence (P < 0.5)<br>• Based on team intuition or anomaly detection | • Write it down to create shared knowledge<br> • Monitor it regularly, don’t act yet<br>• Track changes in case it escalates<br>• Be ready to act if budget improves<br>• Design flexible, low-effort responses that can scale later                                                  |
+
+
 **Questions for maintenance**
 
 Here are five main areas with questions to ask when taking over an application for maintenance. 
@@ -32,8 +44,11 @@ Here are five main areas with questions to ask when taking over an application f
    - Are there any unique or non-standard features of the application that might be relevant during maintenance tasks?
 
 
+
+Finally, see the article on [how to upgrade ruby on rails]({% post_url 2023-01-01-how-to-upgrade-a-ruby-on-rails-application %}).
+
 <details>
-  <summary>General Checklist</summary>
+  <summary>Or have a look at the General Checklist</summary>
   <div markdown=1>
 
 Production
@@ -134,6 +149,3 @@ Coordination
 * Shared knowledge in directories, or files
 * Work locations, times and schedules for real-time conversation
 * Access to communication; Slack, Email, Telephone
-
-
-Finally, see the article on [how to upgrade ruby on rails]({% post_url 2023-01-01-how-to-upgrade-a-ruby-on-rails-application %}).
