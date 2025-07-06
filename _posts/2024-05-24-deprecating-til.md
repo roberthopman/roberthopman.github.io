@@ -50,12 +50,10 @@ When AI agent fails to deliver multiple times in a row
 - Request it to forget everything and build an index2.html, based on the spec2.md
 
 
-
-
-
-
-
-
-
-
+<details>
+  <summary>Nothing but a toggle</summary>
+  <div markdown=1>
+    Inside the toggle.
+  </div>
+</details>
 
