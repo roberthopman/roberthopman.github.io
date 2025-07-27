@@ -17,7 +17,6 @@ Structure:
 - [Read documentation (API)](#read-documentation)
 - [Debugging](#debugging)
 - [Literals](#literals)
-- [Typed Ruby](#typed-ruby)
 - [Variables](#variables)
 - [Control flow](#control-flow)
 - [Methods](#methods)
@@ -34,6 +33,7 @@ Structure:
 - [Interactive Ruby](#interactive-ruby-irb)
 - [Web](#ruby-and-the-web)
 - [Ruby Style](#ruby-style)
+- [Typed Ruby](#typed-ruby)
 - [General rules](#general-rules)
 - [References](#references)
 
@@ -512,214 +512,6 @@ Type conversion:
 1.to_s 
 # to integer
 '1'.to_i
-```
-
-## Typed Ruby
-
-Ruby does not have basic types. A variable is an instance of a class. It can be useful to know what type of values can be assigned to a variable. Setting the type of a variable, attribute, or method argument limits the set of values that can be assigned to it. In Ruby, `x / y` is equal to the method call: `x./(y)` .
-
-When you have to declare the type of a variable before it is used, it's explicit typing. Some languages infer the type of a variable from the first usage, e.g. `x = 3` in TypeScript, this is called type inference. 
-
-Usually a tool, often part of the compiler, that evaluates every variable interaciton to see if type information is followed. If you later in TypeScript set `x = "foo"`, there will be a compliation error, as foor is string. This is called static typing. Ruby determines if a variable can receive a method only at runtime, this is called dynamic typing. The process of determining the behavior of the method at the last possible moment is called late binding. 
-
-3+ "3", which will coerce the string to integer and add both, is called weak typing, 3+"3" which fails is called strong typing.
-
-### RBS
-
-The standard Ruby typing system is called RBS (Ruby Signature) [https://github.com/ruby/rbs](https://github.com/ruby/rbs). You create a separate file that contains type signature information for all or part of your code.
-
-In the file you can describe what type of data Ruby can expect and return.
-
-### RBS Types:
-
-```rb
-Integer    # whole numbers: 1, 42, -5
-Float      # decimal numbers: 3.14, -2.5
-String     # text: "hello", 'world'
-bool       # can be true or false
-true       # specifically true
-false      # specifically false
-nil        # represents "no value"
-void       # the value returned is expected to be discarded
-
-untyped    # any type (prefer void over untyped)
-top        # any type except nil
-bot        # no possible type (prefer void over bot)
-self       # refers to the current object
-# more: https://github.com/ruby/rbs/blob/master/docs/syntax.md
-```
-
-### RBS examples:
-
-```ruby
-# Method with no parameters that returns a String
-def get_name: () -> String
-# One Parameter
-def greet: (String name) -> String
-def half: (Integer number) -> Float
-# Takes two Integers, returns an Integer
-def add: (Integer a, Integer b) -> Integer
-
-# Optional Types (can be nil)
-## Add a `?` after the type to make it optional:
-# Parameter might be nil
-def greet: (String? name) -> String
-# Return value might be nil
-def find_user: (String email) -> String?
-
-# Union Types (can be one of several types)
-## Use `|` to separate possible types:
-# Parameter can be String or Integer
-def display: (String | Integer value) -> String
-# Return can be String or Integer or nil
-def parse: (String input) -> String | Integer | nil
-
-# Class, class variables and instance Variables
-## Instance variables store data in objects. They start with `@`:
-## @variable_name: Type
-class Person
-  @name: String
-  @age: Integer
-  @email: String?    # email is optional (can be nil)
-  @active: bool      # true or false
-  
-  @@total: Integer   # class variable
-  MAX_COUNT: Integer # constant
-  def initialize: (parameters) -> void # instance method
-  def method_name: (parameters) -> return_type #instance maethod
-end
-
-# Parameters
-## Required Parameters
-def greet: (String name) -> String
-## Optional Parameters (add `?` before parameter name)
-## Can be called as: greet("John") or greet("John", "Dr.")
-def greet: (String name, ?String title) -> String
-## Keyword Parameters (use `parameter_name:`)
-## Must be called as: create_user(name: "John", email: "john@example.com")
-def create_user: (name: String, email: String) -> void
-## Optional Keyword Parameters
-def create_user: (name: String, ?email: String) -> void
-# Mixed Parameters
-def complex_method: (
-  String required_param,           # required positional
-  ?Integer optional_param,         # optional positional
-  keyword: String,                 # required keyword
-  ?optional_keyword: bool          # optional keyword
-) -> String
-
-# Collections
-## Array
-Array[Type]           # Array of specific type
-Array[String]         # Array of strings
-Array[Integer]        # Array of integers
-Array[String | Integer]  # Array that can hold strings OR integers
-# Method that takes an array of strings
-def join_names: (Array[String] names) -> String
-# Method that returns an array of integers
-def get_numbers: () -> Array[Integer]
-# Method with array of mixed types
-def process_values: (Array[String | Integer] values) -> String
-
-## Hashes
-Hash[KeyType, ValueType]     # Hash with specific key and value types
-Hash[String, Integer]        # Hash with string keys and integer values
-Hash[Symbol, String]         # Hash with symbol keys and string values
-# Method that takes a hash
-def process_config: (Hash[String, String] config) -> void
-# Method that returns a hash
-def get_user_data: () -> Hash[Symbol, String]
-# Hash with mixed value types
-def get_mixed_data: () -> Hash[String, String | Integer | bool]
-
-# Interfaces
-## Interfaces define what methods a class - must have - (haven't seen this due to duck typing):
-interface _InterfaceName
-  def required_method: (parameters) -> return_type
-end
-## Example
-interface _Drawable
-  def draw: () -> String
-  def color: () -> String
-end
-
-class Circle
-  include _Drawable
-  
-  def draw: () -> String
-  def color: () -> String
-end
-```
-
-### RBS Resources:
-
-- [https://github.com/ruby/rbs](https://github.com/ruby/rbs)
-- [https://github.com/ruby/rbs/blob/master/docs/syntax.md](https://github.com/ruby/rbs/blob/master/docs/syntax.md)
-- [https://github.com/ruby/rbs/blob/master/docs/rbs_by_example.md](https://github.com/ruby/rbs/blob/master/docs/rbs_by_example.md)
-- [Usage can be seen at https://github.com/ruby/rbs/network/dependents?dependent_type=PACKAGE](https://github.com/ruby/rbs/network/dependents?dependent_type=PACKAGE)
-
-### Sorbet
-
-Besides RBS there is the third-party tool by Stripe called Sorbet [https://github.com/sorbet/sorbet](https://github.com/sorbet/sorbet). It is different from RBS as the type annotations go in the Ruby file. Also, Sorbet can do static analysis and type checking at runtime (for development experience a must). RBS can only do static analysis and runtime type checking during tests. More on this tool: [https://sorbet.org/docs](https://sorbet.org/docs), read the the quick reference [https://sorbet.org/docs/quickref](https://sorbet.org/docs/quickref) or visit the playground which has examples located in the top right: [https://sorbet.run/](https://sorbet.run/).
-
-### Sorbet type examples
-
-```rb
-# Magic comments on top of file:
-# typed: false    # No type checking (default for existing code)
-# typed: true     # Basic type checking
-# typed: strict   # Strict mode - all methods must have signatures
-# typed: strong   # Strongest - no untyped code allowed
-
-# Example file data_types.rb
-# typed: true
-
-# Sorbet requires this import for type annotations
-require 'sorbet-runtime'
-
-class DataTypes
-  extend T::Sig  # Required to use sig annotations
-  
-  sig { returns(Integer) }
-  def get_age
-    25
-  end
-  
-  sig { returns(String) }
-  def get_name
-    "Alice"
-  end
-  
-  sig { returns(Float) }
-  def get_price
-    19.99
-  end
-  
-  sig { returns(TrueClass) }
-  def always_true
-    true
-  end
-  
-  sig { returns(FalseClass) }
-  def always_false
-    false
-  end
-  
-  sig { returns(T::Boolean) }
-  def maybe_true
-    [true, false].sample
-  end
-  
-  sig { returns(Symbol) }
-  def get_status
-    :active
-  end
-  
-  sig { returns(NilClass) }
-  def get_nothing
-    nil
-  end
-end
 ```
 
 ### Encoding
@@ -2797,6 +2589,214 @@ There are two distinct kinds of Ruby style. The first is syntax-based, and can b
 - [thoughtbot rails styleguide](https://github.com/thoughtbot/guides/blob/main/rails/README.md)
 - [rubocop rails styleguide](https://github.com/rubocop/rails-style-guide)
 - [https://github.com/leahneukirchen/styleguide/blob/master/RUBY-STYLE](https://github.com/leahneukirchen/styleguide/blob/master/RUBY-STYLE)
+
+## Typed Ruby
+
+Ruby does not have basic types. A variable is an instance of a class. It can be useful to know what type of values can be assigned to a variable. Setting the type of a variable, attribute, or method argument limits the set of values that can be assigned to it. In Ruby, `x / y` is equal to the method call: `x./(y)` .
+
+When you have to declare the type of a variable before it is used, it's explicit typing. Some languages infer the type of a variable from the first usage, e.g. `x = 3` in TypeScript, this is called type inference. 
+
+Usually a tool, often part of the compiler, that evaluates every variable interaciton to see if type information is followed. If you later in TypeScript set `x = "foo"`, there will be a compliation error, as foor is string. This is called static typing. Ruby determines if a variable can receive a method only at runtime, this is called dynamic typing. The process of determining the behavior of the method at the last possible moment is called late binding. 
+
+3+ "3", which will coerce the string to integer and add both, is called weak typing, 3+"3" which fails is called strong typing.
+
+### RBS
+
+The standard Ruby typing system is called RBS (Ruby Signature) [https://github.com/ruby/rbs](https://github.com/ruby/rbs). You create a separate file that contains type signature information for all or part of your code.
+
+In the file you can describe what type of data Ruby can expect and return.
+
+### RBS Types:
+
+```rb
+Integer    # whole numbers: 1, 42, -5
+Float      # decimal numbers: 3.14, -2.5
+String     # text: "hello", 'world'
+bool       # can be true or false
+true       # specifically true
+false      # specifically false
+nil        # represents "no value"
+void       # the value returned is expected to be discarded
+
+untyped    # any type (prefer void over untyped)
+top        # any type except nil
+bot        # no possible type (prefer void over bot)
+self       # refers to the current object
+# more: https://github.com/ruby/rbs/blob/master/docs/syntax.md
+```
+
+### RBS examples:
+
+```ruby
+# Method with no parameters that returns a String
+def get_name: () -> String
+# One Parameter
+def greet: (String name) -> String
+def half: (Integer number) -> Float
+# Takes two Integers, returns an Integer
+def add: (Integer a, Integer b) -> Integer
+
+# Optional Types (can be nil)
+## Add a `?` after the type to make it optional:
+# Parameter might be nil
+def greet: (String? name) -> String
+# Return value might be nil
+def find_user: (String email) -> String?
+
+# Union Types (can be one of several types)
+## Use `|` to separate possible types:
+# Parameter can be String or Integer
+def display: (String | Integer value) -> String
+# Return can be String or Integer or nil
+def parse: (String input) -> String | Integer | nil
+
+# Class, class variables and instance Variables
+## Instance variables store data in objects. They start with `@`:
+## @variable_name: Type
+class Person
+  @name: String
+  @age: Integer
+  @email: String?    # email is optional (can be nil)
+  @active: bool      # true or false
+  
+  @@total: Integer   # class variable
+  MAX_COUNT: Integer # constant
+  def initialize: (parameters) -> void # instance method
+  def method_name: (parameters) -> return_type #instance maethod
+end
+
+# Parameters
+## Required Parameters
+def greet: (String name) -> String
+## Optional Parameters (add `?` before parameter name)
+## Can be called as: greet("John") or greet("John", "Dr.")
+def greet: (String name, ?String title) -> String
+## Keyword Parameters (use `parameter_name:`)
+## Must be called as: create_user(name: "John", email: "john@example.com")
+def create_user: (name: String, email: String) -> void
+## Optional Keyword Parameters
+def create_user: (name: String, ?email: String) -> void
+# Mixed Parameters
+def complex_method: (
+  String required_param,           # required positional
+  ?Integer optional_param,         # optional positional
+  keyword: String,                 # required keyword
+  ?optional_keyword: bool          # optional keyword
+) -> String
+
+# Collections
+## Array
+Array[Type]           # Array of specific type
+Array[String]         # Array of strings
+Array[Integer]        # Array of integers
+Array[String | Integer]  # Array that can hold strings OR integers
+# Method that takes an array of strings
+def join_names: (Array[String] names) -> String
+# Method that returns an array of integers
+def get_numbers: () -> Array[Integer]
+# Method with array of mixed types
+def process_values: (Array[String | Integer] values) -> String
+
+## Hashes
+Hash[KeyType, ValueType]     # Hash with specific key and value types
+Hash[String, Integer]        # Hash with string keys and integer values
+Hash[Symbol, String]         # Hash with symbol keys and string values
+# Method that takes a hash
+def process_config: (Hash[String, String] config) -> void
+# Method that returns a hash
+def get_user_data: () -> Hash[Symbol, String]
+# Hash with mixed value types
+def get_mixed_data: () -> Hash[String, String | Integer | bool]
+
+# Interfaces
+## Interfaces define what methods a class - must have - (haven't seen this due to duck typing):
+interface _InterfaceName
+  def required_method: (parameters) -> return_type
+end
+## Example
+interface _Drawable
+  def draw: () -> String
+  def color: () -> String
+end
+
+class Circle
+  include _Drawable
+  
+  def draw: () -> String
+  def color: () -> String
+end
+```
+
+### RBS Resources:
+
+- [https://github.com/ruby/rbs](https://github.com/ruby/rbs)
+- [https://github.com/ruby/rbs/blob/master/docs/syntax.md](https://github.com/ruby/rbs/blob/master/docs/syntax.md)
+- [https://github.com/ruby/rbs/blob/master/docs/rbs_by_example.md](https://github.com/ruby/rbs/blob/master/docs/rbs_by_example.md)
+- [Usage can be seen at https://github.com/ruby/rbs/network/dependents?dependent_type=PACKAGE](https://github.com/ruby/rbs/network/dependents?dependent_type=PACKAGE)
+
+### Sorbet
+
+Besides RBS there is the third-party tool by Stripe called Sorbet [https://github.com/sorbet/sorbet](https://github.com/sorbet/sorbet). It is different from RBS as the type annotations go in the Ruby file. Also, Sorbet can do static analysis and type checking at runtime (for development experience a must). RBS can only do static analysis and runtime type checking during tests. More on this tool: [https://sorbet.org/docs](https://sorbet.org/docs), read the the quick reference [https://sorbet.org/docs/quickref](https://sorbet.org/docs/quickref) or visit the playground which has examples located in the top right: [https://sorbet.run/](https://sorbet.run/).
+
+### Sorbet type examples
+
+```rb
+# Magic comments on top of file:
+# typed: false    # No type checking (default for existing code)
+# typed: true     # Basic type checking
+# typed: strict   # Strict mode - all methods must have signatures
+# typed: strong   # Strongest - no untyped code allowed
+
+# Example file data_types.rb
+# typed: true
+
+# Sorbet requires this import for type annotations
+require 'sorbet-runtime'
+
+class DataTypes
+  extend T::Sig  # Required to use sig annotations
+  
+  sig { returns(Integer) }
+  def get_age
+    25
+  end
+  
+  sig { returns(String) }
+  def get_name
+    "Alice"
+  end
+  
+  sig { returns(Float) }
+  def get_price
+    19.99
+  end
+  
+  sig { returns(TrueClass) }
+  def always_true
+    true
+  end
+  
+  sig { returns(FalseClass) }
+  def always_false
+    false
+  end
+  
+  sig { returns(T::Boolean) }
+  def maybe_true
+    [true, false].sample
+  end
+  
+  sig { returns(Symbol) }
+  def get_status
+    :active
+  end
+  
+  sig { returns(NilClass) }
+  def get_nothing
+    nil
+  end
+end
+```
 
 ----
 
