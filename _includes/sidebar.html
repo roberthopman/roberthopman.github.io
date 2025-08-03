@@ -1,0 +1,47 @@
+{% comment %}
+  Sidebar navigation component
+  Usage: {% include sidebar.html page_slug="ruby-syntax" %}
+{% endcomment %}
+
+{% assign page_slug = include.page_slug | default: "default" %}
+{% assign sidebar_config = site.data.sidebars[page_slug] %}
+
+{% if sidebar_config %}
+  {% if sidebar_config.data_source %}
+    {% assign sidebar_data = site.data[sidebar_config.data_source] %}
+    {% assign sidebar_title = sidebar_config.title %}
+    {% assign sidebar_sections = sidebar_data.sections %}
+  {% else %}
+    {% assign sidebar_title = sidebar_config.title %}
+    {% assign sidebar_sections = sidebar_config.sections %}
+  {% endif %}
+{% else %}
+  {% assign default_config = site.data.sidebars.default %}
+  {% assign sidebar_title = default_config.title %}
+  {% assign sidebar_sections = default_config.sections %}
+{% endif %}
+
+<aside class="sidebar" aria-label="Page navigation">
+  <div class="sidebar-header">
+    <h3 class="sidebar-title">{{ sidebar_title }}</h3>
+    <button class="sidebar-toggle" aria-label="Toggle sidebar" aria-expanded="true">
+      <span class="toggle-icon">−</span>
+    </button>
+  </div>
+  
+  <nav class="sidebar-nav" role="navigation">
+    <ul class="sidebar-list">
+      {% for section in sidebar_sections %}
+        <li class="sidebar-item">
+          {% if section.anchor and section.anchor != "" %}
+            <a href="{{ section.anchor }}" class="sidebar-link" data-section="{{ section.id }}">
+              {{ section.title }}
+            </a>
+          {% else %}
+            <span class="sidebar-text">{{ section.title }}</span>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  </nav>
+</aside>

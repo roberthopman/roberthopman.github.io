@@ -2,40 +2,24 @@
 layout: default
 title:  Ruby Syntax
 description: Describing the Ruby language structure
+sidebar: ruby-syntax
 ---
 
 # Ruby syntax
+
+<details>
+<summary>Table of contents</summary>
+<ul>
+{% for section in site.data.ruby-syntax.sections -%}
+<li><a href="{{ section.anchor }}">{{ section.title }}</a></li>
+{% endfor -%}
+</ul>
+</details>
 
 Language consists of a system:
 
 - [Semantics](https://en.wikipedia.org/wiki/Semantics) studies the aspects of meaning.
 - [Syntax](https://en.wikipedia.org/wiki/Syntax) studies the structure, principles and relationships.
-
-## Quick reference
-
-Structure:
-- [Read documentation (API)](#read-documentation)
-- [Debugging](#debugging)
-- [Literals](#literals)
-- [Variables](#variables)
-- [Control flow](#control-flow)
-- [Methods](#methods)
-- [Classes](#classes)
-- [Collections](#collections)
-- [Inheritance](#inheritance)
-- [Modules](#modules)
-- [Exceptions](#exceptions)
-- [Input and output](#input-and-output)
-- [Concurrency](#concurrency)
-- [Testing](#testing)
-- [Command-line tool](#command-line-tool)
-- [Ruby Gems](#ruby-gems)
-- [Interactive Ruby](#interactive-ruby-irb)
-- [Web](#ruby-and-the-web)
-- [Ruby Style](#ruby-style)
-- [Typed Ruby](#typed-ruby)
-- [General rules](#general-rules)
-- [References](#references)
 
 ## Read documentation
 
@@ -673,6 +657,194 @@ loop do
 end
 ```
 
+## Variables
+
+[https://docs.ruby-lang.org/en/master/doc/syntax/assignment_rdoc.html](https://docs.ruby-lang.org/en/master/doc/syntax/assignment_rdoc.html)
+
+A variable is an identifier that is assigned to an object, and which may hold a value. A variable is not an object in Ruby, so it is a reference to an object. A local variable name may contain letters, numbers, an _ (underscore or low line) or a character with the eighth bit set.
+
+Assignment aliases objects, potentially giving multiple variables that reference the same object. String#dup will create a new string object with the same content. String#freeze will make a string immutable. Numbers and symbols are always frozen (immutable) in Ruby.
+
+Examples:
+```ruby
+$global_variable
+@@class_variable
+@instance_variable
+CONSTANT
+::TOP_LEVEL_CONSTANT
+OtherClass::CONSTANT
+local_variable
+```
+
+In a file:
+
+```ruby
+# Defining variables
+# global variable, can be mutated
+$some_global_variable = "accessible everywhere"
+# Top level constant, can not be mutated
+TOP_LEVEL_CONSTANT = "accessible everywhere"
+
+class Toy
+  CONSTANT = "Some value"
+end
+
+class Human
+  # A class variable is shared by all instances of this class.
+  @@species = 'H. sapiens'
+  # Constant is a variable that is set only once and never changed.
+  A_CONSTANT = 1
+
+  # Basic initializer
+  def initialize(name, age = 0)
+    # Assign the argument (name) to the '@name' instance variable for the instance.
+    @name = name
+    # If no age given, we will fall back to the default in the arguments list (age=0).
+    @age = age
+  end
+
+  def some_method
+    # local_variable is only accessible within this method
+    local_variable = 1 
+  end
+
+  def some_other_method
+    # TOP_LEVEL_CONSTANT can be accessed from anywhere in the program using :: prefix
+    ::TOP_LEVEL_CONSTANT
+  end
+
+  def some_last_method
+    # From another class
+    Toy::CONSTANT
+  end
+end
+
+# Showing variables
+p $some_global_variable
+Human.class_variable_get(:@@species)
+Human::A_CONSTANT
+h = Human.new('foo', 10)
+h.instance_variable_get(:@name)
+h.instance_variable_get(:@age)
+h.some_method
+h.some_other_method
+h.some_last_method
+```
+
+```ruby
+# Aliasing global variables
+$some_global_variable = "accessible everywhere"
+alias $b $some_global_variable
+p $b # => 'accessible everywhere'
+
+# parallel variable assignment
+x, y, z = 100, 200, 500
+```
+
+### Pseudo Variables
+They provide information about the program's execution environment or serve specific purposes within Ruby.
+Characteristics: Predefined, read-only and available throughout the program.
+
+```ruby
+self  # The receiver object of the current method.
+super # The receiver object of the current method in the superclass.
+true  # boolean; singleton; TrueClass
+false # boolean; singleton; FalseClass
+nil   # empty; uninitialized; NilClass; falsey; singleton
+__FILE__ # The name of the current source file.
+__LINE__ # The current line number in the source file.
+```
+
+### Pre-defined global variables
+
+- [https://docs.ruby-lang.org/en/master/globals_rdoc.html](https://docs.ruby-lang.org/en/master/globals_rdoc.html)
+- [https://github.com/ruby/ruby/blob/HEAD/spec/ruby/language/predefined_spec.rb](https://github.com/ruby/ruby/blob/HEAD/spec/ruby/language/predefined_spec.rb)
+- [https://github.com/ruby/ruby/blob/HEAD/lib/English.rb](https://github.com/ruby/ruby/blob/HEAD/lib/English.rb)
+
+In irb:
+```ruby
+global_variables.count
+# => 43
+global_variables.sort.inspect
+# => "[:$!, :$\", :$$, :$&, :$', :$*, :$+, :$,, :$-0, :$-F, :$-I, :$-W, :$-a, :$-d, :$-i, :$-l, :$-p, :$-v, :$-w, :$., :$/, :$0, :$:, :$;, :$<, :$=, :$>, :$?, :$@, :$DEBUG, :$DEBUG_RDOC, :$FILENAME, :$LOADED_FEATURES, :$LOAD_PATH, :$PROGRAM_NAME, :$VERBOSE, :$\\, :$_, :$`, :$stderr, :$stdin, :$stdout, :$~]"
+
+Exceptions 
+  $! (Exception)
+  $@ (Backtrace)
+
+Pattern Matching 
+  $~ (MatchData)
+  $& (Matched Substring)
+  $` (Pre-Match Substring)
+  $' (Post-Match Substring)
+  $+ (Last Matched Group)
+  $1, $2, Etc. (Matched Group)
+
+Separators 
+  $/ (Input Record Separator)
+  $; (Input Field Separator)
+  $\ (Output Record Separator)
+
+Streams 
+  $stdin (Standard Input)
+  $stdout (Standard Output)
+  $stderr (Standard Error)
+  $< (ARGF or $stdin)
+  $> (Default Standard Output)
+  $. (Input Position)
+  $_ (Last Read Line)
+
+Processes 
+  $0
+  $* (ARGV)
+  $$ (Process ID)
+  $? (Child Status)
+  $LOAD_PATH (Load Path)
+  $LOADED_FEATURES
+
+Debugging 
+  $FILENAME
+  $DEBUG
+  $VERBOSE
+
+Other Variables 
+  $-a
+  $-i
+  $-l
+  $-p
+
+Deprecated 
+  $=
+  $,
+```
+
+Pre-defined global constants
+
+```ruby
+Streams 
+  STDIN
+  STDOUT
+  STDERR
+
+Environment 
+  ENV
+  ARGF
+  ARGV
+  TOPLEVEL_BINDING
+  RUBY_VERSION
+  RUBY_RELEASE_DATE
+  RUBY_PLATFORM
+  RUBY_PATCHLEVEL
+  RUBY_REVISION
+  RUBY_COPYRIGHT
+  RUBY_ENGINE
+  RUBY_ENGINE_VERSION
+  RUBY_DESCRIPTION
+
+Embedded Data 
+  DATA
+```
+
 ## Control Flow and Expressions
 
 [https://docs.ruby-lang.org/en/master/syntax/control_expressions_rdoc.html](https://docs.ruby-lang.org/en/master/syntax/control_expressions_rdoc.html)
@@ -939,193 +1111,7 @@ else # code
 end
 ```
 
-## Variables
 
-[https://docs.ruby-lang.org/en/master/doc/syntax/assignment_rdoc.html](https://docs.ruby-lang.org/en/master/doc/syntax/assignment_rdoc.html)
-
-A variable is an identifier that is assigned to an object, and which may hold a value. A variable is not an object in Ruby, so it is a reference to an object. A local variable name may contain letters, numbers, an _ (underscore or low line) or a character with the eighth bit set.
-
-Assignment aliases objects, potentially giving multiple variables that reference the same object. String#dup will create a new string object with the same content. String#freeze will make a string immutable. Numbers and symbols are always frozen (immutable) in Ruby.
-
-Examples:
-```ruby
-$global_variable
-@@class_variable
-@instance_variable
-CONSTANT
-::TOP_LEVEL_CONSTANT
-OtherClass::CONSTANT
-local_variable
-```
-
-In a file:
-
-```ruby
-# Defining variables
-# global variable, can be mutated
-$some_global_variable = "accessible everywhere"
-# Top level constant, can not be mutated
-TOP_LEVEL_CONSTANT = "accessible everywhere"
-
-class Toy
-  CONSTANT = "Some value"
-end
-
-class Human
-  # A class variable is shared by all instances of this class.
-  @@species = 'H. sapiens'
-  # Constant is a variable that is set only once and never changed.
-  A_CONSTANT = 1
-
-  # Basic initializer
-  def initialize(name, age = 0)
-    # Assign the argument (name) to the '@name' instance variable for the instance.
-    @name = name
-    # If no age given, we will fall back to the default in the arguments list (age=0).
-    @age = age
-  end
-
-  def some_method
-    # local_variable is only accessible within this method
-    local_variable = 1 
-  end
-
-  def some_other_method
-    # TOP_LEVEL_CONSTANT can be accessed from anywhere in the program using :: prefix
-    ::TOP_LEVEL_CONSTANT
-  end
-
-  def some_last_method
-    # From another class
-    Toy::CONSTANT
-  end
-end
-
-# Showing variables
-p $some_global_variable
-Human.class_variable_get(:@@species)
-Human::A_CONSTANT
-h = Human.new('foo', 10)
-h.instance_variable_get(:@name)
-h.instance_variable_get(:@age)
-h.some_method
-h.some_other_method
-h.some_last_method
-```
-
-```ruby
-# Aliasing global variables
-$some_global_variable = "accessible everywhere"
-alias $b $some_global_variable
-p $b # => 'accessible everywhere'
-
-# parallel variable assignment
-x, y, z = 100, 200, 500
-```
-
-### Pseudo Variables
-They provide information about the program's execution environment or serve specific purposes within Ruby.
-Characteristics: Predefined, read-only and available throughout the program.
-
-```ruby
-self  # The receiver object of the current method.
-super # The receiver object of the current method in the superclass.
-true  # boolean; singleton; TrueClass
-false # boolean; singleton; FalseClass
-nil   # empty; uninitialized; NilClass; falsey; singleton
-__FILE__ # The name of the current source file.
-__LINE__ # The current line number in the source file.
-```
-
-### Pre-defined global variables
-
-- [https://docs.ruby-lang.org/en/master/globals_rdoc.html](https://docs.ruby-lang.org/en/master/globals_rdoc.html)
-- [https://github.com/ruby/ruby/blob/HEAD/spec/ruby/language/predefined_spec.rb](https://github.com/ruby/ruby/blob/HEAD/spec/ruby/language/predefined_spec.rb)
-- [https://github.com/ruby/ruby/blob/HEAD/lib/English.rb](https://github.com/ruby/ruby/blob/HEAD/lib/English.rb)
-
-In irb:
-```ruby
-global_variables.count
-# => 43
-global_variables.sort.inspect
-# => "[:$!, :$\", :$$, :$&, :$', :$*, :$+, :$,, :$-0, :$-F, :$-I, :$-W, :$-a, :$-d, :$-i, :$-l, :$-p, :$-v, :$-w, :$., :$/, :$0, :$:, :$;, :$<, :$=, :$>, :$?, :$@, :$DEBUG, :$DEBUG_RDOC, :$FILENAME, :$LOADED_FEATURES, :$LOAD_PATH, :$PROGRAM_NAME, :$VERBOSE, :$\\, :$_, :$`, :$stderr, :$stdin, :$stdout, :$~]"
-
-Exceptions 
-  $! (Exception)
-  $@ (Backtrace)
-
-Pattern Matching 
-  $~ (MatchData)
-  $& (Matched Substring)
-  $` (Pre-Match Substring)
-  $' (Post-Match Substring)
-  $+ (Last Matched Group)
-  $1, $2, Etc. (Matched Group)
-
-Separators 
-  $/ (Input Record Separator)
-  $; (Input Field Separator)
-  $\ (Output Record Separator)
-
-Streams 
-  $stdin (Standard Input)
-  $stdout (Standard Output)
-  $stderr (Standard Error)
-  $< (ARGF or $stdin)
-  $> (Default Standard Output)
-  $. (Input Position)
-  $_ (Last Read Line)
-
-Processes 
-  $0
-  $* (ARGV)
-  $$ (Process ID)
-  $? (Child Status)
-  $LOAD_PATH (Load Path)
-  $LOADED_FEATURES
-
-Debugging 
-  $FILENAME
-  $DEBUG
-  $VERBOSE
-
-Other Variables 
-  $-a
-  $-i
-  $-l
-  $-p
-
-Deprecated 
-  $=
-  $,
-```
-
-Pre-defined global constants
-
-```ruby
-Streams 
-  STDIN
-  STDOUT
-  STDERR
-
-Environment 
-  ENV
-  ARGF
-  ARGV
-  TOPLEVEL_BINDING
-  RUBY_VERSION
-  RUBY_RELEASE_DATE
-  RUBY_PLATFORM
-  RUBY_PATCHLEVEL
-  RUBY_REVISION
-  RUBY_COPYRIGHT
-  RUBY_ENGINE
-  RUBY_ENGINE_VERSION
-  RUBY_DESCRIPTION
-
-Embedded Data 
-  DATA
-```
 
 ## Methods 
 

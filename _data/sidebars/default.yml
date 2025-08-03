@@ -1,0 +1,8 @@
+title: "Navigation"
+sections:
+  - title: "Home"
+    id: "home"
+    anchor: "/"
+  - title: "Ruby Syntax"
+    id: "ruby-syntax"
+    anchor: "/ruby-syntax"

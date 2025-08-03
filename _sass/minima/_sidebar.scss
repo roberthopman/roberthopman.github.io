@@ -1,0 +1,117 @@
+// Sidebar Navigation
+.sidebar {
+  width: 250px;
+  background-color: #f8f8f8;
+  border-right: 1px solid #ddd;
+  font-family: 'Verdana', 'Times New Roman', 'Georgia', serif;
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  align-self: flex-start;
+  max-height: 100vh;
+  overflow-y: auto;
+
+  @media (max-width: 768px) {
+    position: static;
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 1rem;
+    max-height: none;
+    overflow-y: visible;
+  }
+}
+
+.sidebar-header {
+  padding: 1rem;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sidebar-title {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.sidebar-toggle {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #666;
+  padding: 0.25rem;
+
+  &:hover {
+    color: #333;
+  }
+
+  @media (min-width: 769px) {
+    display: none;
+  }
+}
+
+.sidebar-nav {
+  padding: 0;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+
+.sidebar-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar-item {
+  border-bottom: 1px solid #eee;
+}
+
+.sidebar-link {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: #0056b3;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: #e9e9e9;
+    color: #0056b3;
+  }
+
+  &.active {
+    background-color: #e6f3ff;
+    color: #0056b3;
+    font-weight: bold;
+  }
+}
+
+.sidebar-text {
+  display: block;
+  padding: 0.75rem 1rem;
+  color: #333;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+// Page layout with sidebar
+.page-with-sidebar {
+  display: flex;
+  gap: 2rem;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .main-content {
+    flex: 1;
+    min-width: 0; // Prevents flex item from growing beyond container
+  }
+}

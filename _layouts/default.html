@@ -9,11 +9,24 @@
 
     <main class="page-content" aria-label="Content">
       <div class="wrapper">
-        {{ content }}
+        {% if page.sidebar %}
+          <div class="page-with-sidebar">
+            {% include sidebar.html page_slug=page.sidebar %}
+            <div class="main-content">
+              {{ content }}
+            </div>
+          </div>
+        {% else %}
+          {{ content }}
+        {% endif %}
       </div>
     </main>
 
     {%- include footer.html -%}
+
+    {% if page.sidebar %}
+      <script src="{{ "/assets/js/sidebar.js" | relative_url }}"></script>
+    {% endif %}
 
   </body>
 
