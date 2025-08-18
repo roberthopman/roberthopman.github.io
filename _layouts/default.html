@@ -1,33 +1,40 @@
 <!DOCTYPE html>
-<html lang="{{ page.lang | default: site.lang | default: "en" }}">
+<html lang="{{ page.lang | default: site.lang | default: 'en' }}">
 
-  {%- include head.html -%}
+{%- include head.html -%}
 
-  <body>
+<body>
 
-    {%- include header.html -%}
+  {%- include header.html -%}
 
-    <main class="page-content" aria-label="Content">
-      <div class="wrapper">
-        {% if page.sidebar %}
-          <div class="page-with-sidebar">
-            {% include sidebar.html page_slug=page.sidebar %}
-            <div class="main-content">
-              {{ content }}
-            </div>
-          </div>
-        {% else %}
+  <main class="page-content" aria-label="Content">
+    <div class="wrapper">
+      {% if page.sidebar %}
+      <div class="page-with-sidebar">
+        {% include sidebar.html page_slug=page.sidebar %}
+        <div class="main-content">
+          {% include page-header.html %}
           {{ content }}
-        {% endif %}
+
+          {% include share-buttons.html %}
+          {%- if site.disqus.shortname -%}
+          {%- include disqus_comments.html -%}
+          {%- endif -%}
+        </div>
       </div>
-    </main>
+      {% else %}
+      {% include page-header.html %}
+      {{ content }}
+      {% endif %}
+    </div>
+  </main>
 
-    {%- include footer.html -%}
+  {%- include footer.html -%}
 
-    {% if page.sidebar %}
-      <script src="{{ "/assets/js/sidebar.js" | relative_url }}"></script>
-    {% endif %}
+  {% if page.sidebar %}
+  <script src="{{ '/assets/js/sidebar.js' | relative_url }}"></script>
+  {% endif %}
 
-  </body>
+</body>
 
 </html>

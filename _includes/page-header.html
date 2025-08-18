@@ -1,0 +1,33 @@
+{%- if page.title -%}
+<h1>{{ page.title | escape }}</h1>
+{%- endif -%}
+
+{%- unless page.hide_author -%}
+{%- assign author = page.author | default: site.author.name -%}
+{%- if author -%}
+<p class="page-meta">
+  Author: {% if author.size %}{% for author_name in author %}
+  <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <span class="p-author h-card" itemprop="name">{{ author_name }}</span></span>
+  {%- if forloop.last == false %}, {% endif -%}
+  {% endfor %}{% else %}
+  <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <span class="p-author h-card" itemprop="name">{{ author }}</span></span>
+  {% endif %}
+</p>
+{%- endif -%}
+
+{%- unless page.hide_last_updated -%}
+{%- if page.last_modified_at or page.date -%}
+<p class="page-meta">
+  Last updated:
+  <time datetime="{{ page.last_modified_at | default: page.date | date_to_xmlschema }}">
+    {{ page.last_modified_at | default: page.date | date: "%d-%b-%Y" }}
+  </time>
+</p>
+{%- endif -%}
+{%- endunless -%}
+{%- endunless -%}
+{%- if page.page_title -%}
+<h1>{{ page.page_title | escape }}</h1>
+{%- endif -%}

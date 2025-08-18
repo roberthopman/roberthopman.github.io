@@ -1,5 +1,6 @@
 ---
 layout: default
+hide_author: true
 ---
 
 <div class="main">

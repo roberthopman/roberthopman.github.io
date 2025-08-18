@@ -1,11 +1,10 @@
 ---
 layout: default
-title:  Ruby Syntax
+title: Ruby Syntax
 description: Describing the Ruby language structure
 sidebar: ruby-syntax
+last_modified_at: 18-08-2025
 ---
-
-# Ruby syntax
 
 <details>
 <summary>Table of contents</summary>
@@ -149,6 +148,7 @@ Debugging resources:
 - [https://st0012.dev/my-ruby-debugging-tips-in-2025](https://st0012.dev/my-ruby-debugging-tips-in-2025)
 - [https://st0012.dev/ruby-debug-cheatsheet](https://st0012.dev/ruby-debug-cheatsheet)
 - [https://github.com/MadBomber/debug_me](https://github.com/MadBomber/debug_me)
+- [https://www.justinppearson.com/projects/ruby-tutorial.html](https://www.justinppearson.com/projects/ruby-tutorial.html)
 
 ### Reserved keywords
 
@@ -2562,7 +2562,31 @@ WASM [https://developer.mozilla.org/en-US/docs/WebAssembly](https://developer.mo
 
 ## Ruby Style
 
-There are two distinct kinds of Ruby style. The first is syntax-based, and can be evaluated by a linting program, e.g. RuboCop and Standard. The second is the one based around how to use Ruby as a tool, e.g. Ruby's dynamism and support of dynamic typing ("duck typing") to make intent clearer, less code to maintain and change easier. Avoid "bikeshedding" - spending time on trivial cosmetic issues like what color to paint the bike shed.
+There are two distinct kinds of Ruby style. The first is syntax-based, and can be evaluated by a linting program, e.g. RuboCop and Standard. The second is the one based around how to use Ruby as a tool, e.g. Ruby's dynamism and support of dynamic typing ("duck typing") to make intent clearer, less code to maintain and change easier. Avoid "bikeshedding" - spending time on trivial cosmetic issues like what color to paint the bike shed. Most common style guide comes from the rubocop linter: [https://github.com/rubocop/ruby-style-guide](https://github.com/rubocop/ruby-style-guide). More about linters: [https://en.wikipedia.org/wiki/Lint_(software)](https://en.wikipedia.org/wiki/Lint_(software)).
+
+In general, for readability: No spaces after (, [ or before ], ). Use spaces around { and before }. 
+
+```ruby
+# Both these are acceptable:
+# good - space after { and before }
+{ one: 1, two: 2 }
+# good - no space after { and before }
+{one: 1, two: 2}
+
+# With interpolated expressions, there should be no padded-spacing inside the braces.
+# bad
+"From: #{ user.first_name }, #{ user.last_name }"
+# good
+"From: #{user.first_name}, #{user.last_name}"
+```
+
+Single-line method calls should only be used when the body is a single expression and has no side effects.
+```ruby
+def price_in_cents = price * 100
+```
+To use rubocop and see offenses:
+- install rubocop: `gem install rubocop`
+
 
 ### Style Resources
 

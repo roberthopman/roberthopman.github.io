@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Archive
+hide_author: true
 ---
 
 <div class="main">

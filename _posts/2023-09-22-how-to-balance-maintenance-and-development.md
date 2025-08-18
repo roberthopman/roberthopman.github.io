@@ -54,10 +54,47 @@ Then a priority list can be created, based on the answers. However, if you don't
 
 First, decide how to prioritize. For example, you can prioritize based on the urgency (temporal status), predictability and impact. This will come back daily, as you will be reminded of negative consequences of not doing the maintenance work.
 
-| **Category**                                      | **Temporal Status**                                                                             | **Predictability**                                                                  | **Actions**                                                                                                                                                                         |
-| ------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Now**<br>(Immediate-Critical)                   | • Issue is actively occurring<br>• Failure is ongoing or imminent                               | • Fully observable<br>• Probability ≈ 1.0<br>• No forecasting needed                | • Do a quick, low-cost fix to keep it safe and functioning<br>• Avoid expensive replacements unless safety is at risk<br>• Record what broke and what the full solution would require<br>• Focus on stopping things from getting worse |
-| **Upcoming & Expected**<br>(Predictable-Critical) | • Failure expected in days or weeks<br>• Based on wear, inspections, or history                 | • High confidence (P > 0.7)<br>• Supported by trend data or experience              | • Start small: plan the work with important and inexpensive parts<br>• Defer costly labor until more capital is available<br>• Spread out effort to avoid a financial spike<br>• Use estimates and planning to argue for budget now                       |
-| **Upcoming & Unexpected**<br>(Potential-Critical) | • No current failure<br>• Some early signs or weak signals<br>• Could happen in weeks or months | • Low to moderate confidence (P < 0.5)<br>• Based on team intuition or anomaly detection | • Write it down to create shared knowledge<br> • Monitor it regularly, don’t act yet<br>• Track changes in case it escalates<br>• Be ready to act if budget improves<br>• Design flexible, low-effort responses that can scale later                                                  |
+| **Category**                                      | **Temporal Status**                                                                             | **Predictability**                                                                  | **Actions** |
+| ------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------- |
+| **Now (Immediate-Critical)**                      | Issue is actively occurring<br>Failure is ongoing or imminent                                   | Fully observable<br>Probability ≈ 1.0<br>No forecasting needed                      | Focus on stopping things from getting worse; Do a quick, low-cost fix to keep it safe and functioning; Record what broke and what the full solution would require |
+| **Upcoming & Expected (Predictable-Critical)**    | Failure expected in days or weeks<br>Based on wear, inspections, or history                    | High confidence (P > 0.7)<br>Supported by trend data or experience                  | When important and urgent issues seem absent, evaluate and commit time to a work item in the future, for example: next week we commit to x time for work-item y |
+| **Upcoming & Unexpected (Potential-Critical)**    | No current failure<br>Some early signs or weak signals<br>Could happen in weeks or months      | Low to moderate confidence (P < 0.5)<br>Based on team intuition or anomaly detection | Schedule a minor portion of time weekly for this topic; Use it to act when necessary, or to work on upcoming & expected items |
+
+### Categories 
+
+- **Now (Immediate-Critical)**
+  - **Temporal Status**
+    - Issue is actively occurring
+    - Failure is ongoing or imminent
+  - **Predictability**
+    - Fully observable
+    - Probability ≈ 1.0
+    - No forecasting needed
+  - **Actions**
+    - Focus on stopping things from getting worse
+    - Do a quick, low-cost fix to keep it safe and functioning
+    - Record what broke and what the full solution would require
+
+- **Upcoming & Expected (Predictable-Critical)**
+  - **Temporal Status**
+    - Failure expected in days or weeks
+    - Based on wear, inspections, or history
+  - **Predictability**
+    - High confidence (P > 0.7)
+    - Supported by trend data or experience
+  - **Actions**
+    - When important and urgent issues seem absent, evaluate and commit time to a work item in the future, for example: next week we commit to x time for work-item y
+
+- **Upcoming & Unexpected (Potential-Critical)**
+  - **Temporal Status**
+    - No current failure
+    - Some early signs or weak signals
+    - Could happen in weeks or months
+  - **Predictability**
+    - Low to moderate confidence (P < 0.5)
+    - Based on team intuition or anomaly detection
+  - **Actions**
+    - Schedule a minor portion of time weekly for this topic
+    - Use it to act when necessary, or to work on upcoming & expected items
 
 By now you can decide how to balance maintenance and development.
