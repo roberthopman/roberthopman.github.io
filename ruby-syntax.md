@@ -2834,6 +2834,7 @@ Organizing a Model:
 class MyModel < ActiveRecord::Base
   # extends ...................................................................
   # includes ..................................................................
+  # constants .................................................................
   # relationships .............................................................
   # validations ...............................................................
   # callbacks .................................................................
@@ -2843,6 +2844,78 @@ class MyModel < ActiveRecord::Base
   # public instance methods ...................................................
   # protected instance methods ................................................
   # private instance methods ..................................................
+end
+```
+
+RuboCop details an ExpectedOrder of Class Structure
+[https://github.com/rubocop/rubocop/blob/master/lib/rubocop/cop/layout/class_structure.rb](https://github.com/rubocop/rubocop/blob/master/lib/rubocop/cop/layout/class_structure.rb)
+```ruby
+class MyModel < ActiveRecord::Base
+  # * Module inclusion (`include`, `prepend`, `extend`)
+  # * Constants
+  # * Associations (`has_one`, `has_many`)
+  # * Public attribute macros (`attr_accessor`, `attr_writer`, `attr_reader`)
+  # * Other macros (`validates`, `validate`)
+  # * Public class methods
+  # * Initializer
+  # * Public instance methods
+  # * Protected attribute macros (`attr_accessor`, `attr_writer`, `attr_reader`)
+  # * Protected instance methods
+  # * Private attribute macros (`attr_accessor`, `attr_writer`, `attr_reader`)
+  # * Private instance methods
+end
+
+# example
+class Person
+  # extend and include go first
+  extend SomeModule
+  include AnotherModule
+  
+  # inner classes
+  CustomError = Class.new(StandardError)
+  
+  # constants are next
+  SOME_CONSTANT = 20
+  
+  # afterwards we have public attribute macros
+  attr_reader :name
+  
+  # followed by other macros (if any)
+  validates :name
+  
+  # then we have public delegate macros
+  delegate :to_s, to: :name
+  
+  # public class methods are next in line
+  def self.some_method
+  end
+  
+  # initialization goes between class methods and instance methods
+  def initialize
+  end
+  
+  # followed by other public instance methods
+  def some_method
+  end
+  
+  # protected attribute macros and methods go next
+  protected
+  
+  attr_reader :protected_name
+  
+  def some_protected_method
+  end
+  
+  # private attribute macros, delegate macros and methods
+  # are grouped near the end
+  private
+  
+  attr_reader :private_name
+  
+  delegate :some_private_delegate, to: :name
+  
+  def some_private_method
+  end
 end
 ```
 
