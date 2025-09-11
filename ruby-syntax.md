@@ -2585,7 +2585,11 @@ Single-line method calls should only be used when the body is a single expressio
 def price_in_cents = price * 100
 ```
 To use rubocop and see offenses:
-- install rubocop: `gem install rubocop`
+- installing: `gem install rubocop`
+- running: `rubocop`. Each file will get as output one character. A dot means no issues, I is for info, R for refactor, C for convention, W is warning (still legal Ruby), E is for error (not legal Ruby), F is for fatal (certainly not legal Ruby), meaning the file has syntax error that prevents it from being parsed. 
+
+To get an overview use `rubocop --format offenses`.
+
 
 
 ### Style Resources
@@ -2746,7 +2750,11 @@ end
 
 ### Sorbet
 
-Besides RBS there is the third-party tool by Stripe called Sorbet [https://github.com/sorbet/sorbet](https://github.com/sorbet/sorbet). It is different from RBS as the type annotations go in the Ruby file. Also, Sorbet can do static analysis and type checking at runtime (for development experience a must). RBS can only do static analysis and runtime type checking during tests. More on this tool: [https://sorbet.org/docs](https://sorbet.org/docs), read the the quick reference [https://sorbet.org/docs/quickref](https://sorbet.org/docs/quickref) or visit the playground which has examples located in the top right: [https://sorbet.run/](https://sorbet.run/).
+Besides RBS there is the third-party tool by Stripe called Sorbet [https://github.com/sorbet/sorbet](https://github.com/sorbet/sorbet). It is different from RBS as the type annotations go in the Ruby file. Also, Sorbet can do static analysis and type checking at runtime (for development experience a must). RBS can only do static analysis and runtime type checking during tests. 
+
+General docs: [https://sorbet.org/docs](https://sorbet.org/docs)
+Quick reference [https://sorbet.org/docs/quickref](https://sorbet.org/docs/quickref) 
+The playground which has examples located in the top right: [https://sorbet.run/](https://sorbet.run/).
 
 ### Sorbet type examples
 
