@@ -2588,7 +2588,24 @@ To use rubocop and see offenses:
 - installing: `gem install rubocop`
 - running: `rubocop`. Each file will get as output one character. A dot means no issues, I is for info, R for refactor, C for convention, W is warning (still legal Ruby), E is for error (not legal Ruby), F is for fatal (certainly not legal Ruby), meaning the file has syntax error that prevents it from being parsed. 
 
-To get an overview use `rubocop --format offenses`.
+To get an overview use`rubocop --format offenses`.
+To get a minimal configuration file and todo file use `rubocop --auto-gen-config`.
+Configuration is possible in the `.rubocop.yml` file.
+To autocorrect, use `rubocop -a`.
+
+Standard [https://github.com/standardrb/standard](https://github.com/standardrb/standard) is an even more consensus-based Ruby style-checker, minimally configurable and conforms to a small, but commonly used, set of rules.
+
+To run it `standardrb`
+To run it and autocorrect: `standardrb --fix`
+To create a todo file: `standardrb --generate-todo`
+
+### Ruby Style in general
+
+The goal of these style recommendations is to allow the code to clearly reflect the intent of the programmer.
+
+users.map { |user| user.convert_to_json }
+users.map { _1.convert_to_json }
+users.map(&:convert_to_json)
 
 
 
