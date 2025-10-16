@@ -3,9 +3,9 @@ layout: post
 title:  "How to upgrade a Ruby on Rails application?"
 ---
 
-We'll limit the scope to the technical part: upgrading the application.
+First, we'll limit the scope to the technical part: upgrading the application.
 
-Production parts to be considered:
+Production parts to be considered which could impact the upgrade of the application:
 - server
 - database
 - schema
@@ -35,24 +35,41 @@ Next, the steps to upgrade the application:
 - Upgrade the Ruby version. Could be in small steps or big steps, depending on factors. Use rbenv/RVM/asdf to manage multiple ruby versions, download the version, change version in the Gemfile, and run `bundle update`.
 - Run necessary checks, like the test suite and/or manually test the handful of critical business processes.
 - Upgrade the Rails version, test the application doesn't work anymore as required for the handful of critical business processes. Implicitly, this means you need to fix it.
-- Upgrade or downgrade gems, as required and read the (depreciation) messages afterwards on the command line, even if there are no explicit warnings.
-- Run the `rails app:update`: "This will help you with the creation of new files and changes of old files in an interactive session." <https://guides.rubyonrails.org/upgrading_ruby_on_rails.html#the-update-task>
+
+It could go in this order (Source: https://github.com/rubyforgood/awbw/issues/3):
+```
+[ ]  Upgrade Ruby to 2.7.x
+[ ]  Upgrade Rails 5.0 -> 5.1
+[ ]  Upgrade Rails 5.1 -> 5.2
+[ ]  Upgrade to Ruby 3.0.x
+[ ]  Upgrade to Rails 5.2 -> 6.0
+[ ]  Upgrade Rails 6.0 -> 6.1
+[ ]  Upgrade Ruby 3.3.x
+[ ]  Upgrade Rails 6.1 -> 7.0
+[ ]  Upgrade Rails 7.0 -> 7.1
+[ ]  Upgrade Ruby to 3.4.x
+[ ]  Upgrade Rails 8.0
+```
+
+- Upgrade or downgrade gems, as required and read the (depreciation) messages afterwards on the command line, even if there are no explicit warnings (https://thoughtbot.com/blog/upgrade-rails-6-to-rails-7)
+- Run the `rails app:update`: "This will help you with the creation of new files and changes of old files in an interactive session." https://guides.rubyonrails.org/upgrading_ruby_on_rails.html#the-update-task
 - Have an acceptance environment to deploy and explore results, and a rollback plan.
 - Finally, there will be a deploy to production. 
 
 Resources for the upgrade process:
-- <https://www.ruby-lang.org/en/downloads/branches/>
-- <https://railsbump.org/>
-- <https://railsdiff.org/> and <https://github.com/railsdiff/railsdiff>
-- <https://makandracards.com/makandra/59328-how-to-upgrade-rails-workflow-advice>
-- <https://infinum.com/handbook/rails/workflows/rails-upgrades>
-- <https://www.fastruby.io/blog/rails/upgrade/rails-upgrade-series.html> 
-- <https://rormaas.com/maintenance.html#our-maintenance-process>
-- <http://www.t27duck.com/posts/8-how-i-upgrade-ruby-on-rails>
-- <https://github.com/jwo/rails-upgrade_checklist/blob/master/app/views/pages/list.markdown>
-- <https://railsapps.github.io/updating-rails.html>
-- <https://web.archive.org/web/20240725023959/https://jeromezng.com/work/research-and-development/engineering/development/upgrading-rails>
-- Dual booting: <https://github.com/fastruby/next_rails> and <https://github.com/shopify/bootboot>
+- https://www.ruby-lang.org/en/downloads/branches/
+- https://railsbump.org/
+- https://railsdiff.org/ and https://github.com/railsdiff/railsdiff
+- https://makandracards.com/makandra/59328-how-to-upgrade-rails-workflow-advice
+- https://infinum.com/handbook/rails/workflows/rails-upgrades
+- https://www.fastruby.io/blog/rails/upgrade/rails-upgrade-series.html 
+- https://rormaas.com/maintenance.html#our-maintenance-process
+- http://www.t27duck.com/posts/8-how-i-upgrade-ruby-on-rails
+- https://github.com/jwo/rails-upgrade_checklist/blob/master/app/views/pages/list.markdown
+- https://railsapps.github.io/updating-rails.html
+- https://web.archive.org/web/20240725023959/https://jeromezng.com/work/research-and-development/engineering/development/upgrading-rails
+- Dual booting: https://github.com/fastruby/next_rails and https://github.com/shopify/bootboot
+- https://thoughtbot.com/blog/upgrade-rails-6-to-rails-7
 
 
 # Non-technical
