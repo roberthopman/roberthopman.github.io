@@ -16,8 +16,8 @@
 title: The blog of robert hopman
 email: robert@bonaroo.nl
 legal_entity: Charper Bonaroo B.V.
-description: >- 
-  
+description: >-
+  Technical blog by Robert Hopman with practical guides on JavaScript syntax, Ruby on Rails upgrades, and software development best practices for developers
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://roberthopman.com" # the base hostname & protocol for your site, e.g. http://example.com
 permalink: /:title/

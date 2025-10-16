@@ -1,4 +1,4 @@
-Sitemap: https://roberthopman.github.io/sitemap.xml
+Sitemap: https://roberthopman.com/sitemap.xml
 
 User-agent: *
 Disallow:
