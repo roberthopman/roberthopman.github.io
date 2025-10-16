@@ -1,6 +1,8 @@
 ---
 layout: post
 title:  "Which transactional email provider?"
+excerpt: "Curated list of transactional email service providers including AWS SES, Postmark, Mailgun, Sendgrid, and others with brief notes on each."
+tags: [email, saas, tools, comparison]
 ---
 
 Nothing here to see.

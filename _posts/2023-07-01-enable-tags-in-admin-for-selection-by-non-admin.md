@@ -1,6 +1,8 @@
 ---
 layout: post
 title:  "Enable the admin to configure tags for selection in a dropdown, to control type and amount of tags stored"
+excerpt: "Build a tag management system with Rails and ActsAsTaggableOn allowing admins to configure, archive, and control available tags for users."
+tags: [rails, ruby, activerecord, admin, tutorial]
 ---
 
 

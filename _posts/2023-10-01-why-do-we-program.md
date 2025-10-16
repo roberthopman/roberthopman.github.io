@@ -1,6 +1,8 @@
 ---
 layout: post
 title:  "Why do we write code?"
+excerpt: "Programming removes time penalties from complex tasks, automates tedious work, and creates tools that enable us to focus on more valuable things."
+tags: [philosophy, programming, automation]
 ---
 
 From [http://wiki.c2.com/?GarryHamilton](http://wiki.c2.com/?GarryHamilton) on [http://wiki.c2.com/?PurposeOfProgramming](http://wiki.c2.com/?PurposeOfProgramming)

@@ -1,6 +1,8 @@
 ---
 layout: post
 title:  "Fixing an error of ImageMagick in GitHub Actions"
+excerpt: "Fix ImageMagick PDF conversion errors in GitHub Actions by installing Ghostscript and updating the ImageMagick policy configuration."
+tags: [imagemagick, github-actions, troubleshooting, ci-cd]
 ---
 
 When using ImageMagick in GitHub Actions, you may encounter the following error:

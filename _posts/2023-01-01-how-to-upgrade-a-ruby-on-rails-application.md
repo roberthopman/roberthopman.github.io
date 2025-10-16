@@ -1,6 +1,8 @@
 ---
 layout: post
 title:  "How to upgrade a Ruby on Rails application?"
+excerpt: "Step-by-step guide for upgrading Rails apps covering Ruby versions, gems, testing strategies, and managing the upgrade process with your team."
+tags: [ruby, rails, upgrade, maintenance, testing, deployment]
 ---
 
 First, we'll limit the scope to the technical part: upgrading the application.

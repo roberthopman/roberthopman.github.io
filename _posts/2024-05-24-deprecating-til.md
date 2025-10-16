@@ -1,6 +1,8 @@
 ---
 layout: post
 title:  "T.I.L."
+excerpt: "Today I Learned (TIL) is a collection of insights around debugging and prototyping."
+tags: [ruby, debugging, prototyping, ai, til]
 ---
 
 ### General

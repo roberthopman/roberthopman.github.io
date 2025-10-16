@@ -1,6 +1,8 @@
 ---
 layout: post
 title:  "Enter a debugging session when test run fails"
+excerpt: "Debug failing tests interactively using Cuprite, Capybara, and Minitest by entering a debug session on test failure in development environments."
+tags: [ruby, testing, debugging, minitest, capybara]
 ---
 
 Using:

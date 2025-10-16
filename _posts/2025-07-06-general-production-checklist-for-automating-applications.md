@@ -1,6 +1,8 @@
 ---
 layout: post
 title: "General Production Checklist for Automating Applications"
+excerpt: "Comprehensive production readiness checklist covering hosting, monitoring, logging, SSL, domain management, and deployment automation for applications."
+tags: [deployment, automation, monitoring, devops, checklist, production]
 ---
 
 This is a concept checklist to ensure that an application is production ready.

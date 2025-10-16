@@ -1,6 +1,8 @@
 ---
 layout: post
 title:  "A bug report template"
+excerpt: "A good bug report can save hours of debugging. Use this GitHub issue template to standardize bug reporting in your projects."
+tags: [github, template, debugging, workflow]
 ---
 
 A good bug report can save hours of debugging. 

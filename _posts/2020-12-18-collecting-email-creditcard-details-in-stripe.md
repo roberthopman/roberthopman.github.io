@@ -1,6 +1,8 @@
 ---
 layout: post
 title:  "Collecting creditcard details in Stripe with SetupIntent"
+excerpt: "Learn how to save customer payment credentials for future charges using Stripe's SetupIntent API with a Rails implementation example."
+tags: [stripe, rails, payments, api, tutorial]
 ---
 
 **What is a SetupIntent?**

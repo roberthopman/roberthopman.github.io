@@ -1,6 +1,30 @@
 // Placeholder to allow defining custom styles that override everything else.
 // (Use `_sass/minima/custom-variables.scss` to override variable defaults)
 
+@media screen and (min-width: 50em) {
+  .site-nav {
+    float: left;
+    margin-left: 80px;
+  }
+}
+
+// Footer layout - single column with proper spacing
+.footer-description,
+.footer-social,
+.footer-contact {
+  display: block;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  clear: both;
+  width: 100%;
+}
+
+.footer-col .social-media-list,
+.footer-col .contact-list {
+  display: block;
+  clear: both;
+}
+
 // index page
 .site-header,
 .page-content,

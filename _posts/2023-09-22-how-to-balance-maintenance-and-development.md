@@ -1,6 +1,8 @@
 ---
 layout: post
 title:  "How to balance maintenance and development?"
+excerpt: "Learn how to balance maintenance and new development work with prioritization frameworks based on urgency, predictability, and impact."
+tags: [maintenance, development, prioritization, workflow, best-practices]
 ---
 
 The risk of only working on new development to grow the business? At some point, you will have a problem, and you need to fix it.

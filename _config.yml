@@ -13,7 +13,7 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: The blog of robert hopman
+title: My blog
 email: robert@bonaroo.nl
 legal_entity: Charper Bonaroo B.V.
 description: >-
@@ -32,6 +32,13 @@ plugins:
 
 show_excerpts: false
 
+# Header navigation pages
+header_pages:
+  - index.md
+  - archive.md
+  - ruby-syntax.md
+  - tags.md
+
 author:
   name: Robert Hopman
   email: "robert@bonaroo.nl"
@@ -43,8 +50,22 @@ minima:
   social_links:
     github: roberthopman
     twitter: roberthopman
+    linkedin: roberthopman
     
 google_analytics: 'G-J0HMLHK67L'
+
+# Front matter defaults
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      image: /assets/images/default_technical_blog.png
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      image: /assets/images/default_technical_blog.png
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list

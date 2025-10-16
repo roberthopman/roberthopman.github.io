@@ -1,0 +1,23 @@
+---
+layout: default
+---
+
+<div class="main">
+  <h1>Tag: {{ page.tag }}</h1>
+
+  <p>Posts tagged with "{{ page.tag }}":</p>
+
+  <ul class="post-list">
+    {% for post in site.tags[page.tag] %}
+      <li>
+        <span class="post-meta">{{ post.date | date: "%d-%m-%Y" }}</span>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+        {% if post.excerpt %}
+          <p class="post-excerpt">{{ post.excerpt }}</p>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+
+  <p><a href="/tags/">← View all tags</a></p>
+</div>
