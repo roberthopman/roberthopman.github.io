@@ -7,6 +7,12 @@
 
   {%- include header.html -%}
 
+  {% if page.layout == 'post' or page.layout == 'page' or page.sidebar %}
+  <aside class="share-rail" aria-label="Share this page">
+    {% include share-buttons.html variant="floating" %}
+  </aside>
+  {% endif %}
+
   <main class="page-content" aria-label="Content">
     <div class="wrapper">
       {% if page.sidebar %}
@@ -16,7 +22,7 @@
           {% include page-header.html %}
           {{ content }}
 
-          {% include share-buttons.html %}
+          {% include share-buttons.html class="share-inline--mobile" %}
           {%- if site.disqus.shortname -%}
           {%- include disqus_comments.html -%}
           {%- endif -%}

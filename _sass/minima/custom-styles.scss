@@ -126,3 +126,117 @@ table td {
 .page-meta {
   font-style: italic;
 }
+
+// Share buttons (inline + floating rail)
+.share-block {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #666;
+  font-size: 0.8rem;
+
+  .share-label {
+    color: #a0a0a0;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-size: 0.7rem;
+    white-space: nowrap;
+  }
+
+  .share-buttons {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    > div {
+      position: relative;
+      height: 36px;
+      width: 32px;
+      text-align: center;
+      border-radius: 6px;
+      transition: background-color 0.15s ease, transform 0.15s ease;
+
+      &:hover {
+        cursor: pointer;
+        transform: translateY(-1px);
+      }
+
+      > svg {
+        height: 16px;
+        fill: #d5d5d5;
+        margin-top: 10px;
+      }
+    }
+
+    > div.facebook > svg { height: 18px; margin-top: 9px; }
+    > div.x > svg { height: 20px; margin-top: 8px; }
+    > div.linkedin > svg { height: 19px; margin-top: 7px; }
+    > div.pinterest > svg { height: 20px; margin-top: 9px; }
+    > div.mail > svg { height: 14px; margin-top: 11px; }
+    > div.hackernews > svg { height: 20px; margin-top: 9px; }
+    > div.copylink > svg { height: 18px; margin-top: 9px; }
+
+    > div.facebook:hover > svg { fill: #3B5998; }
+    > div.x:hover > svg { fill: #000; }
+    > div.linkedin:hover > svg { fill: #0077b5; }
+    > div.pinterest:hover > svg { fill: #CB2027; }
+    > div.mail:hover > svg { fill: #7D7D7D; }
+    > div.hackernews:hover > svg { fill: #FF6601; }
+    > div.copylink:hover > svg { fill: #333; }
+    > div.copylink.copied > svg { fill: #28a745; }
+  }
+}
+
+.share-inline {
+  margin: 1.25rem 0 0.5rem;
+}
+
+.share-inline--mobile {
+  @media (min-width: 960px) {
+    display: none;
+  }
+}
+
+.share-rail {
+  position: fixed;
+  top: 50%;
+  right: max(16px, 2.5vw);
+  transform: translateY(-50%);
+  z-index: 50;
+
+  .share-block {
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 12px;
+    border: 1px solid #e5e5e5;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.96);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+    backdrop-filter: blur(2px);
+  }
+
+  .share-buttons {
+    flex-direction: column;
+    gap: 10px;
+
+    > div {
+      width: 36px;
+      height: 36px;
+      background: #f7f7f7;
+
+      &:hover {
+        background: #eef2f6;
+      }
+    }
+  }
+
+  .share-label {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+  }
+
+  @media (max-width: 960px) {
+    display: none;
+  }
+}

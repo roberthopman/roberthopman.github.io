@@ -1612,7 +1612,7 @@ With multiple ways to define methods, Ruby will look for a method in the followi
 4. Modules added in the receiver's class using `include`, the last module added is checked first.
 5. If not found, the same loop will happen in the receiver's superclass.
 
-This continues until the method is found or the end of the inheritance structure is reached. If the method is not found, Ruby will try again from the receiver's class, now looking for `method_missing`, if no `method_missing` is found to handle the message, a `NameError` is thrown. Entire list of classes and modules in this lookup path can be accessed by calling the method `foo.ancestors`.
+This continues until the method is found or the end of the inheritance structure is reached. If the method is not found, Ruby will try again from the receiver's class, now looking for `method_missing`, if no `method_missing` is found (either in the receiver's class or in the superclass chain), a `NameError` is thrown. Entire list of classes and modules in this lookup path can be accessed by calling the method `foo.ancestors`.
 
 ### Super lookup
 
@@ -2607,6 +2607,78 @@ users.map { |user| user.convert_to_json }
 users.map { _1.convert_to_json }
 users.map(&:convert_to_json)
 
+### Duck Typing
+
+In Ruby you don't need to declare the type of a variable, method argument, or return value. You can just call the method, and it is evaluated at runtime and it will work.
+
+A class defines the operations (methods) the object can supoort, along with the state (instance variables) on which those methods operate. An interface is a list of methods that are supported together by classes that implement that interface. In Ruby, the class is almost never the type. Instead, the type of an object is defined by what messages it responds to. The idea is that typing is implicitly based on the messages defined rather than explicitly declared is called duck typing.
+
+Standard Protocols and Coercions: Conversion protocols mean that an object can be converted to another object of another class. You have explicit conversion and implicit conversion. Coercion protocols mean that an object can be coerced to another object of another class. Examples: 
+
+```ruby
+1.coerce(2)       # => [2.0, 1.0]
+2.coerce(1.2)     # => [1.2, 2.0]
+(3.3).coerce(4.1) # => [4.1, 3.3]
+(3.4).coerce(4)   # => [4.0, 3.4]
+```
+
+1+2 is equal to 1.+(2), and Ruby calls 2.coerce(1) to get the [1.0, 2.0] array and perform the operation (1.0 + 2.0).
+This technique of calling a method on a paramter is called double dispatch, it allows a method to change its behavior based on the type of the parameter.
+
+## Ruby Object Model and Metaprogramming
+
+Internally, Ruby object has 3 parts: a set of flags, instance variables and an associated class. A Ruby class contains all the things an object has, plus a set of method definitions and a reference to a superclass. A Ruby class is itself an instance of the class `Class`.
+
+Ruby has the concept of `current object`, which is the object that the method is being called on. `self` is the variable with reference to the current object. `self` has two roles: it controls how Ruby finds instance variables and it controls method call lookup. 
+
+When you see `puts "foo"`, it has an implicit receiver, you should see that as `self.puts("foo")`. self is the current object and puts is a method of self's class.
+
+```ruby
+class Zoo
+  def add_animals(amount)
+    @total = amount
+    show_total
+  end
+
+  def show_total
+    puts @total
+  end
+end
+```
+
+Method calling line by line explanation:
+```ruby
+# self is main
+zoo = Zoo.new
+# self is zoo
+zoo.add_animals(10)
+# add_animals method is called
+# @total is a variable with reference set to 10
+# show_total is called
+# self is still zoo
+# (self.)puts @total is called
+# puts isn't defined in the Zoo class, so it looks in the Object class and the modules that are mixed in.
+# puts is defined in the Kernel module mixin, found and executed
+# => 10
+# afterwards, self is reset to the value it had before. The top-level self is an object called main.
+```
+
+## Class definitions and self
+
+```ruby
+puts "Before class, self = #{self}\n"
+puts "-"
+class MyClass
+  puts "Inside class, self = #{self}"
+  puts "Inside class, self.class = #{self.class}"
+  puts "Inside class, self.class.superclass = #{self.class.superclass}"
+  puts "Inside class, self.class.superclass.superclass = #{self.class.superclass.superclass}"
+end
+puts "-"
+puts "After class, self = #{self}"
+puts "After class, self.class = #{self.class}"
+puts "After class, self.class.superclass = #{self.class.superclass}"
+```
 
 
 ### Style Resources

@@ -35,9 +35,9 @@ show_excerpts: false
 # Header navigation pages
 header_pages:
   - index.md
-  - archive.md
   - ruby-syntax.md
   - tags.md
+  - archive.md
 
 author:
   name: Robert Hopman
