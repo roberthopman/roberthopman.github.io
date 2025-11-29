@@ -1,6 +1,6 @@
 {%- if page.title -%}
+<header class="page-header-section">
 <h1>{{ page.title | escape }}</h1>
-{%- endif -%}
 
 {%- unless page.hide_author -%}
 {%- assign author = page.author | default: site.author.name -%}
@@ -24,10 +24,13 @@
   <time datetime="{{ page.last_modified_at | default: page.date | date_to_xmlschema }}">
     {{ page.last_modified_at | default: page.date | date: "%d-%b-%Y" }}
   </time>
+  | <a href="https://github.com/{{ site.minima.social_links.github }}/{{ site.minima.social_links.github }}.github.io/blob/master/{{ page.path }}">View on GitHub</a>
 </p>
 {%- endif -%}
 {%- endunless -%}
 {%- endunless -%}
 {%- if page.page_title -%}
 <h1>{{ page.page_title | escape }}</h1>
+{%- endif -%}
+</header>
 {%- endif -%}

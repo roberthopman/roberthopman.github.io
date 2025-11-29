@@ -29,7 +29,7 @@
 .site-header,
 .page-content,
 .site-footer {
-  font-family: 'Verdana', 'Times New Roman', 'Georgia', serif;
+  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
 }
 
 .page-content {
@@ -83,12 +83,14 @@ code {
 
 // post show page
 .post-header {
-  border-bottom: 1px solid #ccc;
+  border-bottom: 2px solid #000;
 }
 
 .post-title {
-  font-size: 1.75rem;
-  font-weight: bold;
+  font-size: 1.5rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .main {
@@ -123,8 +125,26 @@ table td {
   padding: 10px;
 }
 
+.page-header-section {
+  border: 1px solid #ddd;
+  border-left: 3px solid #000;
+  padding: 15px 20px;
+  margin-bottom: 25px;
+  background: #fafafa;
+}
+
+.page-header-section h1 {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
 .page-meta {
-  font-style: italic;
+  font-style: normal;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #888;
+  margin: 5px 0;
 }
 
 // Share buttons (inline + floating rail)
@@ -175,6 +195,7 @@ table td {
     > div.pinterest > svg { height: 20px; margin-top: 9px; }
     > div.mail > svg { height: 14px; margin-top: 11px; }
     > div.hackernews > svg { height: 20px; margin-top: 9px; }
+    > div.reddit > svg { height: 18px; margin-top: 9px; }
     > div.copylink > svg { height: 18px; margin-top: 9px; }
 
     > div.facebook:hover > svg { fill: #3B5998; }
@@ -183,6 +204,7 @@ table td {
     > div.pinterest:hover > svg { fill: #CB2027; }
     > div.mail:hover > svg { fill: #7D7D7D; }
     > div.hackernews:hover > svg { fill: #FF6601; }
+    > div.reddit:hover > svg { fill: #FF4500; }
     > div.copylink:hover > svg { fill: #333; }
     > div.copylink.copied > svg { fill: #28a745; }
   }
