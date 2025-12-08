@@ -2683,6 +2683,7 @@ puts "After class, self.class.superclass = #{self.class.superclass}"
 
 ### Style Resources
 
+- [basecamp fizzy styleguide](https://github.com/basecamp/fizzy/blob/main/STYLE.md)
 - [cookpad ruby styleguide](https://github.com/cookpad/styleguide/blob/master/ruby.en.md)
 - [cookpad global style guides: ruby](https://github.com/cookpad/global-style-guides/blob/main/ruby/README.md)
 - [cookpad global style guides: rails](https://github.com/cookpad/global-style-guides/blob/main/rails/README.md)
@@ -3007,6 +3008,12 @@ class Person
   end
 end
 ```
+
+### AI handholding
+
+- [Chatwoot agents](https://github.com/chatwoot/chatwoot/blob/develop/AGENTS.md)
+- [Maybe claude](https://github.com/maybe-finance/maybe/blob/main/CLAUDE.md)
+- [Basecamp Fizzy agents](https://github.com/basecamp/fizzy/blob/main/AGENTS.md)
 
 ## References 
 
