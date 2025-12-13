@@ -3,7 +3,7 @@ layout: default
 title: Ruby Syntax
 description: Describing the Ruby language structure
 sidebar: ruby-syntax
-last_modified_at: 29-11-2025
+last_modified_at: 13-12-2025
 ---
 
 <details>
@@ -1657,9 +1657,9 @@ puts Zebra.new.execute
 ```
 
 References:
-- https://www.rafaelmontas.com/ruby-method-lookup-path/
-- https://gist.github.com/robturtle/b20c5e1077ef6ab1cb73605aff0d6b1c
-- https://gist.github.com/damien-roche/351bf4e7991449714533
+- [Rafael Montas: Ruby Method Lookup Path](https://www.rafaelmontas.com/ruby-method-lookup-path/)
+- [Rob Turtle: Method Lookup Gist](https://gist.github.com/robturtle/b20c5e1077ef6ab1cb73605aff0d6b1c)
+- [Damien Roche: Method Lookup Gist](https://gist.github.com/damien-roche/351bf4e7991449714533)
 
 ### Inheritance, Mixins, and Design
 
@@ -1680,7 +1680,7 @@ end
 
 ## Exceptions
 
-Ruby uses exceptions to solve the problem of responding to errors in a program. They let you package information about an error into an object, in ruby of class `Exception` or in one of `Exception` subclasses. Documentation is https://docs.ruby-lang.org/en/master/Exception.html. Most important subclass is `StandardError`, which along with its subclasses, should be used to capture all errors in code. The other subclasses are used to indicate specific types of errors, e.g. Ruby internals or system-level problems.
+Ruby uses exceptions to solve the problem of responding to errors in a program. They let you package information about an error into an object, in ruby of class `Exception` or in one of `Exception` subclasses. Documentation is [Exception](https://docs.ruby-lang.org/en/master/Exception.html). Most important subclass is `StandardError`, which along with its subclasses, should be used to capture all errors in code. The other subclasses are used to indicate specific types of errors, e.g. Ruby internals or system-level problems.
 
 Every `Exception` object has: 
 - The type (the exception’s class): StandardError, RuntimeError, etc.
@@ -1865,7 +1865,7 @@ File.realpath returns absolute path to a file
 File.realpath(__FILE_) gives absolute path to the current file
 ```
 
-StringIO behaves like other IO objects, but they read and write strings, not files. https://docs.ruby-lang.org/en/master/StringIO.html
+StringIO behaves like other IO objects, but they read and write strings, not files. [StringIO](https://docs.ruby-lang.org/en/master/StringIO.html)
 
 ```ruby
 require 'stringio'
@@ -2322,13 +2322,13 @@ The `parse!` method will walk through ARGV array, calling the blocks for any opt
 
 ### Environment variables
 
-Operating system environment variables are available via `ENV` in the script or irb.
+Operating system environment variables are available via `ENV` in the script or irb. [https://docs.ruby-lang.org/en/master/ENV.html](https://docs.ruby-lang.org/en/master/ENV.html)
 
 ```rb
 ENV['HOME']
 ENV['PATH']
 ENV['RUBY_VERSION']
-ENV.to_h.sort # sort the hash by key[https://docs.ruby-lang.org/en/master/ENV.html](https://docs.ruby-lang.org/en/master/ENV.html)
+ENV.to_h.sort # sort the hash by key
 ```
 
 ### Where Ruby finds its libraries
