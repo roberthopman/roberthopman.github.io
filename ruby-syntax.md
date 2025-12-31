@@ -2665,6 +2665,8 @@ zoo.add_animals(10)
 
 ## Class definitions and self
 
+The implicit top-level object is `main`. Inside a class or module definition, self is set to the object of the class or module being defined. 
+
 ```ruby
 puts "Before class, self = #{self}\n"
 puts "-"
@@ -2673,13 +2675,98 @@ class MyClass
   puts "Inside class, self.class = #{self.class}"
   puts "Inside class, self.class.superclass = #{self.class.superclass}"
   puts "Inside class, self.class.superclass.superclass = #{self.class.superclass.superclass}"
+  puts "-"
+  puts "Inside class, self.class.ancestors = #{self.class.ancestors}"
 end
 puts "-"
 puts "After class, self = #{self}"
 puts "After class, self.class = #{self.class}"
 puts "After class, self.class.superclass = #{self.class.superclass}"
+puts "-"
+puts "After class, self.class.ancestors = #{self.class.ancestors}"
+
+# Output
+=begin
+
+Before class, self = main
+-
+Inside class, self = MyClass
+Inside class, self.class = Class
+Inside class, self.class.superclass = Module
+Inside class, self.class.superclass.superclass = Object
+-
+Inside class, self.class.ancestors = [Class, Module, Object, Kernel, BasicObject]
+-
+After class, self = main
+After class, self.class = Object
+After class, self.class.superclass = BasicObject
+-
+After class, self.class.ancestors = [Object, Kernel, BasicObject]
+
+=end
 ```
 
+Ruby lets you define methods that are specific to a particular object, these are called: `singleton methods`.
+
+```ruby
+color = "red" # or String.new("red")
+puts color.upcase
+# => RED
+```
+
+So, `color` is a variable that points to an object with the value of the string `"red"` and a pointer 
+to the class of the object, which is String. Call `upcase` on color and we're going to lookup in the object's class String, where we find the method defintion upcase.
+
+```
+color = "red"
+  │     │
+  │     └── creates a String object with value "red"
+  │
+  └── variable (a name/reference pointing to the object)
+```
+
+color = variable (local variable)
+- Just a label/name/reference
+- Points to an object in memory
+- Can be reassigned to point elsewhere
+
+The thing it references = object / instance / instance of String
+- Lives in memory (the heap)
+- Has its own object_id
+- "Instance" and "object" are interchangeable
+
+```
++-------------------+    +---------------------+    +---------------------+    +--------------------+
+| color (variable)  |--->| "red" (object)      |--->|   String (class)    |--->|   Object (class)   |
+|-------------------|    |---------------------|    |---------------------|    |--------------------|
+| class:            |    | class:              |    | super: Object       |    | super: BasicObject |
+| value:            |    | value: "red"        |    | class: Class        |    | class: Class       |
+| methods:          |    | methods:            |    | methods: upcase, .. |    | methods: clone, .. |
++-------------------+    +---------------------+    +---------------------+    +--------------------+
+```
+
+Defining a singleton method on the String instance object refrenced by color is possible: 
+
+```ruby
+color = "red"
+def color.speak
+  puts "That is #{self}."
+end
+color.speak
+puts color.upcase
+=> That is red.
+=> RED
+```
+So Ruby created an anonymous class and placed the `speak` method in that class. Sometimes this is sometimes called singleton class or eigenclass (the singleton class is personal or hidden). Every object in Ruby has the potential of having its own singleton class. Access the class via `color.singleton_class` and access the methods via `color.singleton_methods`.
+
+Method lookup will be first in the singleton class and then the singletons superclass:
+```ruby
+color = "red"; def color.speak; puts 'hi'; end; color.class
+=> String
+sc = color.singleton_class
+sc.superclass
+=> String
+```
 
 ### Style Resources
 
@@ -2917,6 +3004,21 @@ Besides the syntax, we can have general rules to describe common sense.
 - Methods:     can be no longer than 5 lines of code.
 - Classes:     can be no longer than 100 lines of code.
 - Controllers: can instantiate only 1 object. Therefore, views can only know about one instance variable and views should only send messages to that object (@object.collaborator.value is not allowed).
+- Endpoints:   can only be as CRUD operations on resources (REST). When an action doesn't map cleanly to a standard CRUD verb, introduce a new resource rather than adding custom actions.
+
+Crud only endpoints example:
+```ruby
+# Bad
+resources :cards do
+  post :close
+  post :reopen
+end
+
+# Good
+resources :cards do
+  resource :closure
+end
+```
 
 Organizing a Model:
 

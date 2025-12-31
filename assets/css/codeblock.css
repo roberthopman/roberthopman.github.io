@@ -71,6 +71,18 @@ pre {
   color: #fff;
 }
 
+.chatgpt-button:hover {
+  background-color: #10a37f;
+  border-color: #10a37f;
+  color: #fff;
+}
+
+.claude-button:hover {
+  background-color: #d97706;
+  border-color: #d97706;
+  color: #fff;
+}
+
 
 .line-numbers {
   padding: 12px 12px 12px 16px;

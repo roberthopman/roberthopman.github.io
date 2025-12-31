@@ -19,6 +19,13 @@ document.addEventListener('DOMContentLoaded', function () {
     const copyButton = createCopyButton(codeBlock);
     header.appendChild(copyButton);
 
+    // Add AI assistant buttons
+    const chatGptButton = createChatGptButton(codeBlock);
+    header.appendChild(chatGptButton);
+
+    const claudeButton = createClaudeButton(codeBlock);
+    header.appendChild(claudeButton);
+
     const contentWrapper = document.createElement('div');
     contentWrapper.className = 'codeblock-content';
 
@@ -123,4 +130,30 @@ function getLanguage(codeBlock) {
   }
 
   return 'auto';
+}
+
+function createChatGptButton(codeBlock) {
+  const button = document.createElement('a');
+  const code = codeBlock.textContent;
+  const prompt = `Please read the following ruby syntax documentation and help me understand it:\n\n${code}`;
+
+  button.href = `https://chatgpt.com/?q=${encodeURIComponent(prompt)}`;
+  button.className = 'codeblock-tool chatgpt-button';
+  button.textContent = 'Open in ChatGPT';
+  button.target = '_blank';
+
+  return button;
+}
+
+function createClaudeButton(codeBlock) {
+  const button = document.createElement('a');
+  const code = codeBlock.textContent;
+  const prompt = `Please read the following ruby syntax documentation and help me understand it:\n\n${code}`;
+
+  button.href = `https://claude.ai/new?q=${encodeURIComponent(prompt)}`;
+  button.className = 'codeblock-tool claude-button';
+  button.textContent = 'Open in Claude';
+  button.target = '_blank';
+
+  return button;
 }
