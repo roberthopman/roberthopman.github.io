@@ -1,0 +1,9 @@
+# Links to display at the end of blog posts
+# Add entries with title and url
+
+- title: "Ruby Syntax"
+  url: "/ruby-syntax"
+- title: "How to balance maintenance and development?"
+  url: "/how-to-balance-maintenance-and-development"
+- title: "How to upgrade a Ruby on Rails application?"
+  url: "/how-to-upgrade-a-ruby-on-rails-application"

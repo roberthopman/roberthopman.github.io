@@ -32,7 +32,16 @@
         </div>
       </div>
       <div class="footer-col">
-
+        {%- if page.url != "/" and site.data.post_footer.size > 0 -%}
+        <div class="post-footer-links">
+          <h3>Popular posts</h3>
+          <ul>
+            {%- for item in site.data.post_footer -%}
+            <li><a href="{{ item.url | relative_url }}">{{ item.title }}</a></li>
+            {%- endfor -%}
+          </ul>
+        </div>
+        {%- endif -%}
       </div>
     </div>
 
