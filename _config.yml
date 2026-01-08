@@ -38,6 +38,7 @@ header_pages:
   - index.md
   - ruby-syntax.md
   - tags.md
+  - ai.md
   - archive.md
 
 author:

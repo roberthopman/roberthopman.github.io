@@ -1,4 +1,4 @@
-/* Teenage Engineering-inspired codeblock design */
+/* Modern codeblock styling */
 
 pre {
   position: relative;
@@ -9,10 +9,11 @@ pre {
   font-family: "SF Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-size: 13px;
   letter-spacing: -0.01em;
-  border: 1px solid #1a1a1a;
+  border: 1px solid #e4e2dc;
   border-radius: 0;
-  background-color: #fafafa;
+  background-color: #ffffff;
   overflow: hidden;
+  box-shadow: 0 18px 32px -28px rgba(15, 23, 42, 0.35);
 }
 
 .highlighter-rouge {
@@ -23,26 +24,27 @@ pre {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  gap: 2px;
-  padding: 6px 8px;
-  background-color: #e8e8e8;
-  border-bottom: 1px solid #d0d0d0;
+  gap: 6px;
+  padding: 8px 10px;
+  background: linear-gradient(120deg, #f3f1ec, #f9f7f2);
+  border-bottom: 1px solid #e9e5de;
 }
 
 .codeblock-content {
   display: flex;
   flex: 1;
   overflow-x: auto;
-  background-color: #fafafa;
+  background-color: #ffffff;
+  align-items: stretch;
 }
 
 .codeblock-tool {
   display: inline-block;
   box-sizing: border-box;
-  padding: 4px 10px;
-  background-color: transparent;
-  border: 1px solid #c0c0c0;
-  border-radius: 0;
+  padding: 5px 11px;
+  background-color: #ffffff;
+  border: 1px solid #dedad2;
+  border-radius: 999px;
   font-family: "SF Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-size: 11px;
   font-weight: 500;
@@ -50,25 +52,20 @@ pre {
   letter-spacing: 0.02em;
   text-transform: uppercase;
   cursor: pointer;
-  transition: all 0.1s ease;
+  transition: all 0.15s ease;
   text-decoration: none;
-  color: #1a1a1a;
+  color: #1f2a37;
 }
 
 .codeblock-tool:hover {
-  background-color: #ff6600;
-  border-color: #ff6600;
+  background-color: #1f2a37;
+  border-color: #1f2a37;
   color: #fff;
-}
-
-.copy-button {
-  color: #1a1a1a;
 }
 
 .copy-button:hover {
-  background-color: #ff6600;
-  border-color: #ff6600;
-  color: #fff;
+  background-color: #1f2a37;
+  border-color: #1f2a37;
 }
 
 .chatgpt-button:hover {
@@ -85,18 +82,19 @@ pre {
 
 
 .line-numbers {
-  padding: 12px 12px 12px 16px;
+  padding: 14px 14px 14px 18px;
   text-align: right;
-  background-color: #f0f0f0;
-  border-right: 1px solid #e0e0e0;
+  background-color: #f6f4ef;
+  border-right: 1px solid #eee7dc;
   user-select: none;
   font-family: inherit;
   font-size: inherit;
+  line-height: 1.6;
 }
 
 .line-number {
   display: block;
-  color: #999;
+  color: #9aa4b2;
   line-height: 1.6;
   font-family: inherit;
   font-size: inherit;
@@ -106,20 +104,20 @@ pre code {
   flex: 1;
   overflow-x: auto;
   display: block;
-  padding: 12px 16px;
+  padding: 14px 18px;
   line-height: 1.6;
   font-family: inherit;
   font-size: inherit;
-  color: #1a1a1a;
+  color: #1f2a37;
   background-color: transparent;
   border: none;
 }
 
-/* Syntax highlighting adjustments for TE aesthetic */
+/* Syntax highlighting adjustments */
 .highlight .c,
 .highlight .c1,
 .highlight .cm {
-  color: #808080;
+  color: #8b949e;
 }
 
 .highlight .k,
@@ -128,7 +126,7 @@ pre code {
 .highlight .kp,
 .highlight .kr,
 .highlight .kt {
-  color: #1a1a1a;
+  color: #0f172a;
   font-weight: 600;
 }
 
@@ -144,7 +142,7 @@ pre code {
 .highlight .sx,
 .highlight .sr,
 .highlight .ss {
-  color: #c41a16;
+  color: #c2410c;
 }
 
 .highlight .na,
@@ -159,7 +157,7 @@ pre code {
 .highlight .no,
 .highlight .nt,
 .highlight .nv {
-  color: #1a1a1a;
+  color: #0f172a;
 }
 
 .highlight .m,
@@ -167,10 +165,105 @@ pre code {
 .highlight .mh,
 .highlight .mi,
 .highlight .mo {
-  color: #1c00cf;
+  color: #2563eb;
 }
 
 .highlight .o,
 .highlight .p {
-  color: #1a1a1a;
+  color: #0f172a;
+}
+
+/* Jupyter Notebook embedded styling */
+.jp-Notebook-cell {
+  margin: 1em 0;
+}
+
+.jp-Cell-inputWrapper {
+  display: flex;
+}
+
+.jp-Collapser {
+  display: none;
+}
+
+.jp-InputArea {
+  display: flex;
+  flex: 1;
+}
+
+.jp-InputPrompt,
+.jp-OutputPrompt {
+  min-width: 70px;
+  padding: 8px;
+  font-family: "SF Mono", ui-monospace, monospace;
+  font-size: 12px;
+  color: #303f9f;
+  font-weight: 600;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.jp-OutputPrompt {
+  color: #d84315;
+}
+
+.jp-InputArea-editor {
+  flex: 1;
+}
+
+.jp-InputArea-editor pre {
+  display: block;
+  margin: 0;
+  padding: 8px 12px;
+  border: 1px solid #e0e0e0;
+  background: #f7f7f7;
+}
+
+.jp-Cell-outputArea pre {
+  display: block;
+  margin: 0;
+  padding: 8px 12px;
+  border: none;
+  background: #f7f7f7;
+}
+
+.jp-RenderedMarkdown {
+  padding: 8px 0;
+}
+
+.jp-RenderedMarkdown h1,
+.jp-RenderedMarkdown h3 {
+  margin: 0.5em 0;
+}
+
+.jp-RenderedMarkdown .anchor-link {
+  display: none;
+}
+
+.jp-Cell-outputWrapper {
+  display: flex;
+}
+
+.jp-OutputArea {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.jp-OutputArea-child {
+  display: flex;
+}
+
+.jp-OutputArea-output {
+  flex: 1;
+}
+
+.jp-OutputArea-output pre {
+  background: #fff;
+  padding: 8px 12px;
+}
+
+.jp-RenderedText[data-mime-type='application/vnd.jupyter.stderr'] pre {
+  color: #d32f2f;
+  background: #ffebee;
 }
