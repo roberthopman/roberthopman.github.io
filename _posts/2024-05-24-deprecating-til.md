@@ -59,3 +59,6 @@ When AI agent fails to deliver multiple times in a row
   </div>
 </details>
 
+### contributing to W3C validators
+
+A tiny PR in the README.md file of the W3C validators repository: [https://github.com/w3c/webdriver/pull/1772](https://github.com/w3c/webdriver/pull/1772)
