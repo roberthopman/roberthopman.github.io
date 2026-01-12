@@ -10,7 +10,7 @@ This is a rule-based checklist for software codebases that follow object-oriente
 
 Git
 
-- Small and frequent commits using Conventional Commits: https://www.conventionalcommits.org/en/v1.0.0/
+- Small and frequent commits using [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
 
 Line of code:
 
