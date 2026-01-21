@@ -39,6 +39,16 @@ Next, the steps to upgrade the application:
 - Run necessary checks, like the test suite and/or manually test the handful of critical business processes.
 - Upgrade the Rails version, test the application doesn't work anymore as required for the handful of critical business processes. Implicitly, this means you need to fix it.
 
+From the Rails upgrade guide [https://guides.rubyonrails.org/upgrading_ruby_on_rails.html#ruby-versions](https://guides.rubyonrails.org/upgrading_ruby_on_rails.html#ruby-versions):
+
+| Rails Version      | Required Ruby Version    |
+|--------------------|-------------------------|
+| Rails 8.0, 8.1     | Ruby 3.2.0 or newer     |
+| Rails 7.2          | Ruby 3.1.0 or newer     |
+| Rails 7.0, 7.1     | Ruby 2.7.0 or newer     |
+| Rails 6            | Ruby 2.5.0 or newer     |
+| Rails 5            | Ruby 2.2.2 or newer     |
+
 It could go in this order (Source: <https://github.com/rubyforgood/awbw/issues/3>):
 ```
 [ ]  Upgrade Ruby to 2.7.x

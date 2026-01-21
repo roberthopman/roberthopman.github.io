@@ -327,3 +327,13 @@ table td {
     display: none;
   }
 }
+
+blockquote p {
+  margin: 0;
+  font-size: 0.9rem;
+  font-style: normal !important;
+  color: #666;
+  line-height: 1.5;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+}
