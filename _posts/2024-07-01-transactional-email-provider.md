@@ -5,9 +5,9 @@ excerpt: "Curated list of transactional email service providers including AWS SE
 tags: [email, saas, tools, comparison]
 ---
 
-Nothing here to see.
+A curated list of transactional email service providers.
 
-A list:
+- [AhaSend](https://ahasend.com/)
 - [AWS SES](https://aws.amazon.com/ses/)
 - [Brevo](https://Brevo.com) 
   - Article: [Anything but Brevo](https://avdi.codes/anything-but-brevo/)
