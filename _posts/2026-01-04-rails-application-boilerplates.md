@@ -18,6 +18,7 @@ tags: [ruby, rails]
 - [ryanckulp/speedrail](https://github.com/ryanckulp/speedrail)
 - [ackama/rails-template](https://github.com/ackama/rails-template)
 - [ralixjs/rails-ralix-tailwind](https://github.com/ralixjs/rails-ralix-tailwind)
+- [newstler/template](https://github.com/newstler/template/tree/feature/upgrade-philosophy)
 
 ## Paid
 
