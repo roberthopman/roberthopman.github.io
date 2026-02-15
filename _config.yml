@@ -40,6 +40,7 @@ header_pages:
   - tags.md
   - ai.md
   - archive.md
+  - tools.md
 
 author:
   name: Robert Hopman

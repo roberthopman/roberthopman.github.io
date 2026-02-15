@@ -2,7 +2,8 @@
 layout: default
 title: AI
 description: A structured look at the pdca cyle of a coding robot
-last_modified_at: 08-01-2025
+last_modified_at: 15-02-2026
+tags: [ai, prompting, automation]
 ---
 
 ## What a good prompt actually looks like (in practice)

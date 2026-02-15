@@ -63,9 +63,9 @@ rg -C 3 "search_term"
 # list files
 ls
 
-
 # long listing of files and directories
 ll
+
 # show the alias for ll
 type -a ll   
 => ll is an alias for ls -lh

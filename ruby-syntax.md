@@ -3,7 +3,8 @@ layout: default
 title: Ruby Syntax
 description: Describing the Ruby language structure
 sidebar: ruby-syntax
-last_modified_at: 08-01-2025
+last_modified_at: 08-01-2026
+tags: [ruby, syntax, reference]
 ---
 
 <details>
