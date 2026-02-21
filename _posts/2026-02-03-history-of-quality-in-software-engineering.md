@@ -15,23 +15,24 @@ techniques that bridge the gap between business and technical teams.
 
 1. [Evolution of Quality Approaches](#evolution-of-quality-approaches)
 2. [The Software Crisis (1968)](#the-software-crisis-and-birth-of-software-engineering-1968)
-2. [Structured Programming (1968)](#structured-programming-1968)
-3. [Fagan Inspections (1976)](#fagan-inspections-1976)
-4. [Cleanroom Software Engineering (1980s)](#cleanroom-software-engineering-1980s)
-5. [Personal Software Process (1990s)](#personal-software-process-1990s)
-6. [UML and Design Communication (1997)](#uml-and-design-communication-1997)
-7. [Extreme Programming (1996-1999)](#extreme-programming-1996-1999)
-8. [Test-Driven Development](#test-driven-development)
-9. [Behavior-Driven Development (2006)](#the-birth-of-bdd-2006)
-10. [The C4 Model (2011)](#the-c4-model-2011)
-11. [Given-When-Then Format](#given-when-then-format)
-12. [User Stories](#user-stories-and-acceptance-criteria)
+3. [Structured Programming (1968)](#structured-programming-1968)
+4. [Fagan Inspections (1976)](#fagan-inspections-1976)
+5. [Cleanroom Software Engineering (1980s)](#cleanroom-software-engineering-1980s)
+6. [Personal Software Process (1990s)](#personal-software-process-1990s)
+7. [User Stories (1990s, XP origin)](#user-stories-and-acceptance-criteria)
+8. [Extreme Programming (1996-1999)](#extreme-programming-1996-1999)
+9. [UML and Design Communication (1997)](#uml-and-design-communication-1997)
+10. [Test-Driven Development (~2000)](#test-driven-development)
+11. [Given-When-Then Format (early 2000s)](#given-when-then-format)
+12. [Behavior-Driven Development (2006)](#the-birth-of-bdd-2006)
 13. [Specification by Example (2010s)](#specification-by-example-2010s)
-14. [Example Mapping](#example-mapping)
-15. [TDD vs BDD](#tdd-vs-bdd-choosing-an-approach)
-16. [Common Pitfalls](#common-pitfalls)
-17. [Key Figures](#key-figures)
-18. [Further Reading](#further-reading)
+14. [The C4 Model (2011)](#the-c4-model-2011)
+15. [Example Mapping (mid-2010s)](#example-mapping)
+16. [TDD vs BDD](#tdd-vs-bdd-choosing-an-approach)
+17. [Common Pitfalls](#common-pitfalls)
+18. [Key Figures](#key-figures)
+19. [Further Reading](#further-reading)
+20. [Example Story: Customer Books a Cleaning Appointment](#example-story-customer-books-a-cleaning-appointment)
 
 
 ## Evolution of Quality Approaches
@@ -268,77 +269,25 @@ Maturity Model (CMM) for organizational process improvement.
 ---
 
 
-## UML and Design Communication (1997)
+## User Stories and Acceptance Criteria
 
-While process-focused approaches evolved, another stream addressed quality
-through visual design communication. The Unified Modeling Language emerged
-from the "method wars" of the early 1990s, when competing object-oriented
-notations made it difficult for teams to share designs.
+User stories originated in Extreme Programming in the late 1990s as a
+lightweight alternative to formal requirements documents. Dan North later
+established a template that connects behavior to business value:
 
-**Definition:** A standardized visual modeling language for specifying,
-constructing, and documenting software system artifacts.
+    As a [role]
+    I want [feature]
+    So that [benefit]
 
+**Example:**
 
-### The Three Amigos
+    As a homeowner
+    I want to schedule recurring cleaning appointments
+    So that I don't have to remember to book each time
 
-In 1994-1996, three leading methodologists unified their competing approaches:
-
-- **Grady Booch** brought the Booch Method, strong in design and construction
-- **James Rumbaugh** brought OMT (Object Modeling Technique), strong in analysis
-  and data systems
-- **Ivar Jacobson** brought OOSE, strong in use cases and requirements capture
-
-They joined at Rational Software and released UML 1.1 in 1997, which was adopted
-by the Object Management Group (OMG) on November 14, 1997.
-
-
-### UML Diagram Types
-
-UML defines 14 diagram types in two categories:
-
-**Structural diagrams** (static system view):
-- Class, Object, Component, Deployment, Package, Composite Structure, Profile
-
-**Behavioral diagrams** (dynamic system view):
-- Use Case, Activity, State Machine, Sequence, Communication, Interaction
-  Overview, Timing
-
-
-### Sequence Diagrams
-
-Of all UML diagrams, sequence diagrams proved most valuable and survived the
-agile backlash against heavy documentation. They show how objects interact
-over time:
-
-    +--------+          +--------+          +--------+
-    | Client |          | Server |          |Database|
-    +---+----+          +---+----+          +---+----+
-        |                   |                   |
-        | 1. request()      |                   |
-        |------------------>|                   |
-        |                   | 2. query()        |
-        |                   |------------------>|
-        |                   |                   |
-        |                   | 3. results        |
-        |                   |<------------------|
-        |                   |                   |
-        | 4. response       |                   |
-        |<------------------|                   |
-        |                   |                   |
-
-As Martin Fowler noted: "The primary value of drawing diagrams is communication.
-Because the purpose is communication, it's essential to strip away some
-information so as to clarify other information."
-
-
-### UML and Agile: The Tension
-
-UML emerged from the "big design up front" tradition--create detailed models
-before coding. The Agile Manifesto (2001) explicitly valued "working software
-over comprehensive documentation."
-
-Many agile teams abandoned UML entirely. Others adopted "agile modeling"--using
-diagrams for communication without treating them as formal deliverables.
+This format keeps the focus on who needs what and why, rather than jumping
+straight to implementation details. Stories serve as placeholders for
+conversations, not detailed specifications.
 
 ---
 
@@ -468,6 +417,81 @@ of the Agile Manifesto in 2001.
 ---
 
 
+## UML and Design Communication (1997)
+
+While process-focused approaches evolved, another stream addressed quality
+through visual design communication. The Unified Modeling Language emerged
+from the "method wars" of the early 1990s, when competing object-oriented
+notations made it difficult for teams to share designs.
+
+**Definition:** A standardized visual modeling language for specifying,
+constructing, and documenting software system artifacts.
+
+
+### The Three Amigos
+
+In 1994-1996, three leading methodologists unified their competing approaches:
+
+- **Grady Booch** brought the Booch Method, strong in design and construction
+- **James Rumbaugh** brought OMT (Object Modeling Technique), strong in analysis
+  and data systems
+- **Ivar Jacobson** brought OOSE, strong in use cases and requirements capture
+
+They joined at Rational Software and released UML 1.1 in 1997, which was adopted
+by the Object Management Group (OMG) on November 14, 1997.
+
+
+### UML Diagram Types
+
+UML defines 14 diagram types in two categories:
+
+**Structural diagrams** (static system view):
+- Class, Object, Component, Deployment, Package, Composite Structure, Profile
+
+**Behavioral diagrams** (dynamic system view):
+- Use Case, Activity, State Machine, Sequence, Communication, Interaction
+  Overview, Timing
+
+
+### Sequence Diagrams
+
+Of all UML diagrams, sequence diagrams proved most valuable and survived the
+agile backlash against heavy documentation. They show how objects interact
+over time:
+
+    +--------+          +--------+          +--------+
+    | Client |          | Server |          |Database|
+    +---+----+          +---+----+          +---+----+
+        |                   |                   |
+        | 1. request()      |                   |
+        |------------------>|                   |
+        |                   | 2. query()        |
+        |                   |------------------>|
+        |                   |                   |
+        |                   | 3. results        |
+        |                   |<------------------|
+        |                   |                   |
+        | 4. response       |                   |
+        |<------------------|                   |
+        |                   |                   |
+
+As Martin Fowler noted: "The primary value of drawing diagrams is communication.
+Because the purpose is communication, it's essential to strip away some
+information so as to clarify other information."
+
+
+### UML and Agile: The Tension
+
+UML emerged from the "big design up front" tradition--create detailed models
+before coding. The Agile Manifesto (2001) explicitly valued "working software
+over comprehensive documentation."
+
+Many agile teams abandoned UML entirely. Others adopted "agile modeling"--using
+diagrams for communication without treating them as formal deliverables.
+
+---
+
+
 ## Test-Driven Development
 
 TDD emerged as one of XP's core technical practices but became influential in
@@ -526,6 +550,32 @@ of B before A begins. This eliminates wasteful rework cycles.
 ---
 
 
+## Given-When-Then Format
+
+The Given-When-Then syntax became the dominant format for expressing
+specifications. According to Gojko Adzic's 2020 survey, this format accounts
+for 71% of usage versus less than 10% for table-based formats.
+
+
+### Structure
+
+- **Given** - The context or setup (preconditions)
+- **When** - The action or event that triggers the behavior
+- **Then** - The expected outcome
+
+**Example:**
+
+    Given a registered user with valid credentials
+    When they submit the login form
+    Then they should see their dashboard
+
+The format won adoption due to a good balance between expressiveness and
+developer productivity. Its simplicity enabled broader tooling support and
+better IDE integration.
+
+---
+
+
 ## The Birth of BDD (2006)
 
 Dan North introduced Behavior-Driven Development as an evolution of TDD that
@@ -550,6 +600,23 @@ level--implementing features reveals insights about other features.
 
 This practice involves business and technical people writing examples together
 to establish shared understanding.
+
+---
+
+
+## Specification by Example (2010s)
+
+Gojko Adzic's Specification by Example (SbE) formalized the collaborative
+approach where teams use concrete examples to define acceptance criteria, guide
+development, and create executable tests.
+
+**Key findings from his 2020 survey after 10 years of SbE adoption:**
+
+- Teams using examples as acceptance criteria: 22% rated software as "Great"
+  (vs 8% without)
+- 47% of teams now define acceptance criteria collaboratively with business
+- One-third don't automate examples--yet automation correlates with 2x quality
+  ratings
 
 ---
 
@@ -611,71 +678,6 @@ notation standard. Use whatever helps the team understand the system.
 
 Brown has taught the C4 model to over 10,000 people in ~40 countries, reflecting
 demand for lightweight architecture visualization that agile teams will use.
-
----
-
-
-## Given-When-Then Format
-
-The Given-When-Then syntax became the dominant format for expressing
-specifications. According to Gojko Adzic's 2020 survey, this format accounts
-for 71% of usage versus less than 10% for table-based formats.
-
-
-### Structure
-
-- **Given** - The context or setup (preconditions)
-- **When** - The action or event that triggers the behavior
-- **Then** - The expected outcome
-
-**Example:**
-
-    Given a registered user with valid credentials
-    When they submit the login form
-    Then they should see their dashboard
-
-The format won adoption due to a good balance between expressiveness and
-developer productivity. Its simplicity enabled broader tooling support and
-better IDE integration.
-
----
-
-
-## User Stories and Acceptance Criteria
-
-Dan North's work on user stories established a template that connects behavior
-to business value:
-
-    As a [role]
-    I want [feature]
-    So that [benefit]
-
-**Example:**
-
-    As a homeowner
-    I want to schedule recurring cleaning appointments
-    So that I don't have to remember to book each time
-
-This format keeps the focus on who needs what and why, rather than jumping
-straight to implementation details. Stories serve as placeholders for
-conversations, not detailed specifications.
-
----
-
-
-## Specification by Example (2010s)
-
-Gojko Adzic's Specification by Example (SbE) formalized the collaborative
-approach where teams use concrete examples to define acceptance criteria, guide
-development, and create executable tests.
-
-**Key findings from his 2020 survey after 10 years of SbE adoption:**
-
-- Teams using examples as acceptance criteria: 22% rated software as "Great"
-  (vs 8% without)
-- 47% of teams now define acceptance criteria collaboratively with business
-- One-third don't automate examples--yet automation correlates with 2x quality
-  ratings
 
 ---
 
@@ -852,3 +854,58 @@ See [Further Reading](#further-reading) for links to their work.
 - [SbE: 10 Years Later](https://gojko.net/2020/03/17/sbe-10-years.html) - Gojko Adzic
 - [TDD vs BDD](https://refine.dev/blog/tdd-vs-bdd/) - Refine
 - [Example Mapping](https://examplemapping.com/)
+
+---
+
+
+## Example Story: Customer Books a Cleaning Appointment
+
+This example combines [User Stories](#user-stories-and-acceptance-criteria),
+[Given-When-Then](#given-when-then-format), and
+[BDD](#the-birth-of-bdd-2006) techniques into a complete specification.
+
+**Story:**
+
+    As a Customer
+    I want to book a cleaning appointment online
+    So that I can schedule cleaning without calling
+
+**Scenario 1: Available slot selected**
+
+    Given the customer has selected "Tuesday 10am"
+     And Tuesday 10am is available
+     And the customer has a valid payment method
+    When the customer confirms the booking
+    Then the system should create an appointment for Tuesday 10am
+     And the system should charge a $25 deposit
+     And the customer should receive a confirmation email
+
+**Scenario 2: Slot is no longer available**
+
+    Given the customer has selected "Tuesday 10am"
+     And Tuesday 10am was booked by another customer moments ago
+    When the customer confirms the booking
+    Then the system should not create an appointment
+     And the system should say "This slot is no longer available"
+     And the system should show the next 3 available slots
+
+**Scenario 3: Payment method is declined**
+
+    Given the customer has selected "Tuesday 10am"
+     And Tuesday 10am is available
+     And the customer's card is declined
+    When the customer confirms the booking
+    Then the system should not create an appointment
+     And the slot should remain available for others
+     And the system should say "Payment could not be processed"
+
+**Scenario 4: Customer is blocked**
+
+    Given the customer has 3 previous no-shows
+    When the customer attempts to book any slot
+    Then the system should not show available slots
+     And the system should say "Please contact support to reactivate booking"
+
+Each scenario tests a different constraint: availability (race condition),
+payment processing, and account standing. The happy path comes first, followed
+by edge cases that each isolate a single failure mode with verifiable outcomes.
