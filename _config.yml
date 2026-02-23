@@ -15,7 +15,7 @@
 # in the templates via {{ site.myvariable }}.
 title: My blog
 email: robert@bonaroo.nl
-legal_entity: Charper Bonaroo B.V.
+legal_entity: You can hire me via Bonaroo
 description: >-
   Technical blog by Robert Hopman with practical guides on syntax, patterns, upgrades, and software development best practices for developers
 image: /assets/images/default_technical_blog.png

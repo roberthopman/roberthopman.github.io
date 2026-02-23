@@ -1,6 +1,6 @@
 {%- if page.title -%}
 <header class="page-header-section">
-  <h1>{{ page.title | escape }}</h1>
+  <h1 class="no-anchor">{{ page.title | escape }}</h1>
 
   {%- unless page.hide_author -%}
   {%- assign author = page.author | default: site.author.name -%}
@@ -32,7 +32,16 @@
   {%- endunless -%}
   {%- endunless -%}
   {%- if page.page_title -%}
-  <h1>{{ page.page_title | escape }}</h1>
+  <h1 class="no-anchor">{{ page.page_title | escape }}</h1>
+  {%- endif -%}
+
+  {%- if page.tags and page.tags.size > 0 -%}
+  <p class="page-meta">
+    categories:
+    {%- for tag in page.tags %}
+    <a href="/tags/{{ tag }}/">{{ tag }}</a>{% unless forloop.last %}, {% endunless %}
+    {%- endfor -%}
+  </p>
   {%- endif -%}
 </header>
 {%- endif -%}

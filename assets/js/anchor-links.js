@@ -4,6 +4,8 @@ document.addEventListener('DOMContentLoaded', function () {
   const headings = mainContent ? mainContent.querySelectorAll('h1, h2, h3, h4, h5, h6') : document.querySelectorAll('.post-content h1, .post-content h2, .post-content h3, .post-content h4, .post-content h5, .post-content h6');
 
   headings.forEach(heading => {
+    if (heading.classList.contains('no-anchor')) return;
+    if (heading.closest('.no-anchors')) return;
     // Generate ID if it doesn't exist
     if (!heading.id) {
       heading.id = heading.textContent

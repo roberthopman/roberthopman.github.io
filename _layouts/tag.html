@@ -5,10 +5,23 @@ layout: default
 <div class="main">
   <h1>Tag: {{ page.tag }}</h1>
 
-  <p>Posts tagged with "{{ page.tag }}":</p>
-
+  {% assign tagged_pages = site.pages | where_exp: "p", "p.tags contains page.tag" %}
+  {% if tagged_pages.size > 0 %}
+  <p>Pages tagged with "{{ page.tag }}":</p>
   <ul class="post-list">
-    {% for post in site.tags[page.tag] %}
+    {% for p in tagged_pages %}
+      <li>
+        <a href="{{ p.url }}">{{ p.title }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+
+  {% assign tagged_posts = site.tags[page.tag] %}
+  {% if tagged_posts.size > 0 %}
+  <p>Posts tagged with "{{ page.tag }}":</p>
+  <ul class="post-list">
+    {% for post in tagged_posts %}
       <li>
         <span class="post-meta">{{ post.date | date: "%d-%m-%Y" }}</span>
         <a href="{{ post.url }}">{{ post.title }}</a>
@@ -18,6 +31,7 @@ layout: default
       </li>
     {% endfor %}
   </ul>
+  {% endif %}
 
   <p><a href="/tags/">← View all tags</a></p>
 </div>

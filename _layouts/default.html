@@ -23,6 +23,7 @@
           {{ content }}
 
           {% include share-buttons.html class="share-inline--mobile" %}
+          {% include newsletter_signup_form.html %}
           {%- if site.disqus.shortname -%}
           {%- include disqus_comments.html -%}
           {%- endif -%}
