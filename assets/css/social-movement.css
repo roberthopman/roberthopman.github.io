@@ -1,0 +1,165 @@
+/* Full width on mobile */
+@media screen and (max-width: 768px) {
+  .wrapper {
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+/* Sticky top nav */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: #fff;
+}
+
+/* Sidebar width, no background, sticky below header */
+.sidebar {
+  background-color: transparent;
+  border-right: none;
+}
+
+@media (min-width: 769px) {
+  .sidebar {
+    width: 216px;
+    top: 56px;
+  }
+}
+
+/* Table of contents — compact and smaller */
+.sidebar-link,
+.sidebar-text {
+  font-size: 0.78rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
+/* Wrapper inside left sidebar */
+.sidebar-extra {
+  padding: 0.75rem;
+  font-size: 0.85rem;
+}
+
+/* Follow section */
+.social-movement-follow {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 1.25rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid #ddd;
+}
+
+.social-movement-follow a {
+  width: 30px;
+  height: 30px;
+  background: #ebebeb;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  line-height: 0;
+}
+
+.social-movement-follow svg {
+  display: block;
+  width: 15px;
+  height: 15px;
+  margin: 0;
+  fill: #444;
+  flex-shrink: 0;
+}
+
+/* Newsletter section */
+.social-movement-newsletter {
+  margin-bottom: 1.25rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid #ddd;
+}
+
+.social-movement-label {
+  color: #444;
+  line-height: 1.4;
+  margin-bottom: 0.6rem;
+}
+
+.social-movement-newsletter input[type="email"] {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.35rem 0.4rem;
+  font-size: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  margin-bottom: 0.4rem;
+}
+
+.social-movement-newsletter button[type="submit"] {
+  width: 100%;
+  padding: 0.35rem;
+  font-size: 0.8rem;
+  background: #000;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.social-movement-newsletter button[type="submit"]:hover {
+  background: #333;
+}
+
+/* Share section */
+.social-movement-share .share-block {
+  padding: 0;
+  border: none;
+  background: none;
+  box-shadow: none;
+}
+
+.social-movement-share .share-label {
+  display: none;
+}
+
+.social-movement-share .share-buttons {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.social-movement-share .share-buttons > div {
+  width: 30px;
+  height: 30px;
+  background: #ebebeb;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  line-height: 0;
+}
+
+.social-movement-share .share-buttons > div > svg,
+.social-movement-share .share-buttons > div.mail > svg,
+.social-movement-share .share-buttons > div.hackernews > svg,
+.social-movement-share .share-buttons > div.x > svg,
+.social-movement-share .share-buttons > div.linkedin > svg,
+.social-movement-share .share-buttons > div.reddit > svg,
+.social-movement-share .share-buttons > div.bluesky > svg,
+.social-movement-share .share-buttons > div.copylink > svg {
+  display: block;
+  width: 15px;
+  height: 15px;
+  margin: 0;
+  fill: #444;
+  flex-shrink: 0;
+}
+
+/* Hide the floating share rail on wide screens */
+@media (min-width: 1101px) {
+  .share-rail--hidden-wide {
+    display: none;
+  }
+}
+

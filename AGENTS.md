@@ -1,5 +1,16 @@
 Instructions for all AI agents working on this project.
 
+## Development Server
+
+Always run the local development server with:
+
+```bash
+bundle exec jekyll serve --incremental
+```
+
+The `--incremental` flag skips re-rendering unchanged files, significantly
+reducing build times.
+
 ## Tutorial Writing Checklist
 
 When writing or reviewing blog posts that are tutorials (step-by-step guides, how-tos), check against these rules. 

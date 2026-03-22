@@ -8,7 +8,7 @@
   {%- include header.html -%}
 
   {% if page.layout == 'post' or page.layout == 'page' or page.sidebar %}
-  <aside class="share-rail" aria-label="Share this page">
+  <aside class="share-rail share-rail--hidden-wide" aria-label="Share this page">
     {% include share-buttons.html variant="floating" %}
   </aside>
   {% endif %}
@@ -23,10 +23,21 @@
           {{ content }}
 
           {% include share-buttons.html class="share-inline--mobile" %}
-          {% include newsletter_signup_form.html %}
           {%- if site.disqus.shortname -%}
           {%- include disqus_comments.html -%}
           {%- endif -%}
+        </div>
+      </div>
+      {% elsif page.layout == 'post' %}
+      <div class="page-with-sidebar">
+        <aside class="sidebar" aria-label="Newsletter and sharing">
+          <div class="sidebar-extra no-anchors">
+            {% include social-movement.html %}
+          </div>
+        </aside>
+        <div class="main-content">
+          {% include page-header.html %}
+          {{ content }}
         </div>
       </div>
       {% else %}

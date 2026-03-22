@@ -4,6 +4,7 @@ title: AI
 description: A structured look at the pdca cyle of a coding robot
 last_modified_at: 15-02-2026
 tags: [ai, prompting, automation]
+sidebar: ai
 ---
 
 ## What a good prompt actually looks like (in practice)
