@@ -3,3 +3,4 @@ _site
 .jekyll-metadata
 docs
 assets/css/style.scss
+.claude
