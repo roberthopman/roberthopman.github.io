@@ -35,19 +35,16 @@ show_excerpts: false
 
 # Header navigation pages
 header_pages:
-  - index.md
-  - ruby-syntax.md
-  - tags.md
-  - ai.md
   - archive.md
+  - tags.md
   - tools.md
 
 author:
   name: Robert Hopman
   email: "robert@bonaroo.nl"
 
-disqus:
-  shortname: roberthopman
+discourse:
+  url: 'https://technicalblog.discourse.group/'
 
 minima:
   social_links:

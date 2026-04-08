@@ -23,8 +23,8 @@
           {{ content }}
 
           {% include share-buttons.html class="share-inline--mobile" %}
-          {%- if site.disqus.shortname -%}
-          {%- include disqus_comments.html -%}
+          {%- if site.discourse.url -%}
+          {%- include discourse_comments.html -%}
           {%- endif -%}
         </div>
       </div>
