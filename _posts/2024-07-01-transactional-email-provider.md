@@ -11,6 +11,8 @@ A curated list of transactional email service providers.
 - [AWS SES](https://aws.amazon.com/ses/)
 - [Brevo](https://Brevo.com) 
   - Article: [Anything but Brevo](https://avdi.codes/anything-but-brevo/)
+- [Lettermint](https://lettermint.co/)
+  - Article: [How I moved my digital stack to Europe](https://monokai.com/articles/how-i-moved-my-digital-stack-to-europe/)
 - [Mailerlite](https://Mailerlite.com)
 - [Mailersend](https://Mailersend.com)
 - [Mailgun](https://Mailgun.com)
