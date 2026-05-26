@@ -38,6 +38,7 @@ header_pages:
   - archive.md
   - tags.md
   - tools.md
+  - author.md
 
 author:
   name: Robert Hopman

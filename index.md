@@ -4,15 +4,14 @@ hide_author: true
 ---
 
 <div class="main">
-  <div class="title">Welcome</div>
+  <div>Field notes about building and maintaining B2B technology by Robert, <a href="/author/">say hello</a>.</div>
   <br>
-  <div class="index-text">
-    <p>How to maintain and build b2b technology?</p>
 
-    <p>The modern world moves quickly and demands smart use of resources.</p>
-
-    <p>In this setting, sometimes technology and automation provide the real leverage: they speed up known processes, take over repetitive work, improve communication, and create tools and frameworks that help people understand better.</p>
-
-    <p>To deliver this advantage, I build products and teams. I also write about <a href="/how-to-balance-maintenance-and-development/">balancing maintenance and development</a>.</p>
+  {% for post in site.posts limit:10 %}
+  <div class='post-row'>
+    <div class='column-date'>{{ post.date | date: "%d-%m-%Y" }}</div>
+    <div class='column-title'><a href="{{ post.url }}">{{ post.title }}</a></div>
   </div>
+  {% endfor %}
+
 </div>
