@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Rails application boilerplates"
+last_modified_at: 2026-05-26
 tags: [ruby, rails]
 ---
 
