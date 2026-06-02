@@ -2,6 +2,13 @@ document.addEventListener('DOMContentLoaded', function () {
   const codeBlocks = document.querySelectorAll('pre code');
 
   codeBlocks.forEach(function (codeBlock) {
+    // Only decorate real code blocks. Plain ``` fences (tables, ASCII trees,
+    // wireframes, cards) render as language-plaintext and get no tools header —
+    // "Open in ChatGPT" on a diagram is just noise.
+    if (!isRealCode(codeBlock)) {
+      return;
+    }
+
     const preElement = codeBlock.parentNode;
 
     const header = document.createElement('div');
@@ -40,6 +47,18 @@ document.addEventListener('DOMContentLoaded', function () {
     preElement.appendChild(contentWrapper);
   });
 });
+
+function isRealCode(codeBlock) {
+  // Jekyll/Rouge puts the language class on the .highlighter-rouge wrapper.
+  const wrapper = codeBlock.closest('.highlighter-rouge');
+  const cls = (wrapper && wrapper.className) || codeBlock.className || '';
+  const match = cls.match(/language-([\w-]+)/);
+  if (!match) {
+    return false;
+  }
+  const lang = match[1];
+  return lang !== 'plaintext' && lang !== 'text';
+}
 
 function isRubyCode(codeBlock) {
   // Check the code element itself
