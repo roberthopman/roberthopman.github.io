@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 430" font-family="Helvetica,Arial,sans-serif">
+<defs><marker id="axis" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" refX="7" refY="4" orient="auto"><path d="M0,0 L9,4 L0,8 Z" fill="#333333"/></marker></defs>
+<line x1="78" y1="360" x2="752" y2="360" stroke="#333333" stroke-width="1.6" marker-end="url(#axis)"/>
+<line x1="78" y1="360" x2="78" y2="44" stroke="#333333" stroke-width="1.6" marker-end="url(#axis)"/>
+<text x="26" y="204.0" fill="#333333" font-size="14" font-weight="bold" text-anchor="middle" transform="rotate(-90 26 204.0)">average time to repair</text>
+<text x="78" y="390" fill="#333333" font-size="14" font-weight="bold">time, shipping only new features &#8594;</text>
+<text x="78" y="410" fill="#888888" font-size="12.5">maintenance debt builds up, unnoticed</text>
+<path d="M98,304 L210,300 L330,296 L468,288" fill="none" stroke="#4f8a6b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M468,288 C560,282 628,176 706,74" fill="none" stroke="#e08a3c" stroke-width="3" stroke-linecap="round"/>
+<line x1="468" y1="294" x2="468" y2="360" stroke="#888888" stroke-width="1.2" stroke-dasharray="4 4"/>
+<circle cx="468" cy="288" r="5.5" fill="white" stroke="#e08a3c" stroke-width="2.4"/>
+<text x="468" y="348" fill="#888888" font-size="12.5" font-style="italic" text-anchor="middle">tipping point</text>
+<text x="200" y="262" fill="#4f8a6b" font-size="15" font-weight="bold" text-anchor="middle">"so far no problems"</text>
+<text x="700" y="48" fill="#e08a3c" font-size="15" font-weight="bold" text-anchor="end">"now you have<tspan x="700" dy="18">a problem"</tspan></text>
+</svg>

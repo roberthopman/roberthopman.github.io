@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 470" font-family="Helvetica,Arial,sans-serif">
+<defs><marker id="axis" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" refX="7" refY="4" orient="auto"><path d="M0,0 L9,4 L0,8 Z" fill="#333333"/></marker></defs>
+<line x1="92" y1="410" x2="732" y2="410" stroke="#333333" stroke-width="1.6" marker-end="url(#axis)"/>
+<line x1="92" y1="410" x2="92" y2="40" stroke="#333333" stroke-width="1.6" marker-end="url(#axis)"/>
+<text x="28" y="227.0" fill="#333333" font-size="14" font-weight="bold" text-anchor="middle" transform="rotate(-90 28 227.0)">predictability (P)</text>
+<text x="82" y="54" fill="#888888" font-size="12" text-anchor="end">high</text>
+<text x="82" y="406" fill="#888888" font-size="12" text-anchor="end">low</text>
+<text x="412.0" y="444" fill="#333333" font-size="14" font-weight="bold" text-anchor="middle">time to failure (urgency) &#8594;</text>
+<text x="96" y="430" fill="#888888" font-size="12">months away</text>
+<text x="732" y="430" fill="#888888" font-size="12" text-anchor="end">happening now</text>
+<rect x="110" y="60" width="188" height="108" rx="6" fill="white" stroke="#4f8a6b" stroke-width="1.5"/>
+<path d="M110,90 L110,66 Q110,60 116,60 L292,60 Q298,60 298,66 L298,90 Z" fill="#4f8a6b"/>
+<text x="204.0" y="81" text-anchor="middle" fill="white" font-weight="bold" font-size="12.5">UPCOMING &amp; EXPECTED</text>
+<text x="124" y="107" fill="#333333" font-size="12.5" font-weight="bold">Predictable-Critical</text>
+<text x="124" y="129" fill="#e08a3c" font-size="11.5" font-weight="bold">P &gt; 0.7 · days to weeks</text>
+<text x="124" y="151" fill="#333333" font-size="12.5">▶ commit time next week</text>
+<rect x="496" y="60" width="188" height="108" rx="6" fill="white" stroke="#e08a3c" stroke-width="1.5"/>
+<path d="M496,90 L496,66 Q496,60 502,60 L678,60 Q684,60 684,66 L684,90 Z" fill="#e08a3c"/>
+<text x="590.0" y="81" text-anchor="middle" fill="white" font-weight="bold" font-size="12.5">NOW</text>
+<text x="510" y="107" fill="#333333" font-size="12.5" font-weight="bold">Immediate-Critical</text>
+<text x="510" y="129" fill="#e08a3c" font-size="11.5" font-weight="bold">P ≈ 1.0 · happening now</text>
+<text x="510" y="151" fill="#333333" font-size="12.5">▶ stop the bleeding</text>
+<rect x="110" y="278" width="188" height="108" rx="6" fill="white" stroke="#888888" stroke-width="1.5"/>
+<path d="M110,308 L110,284 Q110,278 116,278 L292,278 Q298,278 298,284 L298,308 Z" fill="#888888"/>
+<text x="204.0" y="299" text-anchor="middle" fill="white" font-weight="bold" font-size="12.5">UPCOMING &amp; UNEXPECTED</text>
+<text x="124" y="325" fill="#333333" font-size="12.5" font-weight="bold">Potential-Critical</text>
+<text x="124" y="347" fill="#e08a3c" font-size="11.5" font-weight="bold">P &lt; 0.5 · weeks to months</text>
+<text x="124" y="369" fill="#333333" font-size="12.5">▶ reserve a weekly slot</text>
+</svg>

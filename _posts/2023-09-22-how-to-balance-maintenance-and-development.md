@@ -18,6 +18,10 @@ Then there could be a point where the average time to repair bugs will increase,
 
 So, you need to work on maintenance and development in a balanced way. The problem is that you need to know what to work on. 
 
+Here is the trap in one picture: repair time stays flat and quiet right up until it doesn't.
+
+![Line chart of average time to repair bugs over time while shipping only new features: it stays flat and low through a green "so far no problems" stretch, crosses a marked tipping point, then spikes upward along an orange curve to "now you have a problem"](/assets/images/how-to-balance-maintenance-and-development-recap.svg)
+
 > How to know what to work on? 
 
 First, ensure all knowledge is written down, so you can understand the business and the application. 
@@ -61,6 +65,10 @@ First, decide how to prioritize. For example, you can prioritize based on the ur
 | **Now (Immediate-Critical)**                      | Issue is actively occurring<br>Failure is ongoing or imminent                                   | Fully observable<br>Probability ≈ 1.0<br>No forecasting needed                      | Focus on stopping things from getting worse; Do a quick, low-cost fix to keep it safe and functioning; Record what broke and what the full solution would require |
 | **Upcoming & Expected (Predictable-Critical)**    | Failure expected in days or weeks<br>Based on wear, inspections, or history                    | High confidence (P > 0.7)<br>Supported by trend data or experience                  | When important and urgent issues seem absent, evaluate and commit time to a work item in the future, for example: next week we commit to x time for work-item y |
 | **Upcoming & Unexpected (Potential-Critical)**    | No current failure<br>Some early signs or weak signals<br>Could happen in weeks or months      | Low to moderate confidence (P < 0.5)<br>Based on team intuition or anomaly detection | Schedule a minor portion of time weekly for this topic; Use it to act when necessary, or to work on upcoming & expected items |
+
+The same three categories laid out as a map makes the logic visible: the more imminent the failure, the more confidently you can usually predict it.
+
+![Map of the three maintenance categories on two axes, time to failure (urgency) across the bottom and predictability of probability up the side: Upcoming and Unexpected (Potential-Critical, P below 0.5, weeks to months away, reserve a weekly slot) sits low and left; Upcoming and Expected (Predictable-Critical, P above 0.7, days to weeks, commit time next week) sits top left; and Now (Immediate-Critical, P about 1.0, happening now, stop the bleeding) sits top right](/assets/images/how-to-balance-maintenance-and-development-priority-map.svg)
 
 ### Categories 
 
