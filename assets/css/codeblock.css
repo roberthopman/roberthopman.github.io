@@ -267,3 +267,8 @@ pre code {
   color: #d32f2f;
   background: #ffebee;
 }
+
+/* JS/TS identifiers — Name.Other */
+.highlight .nx {
+  color: #1e40af;
+}
