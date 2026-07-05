@@ -18,7 +18,7 @@ What are the steps to build?
 - [{{ section.title }}]({{ section.anchor }})
 {% endfor %}
 
-That't it.
+Thats't it.
 
 So let's start with the first step.
 
