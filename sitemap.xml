@@ -14,7 +14,7 @@ sitemap:
   </url>
   {% endfor %}  
   {% for page in site.pages %}
-  {% if page.layout != null and page.layout != 'feed' %}
+  {% if page.layout != null and page.layout != 'feed' and page.sitemap != false %}
   <url>
     <loc>{{ site.url }}{{ page.url }}</loc>
     <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
