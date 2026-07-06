@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Building a B2B CRUD app with Postgres and TypeScript"
-excerpt: ""
+excerpt: "A b2b crud app with postgres, node and typescript isn't that special"
 tags: [javascript, typescript, postgresql, crud]
 sidebar: b2b-crud-app
 ---
