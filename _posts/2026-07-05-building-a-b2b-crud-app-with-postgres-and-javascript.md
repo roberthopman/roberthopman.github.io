@@ -22,7 +22,7 @@ Thats't it.
 
 So let's start with the first step.
 
-You can find the full source code in the [b2b-crud-app GitHub repository](https://github.com/roberthopman/b2b-crud-app).
+You can find the full source code in the [b2b-crud-app GitHub repository](https://github.com/roberthopman/b2b-crud-app/tree/37d30ee0c2f143fc1c9c5a3a9a69d1a9acf5b203), pinned at the commit this post describes.
 
 ## Step 1: Create a new project with Node.js
 
