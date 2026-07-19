@@ -95,6 +95,15 @@ The stack I use for my projects.
 - Pingdom
 - UptimeRobot
 
+## Server Monitoring
+
+- top
+- htop
+- btop
+- ncdu
+- systemd (systemctl)
+- journalctl
+
 ## Practices
 
 - TDD
