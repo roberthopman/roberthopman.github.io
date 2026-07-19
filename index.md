@@ -14,4 +14,6 @@ hide_author: true
   </div>
   {% endfor %}
 
+  <br>
+  <div><a href="/archive/">Archive</a></div>
 </div>
