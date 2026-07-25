@@ -296,7 +296,7 @@ A literal is any notation that lets you represent a fixed value in source code (
 
 What does that even mean?
 
-The notation is it's direct or literal value: e.g. `1` is a literal for the number 1, `"hello"` is a literal for the string `"hello"`, `[1, 2, 3]` is a literal for the array `[1, 2, 3]`. It's a constant or fixed value, it doesn't change. (e.g. `1` is always 1, `"hello"` is always `"hello"`, `[1, 2, 3]` is always `[1, 2, 3]`). It's the primary way to introduce values into a program.
+The notation is its direct or literal value: e.g. `1` is a literal for the number 1, `"hello"` is a literal for the string `"hello"`, `[1, 2, 3]` is a literal for the array `[1, 2, 3]`. It's a constant or fixed value, it doesn't change. (e.g. `1` is always 1, `"hello"` is always `"hello"`, `[1, 2, 3]` is always `[1, 2, 3]`). It's the primary way to introduce values into a program.
 
 This is different from the indirect or variable notation: `x = 1` where `x` is a variable which refers to 1, which can change. Or for Constants `FOO = 1`, Expressions `(1 + 2)`, or Methods `def foo; puts 1 end` which all have indirect or computed values.
 
@@ -348,7 +348,7 @@ The following are metacharacters with specific meaning: `. ? - + * ^ \ | $ ( ) [
 
 [https://docs.ruby-lang.org/en/master/Regexp.html#class-Regexp-label-Special+Characters](https://docs.ruby-lang.org/en/master/Regexp.html#class-Regexp-label-Special+Characters)
 
-Operater =~ returns characters offset of beginning:
+Operator =~ returns characters offset of beginning:
 ```ruby
 /cat/ =~ 'dog and cat' # => 8
 /cat/ =~ 'cat' # => 0
@@ -372,7 +372,7 @@ Regex has modifiers, with the `x` at the last example below, you can add newline
   }x # => extended
 ```
 
-After a succesful match via Regexp#match or =~ it returns a MatchData object, which is a collection of information about the match:
+After a successful match via Regexp#match or =~ it returns a MatchData object, which is a collection of information about the match:
 [https://docs.ruby-lang.org/en/master/MatchData.html](https://docs.ruby-lang.org/en/master/MatchData.html)
 ```ruby
 /all/.match("all things")
@@ -380,7 +380,7 @@ After a succesful match via Regexp#match or =~ it returns a MatchData object, wh
 ```
 
 ### Numbers
-Ruby supports integers, floating-point, rational and complex numbers. Intergers are assumed to be decimal base 10, but can be specified with a leading sign, as base indicatar: 0 for octal, 0x for hexadecimal and 0b for binary (and 0d for decimal), followed by a string of digits in the appropriate base.
+Ruby supports integers, floating-point, rational and complex numbers. Integers are assumed to be decimal base 10, but can be specified with a leading sign, as base indicator: 0 for octal, 0x for hexadecimal and 0b for binary (and 0d for decimal), followed by a string of digits in the appropriate base.
 
 ```ruby
 12345       => 12345  # base 10
@@ -395,7 +395,7 @@ Ruby supports integers, floating-point, rational and complex numbers. Intergers 
 
 BigDecimal is Ruby's high-precision decimal number class.
 
-Rational numbers are the ratio of two integers (they are fractions) and therefor have an exact representation:
+Rational numbers are the ratio of two integers (they are fractions) and therefore have an exact representation:
 ```ruby
 3/4             #=> 0
 3/4r            #=> (3/4)
@@ -603,12 +603,12 @@ bl = -> (param) { puts "you called with #{param}" }
 bl.call("Dave")
 # => Hello, Dave!
 
-# short: lambda (Ruby Kernal method)
+# short: lambda (Ruby Kernel method)
 bl = lambda { |param| puts "you called with #{param}" }
 bl.call("Dave")
 # => Hello, Dave!
 
-# short: Kernal method proc
+# short: Kernel method proc
 bl = proc { |param| puts "you called with #{param}" }
 bl.call("Dave")
 # => Hello, Dave!
@@ -874,7 +874,7 @@ puts 1+1
 - Command Expressions: string with backquotes or backticks will be executed as command by OS. `ls`.split will give array of content of the current folder. Copying , using `` `echo 'hi' | pbcopy` `` will copy the output of echo to clipboard, which is the same as `system("echo '123' | pbcopy")`. 
 Copying resource attributes: `` `echo "#{User.first.id}" | pbcopy` ``.
 - Assignment is setting the lvalue (left value) to refer to the rvalue (right value), and returns rvalue. Ruby has 2 forms of assignment: first an object reference to a variable or constant, ABC = 4. Second is object attribute or element reference on the left side of the assignment operator, ABC[1] = 4. Also possible, is the rightward assignment, since ruby 3.0: data => variable (e.g. 2=>x). 
-- For parallel assignment, to swap vales: 
+- For parallel assignment, to swap values: 
 ```ruby
 a, b = 1, 2 
 a, b = b, a
@@ -905,7 +905,7 @@ a, (b, c), d = 1, [2, 3, 4], 5
 ```
 
 ### Conditional Execution
-- boolean expressions: Ruby has simple definition of truth: any value that is 1. not `nil`, or 2. the constant `false`, is true. So, `"c", 9, 0, :a`, are true, also, `"", [], {}` are true. The set of false values are sometimes referred to as falsey and set of true values are referred to as truthy. `nil && 99` returns `nil`, `"c" && 99` returns `99`. When it's false, the first argument is returned, when it's truee, the second argument is returned (short circuit evaluation). There is a difference in using `&&` and `and`, terms of precedence compared to the assignment. Examples: `result = "" && [], which returns the #=> []`, and will show `result #=> []`, however `result = "" and [] which returns the #=> []` and will show `result # => ""`.
+- boolean expressions: Ruby has simple definition of truth: any value that is 1. not `nil`, or 2. the constant `false`, is true. So, `"c", 9, 0, :a`, are true, also, `"", [], {}` are true. The set of false values are sometimes referred to as falsey and set of true values are referred to as truthy. `nil && 99` returns `nil`, `"c" && 99` returns `99`. When it's false, the first argument is returned, when it's true, the second argument is returned (short circuit evaluation). There is a difference in using `&&` and `and`, in terms of precedence compared to the assignment. Examples: `result = "" && [], which returns the #=> []`, and will show `result #=> []`, however `result = "" and [] which returns the #=> []` and will show `result # => ""`.
 - the `defined?` Keyword: `defined? 1 #=> "expression"` and `defined? a #=> nil` and `defined? a = 1 #=> "assignment"`.
 - Comparing objects: == equal value, ===, <=>, <, >, <=, >=, =~, eql? (equal type and value), equal? (same object id).
 - if and unless: 
@@ -1070,7 +1070,7 @@ in condition2 then # code
 else # code
 end
 
-# pinning values, in a case statemen. With the pin operator ^ : It will pin the value to the part of the pattern..
+# pinning values, in a case statement. With the pin operator ^ : It will pin the value to the part of the pattern..
 def get_status(idea_to_look_for, status_to_look_for, list)
   case list
   in [*, {idea: ^idea_to_look_for, status: }, *] then puts "#{idea_to_look_for} is #{status_to_look_for}"
@@ -1201,7 +1201,7 @@ Calling a method.
 
 ```ruby
 connection.download_mp3("jazz", speed: :slow) { |p| show_progress(p) }
-# receiver.method(postional_parameter, keyword_parameter: "value") { |block_parameter| block_code(block_parameter) }
+# receiver.method(positional_parameter, keyword_parameter: "value") { |block_parameter| block_code(block_parameter) }
 # 1. object invokes method
 # 2. inside that method, self is set to that (receiver) object
 # 3. method body is executed, possibly the block is called as well
@@ -1226,7 +1226,7 @@ Method calls without parentheses are sometimes called commands.
 
 ### rule: If in doubt, use parentheses. 
 
-A `return` statement exists from the currently executing method. It can be used to return a value from a method. If no value is specified, nil is returned.
+A `return` statement exits from the currently executing method. It can be used to return a value from a method. If no value is specified, nil is returned.
 
 ```ruby
 def method_name(city:, country:)
@@ -1260,7 +1260,7 @@ method = number.method(:*)
 
 In object oriented programming, a class is a blueprint for a domain concept.
 
-Instances are created by a constructor. The standard constructor method is called `new`. When you call Bike.new, Ruby holds an uninitialized object and calls that objects `initialize` method, passing all arguments from `.new`. This sets up the object's state. Instances have a unique object_id (object identifier).
+Instances are created by a constructor. The standard constructor method is called `new`. When you call Bike.new, Ruby holds an uninitialized object and calls that object's `initialize` method, passing all arguments from `.new`. This sets up the object's state. Instances have a unique object_id (object identifier).
 
 `#<Class:object_id>` is the default string representation of an object.
 
@@ -1295,7 +1295,7 @@ puts bike
 
 ### Object and attributes
 
-Creating an `accesor` method is a common pattern in Ruby. Below, the `def price` is a getter method, which can also be rewritten to the shortcut `attr_reader :price`. It allows you to read the value of an instance variable. Below, `def price=(price)` is a setter method, shortcut (but rare) `attr_writer :price`. It allows you to write to the value of an instance variable. Generally, use `attr_accessor :price` for both reading and writing, for a given attribute (e.g. an instance variable). Below as example `price_in_cents` is a virtual instance variable or calculated value. An attribute is just a method that is called when you use dot syntax and is an implementation of the `uniform access principle`. 
+Creating an `accessor` method is a common pattern in Ruby. Below, the `def price` is a getter method, which can also be rewritten to the shortcut `attr_reader :price`. It allows you to read the value of an instance variable. Below, `def price=(price)` is a setter method, shortcut (but rare) `attr_writer :price`. It allows you to write to the value of an instance variable. Generally, use `attr_accessor :price` for both reading and writing, for a given attribute (e.g. an instance variable). Below as example `price_in_cents` is a virtual instance variable or calculated value. An attribute is just a method that is called when you use dot syntax and is an implementation of the `uniform access principle`. 
 
 As summary:
 - State is held in instance variables. 
@@ -1464,7 +1464,7 @@ b[6..7] = 99, 98 # will insert 99 and 98 at index 6 and 7 e.g. [1, 2, 3, nil, ni
 Reminder: array of words = %w{one two three}, array of symbols = %i{one two three}
 
 ### Hashes
-Hashes known as associative arrays, maps, dictionaries, key-value stores. They are collections of key-value pairs. The index in a hash is called a key. The value or entry is the object that the key points to. Retrieve the entry by indexing the hash with the key value.
+Hashes are known as associative arrays, maps, dictionaries, key-value stores. They are collections of key-value pairs. The index in a hash is called a key. The value or entry is the object that the key points to. Retrieve the entry by indexing the hash with the key value.
 
 hash literals are created with curly braces, e.g. {:key => "value", "key_2" => "value_2"}
 `=>` is called hashrocket.
@@ -1562,13 +1562,13 @@ end
 ```
 
 ## Modules
-Modules can do everything a class can do, except create instances. They are a way to group methods, classes and constants. Two benefits: 1. a namespace and prevent name clashes, 2. can be included in other classes, known as a `mixin`. Module names are like class names, both are global constants with an initial uppercase letter. use them with the require or require_relative method. Module constants are referenced using two colons, the `scope resultion operator`, e.g. Thing::SAY.
+Modules can do everything a class can do, except create instances. They are a way to group methods, classes and constants. Two benefits: 1. a namespace and prevent name clashes, 2. can be included in other classes, known as a `mixin`. Module names are like class names, both are global constants with an initial uppercase letter. use them with the require or require_relative method. Module constants are referenced using two colons, the `scope resolution operator`, e.g. Thing::SAY.
 
 An `include` is a method of the Module class. The `require` call is at the file level, the `include` call is at the class level. 
 
 Example module is `Kernel` which is included in `Object`. Another is Comparable, which assumes that any class that uses it  defines the method `<=>` (the `spaceship operator`).
 
-Some Object-Oriented languages like Python support multiple inheritance (Powerful and dangerous), some like JavaScript support single inheritance (cleaner and easier to implement). Ruby is a single inheritance language, which mixins to support controlled multiple-inheritance-like capability.
+Some Object-Oriented languages like Python support multiple inheritance (Powerful and dangerous), some like JavaScript support single inheritance (cleaner and easier to implement). Ruby is a single inheritance language, with mixins to support controlled multiple-inheritance-like capability.
 
 
 ```ruby
@@ -1617,7 +1617,7 @@ This continues until the method is found or the end of the inheritance structure
 
 ### Super lookup
 
-when executing a method, if Ruby encounters keyword `super`, it method lookup for `super` starts one step after the points where the method being executed is lcoated. (e.g. if in step 2, it will start at step 3). If `super` has no argument list, Ruby will pass the arguments that were passed to the method that called `super`. If `super` has an argument list, even an empty one, those arguments will be passed.
+When executing a method, if Ruby encounters keyword `super`, the method lookup for `super` starts one step after the point where the method being executed is located. (e.g. if in step 2, it will start at step 3). If `super` has no argument list, Ruby will pass the arguments that were passed to the method that called `super`. If `super` has an argument list, even an empty one, those arguments will be passed.
 
 ```ruby
 module Sound
@@ -1705,7 +1705,7 @@ Below is an example of a `begin/rescue/end` block. We catch all exceptions relat
 
 If no rescue clause matches or if an exception is raised outside of a `begin/end` block, Ruby moves up the stack, looking for an exception handler in the caller, and so on until it finds one. If no exception handler is found, the program typically halts.
 
-Sometimes you want to use the `retry` clause. This will repeat the entire `begin/end` block, so can create infinitie loops and therefor best used with a counter.
+Sometimes you want to use the `retry` clause. This will repeat the entire `begin/end` block, so can create infinite loops and therefore best used with a counter.
 
 ```ruby
 begin
@@ -1735,7 +1735,7 @@ raise "keyboard failed"
 raise InterfaceError, "keyboard failed"
 raise InterfaceError, "keyboard failed", caller
 ```
-`raise` simple reraises the exception. `raise` with a string argument will create a new RuntimeError exception. `raise` with a class name will create a new exception of that class, with the second argument as the message. `raise` with a class name, a message, and a `Kernel#caller` stack trace, will allow to edit the stack backtrace as well: `raise InterfaceError, "keyboard failed", caller[0..-2]`.
+`raise` simply reraises the exception. `raise` with a string argument will create a new RuntimeError exception. `raise` with a class name will create a new exception of that class, with the second argument as the message. `raise` with a class name, a message, and a `Kernel#caller` stack trace, will allow to edit the stack backtrace as well: `raise InterfaceError, "keyboard failed", caller[0..-2]`.
 
 You can also define your own exceptions by subclassing `Exception` or one of its subclasses, to hold more information about the error, or possibly add additional behavior.
 
@@ -1759,7 +1759,7 @@ Exception resources:
 
 [https://docs.ruby-lang.org/en/master/IO.html](https://docs.ruby-lang.org/en/master/IO.html)
 
-I/O or IO methods are implemented in the Kernel module, including `gets, open, print, printf, putc, puts ,readline, readlines`, and `test`.
+I/O or IO methods are implemented in the Kernel module, including `gets, open, print, printf, putc, puts, readline, readlines`, and `test`.
 These are available to all objects. There is also Ruby's `IO` class, with subclasses `File` and `BasicSocket` with more specialized methods. The IO object is a bidirectional stream between a Ruby program and some external resource.
 
 ### Open and Close files
@@ -1863,7 +1863,7 @@ puts File.read("output.txt")
 __FILE__ relative name of the file
 __dir__ absolute pathname of that file
 File.realpath returns absolute path to a file
-File.realpath(__FILE_) gives absolute path to the current file
+File.realpath(__FILE__) gives absolute path to the current file
 ```
 
 StringIO behaves like other IO objects, but they read and write strings, not files. [StringIO](https://docs.ruby-lang.org/en/master/StringIO.html)
@@ -1880,29 +1880,29 @@ io.closed? # => true
 
 ### Talking to Networks
 
-At the network level, Ruby comes with a set of classes in the the socket library. [https://docs.ruby-lang.org/en/master/Socket.html](https://docs.ruby-lang.org/en/master/Socket.html) These give access to TCP, UDP, SOCKS, and Unix domain sockets, and additional socket types. At a higher level of the OSI model, the "lib/net" here [https://docs.ruby-lang.org/en/master/Net.html](https://docs.ruby-lang.org/en/master/Net.html) and [https://github.com/ruby/ruby/tree/master/lib/net](https://github.com/ruby/ruby/tree/master/lib/net), provides application level protocols (such as HTTP, HTTPS, FTP, POP, IMAP, and SMTP). `Net::HTTP` for example: [https://docs.ruby-lang.org/en/master/Net/HTTP.html](https://docs.ruby-lang.org/en/master/Net/HTTP.html) or at a higher-level the `open-uri` library is a wrapper for Net::HTTP, Net::HTTPS and Net::FTP, and handles redirects automatically: [https://docs.ruby-lang.org/en/master/OpenURI.html](https://docs.ruby-lang.org/en/master/OpenURI.html)
+At the network level, Ruby comes with a set of classes in the socket library. [https://docs.ruby-lang.org/en/master/Socket.html](https://docs.ruby-lang.org/en/master/Socket.html) These give access to TCP, UDP, SOCKS, and Unix domain sockets, and additional socket types. At a higher level of the OSI model, the "lib/net" here [https://docs.ruby-lang.org/en/master/Net.html](https://docs.ruby-lang.org/en/master/Net.html) and [https://github.com/ruby/ruby/tree/master/lib/net](https://github.com/ruby/ruby/tree/master/lib/net), provides application level protocols (such as HTTP, HTTPS, FTP, POP, IMAP, and SMTP). `Net::HTTP` for example: [https://docs.ruby-lang.org/en/master/Net/HTTP.html](https://docs.ruby-lang.org/en/master/Net/HTTP.html) or at a higher-level the `open-uri` library is a wrapper for Net::HTTP, Net::HTTPS and Net::FTP, and handles redirects automatically: [https://docs.ruby-lang.org/en/master/OpenURI.html](https://docs.ruby-lang.org/en/master/OpenURI.html)
 
 IO is however slow and blocks programs, a common workaround is to use threading to do multiple things at once.
 
 ## Concurrency
 
-When writing programs that are doing multiple things at once, each thing is called a thread. And the goal is to have thread safety, meaning the code will execute correctly no matter what order the threads operate. When the order of operations matters, we call it a race condition, and it's bad because it can lead to hard-to-find bugs. Ruby programs have a Global Interpreter Lock (GIL), which means that only one thread can executed by Ruby at any time. This is one way to protect thread safety and prevent race conditions.
+When writing programs that are doing multiple things at once, each thing is called a thread. And the goal is to have thread safety, meaning the code will execute correctly no matter what order the threads operate. When the order of operations matters, we call it a race condition, and it's bad because it can lead to hard-to-find bugs. Ruby programs have a Global Interpreter Lock (GIL), which means that only one thread can be executed by Ruby at any time. This is one way to protect thread safety and prevent race conditions.
 
-The `Thread` class is the basic unit of multithreaded behavior in Ruby. Ruby also allows you to spawn processes out to the underlying operating system, and mulithread those processes. `Fibers` are an additional abstraction, to suspend the executation of one part of a program and run some other part. The `Ractor` library allows you to bypass the GIL and have 'true' multiple threading using Ruby.
+The `Thread` class is the basic unit of multithreaded behavior in Ruby. Ruby also allows you to spawn processes out to the underlying operating system, and multithread those processes. `Fibers` are an additional abstraction, to suspend the execution of one part of a program and run some other part. The `Ractor` library allows you to bypass the GIL and have 'true' multiple threading using Ruby.
 
 ### Threads
 
 [https://docs.ruby-lang.org/en/master/Thread.html](https://docs.ruby-lang.org/en/master/Thread.html)
 
-The lowest-level mechanism is the `Thread` class. Mostly you will see one thread executing, and another waiting on an I/O operation. A thread shares all global, instance, and local variables that are in existence and available at the time the thread starts. Threads are immediately executed. Local variables created in the thread's block are truly local ot that thread. Thread.join will ensure the main program waits for the threads to finish, you can also give the thread a timeout, and it will return nil if the thread does not finish in time. Normally, building timing dependencies in a multithreaded program is a bad idea. However, if you need to do this, you can use the `Mutex` (mutually exclusive) class, which creates areas of code that can only be accessed by one thread at a time. Some of the relevant methods to enable this: Mutex#lock, Mutex#unlock, and the block version Mutex#synchronize, and the Mutex#try_lock method.
+The lowest-level mechanism is the `Thread` class. Mostly you will see one thread executing, and another waiting on an I/O operation. A thread shares all global, instance, and local variables that are in existence and available at the time the thread starts. Threads are immediately executed. Local variables created in the thread's block are truly local to that thread. Thread.join will ensure the main program waits for the threads to finish, you can also give the thread a timeout, and it will return nil if the thread does not finish in time. Normally, building timing dependencies in a multithreaded program is a bad idea. However, if you need to do this, you can use the `Mutex` (mutually exclusive) class, which creates areas of code that can only be accessed by one thread at a time. Some of the relevant methods to enable this: Mutex#lock, Mutex#unlock, and the block version Mutex#synchronize, and the Mutex#try_lock method.
 
 ### Multiple external processes
 
-Kernel#system executes given commmand in a subprocess and returns true if the command was found and executed properly. If it fails, it returns false and the subprocess's exit code is in `$?`.
+Kernel#system executes given command in a subprocess and returns true if the command was found and executed properly. If it fails, it returns false and the subprocess's exit code is in `$?`.
 
 ```ruby
 system(`tar xzf test.tgz`) #=> false
-span("date")               #=> "Mon Jan 20 23:04:23 UTC 2025\n"
+spawn("date")              #=> "Mon Jan 20 23:04:23 UTC 2025\n"
 `date`                     #=> "Mon Jan 20 23:04:23 UTC 2025\n"
 ```
 
@@ -1940,13 +1940,13 @@ Child pid 3828: terminated
 
 [https://docs.ruby-lang.org/en/master/Fiber.html](https://docs.ruby-lang.org/en/master/Fiber.html)
 
-Fibers are a block of code that can be stopped and restarted, which is sometimes called a coroutine. They are cooperatively multitasked, meaning that the responsibility of control is with the fibers and not the OS. Fibers are not immediately executed. When `resume` is called, the fiber will execute until it hits a `yield` statement, which suspends execution. The last expression evaluted will be the return value of the Fiber.
+Fibers are a block of code that can be stopped and restarted, which is sometimes called a coroutine. They are cooperatively multitasked, meaning that the responsibility of control is with the fibers and not the OS. Fibers are not immediately executed. When `resume` is called, the fiber will execute until it hits a `yield` statement, which suspends execution. The last expression evaluated will be the return value of the Fiber.
 
 ### Ractors
 
 [https://docs.ruby-lang.org/en/master/Ractor.html](https://docs.ruby-lang.org/en/master/Ractor.html)
 
-Ractors are a way to bypass the GIL and have 'true' multiple threading using Ruby. Ractor is a chunk of code that has a single input port and a single output port. So like a physical room, with a single entrance and a single exit door. The entrance door could have a queue to get in. Ractor is created via Ractor.new and is `isolated`, the code inside the block won't be able to acces any variables that aren't defined in the block (no globals and no external locals).
+Ractors are a way to bypass the GIL and have 'true' multiple threading using Ruby. Ractor is a chunk of code that has a single input port and a single output port. So like a physical room, with a single entrance and a single exit door. The entrance door could have a queue to get in. Ractor is created via Ractor.new and is `isolated`, the code inside the block won't be able to access any variables that aren't defined in the block (no globals and no external locals).
 
 ## Testing
 
@@ -2067,12 +2067,12 @@ end
 ```
 
 Minitest mock objects can take an optional third argument, which is an array of arguments, and an optional block argument.
-If those arguments are used, then the mock object only accepts the method calls that match the arguments and block. If not, it raises an `MockExpectationError`. More documentation in the [minitest mock class](https://github.com/minitest/minitest/blob/master/lib/minitest/mock.rb#L62)
+If those arguments are used, then the mock object only accepts the method calls that match the arguments and block. If not, it raises a `MockExpectationError`. More documentation in the [minitest mock class](https://github.com/minitest/minitest/blob/master/lib/minitest/mock.rb#L62)
 
-It's common to want to orride one method on an existing object rather than create an entire mock object. In minitest, you can do this with the `stub` method, which is added to `Object`, so it's available to all objects. More documentation in the [minitest Object class extension with stub](https://github.com/minitest/minitest/blob/master/lib/minitest/mock.rb#L279)
+It's common to want to override one method on an existing object rather than create an entire mock object. In minitest, you can do this with the `stub` method, which is added to `Object`, so it's available to all objects. More documentation in the [minitest Object class extension with stub](https://github.com/minitest/minitest/blob/master/lib/minitest/mock.rb#L279)
 
 The first argument to `stub` is the name of the method you want to intercept, as a symbol. The second argument is the value that should be returned, or you can pass a block argument. The return value of the stub is one of these:
- - value returned of the the block
+ - value returned of the block
  - result of the `second_arg.call`, if `second_arg` responds to `call`, meaning it's usually a `Proc` or `lambda`
  - the second argument itself, if neither of the above
 
@@ -2091,7 +2091,7 @@ class TestMemeAsker < Minitest::Test
 end
 ```
 
-To have control over the depth of runnin tests, be able to run tests with: 
+To have control over the depth of running tests, be able to run tests with: 
 
 - an exact match: `test test_file_name.rb -n exact_match`
 - a pattern: `test test_file_name.rb -n /all_with_pattern/`
@@ -2102,7 +2102,7 @@ To have control over the depth of runnin tests, be able to run tests with:
 
 Some history: [https://stevenrbaker.com/tech/history-of-rspec.html](https://stevenrbaker.com/tech/history-of-rspec.html)
 
-RSpec started as a teaching tool, but it was so popular that it became a real tool. The goal of RSpec is to express thinking as close to natural language. RSpec is concerned with driving the design, as such, words like expectation and specifcation are used, and usually RSpec is used before you write the implementation. A 'spec' is a specification, a description of how something should work, and written before implementation, an 'assertion' is used to test what already exists. 
+RSpec started as a teaching tool, but it was so popular that it became a real tool. The goal of RSpec is to express thinking as close to natural language. RSpec is concerned with driving the design, as such, words like expectation and specification are used, and usually RSpec is used before you write the implementation. A 'spec' is a specification, a description of how something should work, and written before implementation, an 'assertion' is used to test what already exists. 
 
 To be clear, you can use both RSpec after you write code, and Minitest (also with specs) before you write code.
 
@@ -2123,7 +2123,7 @@ RSpec.describe "Roman" do
 end
 ```
 
-It is helpful to see With parenthesis and implicit `self` message receivers (self.describe, self.it, self.expect, and self.eq):
+It is helpful to see with parenthesis and implicit `self` message receivers (self.describe, self.it, self.expect, and self.eq):
 
 ```ruby
 # ./ex2_rspec.rb
@@ -2165,7 +2165,7 @@ RSpec.describe Roman do
 end
 ```
 
-In RSpec, the term for a fake object is `test double`, the object that stands in for the real object (stunt double) [https://github.com/rspec/rspec-mocks?tab=readme-ov-file#test-doubles](https://github.com/rspec/rspec-mocks?tab=readme-ov-file#test-doubles). You can create a double and assign it a method to respond to, and a value to return, with `allow`. You can limit the arguments to the method with `with`. You can also define multiple methods with `receive_messages`. In Minitest we validated a mock being called, in RSpec we manage this by using `expect`. `Expect` behaves the same as `allow`, however RSpec automatically verifies that the method was called, if not it fails the spec. However this is implicit and at the end, so might be harder to find. You can also use `allow` and `expect` as `stub` on object that are not test-doubles.
+In RSpec, the term for a fake object is `test double`, the object that stands in for the real object (stunt double) [https://github.com/rspec/rspec-mocks?tab=readme-ov-file#test-doubles](https://github.com/rspec/rspec-mocks?tab=readme-ov-file#test-doubles). You can create a double and assign it a method to respond to, and a value to return, with `allow`. You can limit the arguments to the method with `with`. You can also define multiple methods with `receive_messages`. In Minitest we validated a mock being called, in RSpec we manage this by using `expect`. `Expect` behaves the same as `allow`, however RSpec automatically verifies that the method was called, if not it fails the spec. However this is implicit and at the end, so might be harder to find. You can also use `allow` and `expect` as `stub` on objects that are not test-doubles.
 
 ```ruby
 obj = double
@@ -2231,7 +2231,7 @@ A short overview:
 ruby -h # show help
 ruby -v # show version
 ruby -e "puts 'hello'" # run code from command line
-ruby some_program.rb # this will cuase the Ruby interpreter to load the file, parse it and then execute it.
+ruby some_program.rb # this will cause the Ruby interpreter to load the file, parse it and then execute it.
 ```
 
 Oneliners
@@ -2258,7 +2258,7 @@ some_file.rb
 ```
 If you want to run the file with options for Ruby itself, you can use for example, to show warnings:
 ```rb
-RUBYOPTS="-w" some_file.rb
+RUBYOPT="-w" some_file.rb
 ```
 
 Options after the file name will be processed as arguments to the script.
@@ -2358,7 +2358,7 @@ FileUtils.rm(files, verbose: true)
 
 With Rake, we create a `Rakefile` to define the tasks.
 
-This can be executed with `rake delete_unix_backup_files`. We can compose tasks with dependencies, for example, `rake remove_all_backup_files` which will first run `delete_unix_backup_files` and then `delete_windows_backup_files`. If a Rake taskis named `default` it will be executed if no other task is specified.
+This can be executed with `rake delete_unix_backup_files`. We can compose tasks with dependencies, for example, `rake remove_all_backup_files` which will first run `delete_unix_backup_files` and then `delete_windows_backup_files`. If a Rake task is named `default` it will be executed if no other task is specified.
 
 ```rb
 desc "Remove backup files ending with ~"
@@ -2385,7 +2385,7 @@ end
 [https://guides.rubygems.org/what-is-a-gem/](https://guides.rubygems.org/what-is-a-gem/)
 
 A gem is a library of Ruby code that can be installed and used in a Ruby program. 
-RubyGems is the command-line tool for managing gems, it comes as `gem` command and is standard in Ruby. Bundler is a tool for creating manifests of gem versions, so that develoeprs use the same version of gems in their projects.
+RubyGems is the command-line tool for managing gems, it comes as `gem` command and is standard in Ruby. Bundler is a tool for creating manifests of gem versions, so that developers use the same version of gems in their projects.
 
 full description of all the gem command-line options: [https://guides.rubygems.org/command-reference/](https://guides.rubygems.org/command-reference/)
 
@@ -2463,12 +2463,12 @@ end
 ### Writing and packaging your own code into a gem
 
 There are 2 questions to organization of code: 
-1. How to prevetn different things with the same name to clash?
+1. How to prevent different things with the same name to clash?
 2. How to organize source files in the project?
 
 It's smart to split code into a trivial driver file, that provides the external interface (command-line interface), and one or more files with the functionality. Your tests will be able to test the functionality without running the whole program via the driver file.
 
-Also, to structure the code and to answer the first question, we can use a `Class` to encapsulate the functionality. This will ensure the code is properly scoped to a namespace. To access the contants you can use the namespace resultion operator `::` (a double colon).
+Also, to structure the code and to answer the first question, we can use a `Class` to encapsulate the functionality. This will ensure the code is properly scoped to a namespace. To access the constants you can use the namespace resolution operator `::` (a double colon).
 
 ```rb
 class MyClass
@@ -2514,7 +2514,7 @@ MyClass.new.say_hello
 
 You can potentially use multiple irb sessions at the same time, so during a session you can type irb and then you'll get a new session. The `jobs` command will show all irb sessions, and you can switch with `fg 0` (0 is the session number).
 
-When you specifc an object when you create a subsession, that object becomes the value of self in that binding. So, if you create a subsession with `irb -r my_file.rb` and then type `self`, it will be the object that was passed to the subsession.
+When you specify an object when you create a subsession, that object becomes the value of self in that binding. So, if you create a subsession with `irb -r my_file.rb` and then type `self`, it will be the object that was passed to the subsession.
 
 ```rb
 irb -r my_file.rb
@@ -2546,7 +2546,7 @@ The Common Gateway Interface, CGI, can handle characters, especially for HTML en
 
 ### Templating with embedded Ruby (ERB)
 
-We can embed Ruby in an HTML document via ERB, which is a standard Ruby library and acts as a command-line filter. e.g. you can do `erb -x file_name.rb` whereby -x Displays the resulting Ruby script. [https://github.com/ruby/erb](https://github.com/ruby/erb)
+We can embed Ruby in an HTML document via ERB, which is a standard Ruby library and acts as a command-line filter. e.g. you can do `erb -x file_name.rb` whereby -x displays the resulting Ruby script. [https://github.com/ruby/erb](https://github.com/ruby/erb)
 
 ### Serving Ruby to the Web
 
@@ -2555,7 +2555,7 @@ Rack is the interface for the relationship between a web server and web applicat
 So Rack provides: 
 - a standard structure for the user request: a hash structure with pre-defined set of keys
 - a standard structure for the response: an Array with 3 elements; returns status, headers and the body
-- a mechanism for the interface between the two; A rack app is a method or block, that takes the environment as input and returns the repsonse as output. 
+- a mechanism for the interface between the two; A rack app is a method or block, that takes the environment as input and returns the response as output. 
 
 ### Ruby in the browser with Web Assembly
 
@@ -2612,7 +2612,7 @@ users.map(&:convert_to_json)
 
 In Ruby you don't need to declare the type of a variable, method argument, or return value. You can just call the method, and it is evaluated at runtime and it will work.
 
-A class defines the operations (methods) the object can supoort, along with the state (instance variables) on which those methods operate. An interface is a list of methods that are supported together by classes that implement that interface. In Ruby, the class is almost never the type. Instead, the type of an object is defined by what messages it responds to. The idea is that typing is implicitly based on the messages defined rather than explicitly declared is called duck typing.
+A class defines the operations (methods) the object can support, along with the state (instance variables) on which those methods operate. An interface is a list of methods that are supported together by classes that implement that interface. In Ruby, the class is almost never the type. Instead, the type of an object is defined by what messages it responds to. The idea is that typing is implicitly based on the messages defined rather than explicitly declared is called duck typing.
 
 Standard Protocols and Coercions: Conversion protocols mean that an object can be converted to another object of another class. You have explicit conversion and implicit conversion. Coercion protocols mean that an object can be coerced to another object of another class. Examples: 
 
@@ -2624,7 +2624,7 @@ Standard Protocols and Coercions: Conversion protocols mean that an object can b
 ```
 
 1+2 is equal to 1.+(2), and Ruby calls 2.coerce(1) to get the [1.0, 2.0] array and perform the operation (1.0 + 2.0).
-This technique of calling a method on a paramter is called double dispatch, it allows a method to change its behavior based on the type of the parameter.
+This technique of calling a method on a parameter is called double dispatch, it allows a method to change its behavior based on the type of the parameter.
 
 ## Ruby Object Model and Metaprogramming
 
@@ -2716,7 +2716,7 @@ puts color.upcase
 ```
 
 So, `color` is a variable that points to an object with the value of the string `"red"` and a pointer 
-to the class of the object, which is String. Call `upcase` on color and we're going to lookup in the object's class String, where we find the method defintion upcase.
+to the class of the object, which is String. Call `upcase` on color and we're going to lookup in the object's class String, where we find the method definition upcase.
 
 ```
 color = "red"
@@ -2746,7 +2746,7 @@ The thing it references = object / instance / instance of String
 +-------------------+    +---------------------+    +---------------------+    +--------------------+
 ```
 
-Defining a singleton method on the String instance object refrenced by color is possible: 
+Defining a singleton method on the String instance object referenced by color is possible: 
 
 ```ruby
 color = "red"
@@ -2758,9 +2758,9 @@ puts color.upcase
 => That is red.
 => RED
 ```
-So Ruby created an anonymous class and placed the `speak` method in that class. Sometimes this is sometimes called singleton class or eigenclass (the singleton class is personal or hidden). Every object in Ruby has the potential of having its own singleton class. Access the class via `color.singleton_class` and access the methods via `color.singleton_methods`.
+So Ruby created an anonymous class and placed the `speak` method in that class. This is sometimes called singleton class or eigenclass (the singleton class is personal or hidden). Every object in Ruby has the potential of having its own singleton class. Access the class via `color.singleton_class` and access the methods via `color.singleton_methods`.
 
-Method lookup will be first in the singleton class and then the singletons superclass:
+Method lookup will be first in the singleton class and then the singleton's superclass:
 ```ruby
 color = "red"; def color.speak; puts 'hi'; end; color.class
 => String
@@ -2788,7 +2788,7 @@ Ruby does not have basic types. A variable is an instance of a class. It can be 
 
 When you have to declare the type of a variable before it is used, it's explicit typing. Some languages infer the type of a variable from the first usage, e.g. `x = 3` in TypeScript, this is called type inference. 
 
-Usually a tool, often part of the compiler, that evaluates every variable interaciton to see if type information is followed. If you later in TypeScript set `x = "foo"`, there will be a compliation error, as foor is string. This is called static typing. Ruby determines if a variable can receive a method only at runtime, this is called dynamic typing. The process of determining the behavior of the method at the last possible moment is called late binding. 
+Usually a tool, often part of the compiler, that evaluates every variable interaction to see if type information is followed. If you later in TypeScript set `x = "foo"`, there will be a compilation error, as foo is a string. This is called static typing. Ruby determines if a variable can receive a method only at runtime, this is called dynamic typing. The process of determining the behavior of the method at the last possible moment is called late binding. 
 
 3+ "3", which will coerce the string to integer and add both, is called weak typing, 3+"3" which fails is called strong typing.
 
@@ -2854,7 +2854,7 @@ class Person
   @@total: Integer   # class variable
   MAX_COUNT: Integer # constant
   def initialize: (parameters) -> void # instance method
-  def method_name: (parameters) -> return_type #instance maethod
+  def method_name: (parameters) -> return_type #instance method
 end
 
 # Parameters
@@ -3007,7 +3007,7 @@ Besides the syntax, we can have general rules to describe common sense.
 - Controllers: can instantiate only 1 object. Therefore, views can only know about one instance variable and views should only send messages to that object (@object.collaborator.value is not allowed).
 - Endpoints:   can only be as CRUD operations on resources (REST). When an action doesn't map cleanly to a standard CRUD verb, introduce a new resource rather than adding custom actions.
 
-Crud only endpoints example:
+CRUD only endpoints example:
 ```ruby
 # Bad
 resources :cards do
