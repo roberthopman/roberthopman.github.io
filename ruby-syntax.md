@@ -510,11 +510,12 @@ Ranges represent a range of values. Ruby uses ranges to implement sequences and 
 
 ```ruby
 arr = [1,2,3,4,5]
-arr[..2] # => [1,2,3]
-arr[2..] # => [3,4,5]
-arr === 3 # => true
-arr === 6 # => false
-arr.include?(3) # => true
+arr[..2] # => [1, 2, 3]
+arr[2..] # => [3, 4, 5]
+
+(1..5) === 3 # => true
+(1..5) === 6 # => false
+(1..5).include?(3) # => true
 ```
 
 ## Blocks
@@ -540,7 +541,7 @@ puts y
 # method say first, then parameters, only one block after.
 object.say("dave") { puts 'hello' }
 ```
-The act of doing something to all objects in a collection is called enumeration in Ruby; in other languages it is called iteration. e.g. [each](https://ruby-doc.org/3.3.4/Enumerator.html#method-i-each), [find](https://ruby-doc.org/3.3.4/Enumerable.html#method-i-find), map, sort_by, group_by, map, reduce. 
+The act of doing something to all objects in a collection is called enumeration in Ruby; in other languages it is called iteration. e.g. [each](https://ruby-doc.org/3.3.4/Enumerator.html#method-i-each), [find](https://ruby-doc.org/3.3.4/Enumerable.html#method-i-find), map, sort_by, group_by, reduce. 
 
 Ruby remembers the context of an object, local variables, block, and so on, this is called `binding`. Within the method, the block may be invoked, using the `yield` statement. A block returns a value to the method that yields to it. The value of the last expressions evaluated in the block is passed back to the method as the value of the yield expression.
 
@@ -601,22 +602,22 @@ bl.call('Dave')
 # stabby lambda
 bl = -> (param) { puts "you called with #{param}" }
 bl.call("Dave")
-# => Hello, Dave!
+# => you called with Dave
 
 # short: lambda (Ruby Kernel method)
 bl = lambda { |param| puts "you called with #{param}" }
 bl.call("Dave")
-# => Hello, Dave!
+# => you called with Dave
 
 # short: Kernel method proc
 bl = proc { |param| puts "you called with #{param}" }
 bl.call("Dave")
-# => Hello, Dave!
+# => you called with Dave
 
 # Proc.new (not the preferred method)
 bl = Proc.new { |param| puts "you called with #{param}" }
 bl.call("Dave")
-# => Hello, Dave!
+# => you called with Dave
 ```
 
 ### Blocks as closures
@@ -1076,6 +1077,7 @@ def get_status(idea_to_look_for, status_to_look_for, list)
   in [*, {idea: ^idea_to_look_for, status: }, *] then puts "#{idea_to_look_for} is #{status_to_look_for}"
   in [*, {idea:, status: ^status_to_look_for}, *] then puts "second"
   else # code
+  end
 end
 
 puts get_status('idea1', 'status1', 
@@ -1141,23 +1143,28 @@ Preference to use parentheses in all but the simplest cases. This would be idiom
 def hello
   puts 'hi'
 end
+```
 
-Since Ruby 3.0 endless method:
-def a_method(arg) = puts arg
+Since Ruby 3.0, the endless method:
+
+```ruby
+def a_method(arg) = puts(arg)
 ```
 
 ### Method arguments
 
 ```ruby
-def hello(greeting = "hi", name = "bob", question, *args)
+def hello(question, greeting = "hi", name = "bob", *args)
   puts "#{greeting} #{name} #{question} #{args}"
 end
+```
 
+- `question` is a required argument.
 - `greeting` is a default argument.
 - `name` is a default argument.
-- `question` is a required argument.
 - `args` is a splat argument. It collects all remaining arguments into an array.
-```
+
+The order matters: required arguments first, then arguments with defaults, then the splat. A splat cannot follow an argument with a default, so `def hello(greeting = "hi", question, *args)` is a SyntaxError.
 
 A class method: `def self.method_name` and an instance method: `def method_name`.
 
@@ -1316,7 +1323,7 @@ class Bike
   end
 
   def price=(new_price)
-    @price = price
+    @price = new_price
   end
 
   def price_in_cents
@@ -1424,7 +1431,7 @@ end
 # door = Door.new(true)
 # door.open
 # door.close
-# door.next_is_open?(Door.new(true))
+# door.next_is_locked?(Door.new(true))
 ```
 
 ### preference: per method explicit access control
@@ -1443,15 +1450,15 @@ Most real programs manage collections of data. Ruby has a number of built-in cla
 Array.new, Array.[], create a new array.
 ```ruby
 # class methods
-a = Array.new(1,2,3)
-b = Array.[](1, 2, 3)
-
-# instance methods below
-b[0] or b.[](0) are both fine, though b[0] will be much more common.
-
-# assignment
-b[0]=4 or b.[]=(0, 4) are both fine, though b[0]=4 will be much more common.
+a = Array.new(3, 0)   # => [0, 0, 0], 3 elements with the default value 0
+b = Array.[](1, 2, 3) # => [1, 2, 3]
+c = Array[1, 2, 3]    # => [1, 2, 3]
 ```
+
+Instance methods: `b[0]` or `b.[](0)` are both fine, though `b[0]` will be much more common.
+
+Assignment: `b[0] = 4` or `b.[]=(0, 4)` are both fine, though `b[0] = 4` will be much more common.
+
 Some assignments:
 ```ruby
 b[1, 0] = [5, 6] # at index 1, for 0 elements, will insert 5 and 6, shifting the rest of the array to the right.
@@ -1480,7 +1487,7 @@ puts baz
 ### Override methods:
 
 ```ruby
-def Child
+class Child
   def initialize(name)
     @name = name
   end
@@ -1502,7 +1509,7 @@ puts Child.new('Foo') # => "the name: Foo"
 inheritance allows you to create a class that's a specialization of another class: e.g. subclass and superclass, child and parent.
 
 ```ruby
-def Child < Parent
+class Child < Parent
 end
 Child.superclass # => Parent
 Parent.superclass # => Object
@@ -1542,7 +1549,7 @@ class Fire < Element
 
   def hot? = true
 
-  def chatty_string = "I bring fire"
+  def chatty_string = "I bring light"
 end
 
 class Water < Element
@@ -1554,11 +1561,11 @@ end
 class Earth < Element
   def to_s = "earth"
 
-  def chatty_string = "I provide earth"
+  def chatty_string = "I provide ground"
 end
 
 # Element.for(resource.element).chatty_string
-# if there is a Parent, like Element, having `def chatty_string raise NotImplementedError` it signals that subclasses must define this method.
+# if there is a Parent, like Element, having `def chatty_string = raise NotImplementedError` it signals that subclasses must define this method.
 ```
 
 ## Modules
@@ -1600,7 +1607,7 @@ end
 Child.new("FOO").who_am_i? # => "Child (id: 123456789): FOO"
 ```
 
-Ruby provides two mechanisms for mixing in module behaviour. The first is `include`, which is used to add methods as instance methods to a class, and those will be looked up after the class itself is checked for a method. The second is `extend`, which is used to add methods directly to the receiver of extend rather than as instance methods of a class. Ruby also provides another mechanism, `prepend`, which is used to add methods as class methods to a class, and those will be looked up before the class itself is checked for a method. Prepend is often used for logging or other logistical information to classes.
+Ruby provides two mechanisms for mixing in module behaviour. The first is `include`, which is used to add methods as instance methods to a class, and those will be looked up after the class itself is checked for a method. The second is `extend`, which is used to add methods directly to the receiver of extend rather than as instance methods of a class. Ruby also provides another mechanism, `prepend`, which is used to add methods as instance methods to a class, and those will be looked up before the class itself is checked for a method. Prepend is often used for logging or other logistical information to classes.
 
 In general, a mixin that requires its own state isn't a mixin, it should be written as a class.
 
@@ -1711,9 +1718,9 @@ Sometimes you want to use the `retry` clause. This will repeat the entire `begin
 begin
   puts 0/0
 rescue SyntaxError => e
-  $stderr.warn "Failed #{$!}" 
-  # warn "Failed #{$!}"
+  warn "Failed #{$!}"
   # warn "Failed #{e}"
+  # $stderr.puts "Failed #{$!}"
   raise
 rescue StandardError => e
   print "Error: #{e}"
@@ -1933,7 +1940,7 @@ end
 spawn("sort textfile.txt > output.txt")
 # do other things
 # returns:
-Child pid 3828: terminated
+Child 3828: terminated
 ```
 
 ### Fibers
@@ -2238,7 +2245,7 @@ Oneliners
 ```rb
 ruby -e 'puts "line: #{$_}" while gets' < some_file.txt # print each line of the file
 ruby -ne 'puts "line: #{$_}"' < some_file.txt # same as above, but with -n flag
-ruby -pe 'line: #{$_}' < some_file.txt # same as above, but with -p flag
+ruby -pe '$_ = "line: #{$_}"' < some_file.txt # same as above, but with -p flag
 
 # note: -pe is same as adding -p -e
 ```
@@ -2604,9 +2611,11 @@ To create a todo file: `standardrb --generate-todo`
 
 The goal of these style recommendations is to allow the code to clearly reflect the intent of the programmer.
 
+```ruby
 users.map { |user| user.convert_to_json }
 users.map { _1.convert_to_json }
 users.map(&:convert_to_json)
+```
 
 ### Duck Typing
 
@@ -2617,13 +2626,13 @@ A class defines the operations (methods) the object can support, along with the 
 Standard Protocols and Coercions: Conversion protocols mean that an object can be converted to another object of another class. You have explicit conversion and implicit conversion. Coercion protocols mean that an object can be coerced to another object of another class. Examples: 
 
 ```ruby
-1.coerce(2)       # => [2.0, 1.0]
+1.coerce(2)       # => [2, 1]
 2.coerce(1.2)     # => [1.2, 2.0]
 (3.3).coerce(4.1) # => [4.1, 3.3]
 (3.4).coerce(4)   # => [4.0, 3.4]
 ```
 
-1+2 is equal to 1.+(2), and Ruby calls 2.coerce(1) to get the [1.0, 2.0] array and perform the operation (1.0 + 2.0).
+1 + 2.0 is equal to 1.+(2.0). When a number doesn't know how to handle the class of the argument, it calls `argument.coerce(receiver)`, here 2.0.coerce(1), to get the [1.0, 2.0] array and perform the operation (1.0 + 2.0).
 This technique of calling a method on a parameter is called double dispatch, it allows a method to change its behavior based on the type of the parameter.
 
 ## Ruby Object Model and Metaprogramming
