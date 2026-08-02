@@ -52,6 +52,18 @@ header_pages:
 author:
   name: Robert Hopman
   email: "robert@bonaroo.nl"
+  url: https://roberthopman.com/author/
+
+# jekyll-seo-tag turns these into schema.org sameAs, which is what lets an
+# agent cross-reference "Robert Hopman" against verifiable profiles. The same
+# URLs already appear as rel="me" links in the footer via minima.social_links;
+# keep the two lists in step.
+social:
+  name: Robert Hopman
+  links:
+    - https://github.com/roberthopman
+    - https://www.linkedin.com/in/roberthopman
+    - https://x.com/roberthopman
 
 discourse:
   url: 'https://technicalblog.discourse.group/'
