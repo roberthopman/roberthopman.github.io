@@ -1,0 +1,41 @@
+---
+layout: null
+permalink: /llms.txt
+sitemap:
+  exclude: 'yes'
+---
+{%- comment -%}
+Generated to the llms.txt spec (https://llmstxt.org/): an H1, an optional
+blockquote summary, then H2 sections of markdown link lists. Built from
+site.pages and site.posts the same way sitemap.xml is, so it stays current
+without maintenance.
+
+Navigational pages go under "## Optional", which the spec defines as the
+section an agent may skip when it needs a shorter context.
+{%- endcomment -%}
+{%- assign skip = "index.md,404.html,archive.md,tags.md,sitemap.xml,robots.txt,llms.txt" | split: "," -%}
+{%- comment -%}
+/tags/ holds one generated page per tag, and /docs/ is untracked scratch that
+exists locally but never reaches the deployed site. Neither belongs in a
+curated index, and including /docs/ would make local and CI output disagree.
+{%- endcomment -%}
+# {{ site.author.name }}
+
+> {{ site.description | strip_newlines | strip }}
+
+## Pages
+{% for p in site.pages -%}
+{%- unless skip contains p.name or p.url contains '/tags/' or p.url contains '/docs/' -%}
+{%- if p.title -%}
+- [{{ p.title }}]({{ p.url | absolute_url }}){% if p.description %}: {{ p.description | strip_html | strip_newlines | strip }}{% endif %}
+{% endif -%}
+{%- endunless -%}
+{%- endfor %}
+## Posts
+{% for post in site.posts -%}
+- [{{ post.title }}]({{ post.url | absolute_url }}){% if post.excerpt %}: {{ post.excerpt | strip_html | strip_newlines | strip | truncate: 160 }}{% endif %}
+{% endfor %}
+## Optional
+- [Archive]({{ '/archive/' | absolute_url }}): Every post in reverse chronological order.
+- [Tags]({{ '/tags/' | absolute_url }}): Posts grouped by topic.
+- [Feed]({{ '/feed.xml' | absolute_url }}): Atom feed of all posts.

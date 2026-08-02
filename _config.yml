@@ -28,6 +28,7 @@ markdown: kramdown
 theme: minima
 
 sass:
+  style: compressed
   # Don't report deprecations originating inside gems we don't control.
   quiet_deps: true
   # Our own Sass still uses @import, which Dart Sass 3.0 will remove. Migrating

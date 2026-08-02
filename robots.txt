@@ -1,4 +1,62 @@
-Sitemap: https://roberthopman.com/sitemap.xml
+# Content Signals Policy — https://contentsignals.org/
+#
+# A machine-readable statement of how the content on this site may be used.
+# The three signals below mean:
+#
+#   search=yes     May be indexed and shown in search results, including a
+#                  short excerpt or link.
+#   ai-input=yes   May be retrieved at answer time and used as input to an AI
+#                  response (RAG, grounding, summarisation) that links back.
+#   ai-train=no    May NOT be used to train or fine-tune a model.
+#
+# In short: quote me and link back, but don't harvest this as training data.
+# Compliance is voluntary. It is a stated preference, not an access control.
 
 User-agent: *
+Content-Signal: search=yes, ai-input=yes, ai-train=no
 Disallow:
+
+# --- AI crawlers that retrieve and cite -------------------------------------
+# These fetch a page to answer a specific question and link back to the source,
+# which is consistent with ai-input=yes above.
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+# --- AI crawlers that collect training data ---------------------------------
+# Declined, per ai-train=no above. Note Google-Extended is a signal token
+# rather than a crawler: it governs Gemini training use and has no effect on
+# ordinary Google Search indexing, which stays allowed by the * group.
+
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: meta-externalagent
+Disallow: /
+
+# See also /llms.txt for a curated, machine-readable index of this site.
+Sitemap: https://roberthopman.com/sitemap.xml
