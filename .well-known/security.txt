@@ -1,0 +1,4 @@
+Contact: mailto:robert@bonaroo.nl
+Expires: 2027-08-02T00:00:00.000Z
+Preferred-Languages: en, nl
+Canonical: https://roberthopman.com/.well-known/security.txt

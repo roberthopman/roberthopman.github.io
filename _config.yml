@@ -27,6 +27,11 @@ permalink: /:title/
 markdown: kramdown
 theme: minima
 
+# Jekyll skips dot-directories, so .well-known/ would never reach the build
+# without this. Needed for security.txt (RFC 9116).
+include:
+  - .well-known
+
 sass:
   style: compressed
   # Don't report deprecations originating inside gems we don't control.

@@ -8,6 +8,17 @@ Placeholder to allow defining custom head, in principle, you can add anything he
 <!-- Favicon -->
 <link rel="icon" type="image/svg+xml" href="{{ '/assets/images/favicon.svg' | relative_url }}">
 
+<!-- Browser UI hints. The site is light-only ($background-color is #fff), so
+     color-scheme deliberately says "light" rather than "light dark": claiming
+     dark support would let the browser render form controls and scrollbars
+     dark against a page that stays white. -->
+<meta name="theme-color" content="#ffffff">
+<meta name="color-scheme" content="light">
+
+<!-- Referrer-Policy can only be a response header, which GitHub Pages cannot
+     set, so declare it in markup instead. -->
+<meta name="referrer" content="strict-origin-when-cross-origin">
+
 <!-- Custom CSS and JavaScript -->
 
 <!-- Anchor Links CSS -->

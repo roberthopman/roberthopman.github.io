@@ -5,6 +5,13 @@
 
 <body>
 
+  {%- comment -%}
+  Must be the first focusable element in the document so keyboard and screen
+  reader users can jump past the header and share rail. Visually hidden until
+  focused; see .skip-link in _sass/minima/custom-styles.scss.
+  {%- endcomment -%}
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
   {%- include header.html -%}
 
   {% if page.layout == 'post' or page.layout == 'page' or page.sidebar %}
@@ -13,7 +20,7 @@
   </aside>
   {% endif %}
 
-  <main class="page-content" aria-label="Content">
+  <main class="page-content" id="main-content" aria-label="Content">
     <div class="wrapper">
       {% if page.sidebar %}
       <div class="page-with-sidebar">
