@@ -1,0 +1,63 @@
+# Builds and deploys the site using this repo's own Gemfile.
+#
+# This replaced GitHub Pages' legacy branch builds, which ignored the Gemfile
+# and forced Jekyll 3.9.3 via the github-pages gem. That old stack also shipped
+# jekyll-sass-converter 1.5.2 (Ruby Sass), which cannot parse the @use rules and
+# color.adjust() calls in _sass/minima/. This workflow is what makes those work.
+#
+# Pages must be set to build_type=workflow for the deploy step to succeed:
+#   gh api -X PUT repos/roberthopman/roberthopman.github.io/pages -f build_type=workflow
+# To roll back to branch builds, set build_type=legacy. The Sass would then need
+# reverting too, so prefer fixing forward.
+name: Jekyll
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Let a running deploy finish rather than cancelling it mid-flight.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          # Reads .ruby-version, so CI and local can never drift.
+          ruby-version-file: .ruby-version
+          bundler-cache: true
+
+      # No --baseurl override here on purpose. _config.yml sets baseurl: "" and
+      # the site is served from the root of a custom domain, which is what
+      # production already expects. Letting actions/configure-pages compute a
+      # base_path risks rewriting every relative_url on the site.
+      - name: Build site
+        env:
+          JEKYLL_ENV: production
+        run: bundle exec jekyll build
+
+      - uses: actions/upload-pages-artifact@v3
+
+  deploy:
+    needs: build
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/deploy-pages@v4
+        id: deployment

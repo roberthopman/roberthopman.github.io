@@ -1,0 +1,14 @@
+---
+# Front matter is required, and must stay. It is what makes Jekyll treat this
+# file as a page, which is what lets it override the theme's copy. Without it
+# Jekyll files this as a static asset and the gem's version compiles anyway.
+---
+
+// Intentionally empty.
+//
+// The minima gem ships its own assets/main.scss, and `theme: minima` pulls the
+// theme's assets into the build. That compiled a second full stylesheet to
+// /assets/main.css that nothing ever loaded: _includes/head.html links
+// /assets/css/style.css instead.
+//
+// This file shadows the gem's copy so that stylesheet is no longer built.

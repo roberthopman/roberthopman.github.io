@@ -39,7 +39,7 @@ h1, h2, h3, h4, h5, h6,
 p, blockquote, pre,
 ul, ol, dl, figure,
 %vertical-rhythm {
-  margin-bottom: $spacing-unit / 2;
+  margin-bottom: $spacing-unit * 0.5;
 }
 
 hr {
@@ -132,7 +132,7 @@ a {
 blockquote {
   color: $brand-color;
   border-left: 4px solid $brand-color-light;
-  padding-left: $spacing-unit / 2;
+  padding-left: $spacing-unit * 0.5;
   @include relative-font-size(1.125);
   letter-spacing: -1px;
   font-style: italic;
@@ -190,8 +190,8 @@ pre {
   max-width: calc(#{$content-width} - (#{$spacing-unit}));
   margin-right: auto;
   margin-left: auto;
-  padding-right: $spacing-unit / 2;
-  padding-left: $spacing-unit / 2;
+  padding-right: $spacing-unit * 0.5;
+  padding-left: $spacing-unit * 0.5;
   @extend %clearfix;
 
   @media screen and (min-width: $on-large) {
@@ -252,7 +252,7 @@ table {
     }
   }
   th, td {
-    padding: ($spacing-unit / 3) ($spacing-unit / 2);
+    padding: ($spacing-unit * 0.3333) ($spacing-unit * 0.5);
   }
   th {
     background-color: $table-header-bg-color;
