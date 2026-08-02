@@ -51,7 +51,13 @@ jobs:
           JEKYLL_ENV: production
         run: bundle exec jekyll build
 
+      # include-hidden-files defaults to false, which adds --exclude=.[^/]* to
+      # the action's tar and silently drops .well-known/ from the artifact.
+      # Jekyll builds security.txt correctly; without this it never deploys.
+      # .git and .github stay excluded regardless of this setting.
       - uses: actions/upload-pages-artifact@v5
+        with:
+          include-hidden-files: true
 
   deploy:
     needs: build
