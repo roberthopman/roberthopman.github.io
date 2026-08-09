@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1036" font-family="Helvetica,Arial,sans-serif">
+<defs>
+<marker id="ag" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" refX="9" refY="4" orient="auto"><path d="M0,0 L9,4 L0,8 Z" fill="#4f8a6b"/></marker>
+<marker id="ao" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" refX="9" refY="4" orient="auto"><path d="M0,0 L9,4 L0,8 Z" fill="#e08a3c"/></marker>
+<marker id="ay" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" refX="9" refY="4" orient="auto"><path d="M0,0 L9,4 L0,8 Z" fill="#777"/></marker>
+</defs>
+<rect x="0" y="100" width="1000" height="154" fill="#f7f7f5"/>
+<text x="14" y="120" font-size="12" fill="#555" font-weight="bold">1. Build the loop</text>
+<text x="14" y="274" font-size="12" fill="#555" font-weight="bold">2. Reproduce</text>
+<rect x="0" y="514" width="1000" height="70" fill="#f7f7f5"/>
+<text x="14" y="534" font-size="12" fill="#555" font-weight="bold">3. Hypothesise</text>
+<text x="14" y="644" font-size="12" fill="#555" font-weight="bold">4. Instrument</text>
+<rect x="0" y="844" width="1000" height="132" fill="#f7f7f5"/>
+<text x="14" y="864" font-size="12" fill="#555" font-weight="bold">5. Fix</text>
+<text x="14" y="996" font-size="12" fill="#555" font-weight="bold">6. Clean up</text>
+<line x1="220" y1="88" x2="220" y2="1026" stroke="#c9c9c9" stroke-width="1.2" stroke-dasharray="4,5"/>
+<rect x="158" y="50" width="124" height="32" rx="4" fill="#fff" stroke="#777" stroke-width="1.2"/>
+<text x="220" y="71" font-size="13" fill="#333" text-anchor="middle">You</text>
+<line x1="444" y1="88" x2="444" y2="1026" stroke="#c9c9c9" stroke-width="1.2" stroke-dasharray="4,5"/>
+<rect x="382" y="50" width="124" height="32" rx="4" fill="#fff" stroke="#777" stroke-width="1.2"/>
+<text x="444" y="71" font-size="13" fill="#333" text-anchor="middle">Loop</text>
+<line x1="668" y1="88" x2="668" y2="1026" stroke="#c9c9c9" stroke-width="1.2" stroke-dasharray="4,5"/>
+<rect x="606" y="50" width="124" height="32" rx="4" fill="#fff" stroke="#777" stroke-width="1.2"/>
+<text x="668" y="71" font-size="13" fill="#333" text-anchor="middle">Code</text>
+<line x1="892" y1="88" x2="892" y2="1026" stroke="#c9c9c9" stroke-width="1.2" stroke-dasharray="4,5"/>
+<rect x="830" y="50" width="124" height="32" rx="4" fill="#fff" stroke="#777" stroke-width="1.2"/>
+<text x="892" y="71" font-size="13" fill="#333" text-anchor="middle">Probe</text>
+<rect x="398" y="172" width="267.9" height="76" fill="none" stroke="#9aa8b5" stroke-width="1.2" stroke-dasharray="5,4"/>
+<rect x="398" y="172" width="258" height="18" fill="#fff" stroke="#9aa8b5" stroke-width="1.2"/>
+<text x="406" y="185" font-size="10.5" fill="#9aa8b5">loop [until it is fast and deterministic]</text>
+<rect x="174" y="414" width="316" height="94" fill="none" stroke="#9aa8b5" stroke-width="1.2" stroke-dasharray="5,4"/>
+<rect x="174" y="414" width="264" height="18" fill="#fff" stroke="#9aa8b5" stroke-width="1.2"/>
+<text x="182" y="427" font-size="10.5" fill="#9aa8b5">loop [until every element is load bearing]</text>
+<rect x="174" y="612" width="764" height="182" fill="none" stroke="#9aa8b5" stroke-width="1.2" stroke-dasharray="5,4"/>
+<rect x="174" y="612" width="323" height="18" fill="#fff" stroke="#9aa8b5" stroke-width="1.2"/>
+<text x="182" y="625" font-size="10.5" fill="#9aa8b5">loop [for each ranked cause, until one is confirmed]</text>
+<line x1="220" y1="122" x2="435" y2="122" stroke="#777" stroke-width="1.6" marker-end="url(#ay)"/>
+<text x="332.0" y="115" font-size="12" fill="#555" text-anchor="middle">write one command that can go red</text>
+<path d="M444,206 L520,206 L520,232 L453,232" fill="none" stroke="#777" stroke-width="1.6" marker-end="url(#ay)"/>
+<text x="530" y="228" font-size="12" fill="#555">tighten: faster, sharper, repeatable</text>
+<line x1="444" y1="276" x2="659" y2="276" stroke="#777" stroke-width="1.6" marker-end="url(#ay)"/>
+<text x="556.0" y="269" font-size="12" fill="#555" text-anchor="middle">run it</text>
+<line x1="668" y1="320" x2="453" y2="320" stroke="#e08a3c" stroke-width="1.6" stroke-dasharray="6,4" marker-end="url(#ao)"/>
+<text x="556.0" y="313" font-size="12" fill="#555" text-anchor="middle">wrong result</text>
+<line x1="444" y1="364" x2="229" y2="364" stroke="#e08a3c" stroke-width="1.6" stroke-dasharray="6,4" marker-end="url(#ao)"/>
+<text x="332.0" y="357" font-size="12" fill="#555" text-anchor="middle">RED, and it is the reported symptom</text>
+<line x1="220" y1="448" x2="435" y2="448" stroke="#777" stroke-width="1.6" marker-end="url(#ay)"/>
+<text x="332.0" y="441" font-size="12" fill="#555" text-anchor="middle">cut one element, run it again</text>
+<line x1="444" y1="492" x2="229" y2="492" stroke="#777" stroke-width="1.6" stroke-dasharray="6,4" marker-end="url(#ay)"/>
+<text x="332.0" y="485" font-size="12" fill="#555" text-anchor="middle">still RED, so keep the cut</text>
+<path d="M220,536 L296,536 L296,562 L229,562" fill="none" stroke="#777" stroke-width="1.6" marker-end="url(#ay)"/>
+<text x="306" y="558" font-size="12" fill="#555">rank 3 to 5 falsifiable causes</text>
+<line x1="220" y1="646" x2="883" y2="646" stroke="#777" stroke-width="1.6" marker-end="url(#ay)"/>
+<text x="556.0" y="639" font-size="12" fill="#555" text-anchor="middle">set one probe on the top cause</text>
+<line x1="892" y1="690" x2="677" y2="690" stroke="#777" stroke-width="1.6" marker-end="url(#ay)"/>
+<text x="780.0" y="683" font-size="12" fill="#555" text-anchor="middle">observe one value</text>
+<line x1="668" y1="734" x2="883" y2="734" stroke="#777" stroke-width="1.6" stroke-dasharray="6,4" marker-end="url(#ay)"/>
+<text x="780.0" y="727" font-size="12" fill="#555" text-anchor="middle">the actual value</text>
+<line x1="892" y1="778" x2="229" y2="778" stroke="#e08a3c" stroke-width="1.6" stroke-dasharray="6,4" marker-end="url(#ao)"/>
+<text x="556.0" y="771" font-size="12" fill="#555" text-anchor="middle">rejected, take the next cause</text>
+<line x1="892" y1="822" x2="229" y2="822" stroke="#4f8a6b" stroke-width="1.6" stroke-dasharray="6,4" marker-end="url(#ag)"/>
+<text x="556.0" y="815" font-size="12" fill="#555" text-anchor="middle">cause 2 is confirmed</text>
+<line x1="220" y1="866" x2="659" y2="866" stroke="#4f8a6b" stroke-width="1.6" marker-end="url(#ag)"/>
+<text x="444.0" y="859" font-size="12" fill="#555" text-anchor="middle">add the regression test, then fix</text>
+<line x1="220" y1="910" x2="435" y2="910" stroke="#777" stroke-width="1.6" marker-end="url(#ay)"/>
+<text x="332.0" y="903" font-size="12" fill="#555" text-anchor="middle">run the loop again</text>
+<line x1="444" y1="954" x2="229" y2="954" stroke="#4f8a6b" stroke-width="1.6" stroke-dasharray="6,4" marker-end="url(#ag)"/>
+<text x="332.0" y="947" font-size="12" fill="#555" text-anchor="middle">GREEN</text>
+<line x1="220" y1="998" x2="659" y2="998" stroke="#777" stroke-width="1.6" marker-end="url(#ay)"/>
+<text x="444.0" y="991" font-size="12" fill="#555" text-anchor="middle">remove every probe</text>
+</svg>
