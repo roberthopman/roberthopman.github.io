@@ -1,0 +1,124 @@
+#!/usr/bin/env ruby
+# Compares the Jekyll output on master with the Parklife output on this branch.
+#
+# Both sides build under TZ=UTC. Jekyll renders dates in the local zone, and
+# production runs on GitHub Actions in UTC, so any other zone reports a false
+# difference on every post.
+require "bundler"
+require "fileutils"
+require "yaml"
+require "nokogiri"
+
+ENV["TZ"] = "UTC"
+
+ROOT = File.expand_path("..", __dir__)
+WORKTREE = File.join(ROOT, "tmp", "parity-master")
+JEKYLL_OUT = File.join(WORKTREE, "_site")
+PARKLIFE_OUT = File.join(ROOT, "build")
+ALLOWLIST = YAML.load_file(File.join(ROOT, "script", "parity_allowlist.yml"))
+
+# Whitespace inside these elements is content, not formatting. Stripping it
+# would corrupt every code block on the site.
+PRESERVE = %w[pre code script style textarea].freeze
+
+def sh(command, chdir: ROOT)
+  puts "  $ #{command}"
+  system(command, chdir: chdir) or abort("FAILED: #{command}")
+end
+
+# This script itself typically runs under `BUNDLE_GEMFILE=Gemfile.parklife
+# bundle exec ...` so that it can `require "nokogiri"`. `bundle exec` exports
+# BUNDLE_GEMFILE, BUNDLE_LOCKFILE and RUBYOPT into every child process
+# regardless of chdir. Left alone, "bundle install" and "bundle exec jekyll
+# build" in the Jekyll worktree silently target Gemfile.parklife and even
+# write to its lockfile instead of the worktree's own Gemfile.
+# Bundler.with_unbundled_env restores the environment this process had before
+# `bundle exec` touched it, which is exactly what a child bundle command needs.
+def sh_unbundled(command, chdir: ROOT)
+  puts "  $ #{command}"
+  Bundler.with_unbundled_env { system(command, chdir: chdir) } or abort("FAILED: #{command}")
+end
+
+def build_jekyll
+  FileUtils.rm_rf(WORKTREE)
+  sh("git worktree prune")
+  # --detach, not a branch checkout: "git worktree add <dir> master" fails with
+  # "master is already checked out" whenever master is the branch in some other
+  # checkout. Detaching at master's commit works in every layout.
+  sh("git worktree add --detach #{WORKTREE} master")
+  sh_unbundled("bundle install", chdir: WORKTREE)
+  sh_unbundled("JEKYLL_ENV=production TZ=UTC bundle exec jekyll build", chdir: WORKTREE)
+end
+
+def build_parklife
+  sh("BUNDLE_GEMFILE=Gemfile.parklife TZ=UTC bin/parklife build")
+end
+
+def files_in(dir)
+  Dir.glob("#{dir}/**/*", File::FNM_DOTMATCH)
+    .select { |path| File.file?(path) }
+    .map { |path| path.delete_prefix("#{dir}/") }
+    .reject { |path| path.start_with?("docs/") }
+    .reject { |path| ALLOWLIST["skip_paths"].include?(path) }
+    .sort
+end
+
+def normalise(html, strip_selectors: [])
+  doc = Nokogiri::HTML5(html)
+  strip_selectors.each { |selector| doc.css(selector).each(&:remove) }
+  doc.xpath("//comment()").each(&:remove)
+
+  doc.traverse do |node|
+    next unless node.text?
+    next unless node.text.strip.empty?
+    next if node.ancestors.any? { |ancestor| PRESERVE.include?(ancestor.name) }
+    node.remove
+  end
+
+  doc.traverse do |node|
+    next unless node.element?
+    pairs = node.attribute_nodes.map { |attr| [attr.name, attr.value] }.sort
+    pairs.each { |name, _| node.remove_attribute(name) }
+    pairs.each { |name, value| node[name] = value }
+  end
+
+  doc.to_html
+end
+
+build_jekyll
+build_parklife
+
+jekyll_files = files_in(JEKYLL_OUT)
+parklife_files = files_in(PARKLIFE_OUT)
+
+missing = jekyll_files - parklife_files
+extra = parklife_files - jekyll_files
+differing = []
+
+strip = ALLOWLIST["strip_from_jekyll"].map { |entry| entry["selector"] }
+
+(jekyll_files & parklife_files).each do |path|
+  left = File.read(File.join(JEKYLL_OUT, path))
+  right = File.read(File.join(PARKLIFE_OUT, path))
+
+  same =
+    if path.end_with?(".html")
+      normalise(left, strip_selectors: strip) == normalise(right)
+    else
+      left == right
+    end
+
+  differing << path unless same
+end
+
+puts
+puts "compared:  #{(jekyll_files & parklife_files).size}"
+puts "missing:   #{missing.size}"
+puts "extra:     #{extra.size}"
+puts "differing: #{differing.size}"
+
+missing.each { |path| puts "  MISSING  #{path}" }
+extra.each { |path| puts "  EXTRA    #{path}" }
+differing.each { |path| puts "  DIFFERS  #{path}" }
+
+exit(missing.empty? && extra.empty? && differing.empty? ? 0 : 1)

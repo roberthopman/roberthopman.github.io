@@ -1,0 +1,11 @@
+# Differences between the Jekyll build and the Parklife build that are accepted
+# on purpose. Every entry needs a reason. An empty list means the two builds
+# must agree exactly.
+
+# CSS selectors removed from the Jekyll side before comparison.
+strip_from_jekyll:
+  - selector: 'meta[name="generator"]'
+    reason: "Jekyll advertises its own version in every page. Rails does not."
+
+# Output paths excluded from comparison entirely.
+skip_paths: []

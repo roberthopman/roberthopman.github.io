@@ -4,3 +4,6 @@ _site
 docs
 .claude
 build
+log/
+tmp/
+.superpowers/
