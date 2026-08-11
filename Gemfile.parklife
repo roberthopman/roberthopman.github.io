@@ -1,0 +1,16 @@
+source "https://rubygems.org"
+ruby file: ".ruby-version"
+
+gem "rails", "~> 8.1"
+gem "parklife"
+gem "parklife-rails"
+
+gem "front_matter_parser"
+gem "kramdown"
+gem "kramdown-parser-gfm"
+gem "rouge"
+gem "puma"
+
+group :development do
+  gem "nokogiri"
+end
