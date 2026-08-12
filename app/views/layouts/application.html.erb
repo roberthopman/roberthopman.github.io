@@ -1,5 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
-<head><title>Blog</title></head>
-<body><%= yield %></body>
+<html lang="en"><%= render "layouts/head" %><body><a class="skip-link" href="#main-content">Skip to main content</a><%= render "layouts/header" %><% if @document.kind == :post || @document.sidebar %>
+  <aside class="share-rail share-rail--hidden-wide" aria-label="Share this page">
+    <%= render "shared/share_buttons", variant: "floating" %>
+  </aside>
+<%= "  " %><% end %>
+
+  <main class="page-content" id="main-content" aria-label="Content">
+    <div class="wrapper">
+<%= "      " %><% if @document.sidebar %>
+      <div class="page-with-sidebar">
+        <%= render "shared/sidebar" -%>
+        <div class="main-content">
+          <%= render "shared/page_header" -%>
+          <%= yield %>
+
+          <%= render "shared/share_buttons", extra_class: "share-inline--mobile" -%>
+<% if Site.discourse_url %><%= render("shared/discourse_comments").chomp.html_safe %><% end %></div>
+      </div>
+<%= "      " %><% elsif @document.kind == :post %>
+      <div class="page-with-sidebar">
+        <aside class="sidebar" aria-label="Newsletter and sharing">
+          <div class="sidebar-extra no-anchors">
+            <%= render "shared/social_movement" %>
+          </div>
+        </aside>
+        <div class="main-content">
+          <%= render "shared/page_header" -%>
+          <%= yield %>
+        </div>
+      </div>
+      <% else %>
+      <%= render "shared/page_header" -%>
+      <%= yield %>
+      <% end %><%= "" %>
+    </div>
+  </main><%= render("layouts/footer").chomp.html_safe %><% if @document.sidebar %>
+  <script src="/assets/js/sidebar.js"></script>
+<%= "  " %><% end %>
+
+</body>
+
 </html>

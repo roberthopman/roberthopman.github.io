@@ -18,6 +18,18 @@ strip_from_jekyll:
 # "404: Not Found" into the noscript fallback because it could not fetch the
 # gist body at build time. The Rails version emits a working link to the
 # gist instead. Site owner sign-off: 2026-08-12.
+#
+# AGENTS.md, CLAUDE.md, script/bootstrap, script/build, script/cibuild,
+# script/server: Jekyll copied every front-matter-less file into _site,
+# which published the repo's own agent instructions and build scripts.
+# Nothing links to them and they are in no index. Site owner decided to
+# stop serving them. Sign-off: 2026-08-11.
 skip_paths:
   - "deprecating-til/index.html"
   - "bug-report-template/index.html"
+  - "AGENTS.md"
+  - "CLAUDE.md"
+  - "script/bootstrap"
+  - "script/build"
+  - "script/cibuild"
+  - "script/server"

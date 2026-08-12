@@ -15,6 +15,7 @@ Parklife.application.config.on_404 = :error
 # listed instead, and the parity harness proves the list is complete.
 Parklife.application.routes do
   root
+  get "/diagnose-a-bug/"
 end
 
 require "parklife/application"
@@ -24,5 +25,9 @@ Parklife::Application.prepend(Module.new do
     root = Rails.application.root
     FileUtils.cp_r("#{root}/public/.", "#{root}/build")
     FileUtils.cp("#{root}/CNAME", "#{root}/build/CNAME") if File.exist?("#{root}/CNAME")
+    # Parklife's own metadata directory is not a page. The Pages workflow
+    # deploys with include-hidden-files: true, so leaving it here would
+    # publish it at a live URL.
+    FileUtils.rm_rf("#{root}/build/.parklife")
   end
 end)
