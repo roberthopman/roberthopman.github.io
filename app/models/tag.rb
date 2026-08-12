@@ -5,8 +5,13 @@ class Tag
   attr_reader :name
 
   def self.all
-    @all = nil if Rails.env.development?
     @all ||= build_from(Post.all + Page.all)
+  end
+
+  # See Document.reset_memo!: same per-request reset, called by
+  # ApplicationController alongside Post/Page's.
+  def self.reset_memo!
+    @all = nil
   end
 
   # The dedup rule as a pure function of any list of tag-bearing documents,

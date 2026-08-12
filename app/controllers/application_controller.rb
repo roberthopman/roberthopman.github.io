@@ -1,5 +1,23 @@
 class ApplicationController < ActionController::Base
+  before_action :reset_document_memoization
+
   private
+
+  # Post.all/Page.all/Tag.all each memoise for the life of the process (see
+  # Document.reset_memo!), which is what keeps `bin/parklife build` fast:
+  # eager loading plus no reloading means one process serves the whole
+  # crawl, so memoising across it is correct. Development reuses that same
+  # long-lived process across requests, so without a reset here the first
+  # edit made after boot would memoise forever; clearing once per request,
+  # rather than once per call, is what fixed /tags/ calling Post.all and
+  # Page.all 190 times (once per tag) instead of twice.
+  def reset_document_memoization
+    return unless Rails.env.development?
+
+    Post.reset_memo!
+    Page.reset_memo!
+    Tag.reset_memo!
+  end
 
   # The shared layout, page header and seo_tags all key off @document
   # (title, url, kind, ...). home, archive and the tag pages are pure

@@ -9,9 +9,17 @@ class Document
 
   class << self
     def all
-      # Rails reloads app/, but it does not watch _posts/. Re-globbing per
-      # request in development is what makes "save the file, refresh" work.
-      Rails.env.development? ? load_all : (@all ||= load_all)
+      @all ||= load_all
+    end
+
+    # Rails reloads app/, but it does not watch _posts/, so memoising #all
+    # unconditionally would freeze a document's content for the life of the
+    # server process. ApplicationController calls this once per request in
+    # development, which keeps "save the file, refresh" working while still
+    # reading each file only once per request instead of once per #all call
+    # (Tag#posts/#pages each call Post.all/Page.all, once per tag).
+    def reset_memo!
+      @all = nil
     end
 
     def find_by_slug(slug)

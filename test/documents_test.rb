@@ -137,4 +137,38 @@ assert_equal(2, deduped.size, "two spellings of one tag collapse to a single Tag
 assert_equal("Git Grep", deduped.find { |tag| tag.slug == "git-grep" }.name,
              "the first spelling encountered wins the dedup")
 
+# Document.all (see Post.all/Page.all) memoises per class for the life of
+# the process; ApplicationController resets that memo once per request in
+# development. Pin the contract directly: two calls within the same
+# "request" hand back the identical parsed instance, not two separate
+# reads of the file from disk. Post.all itself always returns a new Array
+# (it wraps Document.all in a sort_by.reverse), so the identity check is
+# on an element, the thing that is actually expensive to reconstruct.
+memoised_path = "_posts/2026-08-09-diagnose-a-bug.md"
+first_call = Post.all.find { |doc| doc.path == memoised_path }
+second_call = Post.all.find { |doc| doc.path == memoised_path }
+assert_equal(true, first_call.equal?(second_call),
+             "two Post.all calls hand back the identical document instance while memoised")
+
+# Prove the identity check above is not a tautology (identity by
+# coincidence). Mutate the memoised instance in place, exactly like a
+# saved edit would produce, and confirm the mutation is visible on the
+# next call too: without a reset, Post.all really is handing back the
+# same object.
+original_title = first_call.front_matter["title"]
+first_call.front_matter["title"] = "MUTATED"
+assert_equal("MUTATED", Post.all.find { |doc| doc.path == memoised_path }.front_matter["title"],
+             "without a reset, Post.all keeps handing back the same (now mutated) instance")
+
+# Post.reset_memo! is what ApplicationController calls once per request in
+# development. After it, the next Post.all call reparses the file from
+# disk: the in-memory mutation is gone, the real title is back, and the
+# instance itself is a new one, not the mutated one restored in place.
+Post.reset_memo!
+restored = Post.all.find { |doc| doc.path == memoised_path }
+assert_equal(original_title, restored.front_matter["title"],
+             "Post.reset_memo! clears the memo: the next call reparses the file from disk")
+assert_equal(false, first_call.equal?(restored),
+             "the post after reset is a freshly parsed instance, not the mutated one restored in place")
+
 puts "all document assertions passed"
