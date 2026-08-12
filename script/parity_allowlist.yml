@@ -50,6 +50,21 @@ skip_paths:
   - "assets/main.css"
   - "assets/main.css.map"
 
+# Paths on which the literal build-time string is normalised away before
+# comparison, independently on each side. feed.xml and sitemap.xml both
+# embed site.time (the moment that side's build ran): the top-level
+# <updated> in feed.xml, before the first <entry>, and the <lastmod> on
+# every PAGE entry in sitemap.xml (post entries use the post's own date
+# and are already stable). Two builds started at different instants can
+# never be byte-identical on these two paths without this. It is not a
+# pattern-based timestamp strip: script/parity reads each side's own
+# feed.xml <updated> value and replaces only that exact string, only in
+# these paths, only on that side, so a real change to a post's own date
+# still shows up as differing. Approved 2026-08-12.
+normalise_build_time:
+  - "feed.xml"
+  - "sitemap.xml"
+
 # Attributes removed from BOTH sides before comparison. Unlike skip_paths,
 # the rest of the page is still compared in full.
 strip_attributes:

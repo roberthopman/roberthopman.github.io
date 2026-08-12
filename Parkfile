@@ -22,6 +22,10 @@ Parklife.application.routes do
   get "/archive/"
   get "/tags/"
   Tag.all.each { |tag| get tag.url }
+
+  get "/feed.xml"
+  get "/sitemap.xml"
+  get "/llms.txt"
 end
 
 require "parklife/application"

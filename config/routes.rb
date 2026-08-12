@@ -5,6 +5,10 @@ Rails.application.routes.draw do
   get "/tags", to: "tags#index"
   get "/tags/:slug", to: "tags#show"
 
+  get "/feed.xml", to: "machine#feed", format: false
+  get "/sitemap.xml", to: "machine#sitemap", format: false
+  get "/llms.txt", to: "machine#llms", format: false
+
   # format: false stops Rails treating the ".html" in "/404.html" as a format
   # extension, which would otherwise route it as slug=404, format=html and
   # leave DocumentsController looking up a url that does not exist. A dynamic

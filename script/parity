@@ -98,6 +98,30 @@ differing = []
 
 strip = ALLOWLIST["strip_from_jekyll"].map { |entry| entry["selector"] }
 
+# feed.xml and sitemap.xml both stamp in site.time (the moment that side's
+# build ran), so two builds started at different instants can never be
+# byte-identical there without this. Each side's own build-time value is
+# read off its own feed.xml (the top-level <updated>, before the first
+# <entry>, is exactly site.time) and only that exact string is replaced,
+# only in the declared paths, only on the side it came from. This is
+# deliberately not a pattern-based timestamp strip: post and page dates
+# are timestamps too, and blurring those would stop the harness checking
+# real content. See parity_allowlist.yml's normalise_build_time entry.
+def extract_build_time(content)
+  content[/<updated>([^<]+)<\/updated>/, 1]
+end
+
+BUILD_TIME_PLACEHOLDER = "BUILD_TIME"
+build_time_paths = ALLOWLIST["normalise_build_time"] || []
+jekyll_build_time = extract_build_time(File.read(File.join(JEKYLL_OUT, "feed.xml")))
+parklife_build_time = extract_build_time(File.read(File.join(PARKLIFE_OUT, "feed.xml")))
+
+def normalise_build_time(content, value)
+  return content unless value
+
+  content.gsub(value, BUILD_TIME_PLACEHOLDER)
+end
+
 # Attributes removed from BOTH sides before comparison, keyed by the path
 # they apply to. Unlike strip_from_jekyll, this strips from the Parklife
 # side too: it is for a value both builds compute honestly but that
@@ -117,6 +141,8 @@ end
       attributes = strip_attributes_by_path[path]
       normalise(left, strip_selectors: strip, strip_attributes: attributes) ==
         normalise(right, strip_attributes: attributes)
+    elsif build_time_paths.include?(path)
+      normalise_build_time(left, jekyll_build_time) == normalise_build_time(right, parklife_build_time)
     else
       left == right
     end
