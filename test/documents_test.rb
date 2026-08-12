@@ -21,12 +21,8 @@ page = Page.all.find { |doc| doc.path == "ai.md" }
 assert_equal("/ai/", page.url, "page url without permalink")
 
 # A page with a permalink uses it verbatim.
-tags_page = Page.all.find { |doc| doc.path == "tags.md" }
-assert_equal("/tags/", tags_page.url, "page permalink override")
-
-# index.md is the home page.
-home = Page.all.find { |doc| doc.path == "index.md" }
-assert_equal("/", home.url, "home url")
+uses_page = Page.all.find { |doc| doc.path == "uses.md" }
+assert_equal("/uses/", uses_page.url, "page permalink override")
 
 # 404.html keeps its extension.
 not_found = Page.all.find { |doc| doc.path == "404.html" }
@@ -88,5 +84,21 @@ assert_equal(short_description, seo.send(:snippet, short_description, 100),
 authored_post = Post.all.find { |doc| doc.front_matter["author"] == "Robert Hopman" }
 assert_equal("Robert Hopman", seo.send(:json_ld_author, authored_post)["name"],
              "json-ld author name for a post with its own front-matter author")
+
+# Tag replaces _plugins/tag_pages.rb. A multi-word tag slugifies with a
+# hyphen, same as Jekyll's Utils.slugify.
+git_grep = Tag.find_by_slug("git-grep")
+assert_equal("git grep", git_grep.name, "multi-word tag slug")
+
+# "security" is declared only on iso-27001.md, a page, and on no post.
+# Tag.all must still find it (tag_pages.rb generated a page for every tag
+# on a post OR a page), but the /tags/ index only lists tags with a post
+# (site.tags is posts only), so it must report zero posts here.
+security = Tag.find_by_slug("security")
+assert_equal([], security.posts, "a page-only tag has no posts")
+assert_equal(["iso-27001.md"], security.pages.map(&:path), "a page-only tag still resolves its page")
+
+# Two spellings of the same tag collapse to one Tag, keyed by slug.
+assert_equal(1, Tag.all.count { |tag| tag.slug == "ruby" }, "tag slugs are deduplicated")
 
 puts "all document assertions passed"

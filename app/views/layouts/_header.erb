@@ -10,6 +10,6 @@
           </span>
         </label>
 
-        <div class="trigger"><% Site.header_pages.each do |path| %><% nav_page = Page.all.find { |page| page.path == path } %><% if nav_page&.title %><a class="page-link" href="<%= nav_page.url %>"><%= nav_page.title %></a><% end %><% end %></div>
+        <div class="trigger"><% Site.header_pages.each do |path| %><% title, url = header_link(path) %><% if title %><a class="page-link" href="<%= url %>"><%= title %></a><% end %><% end %></div>
       </nav></div>
 </header>

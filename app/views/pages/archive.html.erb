@@ -1,9 +1,3 @@
----
-layout: default
-title: Archive
-hide_author: true
----
-
 <div class="main">
 
   <div class="archive-filters">
@@ -21,43 +15,31 @@ hide_author: true
     </div>
   </div>
 
-  {% for post in site.posts %}
-  {% assign post_date = post.date | date: "%s" | plus: 0 %}
-  {% assign eighteen_months_ago = "now" | date: "%s" | minus: 15552000 | plus: 0 %}
-
-  {% if post_date >= eighteen_months_ago %}
-  <div class='post-row' data-tags="{{ post.tags | join: ',' | downcase }}" data-words="{{ post.content | number_of_words }}">
-    <div class='column-date'>{{ post.date | date: "%d-%m-%Y" }}</div>
-    <div class='column-title'><a href="{{ post.url }}">{{ post.title }}</a></div>
+  <% Post.all.select { |post| post.date >= @cutoff }.each do |post| %>
+  <div class='post-row' data-tags="<%= post.tags.join(',').downcase %>" data-words="<%= archive_post_words(post) %>">
+    <div class='column-date'><%= post.date.strftime("%d-%m-%Y") %></div>
+    <div class='column-title'><a href="<%= post.url %>"><%= post.title %></a></div>
   </div>
-  {% endif %}
-  {% endfor %}
+  <% end %>
 
-  {% for post in site.posts %}
-  {% assign post_date = post.date | date: "%s" | plus: 0 %}
-  {% assign eighteen_months_ago = "now" | date: "%s" | minus: 15552000 | plus: 0 %}
-
-  {% if post_date < eighteen_months_ago %}
-  <div class='post-row' data-tags="{{ post.tags | join: ',' | downcase }}" data-words="{{ post.content | number_of_words }}">
-    <div class='column-date'>{{ post.date | date: "%d-%m-%Y" }}</div>
-    <div class='column-title'><a href="{{ post.url }}">{{ post.title }}</a></div>
+  <% Post.all.select { |post| post.date < @cutoff }.each do |post| %>
+  <div class='post-row' data-tags="<%= post.tags.join(',').downcase %>" data-words="<%= archive_post_words(post) %>">
+    <div class='column-date'><%= post.date.strftime("%d-%m-%Y") %></div>
+    <div class='column-title'><a href="<%= post.url %>"><%= post.title %></a></div>
   </div>
-  {% endif %}
-{% endfor %}
+  <% end %>
 
-  {% for page in site.pages %}
-  {% if page.tags and page.tags.size > 0 %}
-  <div class='post-row' data-tags="{{ page.tags | join: ',' | downcase }}" data-words="{{ page.content | number_of_words }}">
-    <div class='column-date'>{{ page.last_modified_at }}</div>
-    <div class='column-title'><a href="{{ page.url }}">{{ page.title }}</a></div>
+  <% @tagged_pages.each do |page| %>
+  <div class='post-row' data-tags="<%= page.tags.join(',').downcase %>" data-words="<%= archive_word_count(page) %>">
+    <div class='column-date'><%= page.last_modified_raw %></div>
+    <div class='column-title'><a href="<%= page.url %>"><%= page.title %></a></div>
   </div>
-  {% endif %}
-  {% endfor %}
+  <% end %>
 
   <p class="filter-count"></p>
 </div>
 
-<a href="/">Home</a>
+<p><a href="/">Home</a></p>
 
 <script>
 (function() {
