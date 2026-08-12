@@ -65,6 +65,25 @@ normalise_build_time:
   - "feed.xml"
   - "sitemap.xml"
 
+# Paths compared as parsed XML rather than byte-for-byte: sibling element
+# order is still preserved, and only whitespace-only text nodes collapse.
+# sitemap.xml is generated as ordinary, readably-indented XML now, which
+# Jekyll's own Liquid loop never was: Jekyll's {% if %} inside the page
+# loop left an empty iteration's worth of whitespace behind for every page
+# that failed the sitemap condition (Jekyll's own generated feed.xml/
+# sitemap.xml/llms.txt pages, 404.html's sitemap: false, and two Sass
+# entry-point pages jekyll-sass-converter also registers as pages), in an
+# order tied to Jekyll's own site.pages read order (filesystem directory
+# order, not something worth simulating on the Rails side for whitespace
+# alone). Comparing structurally means indentation, blank-line placement
+# and trailing whitespace no longer have to match byte for byte. Every
+# <url> element's presence, its position relative to its siblings, and the
+# text of its <loc>, <lastmod>, <changefreq> and <priority> are still
+# compared exactly: nothing about element order or content is loosened.
+# Approved 2026-08-12.
+structural_xml:
+  - "sitemap.xml"
+
 # Attributes removed from BOTH sides before comparison. Unlike skip_paths,
 # the rest of the page is still compared in full.
 strip_attributes:

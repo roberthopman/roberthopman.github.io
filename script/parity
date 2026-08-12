@@ -122,6 +122,18 @@ def normalise_build_time(content, value)
   content.gsub(value, BUILD_TIME_PLACEHOLDER)
 end
 
+# sitemap.xml is compared as parsed XML instead of bytes (see
+# parity_allowlist.yml's structural_xml entry): NOBLANKS drops
+# whitespace-only text nodes during parsing, which is the only kind of
+# difference this is meant to absorb. Real element order and content are
+# untouched, and the result is a plain string, so it still goes through
+# `==` like every other comparison in this file.
+structural_xml_paths = ALLOWLIST["structural_xml"] || []
+
+def normalise_xml(content)
+  Nokogiri::XML(content) { |config| config.noblanks }.to_xml
+end
+
 # Attributes removed from BOTH sides before comparison, keyed by the path
 # they apply to. Unlike strip_from_jekyll, this strips from the Parklife
 # side too: it is for a value both builds compute honestly but that
@@ -141,6 +153,10 @@ end
       attributes = strip_attributes_by_path[path]
       normalise(left, strip_selectors: strip, strip_attributes: attributes) ==
         normalise(right, strip_attributes: attributes)
+    elsif structural_xml_paths.include?(path)
+      left_n = build_time_paths.include?(path) ? normalise_build_time(left, jekyll_build_time) : left
+      right_n = build_time_paths.include?(path) ? normalise_build_time(right, parklife_build_time) : right
+      normalise_xml(left_n) == normalise_xml(right_n)
     elsif build_time_paths.include?(path)
       normalise_build_time(left, jekyll_build_time) == normalise_build_time(right, parklife_build_time)
     else

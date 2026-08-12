@@ -40,16 +40,13 @@ module MachineHelper
     MachineHelper.build_time_xmlschema
   end
 
-  # jekyll-feed's "smartify" filter runs a title through Kramdown's
-  # SmartyPants-only parser (typographic quotes/dashes, no block markup).
-  # A full Kramdown render produces the same result for any title with no
-  # markdown syntax in it, which is true of every title in this corpus, so
-  # this reuses the same renderer the rest of the app already proved
-  # correct rather than reimplementing Jekyll's SmartyPants parser.
-  # ponytail: full markdownify instead of SmartyPants-only, wrong only if a
-  # future title contains real markdown syntax (bold, links, backticks).
-  def feed_smartify(text)
-    strip_tags(MarkdownRenderer.render(text.to_s)).squish
+  # jekyll-feed's "smartify" filter: Jekyll's own SmartyPants-only Kramdown
+  # parser (see SmartypantsRenderer), typography only. Titles with markdown
+  # control characters ("*args", "`code`", "[text](url)") come out
+  # unconverted, matching Jekyll rather than the full-markdown renderer
+  # used for post/page bodies.
+  def smartify(text)
+    SmartypantsRenderer.render(text)
   end
 
   # Jekyll::Document#generate_excerpt only builds a rendered Jekyll::Excerpt
@@ -63,42 +60,33 @@ module MachineHelper
 
   # === sitemap.xml =========================================================
 
-  # sitemap.xml.liquid's page loop wraps its "<url>...</url>" body in an
-  # {% if %}, so every site.pages entry (matching or not) leaves behind a
-  # "\n  " before AND after its turn, not just the matching ones:
-  # {% for page %}\n  {% if ... %}\n  <url>...</url>\n  {% endif %}\n  {% endfor %}.
-  # A page that fails the condition (Jekyll's own feed.xml/sitemap.xml/
-  # llms.txt pages, and the two Sass entry points its converter also
-  # registers as pages) contributes that empty "\n  \n  " with no <url>
-  # block. MachineController#sitemap_page_entries builds the same sequence
-  # of :skip / [:page, url] tokens that site.pages carried, in the same
-  # positions, so this only has to render each token, not know why it is
-  # there.
-  def sitemap_xml(posts, page_entries)
+  # script/parity compares sitemap.xml structurally (parsed XML, sibling
+  # order preserved, whitespace-only text nodes collapsed) rather than
+  # byte-for-byte, so this only has to emit ordinary, readably-indented
+  # XML for the posts, pages and tags that actually exist. See
+  # parity_allowlist.yml's structural_xml entry for why.
+  def sitemap_xml(posts, page_urls)
     build_time = build_time_xmlschema
+    entries = posts.map { |post| sitemap_url_xml(post.url, post.date.iso8601, "0.8") }
+    entries += page_urls.map { |url| sitemap_url_xml(url, build_time, "0.5") }
 
-    xml = +%(<?xml version="1.0" encoding="UTF-8"?>\n)
-    xml << %(<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">\n  )
+    <<~XML
+      <?xml version="1.0" encoding="UTF-8"?>
+      <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+      #{entries.join("\n")}
+      </urlset>
+    XML
+  end
 
-    posts.each do |post|
-      xml << "\n  <url>\n    <loc>#{Site.url}#{post.url}</loc>\n    <lastmod>#{post.date.iso8601}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>0.8</priority>\n  </url>\n  "
-    end
-
-    xml << "  \n  "
-
-    page_entries.each do |entry|
-      body =
-        if entry == :skip
-          ""
-        else
-          _, url = entry
-          "\n  <url>\n    <loc>#{Site.url}#{url}</loc>\n    <lastmod>#{build_time}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>0.5</priority>\n  </url>\n  "
-        end
-      xml << "\n  #{body}\n  "
-    end
-
-    xml << "\n</urlset>"
-    xml
+  def sitemap_url_xml(path, lastmod, priority)
+    <<~XML.chomp
+      <url>
+        <loc>#{Site.url}#{path}</loc>
+        <lastmod>#{lastmod}</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>#{priority}</priority>
+      </url>
+    XML
   end
 
   # === feed.xml =============================================================
@@ -106,7 +94,7 @@ module MachineHelper
   def feed_xml(posts)
     build_time = build_time_xmlschema
     self_url = "#{Site.url}/feed.xml"
-    title = xml_escape(feed_smartify(Site.title))
+    title = xml_escape(smartify(Site.title))
 
     xml = +%(<?xml version="1.0" encoding="utf-8"?>)
     xml << %(<feed xmlns="http://www.w3.org/2005/Atom" >)
@@ -124,7 +112,9 @@ module MachineHelper
   end
 
   def feed_entry_xml(post)
-    title = xml_escape(feed_smartify(post.title))
+    # post_title in jekyll-feed's template: smartify | strip_html |
+    # normalize_whitespace | xml_escape, unlike the bare site-level title.
+    title = xml_escape(strip_tags(smartify(post.title)).squish)
     url = "#{Site.url}#{post.url}"
     id = xml_escape("#{Site.url}#{post.url.chomp('/')}")
     image = xml_escape("#{Site.url}#{post.image}")

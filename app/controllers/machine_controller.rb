@@ -3,18 +3,10 @@ class MachineController < ApplicationController
 
   # Pages that were never Page objects to begin with: home, archive and
   # tags moved to pure views in an earlier task (see
-  # ApplicationHelper::HEADER_VIRTUAL_PAGES), so sitemap.xml.liquid's own
-  # alphabetical site.pages order is reconstructed by sorting them back in
-  # by slug alongside the real Page documents.
+  # ApplicationHelper::HEADER_VIRTUAL_PAGES), so sitemap.xml's own
+  # alphabetical page order is reconstructed by sorting them back in by
+  # slug alongside the real Page documents.
   VIRTUAL_SITEMAP_PAGES = { "archive" => "/archive/", "index" => "/", "tags" => "/tags/" }.freeze
-
-  # Where master's site.pages carried a page that fails sitemap.xml's own
-  # {% if %} (confirmed with a one-off Jekyll :post_write hook dumping
-  # site.pages, see task-8-report.md): llms.txt and the Sass entry point
-  # for main.css between "iso-27001" and "ruby-syntax", then sitemap.xml
-  # and the Sass entry point for the theme stylesheet between "ruby-syntax"
-  # and "tags". Keyed by the slug the skip run comes immediately after.
-  SITEMAP_SKIPS_AFTER = { "iso-27001" => 2, "ruby-syntax" => 2 }.freeze
 
   def feed
     @posts = Post.all
@@ -23,7 +15,7 @@ class MachineController < ApplicationController
 
   def sitemap
     @posts = Post.all
-    @page_entries = sitemap_page_entries
+    @page_urls = sitemap_page_urls
     render formats: [:xml], content_type: "application/xml"
   end
 
@@ -35,22 +27,10 @@ class MachineController < ApplicationController
 
   private
 
-  # Builds the same :skip / [:page, url] token sequence master's
-  # site.pages carried through sitemap.xml.liquid's page loop, so
-  # MachineHelper#sitemap_xml can render each token's turn without needing
-  # to know why a given position is empty.
-  def sitemap_page_entries
+  def sitemap_page_urls
     real = Page.all.select { |page| page["sitemap"] != false }.map { |page| [page.slug, page.url] }
-    ordered = (real + VIRTUAL_SITEMAP_PAGES.to_a).sort_by(&:first)
-
-    entries = [:skip] # 404.html: sitemap: false, sorts before every page above
-    ordered.each do |slug, url|
-      entries << [:page, url]
-      SITEMAP_SKIPS_AFTER.fetch(slug, 0).times { entries << :skip }
-    end
-    sitemap_tag_urls.each { |url| entries << [:page, url] }
-    2.times { entries << :skip } # feed.xml, and the Sass source-map companion it beat to /assets/main.css
-    entries
+    ordered = (real + VIRTUAL_SITEMAP_PAGES.to_a).sort_by(&:first).map(&:last)
+    ordered + sitemap_tag_urls
   end
 
   # _plugins/tag_pages.rb built site.tags in the order tags first appear
