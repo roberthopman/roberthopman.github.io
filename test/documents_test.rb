@@ -15,8 +15,7 @@ assert_equal(Date.new(2026, 8, 9), post.date.to_date, "post date from filename")
 override = Post.all.find { |doc| doc.path == "_posts/2024-05-04-tools.md" }
 assert_equal("/tools-keyboard-shortcuts/", override.url, "post permalink override")
 
-# A page with no permalink gets a trailing slash, because _config.yml sets
-# permalink: /:title/ which ends in a slash.
+# A page with no permalink gets a trailing slash. See Page#url.
 page = Page.all.find { |doc| doc.path == "ai.md" }
 assert_equal("/ai/", page.url, "page url without permalink")
 

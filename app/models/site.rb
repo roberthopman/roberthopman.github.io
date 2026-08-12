@@ -2,7 +2,7 @@ module Site
   module_function
 
   def config
-    @config ||= YAML.load_file(Rails.root.join("_config.yml"))
+    @config ||= YAML.load_file(Rails.root.join("config", "site.yml"))
   end
 
   def data(name)

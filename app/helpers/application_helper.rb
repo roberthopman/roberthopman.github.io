@@ -1,6 +1,6 @@
 module ApplicationHelper
   # archive.md and tags.md no longer exist as Page files (Task 7 replaced
-  # them with views), but _config.yml's header_pages still names them by
+  # them with views), but config/site.yml's header_pages still names them by
   # path, so the site nav needs their title/url from somewhere else.
   HEADER_VIRTUAL_PAGES = {
     "archive.md" => ["Archive", "/archive/"],

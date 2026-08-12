@@ -59,7 +59,7 @@ class Document
   def comments? = front_matter["comments"] != false
 
   def image
-    # _config.yml sets a default image for both posts and pages.
+    # config/site.yml sets a default image for both posts and pages.
     front_matter["image"] || Site.image
   end
 

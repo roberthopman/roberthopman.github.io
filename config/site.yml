@@ -1,0 +1,44 @@
+# Site settings
+# These are used to personalize the whole site. The Site model reads them;
+# see app/models/site.rb.
+title: Blog
+email: robert@bonaroo.nl
+legal_entity: You can hire me via Bonaroo
+description: >-
+  Technical blog by Robert Hopman with practical guides on syntax, patterns, upgrades, and software development best practices for developers
+image: /assets/images/default_technical_blog.png
+url: "https://roberthopman.com" # the base hostname & protocol for your site, e.g. http://example.com
+
+# Header navigation pages
+header_pages:
+  - archive.md
+  - tags.md
+  - tools.md
+  - author.md
+
+author:
+  name: Robert Hopman
+  email: "robert@bonaroo.nl"
+  url: https://roberthopman.com/author/
+
+# Turned into schema.org sameAs, which is what lets an agent cross-reference
+# "Robert Hopman" against verifiable profiles. The same URLs already appear
+# as rel="me" links in the footer via minima.social_links; keep the two lists
+# in step.
+social:
+  name: Robert Hopman
+  links:
+    - https://github.com/roberthopman
+    - https://www.linkedin.com/in/roberthopman
+    - https://x.com/roberthopman
+
+discourse:
+  url: 'https://technicalblog.discourse.group/'
+
+minima:
+  social_links:
+    github: roberthopman
+    twitter: roberthopman
+    linkedin: roberthopman
+
+google_analytics: 'G-J0HMLHK67L'

@@ -17,9 +17,8 @@ class Page < Document
     return permalink if permalink
     return "/" if slug == "index"
 
-    # _config.yml sets permalink: /:title/, which ends in a slash, so Jekyll
-    # appends one to the page template. That is why ai.md is /ai/ and not
-    # /ai.html.
+    # Every page URL ends in a slash, the convention the old Jekyll permalink
+    # setting used. That is why ai.md is /ai/ and not /ai.html.
     "/#{slug}/"
   end
 

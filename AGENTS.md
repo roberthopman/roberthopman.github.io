@@ -2,14 +2,24 @@ Instructions for all AI agents working on this project.
 
 ## Development Server
 
-Always run the local development server with:
+Run the local development server with:
 
 ```bash
-bundle exec jekyll serve --incremental
+bin/rails server
 ```
 
-The `--incremental` flag skips re-rendering unchanged files, significantly
-reducing build times.
+Pages render on request. Editing a post and refreshing the browser is enough;
+there is no build step.
+
+To work on styles, run the Sass compiler in a second terminal:
+
+```bash
+npx sass --watch --load-path=_sass _sass/style.scss public/assets/css/style.css
+```
+
+This produces uncompressed CSS for fast iteration. Before committing a style
+change, recompile once with `--style=compressed` so
+`public/assets/css/style.css` matches the asset the build ships.
 
 ## Tutorial Writing Checklist
 

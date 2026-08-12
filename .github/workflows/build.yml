@@ -1,15 +1,10 @@
-# Builds and deploys the site using this repo's own Gemfile.
-#
-# This replaced GitHub Pages' legacy branch builds, which ignored the Gemfile
-# and forced Jekyll 3.9.3 via the github-pages gem. That old stack also shipped
-# jekyll-sass-converter 1.5.2 (Ruby Sass), which cannot parse the @use rules and
-# color.adjust() calls in _sass/minima/. This workflow is what makes those work.
+# Builds the site with Parklife (this Rails app rendered to static files)
+# and deploys the result to GitHub Pages.
 #
 # Pages must be set to build_type=workflow for the deploy step to succeed:
 #   gh api -X PUT repos/roberthopman/roberthopman.github.io/pages -f build_type=workflow
-# To roll back to branch builds, set build_type=legacy. The Sass would then need
-# reverting too, so prefer fixing forward.
-name: Jekyll
+# To roll back to branch builds, set build_type=legacy.
+name: Build
 
 on:
   push:
@@ -42,21 +37,17 @@ jobs:
           # action and is ignored with a warning on every run.
           bundler-cache: true
 
-      # No --baseurl override here on purpose. _config.yml sets baseurl: "" and
-      # the site is served from the root of a custom domain, which is what
-      # production already expects. Letting actions/configure-pages compute a
-      # base_path risks rewriting every relative_url on the site.
       - name: Build site
         env:
-          JEKYLL_ENV: production
-        run: bundle exec jekyll build
+          TZ: UTC
+        run: bin/parklife build
 
       # include-hidden-files defaults to false, which adds --exclude=.[^/]* to
       # the action's tar and silently drops .well-known/ from the artifact.
-      # Jekyll builds security.txt correctly; without this it never deploys.
-      # .git and .github stay excluded regardless of this setting.
+      # public/.well-known/security.txt (RFC 9116) needs it to deploy.
       - uses: actions/upload-pages-artifact@v5
         with:
+          path: build
           include-hidden-files: true
 
   deploy:

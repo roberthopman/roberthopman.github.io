@@ -26,12 +26,12 @@ def sh(command, chdir: ROOT)
   system(command, chdir: chdir) or abort("FAILED: #{command}")
 end
 
-# This script itself typically runs under `BUNDLE_GEMFILE=Gemfile.parklife
-# bundle exec ...` so that it can `require "nokogiri"`. `bundle exec` exports
-# BUNDLE_GEMFILE, BUNDLE_LOCKFILE and RUBYOPT into every child process
-# regardless of chdir. Left alone, "bundle install" and "bundle exec jekyll
-# build" in the Jekyll worktree silently target Gemfile.parklife and even
-# write to its lockfile instead of the worktree's own Gemfile.
+# This script itself typically runs under `bundle exec ruby script/parity` so
+# that it can `require "nokogiri"`. `bundle exec` exports BUNDLE_GEMFILE,
+# BUNDLE_LOCKFILE and RUBYOPT into every child process regardless of chdir.
+# Left alone, "bundle install" and "bundle exec jekyll build" in the Jekyll
+# worktree silently target this repo's Gemfile and even write to its lockfile
+# instead of the worktree's own Gemfile.
 # Bundler.with_unbundled_env restores the environment this process had before
 # `bundle exec` touched it, which is exactly what a child bundle command needs.
 def sh_unbundled(command, chdir: ROOT)
@@ -51,7 +51,7 @@ def build_jekyll
 end
 
 def build_parklife
-  sh("BUNDLE_GEMFILE=Gemfile.parklife TZ=UTC bin/parklife build")
+  sh("TZ=UTC bin/parklife build")
 end
 
 def files_in(dir)
