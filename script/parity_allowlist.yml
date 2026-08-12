@@ -49,3 +49,16 @@ skip_paths:
   - "assets/css/style.css.map"
   - "assets/main.css"
   - "assets/main.css.map"
+
+# Attributes removed from BOTH sides before comparison. Unlike skip_paths,
+# the rest of the page is still compared in full.
+strip_attributes:
+  - path: "archive/index.html"
+    attribute: "data-words"
+    reason: >
+      Two posts (deprecating-til, bug-report-template) have approved content
+      changes (see skip_paths above), which shifts their rendered word
+      counts by a few words. data-words feeds only a client-side filter
+      bucketed <400 / 400-800 / 800+, and every affected row stays in the
+      same bucket either way, so the difference is not observable. Approved
+      2026-08-12.

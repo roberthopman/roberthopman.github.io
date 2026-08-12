@@ -63,9 +63,10 @@ def files_in(dir)
     .sort
 end
 
-def normalise(html, strip_selectors: [])
+def normalise(html, strip_selectors: [], strip_attributes: [])
   doc = Nokogiri::HTML5(html)
   strip_selectors.each { |selector| doc.css(selector).each(&:remove) }
+  strip_attributes.each { |attribute| doc.css("[#{attribute}]").each { |node| node.remove_attribute(attribute) } }
   doc.xpath("//comment()").each(&:remove)
 
   doc.traverse do |node|
@@ -97,13 +98,25 @@ differing = []
 
 strip = ALLOWLIST["strip_from_jekyll"].map { |entry| entry["selector"] }
 
+# Attributes removed from BOTH sides before comparison, keyed by the path
+# they apply to. Unlike strip_from_jekyll, this strips from the Parklife
+# side too: it is for a value both builds compute honestly but that
+# differs for an approved, unrelated content reason (see
+# parity_allowlist.yml), not for a one-sided quirk of the Jekyll build.
+strip_attributes_by_path = Hash.new { |hash, key| hash[key] = [] }
+(ALLOWLIST["strip_attributes"] || []).each do |entry|
+  strip_attributes_by_path[entry["path"]] << entry["attribute"]
+end
+
 (jekyll_files & parklife_files).each do |path|
   left = File.read(File.join(JEKYLL_OUT, path))
   right = File.read(File.join(PARKLIFE_OUT, path))
 
   same =
     if path.end_with?(".html")
-      normalise(left, strip_selectors: strip) == normalise(right)
+      attributes = strip_attributes_by_path[path]
+      normalise(left, strip_selectors: strip, strip_attributes: attributes) ==
+        normalise(right, strip_attributes: attributes)
     else
       left == right
     end
