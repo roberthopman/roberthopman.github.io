@@ -8,27 +8,14 @@ require "kramdown"
 # over that text: smart quotes, HTML entities, typographic symbols (em/en
 # dash, ellipsis) and literal HTML passthrough. Emphasis, code spans and
 # links are not in that list, so "*args", "`code`" and "[text](url)" come
-# out exactly as written instead of becoming <em>/<code>/<a>. This registers
-# the same restricted parser under the same name Kramdown looks up for
-# `input: "SmartyPants"`, copied from Jekyll's own file rather than
-# reimplemented from a description, so it stays behaviourally identical.
-module Kramdown
-  module Parser
-    class SmartyPants < Kramdown::Parser::Kramdown
-      def initialize(source, options)
-        super
-        @block_parsers = [:block_html, :content]
-        @span_parsers = [:smart_quotes, :html_entity, :typographic_syms, :span_html]
-      end
-
-      def parse_content
-        add_text @src.scan(%r!\A.*\n!)
-      end
-      define_parser(:content, %r!\A!)
-    end
-  end
-end
-
+# out exactly as written instead of becoming <em>/<code>/<a>.
+#
+# The "SmartyPants" parser this looks up by name is registered in
+# config/initializers/kramdown_smartypants_parser.rb, not here: it reopens
+# Kramdown's own Parser namespace, which this file's autoload path
+# (app/lib, reloaded on every request in development) is the wrong place
+# to do more than once per process. This module only knows how to render,
+# and is an ordinary autoloadable, reloadable class.
 module SmartypantsRenderer
   OPTIONS = {
     "entity_output" => "as_char",

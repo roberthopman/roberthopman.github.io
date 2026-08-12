@@ -59,4 +59,24 @@ assert_equal(false, not_found["sitemap"], "404.html declares sitemap: false")
 sitemap_urls = MachineController.new.send(:sitemap_page_urls)
 assert_equal(false, sitemap_urls.include?(not_found.url), "sitemap.xml excludes a document with sitemap: false")
 
+# Regression guard for the Zeitwerk reload bug this split file layout
+# exists to prevent: app/lib/smartypants_renderer.rb lives in Rails'
+# reloadable autoload path, so Zeitwerk unloads and re-executes it on
+# every code change in development. Kernel#load, unlike require,
+# re-executes a file every time it is called, which is exactly what a
+# reload does, so loading this file twice in one process is the check for
+# "does this file mutate unmanaged third-party state that only tolerates
+# running once". It must not: the Kramdown::Parser::SmartyPants class
+# that would break on a second define_parser call lives in
+# config/initializers instead, which this file must not reopen.
+renderer_path = File.expand_path("../app/lib/smartypants_renderer.rb", __dir__)
+load(renderer_path)
+begin
+  load(renderer_path)
+  reloaded_twice_without_raising = true
+rescue StandardError
+  reloaded_twice_without_raising = false
+end
+assert_equal(true, reloaded_twice_without_raising, "app/lib/smartypants_renderer.rb tolerates being reloaded twice in one process")
+
 puts "all machine assertions passed"
