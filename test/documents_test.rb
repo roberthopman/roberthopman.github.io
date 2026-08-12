@@ -37,7 +37,16 @@ declared = Post.all.find { |doc| doc.front_matter["excerpt"].present? }
 assert_equal(declared.front_matter["excerpt"], declared.excerpt_source, "declared excerpt")
 
 # Without one, Jekyll takes the first block delimited by a blank line.
-derived = Post.all.find { |doc| doc.front_matter["excerpt"].blank? }
-assert_equal(derived.body.strip.split("\n\n").first, derived.excerpt_source, "derived excerpt")
+# The expected value is a literal, and the post is named rather than
+# searched for. Recomputing the split rule here, or picking "the first post
+# without an excerpt", would make the assertion pass even when the rule is
+# wrong.
+derived = Post.all.find { |doc| doc.path == "_posts/2025-11-29-nextgen-erb-lint-caching.md" }
+assert_equal(nil, derived.front_matter["excerpt"], "the fixture declares no excerpt")
+assert_equal(
+  "I recently submitted a [pull request](https://github.com/mattbrictson/nextgen/pull/178) to Matt Brictson's nextgen gem. ",
+  derived.excerpt_source,
+  "derived excerpt"
+)
 
 puts "all document assertions passed"
