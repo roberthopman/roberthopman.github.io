@@ -30,6 +30,13 @@ strip_from_jekyll:
 # developer-only artifact (source maps are read by browser devtools, not by
 # any rendered page). Both builds publish the URL; only the content differs.
 # Sign-off: 2026-08-12.
+#
+# assets/main.css, assets/main.css.map: main.css was an empty stylesheet
+# (only a "/*# sourceMappingURL=main.css.map */" comment, no rules) that
+# existed only to out-rank the minima theme gem's own copy of the same
+# path. The theme gem is gone, so there is nothing left to out-rank, and
+# nothing on the site links to either path. Site owner decided to stop
+# serving them. Sign-off: 2026-08-12.
 skip_paths:
   - "deprecating-til/index.html"
   - "bug-report-template/index.html"
@@ -40,3 +47,5 @@ skip_paths:
   - "script/cibuild"
   - "script/server"
   - "assets/css/style.css.map"
+  - "assets/main.css"
+  - "assets/main.css.map"

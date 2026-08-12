@@ -50,9 +50,26 @@ module SeoHelper
   end
 
   def seo_description(document)
-    format_string(document.description) ||
+    value = format_string(document.description) ||
       format_string(document_excerpt(document)) ||
       Site.description
+    snippet(value, description_max_words(document))
+  end
+
+  # jekyll-seo-tag caps the description at 100 words, or at a page's own
+  # front_matter["seo_description_max_words"] when it sets one.
+  def description_max_words(document)
+    document.front_matter["seo_description_max_words"] || 100
+  end
+
+  # jekyll-seo-tag's own truncation: split on whitespace, keep the first
+  # max_words pieces, and append a single "…" (not three dots) only when
+  # something was actually cut.
+  def snippet(string, max_words)
+    return string if string.nil?
+
+    result = string.split(/\s+/, max_words + 1)[0...max_words].join(" ")
+    result.length < string.length ? "#{result}…" : result
   end
 
   # Jekyll gives every post an automatic excerpt (the first paragraph of the
@@ -103,9 +120,19 @@ module SeoHelper
   # dropped. Only a document with no author of its own reuses the
   # site-level author's url.
   def json_ld_author(document)
-    hash = { "@type" => "Person", "name" => Site.author_name }
-    hash["url"] = Site.author_url unless document.front_matter["author"]
+    author = document.front_matter["author"]
+    hash = { "@type" => "Person", "name" => json_ld_author_name(author) }
+    hash["url"] = Site.author_url unless author
     hash
+  end
+
+  # The real drop takes the name from the document's own declared author
+  # when it has one, else the site author. A document's author can in
+  # principle be an Array (see _includes/page-header.html), but neither
+  # this repo nor the real drop resolves that case, so anything but a
+  # String falls back to the site author.
+  def json_ld_author_name(author)
+    author.is_a?(String) ? author : Site.author_name
   end
 
   def schema_type(document)

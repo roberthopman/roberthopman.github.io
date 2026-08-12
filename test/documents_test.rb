@@ -63,4 +63,30 @@ assert_equal(
   "derived excerpt"
 )
 
+seo = Object.new.extend(SeoHelper)
+
+# jekyll-seo-tag truncates the resolved description to
+# description_max_words (100 by default) and appends a single "…" (not
+# three dots) only when it actually cut something. The longest real
+# description in this corpus is far under 100 words, so a synthetic string
+# exercises the same private `snippet` method the description path calls.
+long_description = (1..105).map { |n| "word#{n}" }.join(" ")
+expected_snippet = "#{(1..100).map { |n| "word#{n}" }.join(" ")}…"
+assert_equal(expected_snippet, seo.send(:snippet, long_description, 100),
+             "long description truncates to 100 words with a single ellipsis")
+
+short_description = "just a few words"
+assert_equal(short_description, seo.send(:snippet, short_description, 100),
+             "short description under the word limit is left untouched")
+
+# A document's own front-matter author takes priority over the site author
+# when resolving the json-ld author name (jekyll-seo-tag's
+# AuthorDrop#author_hash). Both posts that declare one happen to share the
+# site author's name, so this pins the resolved value as a regression
+# guard rather than proving document-over-site precedence on its own; see
+# json_ld_author_name's own comment for that rule.
+authored_post = Post.all.find { |doc| doc.front_matter["author"] == "Robert Hopman" }
+assert_equal("Robert Hopman", seo.send(:json_ld_author, authored_post)["name"],
+             "json-ld author name for a post with its own front-matter author")
+
 puts "all document assertions passed"
