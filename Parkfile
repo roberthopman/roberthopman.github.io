@@ -15,7 +15,18 @@ Parklife.application.config.on_404 = :error
 # listed instead, and the parity harness proves the list is complete.
 Parklife.application.routes do
   root
-  get "/diagnose-a-bug/"
+
+  Post.all.each { |post| get post.url }
+
+  # archive.md and tags.md still hold literal, unconverted Liquid ({% for
+  # post in site.posts %} and friends): the dynamic post/tag listing logic
+  # is Task 7's job, not this task's. Routing them now would render real,
+  # wrong output (verified: Liquid syntax leaks straight into the HTML) and
+  # turn them from MISSING into DIFFERING in the parity harness. Leaving
+  # them unrouted keeps them MISSING, which is the expected state until
+  # Task 7 replaces both with real views.
+  listing_pages = %w[archive.md tags.md]
+  Page.all.each { |page| get page.url unless page.url == "/" || listing_pages.include?(page.path) }
 end
 
 require "parklife/application"

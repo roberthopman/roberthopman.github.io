@@ -18,6 +18,15 @@ class Document
       all.find { |document| document.slug == slug }
     end
 
+    # Slugs are not unique and are not the URL: _posts/2024-05-04-tools.md
+    # has slug "tools" but url "/tools-keyboard-shortcuts/", while tools.md
+    # also has slug "tools" and owns "/tools/". Routing must resolve on the
+    # url, not the slug, or one of the two silently shadows the other.
+    def find_by_url(path)
+      candidate = path.end_with?("/") ? path : "#{path}/"
+      (Post.all + Page.all).find { |document| document.url == candidate || document.url == path }
+    end
+
     def load_all
       Dir.glob(glob, base: Rails.root).sort.map { |relative| new(relative) }
     end

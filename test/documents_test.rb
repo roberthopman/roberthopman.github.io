@@ -32,6 +32,20 @@ assert_equal("/", home.url, "home url")
 not_found = Page.all.find { |doc| doc.path == "404.html" }
 assert_equal("/404.html", not_found.url, "404 url")
 
+# Slugs collide: tools.md and _posts/2024-05-04-tools.md both have the slug
+# "tools", but different urls. Resolution must be by url, not slug, or one
+# document shadows the other.
+tools_page = Document.find_by_url("/tools/")
+assert_equal("tools.md", tools_page.path, "resolve /tools/ to the page")
+
+tools_post = Document.find_by_url("/tools-keyboard-shortcuts/")
+assert_equal("_posts/2024-05-04-tools.md", tools_post.path, "resolve /tools-keyboard-shortcuts/ to the post")
+
+# 404.html carries no trailing slash, so resolution must also try the path
+# as given, not only the path with "/" appended.
+not_found_by_url = Document.find_by_url("/404.html")
+assert_equal("404.html", not_found_by_url.path, "resolve /404.html to the page")
+
 # An excerpt in front matter wins.
 declared = Post.all.find { |doc| doc.front_matter["excerpt"].present? }
 assert_equal(declared.front_matter["excerpt"], declared.excerpt_source, "declared excerpt")

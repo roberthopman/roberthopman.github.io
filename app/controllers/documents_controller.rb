@@ -1,6 +1,6 @@
 class DocumentsController < ApplicationController
   def show
-    @document = Post.find_by_slug(params[:slug]) || Page.find_by_slug(params[:slug])
+    @document = Document.find_by_url(request.path)
     raise ActionController::RoutingError, "Not Found" unless @document
   end
 end
