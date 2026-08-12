@@ -3,8 +3,15 @@ class Post < Document
 
   def self.glob = "_posts/*.md"
 
+  # Ruby's sort_by does not promise stability, so a same-day pair could
+  # reorder from run to run without an explicit tie-break. Jekyll's own
+  # descending post order (Jekyll::Drops::SiteDrop#posts, "b <=> a" on
+  # Jekyll::Document#<=>) breaks a date tie by path, descending. Sorting
+  # ascending on [date, path] and reversing the whole array reproduces that
+  # exactly, since path is unique per post and needs no stability to land
+  # in the right order.
   def self.all
-    super.sort_by(&:date).reverse
+    super.sort_by { |post| [post.date, post.path] }.reverse
   end
 
   def kind = :post

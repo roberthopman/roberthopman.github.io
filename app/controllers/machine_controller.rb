@@ -20,12 +20,21 @@ class MachineController < ApplicationController
   end
 
   def llms
-    @pages = Page.all.select { |page| page.title.present? }
+    @pages = llms_pages
     @posts = Post.all
     render formats: [:text], content_type: "text/plain"
   end
 
   private
+
+  # llms.txt's "## Pages" section only lists a page with a title (mirrors
+  # Jekyll's own "{%- if p.title -%}"). Split out so a test can call the
+  # same code path the controller action calls, the way
+  # sitemap_page_urls already does for sitemap.xml, instead of re-deriving
+  # the filter locally.
+  def llms_pages
+    Page.all.select { |page| page.title.present? }
+  end
 
   def sitemap_page_urls
     real = Page.all.select { |page| page["sitemap"] != false }.map { |page| [page.slug, page.url] }

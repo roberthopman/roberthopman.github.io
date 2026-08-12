@@ -18,6 +18,9 @@ class ApplicationController < ActionController::Base
     def tags = []
     def path = nil
     def hide_author? = hide_author
+    def hide_last_updated? = false
+    def page_title = nil
+    def author = nil
   end
 
   def view_page(title:, url:, hide_author: false)

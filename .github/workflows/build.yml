@@ -37,10 +37,36 @@ jobs:
           # action and is ignored with a warning on every run.
           bundler-cache: true
 
+      - name: Run tests
+        run: |
+          bundle exec ruby test/documents_test.rb
+          bundle exec ruby test/machine_test.rb
+
       - name: Build site
         env:
           TZ: UTC
         run: bin/parklife build
+
+      # Catches a build that "succeeds" but produces a broken or truncated
+      # site, the failure mode that actually takes the site down: the tests
+      # above check the code, this checks the artifact they produced.
+      - name: Verify build artifacts
+        run: |
+          set -e
+          for f in build/index.html build/404.html build/CNAME \
+                   build/.well-known/security.txt build/feed.xml \
+                   build/sitemap.xml build/llms.txt; do
+            if [ ! -s "$f" ]; then
+              echo "missing or empty: $f"
+              exit 1
+            fi
+          done
+
+          count=$(find build -name index.html | wc -l)
+          if [ "$count" -lt 130 ]; then
+            echo "only $count index.html files under build/, expected at least 130"
+            exit 1
+          fi
 
       # include-hidden-files defaults to false, which adds --exclude=.[^/]* to
       # the action's tar and silently drops .well-known/ from the artifact.

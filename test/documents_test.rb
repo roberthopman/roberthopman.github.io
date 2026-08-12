@@ -58,6 +58,30 @@ assert_equal(
   "derived excerpt"
 )
 
+# Jekyll::Excerpt#extract_excerpt appends any markdown link reference
+# definition ([ref]: url) from the rest of the body that the excerpt's
+# own first paragraph actually references, and drops one it doesn't; the
+# excerpt would otherwise reuse a reference-style link with no definition
+# in reach (tag pages, feed.xml both render "[text][ref]" literally). No
+# real post's first paragraph uses a reference-style link, so this is
+# exercised with a synthetic body against Document#extract_excerpt
+# directly (a private, state-free method: Document.allocate skips
+# initialize since nothing here needs a real file on disk).
+synthetic_body = <<~BODY.strip
+  First paragraph with a [reference link][used].
+
+  Second paragraph, not part of the excerpt.
+
+  [used]: https://example.com/used
+  [unused]: https://example.com/unused
+BODY
+synthetic_excerpt = Document.allocate.send(:extract_excerpt, synthetic_body)
+assert_equal(
+  "First paragraph with a [reference link][used].\n\n[used]: https://example.com/used",
+  synthetic_excerpt,
+  "derived excerpt carries a referenced link definition and drops an unreferenced one"
+)
+
 seo = Object.new.extend(SeoHelper)
 
 # jekyll-seo-tag truncates the resolved description to
@@ -97,7 +121,20 @@ security = Tag.find_by_slug("security")
 assert_equal([], security.posts, "a page-only tag has no posts")
 assert_equal(["iso-27001.md"], security.pages.map(&:path), "a page-only tag still resolves its page")
 
-# Two spellings of the same tag collapse to one Tag, keyed by slug.
-assert_equal(1, Tag.all.count { |tag| tag.slug == "ruby" }, "tag slugs are deduplicated")
+# Two spellings of the same tag collapse to one Tag, keyed by slug, first
+# spelling wins. No tag in the real corpus has two spellings, so an
+# assertion pinned to Tag.all would pass even with the dedup logic
+# removed; Tag.build_from is the exact code Tag.all calls, exercised here
+# with synthetic documents so the rule is genuinely tested.
+FakeTaggedDocument = Struct.new(:tags)
+dedup_input = [
+  FakeTaggedDocument.new(["Git Grep"]),
+  FakeTaggedDocument.new(["git grep"]),
+  FakeTaggedDocument.new(["Ruby"])
+]
+deduped = Tag.build_from(dedup_input)
+assert_equal(2, deduped.size, "two spellings of one tag collapse to a single Tag")
+assert_equal("Git Grep", deduped.find { |tag| tag.slug == "git-grep" }.name,
+             "the first spelling encountered wins the dedup")
 
 puts "all document assertions passed"

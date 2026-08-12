@@ -41,9 +41,14 @@ assert_equal(false, smart_title.include?("<"), "smartify never introduces markup
 
 # llms.txt's "## Pages" section only lists a page with a title (mirrors
 # jekyll's own "{%- if p.title -%}"). 404.html declares none.
+# MachineController#llms_pages is the real filter the controller action
+# calls; calling it here (rather than re-deriving "select { |page|
+# page.title.present? }" locally) is what sitemap_page_urls below already
+# does for sitemap.xml, so a change to the real filter can't drift
+# unnoticed from what this assertion checks.
 not_found = Page.all.find { |doc| doc.path == "404.html" }
 assert_equal(nil, not_found.title, "404.html declares no title")
-pages_for_llms = Page.all.select { |page| page.title.present? }
+pages_for_llms = MachineController.new.send(:llms_pages)
 assert_equal(false, pages_for_llms.include?(not_found), "the llms.txt page filter excludes a page with no title")
 assert_equal(false, helpers.llms_txt(pages_for_llms, []).include?("404"), "404.html's own text never reaches llms.txt output")
 

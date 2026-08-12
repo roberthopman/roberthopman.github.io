@@ -6,21 +6,27 @@ class Tag
 
   def self.all
     @all = nil if Rails.env.development?
-    @all ||= begin
-      seen = {}
-      (Post.all + Page.all).each do |document|
-        document.tags.each do |raw|
-          name = raw.to_s.strip
-          next if name.empty?
+    @all ||= build_from(Post.all + Page.all)
+  end
 
-          slug = name.parameterize
-          next if slug.empty?
+  # The dedup rule as a pure function of any list of tag-bearing documents,
+  # split out of .all so a test can exercise "first spelling wins" with
+  # synthetic documents: no tag in the real corpus has two spellings, so an
+  # assertion pinned to Tag.all would pass even with the dedup removed.
+  def self.build_from(documents)
+    seen = {}
+    documents.each do |document|
+      document.tags.each do |raw|
+        name = raw.to_s.strip
+        next if name.empty?
 
-          seen[slug] ||= new(name)
-        end
+        slug = name.parameterize
+        next if slug.empty?
+
+        seen[slug] ||= new(name)
       end
-      seen.values.sort_by(&:slug)
     end
+    seen.values.sort_by(&:slug)
   end
 
   def self.find_by_slug(slug)

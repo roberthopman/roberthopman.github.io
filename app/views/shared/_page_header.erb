@@ -1,17 +1,21 @@
 <% if @document.title %>
 <header class="page-header-section">
-  <h1 class="no-anchor"><%= @document.title %></h1><% unless @document.hide_author? %><p class="page-meta">
-    Author: 
+  <h1 class="no-anchor"><%= @document.title %></h1><% unless @document.hide_author? %><% author = @document.author || Site.author_name %><p class="page-meta">
+    Author: <% if author.is_a?(Array) %><% author.each_with_index do |author_name, index| %>
     <span itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <a href="/author/" class="p-author h-card" itemprop="name"><%= Site.author_name %></a></span>
-  </p><% if @document.last_modified_at || @document.date %><p class="page-meta">
+      <a href="/author/" class="p-author h-card" itemprop="name"><%= author_name %></a></span><% unless index == author.length - 1 %>, <% end %>
+    <% end %><% else %>
+    <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <a href="/author/" class="p-author h-card" itemprop="name"><%= author %></a></span>
+  <% end %>
+  </p><% unless @document.hide_last_updated? %><% if @document.last_modified_at || @document.date %><p class="page-meta">
     Last updated:
     <time datetime="<%= (@document.last_modified_at || @document.date).iso8601 %>">
       <%= (@document.last_modified_at || @document.date).strftime("%d-%b-%Y") %>
     </time>
     | <a href="https://github.com/<%= Site.config.dig("minima", "social_links", "github") %>/<%= Site.config.dig("minima", "social_links", "github") %>.github.io/blob/master/<%= @document.path %>">View
       on GitHub</a>
-  </p><% end %><% end %><% if @document.tags.any? %><p class="page-meta">
+  </p><% end %><% end %><% end %><% if @document.page_title %><h1 class="no-anchor"><%= @document.page_title %></h1><% end %><% if @document.tags.any? %><p class="page-meta">
     categories:
     <%= safe_join(@document.tags.map { |t| link_to(t, "/tags/#{t.parameterize}/") }, ", \n    ".html_safe) %></p><% end %></header>
 <% end %>

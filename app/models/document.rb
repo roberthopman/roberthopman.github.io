@@ -50,6 +50,10 @@ class Document
 
   def [](key) = front_matter[key]
   def title = front_matter["title"]
+  def page_title = front_matter["page_title"]
+  # A String for a single author, or an Array for several. Falls back to
+  # Site.author_name in the view when a document declares none of its own.
+  def author = front_matter["author"]
   def tags = Array(front_matter["tags"])
   def erb? = front_matter["erb"] == true
   def permalink = front_matter["permalink"]
@@ -86,9 +90,11 @@ class Document
   end
 
   # The raw excerpt string, before rendering. Jekyll takes the first block
-  # delimited by a blank line when front matter declares none.
+  # delimited by a blank line when front matter declares none, then (see
+  # extract_excerpt below) appends any markdown link reference definition
+  # from the rest of the body that the excerpt itself uses.
   def excerpt_source
-    front_matter["excerpt"].presence || body.strip.split("\n\n").first
+    front_matter["excerpt"].presence || extract_excerpt(body.strip)
   end
 
   def excerpt_html
@@ -96,6 +102,26 @@ class Document
   end
 
   private
+
+  # Mirrors Jekyll::Excerpt#extract_excerpt (jekyll-4.4.1, lib/jekyll/excerpt.rb).
+  # A reference-style link like "[text][ref]" only resolves when its
+  # "[ref]: url" definition line travels with the excerpt; without it the
+  # excerpt renders the literal "[text][ref]" wherever it is reused (tag
+  # pages, feed.xml). The excerpt separator is "\n\n" (this site never sets
+  # a custom excerpt_separator), so the head is the same first block
+  # split("\n\n").first used to take; partition also keeps the remainder
+  # intact as one string so it can be scanned for definitions.
+  MKDWN_LINK_REF_REGEX = /^ {0,3}(?:(\[[^\]]+\])(:.+))$/
+
+  def extract_excerpt(content)
+    head, _, tail = content.partition("\n\n")
+    return head if tail.empty?
+
+    definitions = tail.scan(MKDWN_LINK_REF_REGEX).select { |segments| head.include?(segments[0]) }.map(&:join)
+    return head if definitions.empty?
+
+    "#{head}\n\n#{definitions.join("\n")}"
+  end
 
   def source_text
     return body unless erb?
