@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
   def home
-    @document = Page.all.find { |page| page.url == "/" }
+    @document = Page.find_by_slug("index")
   end
 end
