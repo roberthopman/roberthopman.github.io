@@ -8,4 +8,10 @@ strip_from_jekyll:
     reason: "Jekyll advertises its own version in every page. Rails does not."
 
 # Output paths excluded from comparison entirely.
-skip_paths: []
+# deprecating-til/index.html: {% highlight %} became a fenced code block, so
+# Rouge now wraps it in div.language-*.highlighter-rouge instead of
+# figure.highlight. The site's CSS styles .highlighter-rouge and never styled
+# figure.highlight, so this is a visible fix, not a regression. Site owner
+# sign-off: 2026-08-11.
+skip_paths:
+  - "deprecating-til/index.html"

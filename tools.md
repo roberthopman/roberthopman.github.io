@@ -8,10 +8,10 @@ permalink: /tools/
 <div class="main">
 
 <div class="tool-card">
-  <a href="{{ site.url }}/effectuation-tool/">
+  <a href="https://roberthopman.com/effectuation-tool/">
     <img src="/assets/images/effectuation-tool.svg" alt="Effectuation Tool" class="tool-image">
   </a>
-  <h3><a href="{{ site.url }}/effectuation-tool/">Effectuation Tool</a></h3>
+  <h3><a href="https://roberthopman.com/effectuation-tool/">Effectuation Tool</a></h3>
   <p>An interactive tool based on Sarasvathy's Effectuation theory — helps explore partnerships by reflecting on identity, risk, collaboration, adaptability, and actionable next steps.</p>
 </div>
 

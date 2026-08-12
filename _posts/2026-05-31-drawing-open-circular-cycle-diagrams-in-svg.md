@@ -6,7 +6,7 @@ excerpt: "Mermaid, PlantUML, and Graphviz could not arrange four feedback loops 
 tags: [svg, graphviz, mermaid, plantuml, diagrams, python]
 ---
 
-For [The Agile Process]({% post_url 2026-05-30-the-agile-process %}) I recreated the cohesive cycle figure from LaunchSchool's [Process Overview](https://launchschool.com/books/agile_planning/read/process_overview): four feedback loops drawn as rings, where each loop opens into the next.
+For [The Agile Process](/the-agile-process/) I recreated the cohesive cycle figure from LaunchSchool's [Process Overview](https://launchschool.com/books/agile_planning/read/process_overview): four feedback loops drawn as rings, where each loop opens into the next.
 
 ![Four cycles drawn as open rings arranged in a circle: business opens into planning opens into release opens into sprint](/assets/images/agile-cohesive-cycles.svg)
 

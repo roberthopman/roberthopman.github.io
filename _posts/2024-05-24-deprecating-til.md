@@ -9,7 +9,7 @@ tags: [ruby, debugging, prototyping, ai, til]
 
 <a href="https://ruby-doc.org/3.3.4/Kernel.html#method-i-tap">Kernel#tap</a> is a method that yields self to the block and returns self. It is useful for debugging or for chaining methods together.
 
-{% highlight ruby %}
+```ruby
 (1..10)
   .tap {|x| puts "original: #{x}" }
   .to_a
@@ -25,13 +25,13 @@ tags: [ruby, debugging, prototyping, ai, til]
   # evens:    [2, 4, 6, 8, 10]
   # squares:  [4, 16, 36, 64, 100]
   # => [4, 16, 36, 64, 100]
-{% endhighlight %}
+```
 
 Fix failure due to architecture arm64:
-{% highlight shell %}
+```shell
 bundle config build.gem_name "--with-cflags=-Wno-error=incompatible-function-pointer-types"
 bundle install
-{% endhighlight %}
+```
 
 ### Prototyping with AI
 

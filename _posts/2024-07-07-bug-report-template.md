@@ -13,4 +13,4 @@ Add file in repo_name/.github/ISSUE_TEMPLATE/bug_report.md
 
 [The gist at github.](https://gist.github.com/roberthopman/96154ffab30e89d2972cb875d09ecec8)
 
-{% gist 96154ffab30e89d2972cb875d09ecec8 %}
+<script src="https://gist.github.com/96154ffab30e89d2972cb875d09ecec8.js"> </script>

@@ -5,14 +5,15 @@ description: Describing the Ruby language structure
 sidebar: ruby-syntax
 last_modified_at: 08-01-2026
 tags: [ruby, syntax, reference]
+erb: true
 ---
 
 <details>
 <summary>Table of contents</summary>
 <ul>
-{% for section in site.data.ruby-syntax.sections -%}
-<li><a href="{{ section.anchor }}">{{ section.title }}</a></li>
-{% endfor -%}
+<%- data("ruby-syntax")["sections"].each do |section| -%>
+<li><a href="<%= section["anchor"] %>"><%= section["title"] %></a></li>
+<%- end -%>
 </ul>
 </details>
 

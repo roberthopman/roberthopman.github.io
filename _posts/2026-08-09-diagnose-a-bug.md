@@ -40,7 +40,7 @@ The loop comes first. Phase 1 carries the weight for this reason. You cannot obs
 
 The four lifelines are you, the loop, the code under test and the probe. Read the diagram from the top. The three dashed boxes are the loops.
 
-I built the generator with the method in [Drawing Open Circular Cycle Diagrams with a Python SVG Generator]({% post_url 2026-05-31-drawing-open-circular-cycle-diagrams-in-svg %}). The code is at `assets/images/diagnose-a-bug-sequence.py`.
+I built the generator with the method in [Drawing Open Circular Cycle Diagrams with a Python SVG Generator](/drawing-open-circular-cycle-diagrams-in-svg/). The code is at `assets/images/diagnose-a-bug-sequence.py`.
 
 ## The three loops
 
