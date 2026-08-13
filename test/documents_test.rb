@@ -171,4 +171,58 @@ assert_equal(original_title, restored.front_matter["title"],
 assert_equal(false, first_call.equal?(restored),
              "the post after reset is a freshly parsed instance, not the mutated one restored in place")
 
+# Document#word_count is what archive.html.erb's data-words attribute
+# calls (see Document#word_count and app/views/pages/archive.html.erb).
+# data-words is stripped from the parity comparison, so a wrong count
+# ships silently unless it is pinned here directly. These are the counts
+# captured from the real dev server before WORD_COUNT_CACHE existed;
+# recomputing the split rule here would let a broken cache still pass.
+diagnose_a_bug = Post.all.find { |doc| doc.path == "_posts/2026-08-09-diagnose-a-bug.md" }
+assert_equal(1218, diagnose_a_bug.word_count, "word count: diagnose-a-bug")
+
+drawing_svg = Post.all.find { |doc| doc.path == "_posts/2026-05-31-drawing-open-circular-cycle-diagrams-in-svg.md" }
+assert_equal(2391, drawing_svg.word_count, "word count: drawing-open-circular-cycle-diagrams-in-svg")
+
+erb_lint_caching = Post.all.find { |doc| doc.path == "_posts/2025-11-29-nextgen-erb-lint-caching.md" }
+assert_equal(223, erb_lint_caching.word_count, "word count: nextgen-erb-lint-caching")
+
+ai_page = Page.all.find { |doc| doc.path == "ai.md" }
+assert_equal(384, ai_page.word_count, "word count: ai.md")
+
+iso_page = Page.all.find { |doc| doc.path == "iso-27001.md" }
+assert_equal(3756, iso_page.word_count, "word count: iso-27001.md")
+
+ruby_syntax_page = Page.all.find { |doc| doc.path == "ruby-syntax.md" }
+assert_equal(22281, ruby_syntax_page.word_count, "word count: ruby-syntax.md")
+
+# WORD_COUNT_CACHE is keyed by path AND mtime (see Document#word_count), so
+# editing a file invalidates only that file's entry with no server
+# restart. A real post is never touched to prove this: a temporary
+# fixture file stands in, written and deleted here, under tmp/ (gitignored,
+# outside _posts/ and Page.glob, so nothing else ever scans it).
+require "fileutils"
+
+temp_relative_path = "tmp/word_count_cache_test.md"
+temp_full_path = Rails.root.join(temp_relative_path)
+begin
+  File.write(temp_full_path, "---\ntitle: Word Count Cache Test\n---\nOne two three four five.\n")
+  first_count = Document.new(temp_relative_path).word_count
+  assert_equal(5, first_count, "temporary fixture: initial word count")
+
+  # A new Document instance mirrors what Post.reset_memo! hands back each
+  # development request: a fresh parse of the same path. Without mtime
+  # invalidation this would still read the first_count value from the
+  # cache instead of recomputing.
+  unchanged_reread = Document.new(temp_relative_path).word_count
+  assert_equal(5, unchanged_reread, "temporary fixture: unchanged mtime reuses the cached count")
+
+  File.write(temp_full_path, "---\ntitle: Word Count Cache Test\n---\nOne two three four five six seven.\n")
+  FileUtils.touch(temp_full_path, mtime: Time.now + 5)
+
+  changed_count = Document.new(temp_relative_path).word_count
+  assert_equal(7, changed_count, "temporary fixture: a changed mtime invalidates the cache and recomputes")
+ensure
+  File.delete(temp_full_path) if File.exist?(temp_full_path)
+end
+
 puts "all document assertions passed"

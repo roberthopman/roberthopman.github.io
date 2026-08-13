@@ -97,6 +97,30 @@ class Document
     @html ||= MarkdownRenderer.render(source_text)
   end
 
+  # archive.html.erb's data-words needs Jekyll's number_of_words semantics
+  # (a count of the RENDERED content), so it calls through kramdown and
+  # Rouge for every post and tagged page. #html's own @html memo cannot
+  # help there: ApplicationController's reset_memo! (see .reset_memo! above)
+  # reparses a fresh Document instance from disk on every development
+  # request, discarding @html with it. WORD_COUNT_CACHE is a class-level
+  # constant instead, so it survives that reset; it is keyed by path AND
+  # mtime, so editing a post invalidates only that post's entry (the mtime
+  # no longer matches) with no server restart, while every other post's
+  # count is reused. One entry per path: a changed mtime replaces the old
+  # entry rather than growing the hash. Production renders each document
+  # once regardless, so this changes nothing there beyond one extra
+  # File.mtime stat per document.
+  WORD_COUNT_CACHE = {}
+
+  def word_count
+    mtime = File.mtime(Rails.root.join(path))
+    cached = WORD_COUNT_CACHE[path]
+    return cached[:count] if cached && cached[:mtime] == mtime
+
+    WORD_COUNT_CACHE[path] = { mtime: mtime, count: html.split.size }.freeze
+    WORD_COUNT_CACHE[path][:count]
+  end
+
   # The raw excerpt string, before rendering. Jekyll takes the first block
   # delimited by a blank line when front matter declares none, then (see
   # extract_excerpt below) appends any markdown link reference definition
