@@ -205,6 +205,9 @@ require "fileutils"
 temp_relative_path = "tmp/word_count_cache_test.md"
 temp_full_path = Rails.root.join(temp_relative_path)
 begin
+  # tmp/ is gitignored and empty, so it does not exist in a fresh checkout.
+  # CI failed here before this line was added.
+  FileUtils.mkdir_p(File.dirname(temp_full_path))
   File.write(temp_full_path, "---\ntitle: Word Count Cache Test\n---\nOne two three four five.\n")
   first_count = Document.new(temp_relative_path).word_count
   assert_equal(5, first_count, "temporary fixture: initial word count")
