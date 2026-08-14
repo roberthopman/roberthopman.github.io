@@ -1,0 +1,14 @@
+<%
+  social = Site.config.dig("minima", "social_links") || {}
+%>
+<ul class="social-media-list"><% if social["github"] %><li><a rel="me" href="https://github.com/<%= URI::DEFAULT_PARSER.escape(social["github"]) %>"
+      title="<%= social["github"] %>"><svg class="svg-icon grey">
+        <use xlink:href="/assets/minima-social-icons.svg#github"></use>
+      </svg></a></li><% end %><% if social["linkedin"] %><li><a rel="me"
+      href="https://www.linkedin.com/in/<%= URI::DEFAULT_PARSER.escape(social["linkedin"]) %>"
+      title="<%= social["linkedin"] %>"><svg class="svg-icon grey">
+        <use xlink:href="/assets/minima-social-icons.svg#linkedin"></use>
+      </svg></a></li><% end %><% if social["twitter"] %><li><a rel="me" href="https://x.com/<%= URI::DEFAULT_PARSER.escape(social["twitter"]) %>"
+      title="<%= social["twitter"] %>"><svg class="svg-icon grey" viewBox="0 0 24 24">
+        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+      </svg></a></li><% end %></ul>

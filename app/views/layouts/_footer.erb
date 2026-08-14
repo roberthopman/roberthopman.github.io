@@ -1,0 +1,36 @@
+<footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>RSS</span>
+          </a>
+        </p>
+        <div class="footer-description">
+          <%= Site.description %>
+        </div>
+
+        <div class="footer-social"><%= render("layouts/social").chomp.html_safe %></div>
+
+        <div class="footer-contact">
+          <ul class="contact-list">
+            <li><a class="u-email" href="mailto:<%= Site.author_email %>"><%= Site.author_email %></a></li>
+            <li><a href="https://bonaroo.nl"><%= Site.legal_entity %></a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-col"><% if @document.url != "/" && Site.data("post_footer").size > 0 %><div class="post-footer-links">
+          <h3>Popular posts</h3>
+          <ul><% Site.data("post_footer").each do |item| %><li><a href="<%= item["url"] %>"><%= item["title"] %></a></li><% end %></ul>
+        </div><% end %></div>
+    </div>
+
+  </div>
+
+</footer>

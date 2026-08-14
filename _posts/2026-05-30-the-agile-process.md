@@ -48,7 +48,7 @@ Here is that whole process on a single diagram:
 
 <img src="/assets/images/agile-cohesive-cycles.svg" alt="Four cycles drawn as rings arranged in a circle, clockwise: Business (top-left), Planning (top-right), Release (bottom-right), and Sprint (bottom-left). The orange build, create-a-release, and execute-sprints steps each open into the next cycle." style="max-width:100%;height:auto;">
 
-*Diagram after the cohesive cycle figure in LaunchSchool's [Process Overview](https://launchschool.com/books/agile_planning/read/process_overview); recreated as an open-ring SVG ([how]({% post_url 2026-05-31-drawing-open-circular-cycle-diagrams-in-svg %})).*
+*Diagram after the cohesive cycle figure in LaunchSchool's [Process Overview](https://launchschool.com/books/agile_planning/read/process_overview); recreated as an open-ring SVG ([how](/drawing-open-circular-cycle-diagrams-in-svg/)).*
 
 Four feedback loops, each drawn as a ring: Business, Planning, Release, and Sprint. They nest, each ring a smaller and faster version of the one that contains it. One step in every ring is orange (build, create-a-release, execute-sprints), and that step is a doorway that opens into the next ring down, which is how the outer loops actually make progress. Every loop also ends by feeding back to its own step 1 and by measuring feedback, which is what makes the whole thing cohesive rather than a one-way waterfall.
 

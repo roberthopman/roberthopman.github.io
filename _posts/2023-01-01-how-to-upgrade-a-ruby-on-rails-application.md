@@ -106,4 +106,4 @@ The goal is the starting point for the upgrade process.
 
 Example goal could be: Secure the continuity of the critical business processes.
 
-Finally, read how to [balance maintenance and development]({% post_url 2023-09-22-how-to-balance-maintenance-and-development %}).
+Finally, read how to [balance maintenance and development](/how-to-balance-maintenance-and-development/).

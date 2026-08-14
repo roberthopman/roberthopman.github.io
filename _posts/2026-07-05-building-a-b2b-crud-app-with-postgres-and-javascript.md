@@ -4,6 +4,7 @@ title:  "Building a B2B CRUD app with Postgres and TypeScript"
 excerpt: "A b2b crud app with postgres, node and typescript isn't that special"
 tags: [javascript, typescript, postgresql, crud]
 sidebar: b2b-crud-app
+erb: true
 ---
 
 Why bother building a simple B2B CRUD app with Postgres and TypeScript? 
@@ -14,9 +15,9 @@ What are the steps to build?
 
 ## Initial Steps 
 
-{% for section in site.data.b2b-crud-app.sections -%}
-- [{{ section.title }}]({{ section.anchor }})
-{% endfor %}
+<%- data("b2b-crud-app")["sections"].each do |section| -%>
+- [<%= section["title"] %>](<%= section["anchor"] %>)
+<%- end -%>
 
 Thats't it.
 

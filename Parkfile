@@ -1,0 +1,43 @@
+ENV["RAILS_ENV"] = "production"
+ENV["TZ"] = "UTC"
+
+require "parklife/rails"
+require_relative "config/environment"
+
+Parklife.application.config.base = "https://roberthopman.com"
+
+Parklife.application.config.on_404 = :error
+
+# No crawl: true anywhere. config.base is roberthopman.com, so a link to
+# https://roberthopman.com/effectuation-tool/ reads as internal, but that path
+# is served by a sibling project repo and this app knows nothing about it.
+# Crawling would 404 on a URL production serves correctly. Every route is
+# listed instead, and the parity harness proves the list is complete.
+Parklife.application.routes do
+  root
+
+  Post.all.each { |post| get post.url }
+  Page.all.each { |page| get page.url unless page.url == "/" }
+
+  get "/archive/"
+  get "/tags/"
+  Tag.all.each { |tag| get tag.url }
+
+  get "/feed.xml"
+  get "/sitemap.xml"
+  get "/llms.txt"
+end
+
+require "parklife/application"
+Parklife::Application.prepend(Module.new do
+  def build
+    super
+    root = Rails.application.root
+    FileUtils.cp_r("#{root}/public/.", "#{root}/build")
+    FileUtils.cp("#{root}/CNAME", "#{root}/build/CNAME") if File.exist?("#{root}/CNAME")
+    # Parklife's own metadata directory is not a page. The Pages workflow
+    # deploys with include-hidden-files: true, so leaving it here would
+    # publish it at a live URL.
+    FileUtils.rm_rf("#{root}/build/.parklife")
+  end
+end)

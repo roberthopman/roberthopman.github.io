@@ -2,14 +2,55 @@ Instructions for all AI agents working on this project.
 
 ## Development Server
 
-Always run the local development server with:
+Run the local development server with:
 
 ```bash
-bundle exec jekyll serve --incremental
+bin/rails server
 ```
 
-The `--incremental` flag skips re-rendering unchanged files, significantly
-reducing build times.
+Pages render on request. Editing a post and refreshing the browser is enough;
+there is no build step.
+
+To work on styles, run the Sass compiler in a second terminal:
+
+```bash
+npx sass --watch --load-path=_sass _sass/style.scss public/assets/css/style.css
+```
+
+This produces uncompressed CSS for fast iteration. Before committing a style
+change, recompile once with `--style=compressed` so
+`public/assets/css/style.css` matches the asset the build ships.
+
+## Static Files
+
+Put a static file in `public/`, not in the repo root. Parklife copies
+`public/` into the build output verbatim. It does not copy every
+front-matter-less file the way Jekyll's `_site` build did. A file placed
+outside `public/` and outside a rendered route does not deploy, and the
+build raises no error for it.
+
+For example, put a new image at `public/assets/images/example.png`, not at
+`assets/images/example.png`.
+
+## Build and Test
+
+Build the static site with:
+
+```bash
+bin/parklife build
+```
+
+This writes the site to `build/`.
+
+Run the test suite with:
+
+```bash
+bundle exec ruby test/documents_test.rb
+bundle exec ruby test/machine_test.rb
+```
+
+Both files must pass before you commit a change to `app/models/`,
+`app/controllers/machine_controller.rb`, or `app/helpers/`.
 
 ## Tutorial Writing Checklist
 

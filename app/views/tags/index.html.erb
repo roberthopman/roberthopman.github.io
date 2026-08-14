@@ -1,0 +1,22 @@
+<div class="main">
+  <h1>Browse by Tag</h1>
+
+  <% @tags.each do |tag| %>
+    <div class="tag-group">
+      <h2 id="<%= tag.slug %>">
+        <a href="<%= tag.url %>"><%= tag.name %></a>
+        <span class="tag-count">(<%= tag.posts.size %>)</span>
+      </h2>
+      <ul class="post-list">
+        <% tag.posts.each do |post| %>
+          <li>
+            <span class="post-meta"><%= post.date.strftime("%d-%m-%Y") %></span>
+            <a href="<%= post.url %>"><%= post.title %></a>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+</div>
+
+<p><a href="/">Home</a></p>

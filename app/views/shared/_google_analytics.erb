@@ -1,0 +1,9 @@
+<script async src="https://www.googletagmanager.com/gtag/js?id=<%= Site.google_analytics %>"></script>
+<script>
+  window['ga-disable-<%= Site.google_analytics %>'] = window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1";
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '<%= Site.google_analytics %>');
+</script>

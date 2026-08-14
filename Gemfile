@@ -1,33 +1,21 @@
 source "https://rubygems.org"
+ruby file: ".ruby-version"
 
-# Hello! This is where you manage which Jekyll version is used to run.
-# When you want to use a different version, change it below, save the
-# file and run `bundle install`. Run Jekyll with `bundle exec`, like so:
-#
-#     bundle exec jekyll serve --incremental
-#
-# This will help ensure the proper Jekyll version is running.
-# Happy Jekylling!
+gem "rails", "~> 8.1"
+gem "parklife"
+gem "parklife-rails"
 
-gem "jekyll", "~> 4.4"
+gem "front_matter_parser"
+gem "kramdown"
+gem "kramdown-parser-gfm"
+# Jekyll's own gemspec caps rouge at "< 5.0" (its Python lexer, among
+# others, reclassifies tokens in 5.x: builtins move from Name.Function to
+# Name.Builtin, "print" moves from a function call to a keyword). Left
+# unpinned here, Bundler resolves the newest 5.x and every fenced Python
+# code block renders with different <span> classes than Jekyll's own build.
+gem "rouge", ">= 3.0", "< 5.0"
+gem "puma"
 
-# This is the default theme for new Jekyll sites. You may change this to anything you like.
-gem "minima", "~> 2.5"
-
-# If you have any plugins, put them here!
-group :jekyll_plugins do
-  gem "jekyll-feed", "~> 0.6"
-  gem "jekyll-gist"
-  gem "jekyll-seo-tag"
+group :development do
+  gem "nokogiri"
 end
-
-# jekyll-gist -> octokit -> faraday v2 wants this for its retry middleware.
-gem "faraday-retry", "~> 2.3"
-
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-
-# Ruby 3.0+ no longer ships webrick, which `jekyll serve` needs.
-gem "webrick", "~> 1.8"
-
-gem "standard", group: [:development, :test]

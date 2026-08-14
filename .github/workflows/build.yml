@@ -1,0 +1,88 @@
+# Builds the site with Parklife (this Rails app rendered to static files)
+# and deploys the result to GitHub Pages.
+#
+# Pages must be set to build_type=workflow for the deploy step to succeed:
+#   gh api -X PUT repos/roberthopman/roberthopman.github.io/pages -f build_type=workflow
+# To roll back to branch builds, set build_type=legacy.
+name: Build
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Let a running deploy finish rather than cancelling it mid-flight.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          # ruby-version is deliberately omitted. The action's default already
+          # reads .ruby-version, which keeps CI and local on the same Ruby.
+          # Do not add ruby-version-file: it is not a valid input for this
+          # action and is ignored with a warning on every run.
+          bundler-cache: true
+
+      - name: Run tests
+        run: |
+          bundle exec ruby test/documents_test.rb
+          bundle exec ruby test/machine_test.rb
+
+      - name: Build site
+        env:
+          TZ: UTC
+        run: bin/parklife build
+
+      # Catches a build that "succeeds" but produces a broken or truncated
+      # site, the failure mode that actually takes the site down: the tests
+      # above check the code, this checks the artifact they produced.
+      - name: Verify build artifacts
+        run: |
+          set -e
+          for f in build/index.html build/404.html build/CNAME \
+                   build/.well-known/security.txt build/feed.xml \
+                   build/sitemap.xml build/llms.txt; do
+            if [ ! -s "$f" ]; then
+              echo "missing or empty: $f"
+              exit 1
+            fi
+          done
+
+          count=$(find build -name index.html | wc -l)
+          if [ "$count" -lt 130 ]; then
+            echo "only $count index.html files under build/, expected at least 130"
+            exit 1
+          fi
+
+      # include-hidden-files defaults to false, which adds --exclude=.[^/]* to
+      # the action's tar and silently drops .well-known/ from the artifact.
+      # public/.well-known/security.txt (RFC 9116) needs it to deploy.
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: build
+          include-hidden-files: true
+
+  deploy:
+    needs: build
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/deploy-pages@v5
+        id: deployment

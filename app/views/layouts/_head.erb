@@ -1,0 +1,31 @@
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><%= seo_tags(@document) %>
+<link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="<%= Site.url %>/feed.xml" title="<%= Site.title %>" /><% if Rails.env.production? && Site.google_analytics %><%= render "shared/google_analytics" %><% end %>
+
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg">
+
+<!-- Browser UI hints. The site is light-only ($background-color is #fff), so
+     color-scheme deliberately says "light" rather than "light dark": claiming
+     dark support would let the browser render form controls and scrollbars
+     dark against a page that stays white. -->
+<meta name="theme-color" content="#ffffff">
+<meta name="color-scheme" content="light">
+
+<!-- Referrer-Policy can only be a response header, which GitHub Pages cannot
+     set, so declare it in markup instead. -->
+<meta name="referrer" content="strict-origin-when-cross-origin">
+
+<!-- Custom CSS and JavaScript -->
+
+<!-- Anchor Links CSS -->
+<link rel="stylesheet" href="/assets/css/anchor-links.css">
+<link rel="stylesheet" href="/assets/css/codeblock.css">
+<link rel="stylesheet" href="/assets/css/social-movement.css">
+
+<!-- Anchor Links JavaScript -->
+<script src="/assets/js/anchor-links.js"></script>
+<script src="/assets/js/codeblock-lines.js"></script>
+<script src="/assets/js/codeblock-tools.js"></script></head>

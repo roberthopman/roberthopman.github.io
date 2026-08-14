@@ -1,0 +1,53 @@
+<%
+  page_slug = @document.sidebar || "default"
+  sidebar_config = Site.data("sidebars/#{page_slug}")
+  if sidebar_config
+    if sidebar_config["data_source"]
+      sidebar_data = Site.data(sidebar_config["data_source"])
+      sidebar_title = sidebar_config["title"]
+      sidebar_sections = sidebar_data["sections"]
+    else
+      sidebar_title = sidebar_config["title"]
+      sidebar_sections = sidebar_config["sections"]
+    end
+  else
+    default_config = Site.data("sidebars/default")
+    sidebar_title = default_config["title"]
+    sidebar_sections = default_config["sections"]
+  end
+%>
+
+
+
+
+
+
+
+<aside class="sidebar" aria-label="Page navigation">
+  <div class="sidebar-extra no-anchors">
+    <%= render "shared/social_movement" %>
+  </div>
+
+  <div class="sidebar-header">
+    <h3 class="sidebar-title"><%= sidebar_title %></h3>
+    <button class="sidebar-toggle" aria-label="Toggle sidebar" aria-expanded="true">
+      <span class="toggle-icon">−</span>
+    </button>
+  </div>
+  
+  <nav class="sidebar-nav" role="navigation">
+    <ul class="sidebar-list">
+<%= "      " %><% sidebar_sections.each do |section| %>
+        <li class="sidebar-item">
+<%= "          " %><% if section["anchor"].present? %>
+            <a href="<%= section["anchor"] %>" class="sidebar-link" data-section="<%= section["id"] %>">
+              <%= section["title"] %>
+            </a>
+<%= "          " %><% else %>
+            <span class="sidebar-text"><%= section["title"] %></span>
+<%= "          " %><% end %>
+        </li>
+<%= "      " %><% end %>
+    </ul>
+  </nav>
+</aside>
