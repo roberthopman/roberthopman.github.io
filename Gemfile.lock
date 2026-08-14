@@ -236,7 +236,6 @@ DEPENDENCIES
   front_matter_parser
   kramdown
   kramdown-parser-gfm
-  nokogiri
   parklife
   parklife-rails
   puma

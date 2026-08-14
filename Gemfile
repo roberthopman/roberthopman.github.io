@@ -16,6 +16,3 @@ gem "kramdown-parser-gfm"
 gem "rouge", ">= 3.0", "< 5.0"
 gem "puma"
 
-group :development do
-  gem "nokogiri"
-end
