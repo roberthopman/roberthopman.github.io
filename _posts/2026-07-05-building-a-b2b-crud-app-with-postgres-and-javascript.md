@@ -19,7 +19,7 @@ What are the steps to build?
 - [<%= section["title"] %>](<%= section["anchor"] %>)
 <%- end -%>
 
-Thats't it.
+That's it.
 
 So let's start with the first step.
 
@@ -115,7 +115,7 @@ We covered:
 npm install typescript tsx @types/node --save-dev
 ```
 
-Lets continue:
+Let's continue:
 
 ```bash
 npx tsc --init
@@ -294,14 +294,14 @@ So what kind of models and related tables would be useful in a b2b crud app?
 
 Possible extensions: projects can be billable or not.
 
-Now that we're here, lets also capture step 3b and 3c:
+Now that we're here, let's also capture step 3b and 3c:
 
 ### Step 3b: Create a table with foreign keys, defaults and constraints
 ### Step 3c: Create a model that relates to a table
 
 The data model:
 ```js
-model User{
+model User {
   id          Int             @id @default(autoincrement())
   email       String          @unique
   first_name  String?
@@ -388,7 +388,7 @@ const prisma = new PrismaClient({ adapter });
 export { prisma };
 ```
 
-Note that `import { prismaPg }` is a deconstructoring import, it pulls the `prismaPg` function out of the `@prisma/adapter-pg` package and assigns it to the `adapter` variable.
+Note that `import { PrismaPg }` is a destructuring import, it pulls the `PrismaPg` class out of the `@prisma/adapter-pg` package and assigns it to the `adapter` variable.
 
 Also note that in startup, `lib/prisma.ts` does the following:
   - Loads DATABASE_URL from `.env`
@@ -710,7 +710,7 @@ export async function createUser(input: CreateUserInput) {
 Action 5: Define the isValidEmail regex helper.
 Feedback: green 1 passed test
 
-To be fair, we don't need to add the test the database call, because the test is testing the validation logic.
+To be fair, we don't need to add a test for the database call, because the test is testing the validation logic.
 
 Now #2: saving a user to the database which means: persistence.
 
@@ -736,7 +736,7 @@ So at this point we have the following tests:
 - createUser rejects duplicate email
 - createUser persists a valid user
 
-As discussed before, we want to have have the following architecture:
+As discussed before, we want to have the following architecture:
 
 - Service: decide and coordinate business behavior
 - Repository: fetch and persist domain data
