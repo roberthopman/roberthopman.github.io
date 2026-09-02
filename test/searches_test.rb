@@ -49,6 +49,10 @@ assert_equal(true, header_for("/archive/").include?('<label class="search-label"
 assert_equal(false, header_for("/search/").include?('action="/search/"'),
              "the search page does not repeat the form in its header")
 
+# The submit control is an icon, so its only accessible name is the aria-label.
+assert_equal(true, header_for("/archive/").include?('<button type="submit" class="site-search__submit" aria-label="Search">'),
+             "the header search form has a named submit button")
+
 # The box replaced the nav link, so nothing should still resolve search.md.
 assert_equal(false, Site.header_pages.include?("search.md"), "the redundant search nav link is gone")
 

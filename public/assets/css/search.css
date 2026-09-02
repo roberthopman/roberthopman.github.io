@@ -6,16 +6,39 @@
    menu below 600px exactly like the nav links do. 600px repeats $on-palm from
    _sass/minima/initialize.scss; keep the two in step. */
 .site-search {
+  position: relative;
   margin: 8px 10px 4px;
 }
 
 .site-search__input {
   width: 100%;
-  padding: 6px 10px;
+  padding: 6px 32px 6px 10px;
   font-size: 0.9em;
   border: 1px solid #e8e8e8;
   border-radius: 5px;
   box-sizing: border-box;
+}
+
+/* Inside the input's right edge. The outline on :focus is deliberately left
+   at the browser default, so the button stays visible to keyboard users. */
+.site-search__submit {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #828282;
+  cursor: pointer;
+}
+
+.site-search__submit:hover {
+  color: #424242;
 }
 
 @media screen and (min-width: 600px) {
