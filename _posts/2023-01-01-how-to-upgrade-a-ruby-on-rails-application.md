@@ -85,7 +85,7 @@ Resources for the upgrade process:
 - <https://thoughtbot.com/blog/upgrade-rails-6-to-rails-7>
 
 
-# Non-technical
+## Non-technical
 
 Management of integrating the upgrade process with the team is the other part of the process.
 

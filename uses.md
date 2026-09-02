@@ -5,8 +5,6 @@ hide_author: true
 permalink: /uses/
 ---
 
-# Uses
-
 The stack I use for my projects.
 
 ## Tooling
@@ -62,13 +60,13 @@ The stack I use for my projects.
 - GitHub Actions
 - GitLab CI
 
-# Code Hosting
+## Code Hosting
 
 - GitHub
 - GitLab
 - Bitbucket
 
-# VPS and Cloud Hosting
+## VPS and Cloud Hosting
 
 - Hetzner
 - AWS
