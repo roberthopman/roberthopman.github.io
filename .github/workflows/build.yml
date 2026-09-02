@@ -41,7 +41,7 @@ jobs:
       # gives you locally. node-version-file keeps CI and local in step; this
       # action, unlike setup-ruby, does take that input. No cache: input,
       # because there is no package.json or lockfile to cache against.
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version-file: .node-version
 
