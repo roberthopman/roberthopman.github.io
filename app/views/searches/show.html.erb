@@ -1,0 +1,23 @@
+<div class="main">
+  <label class="search-label" for="search-input">Search the posts</label>
+  <input type="search" id="search-input" class="search-box" placeholder="Search the posts" autocomplete="off" autofocus>
+
+  <p class="search-status" id="search-status" role="status" aria-live="polite"></p>
+  <ul class="search-results" id="search-results"></ul>
+
+  <%# The index under /pagefind/ is written by the pagefind binary, not by this
+      app: into build/pagefind/ by CI, and into public/pagefind/ by the local
+      command in AGENTS.md. Both resolve at the same absolute path, so this
+      view needs no environment switch. Under bin/rails server the search box
+      stays empty until that command has been run once. %>
+  <script type="module" src="/assets/js/search.js"></script>
+
+  <noscript>
+    <p>Search needs JavaScript. Two alternatives:</p>
+    <ul>
+      <li><a href="/archive/">Browse the archive</a>, which lists every post.</li>
+      <li><a href="https://github.com/search?q=repo%3Aroberthopman%2Froberthopman.github.io+path%3A_posts">Search
+        the posts on GitHub</a>, which reads the same markdown this site is built from.</li>
+    </ul>
+  </noscript>
+</div>

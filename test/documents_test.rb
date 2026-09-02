@@ -228,4 +228,24 @@ ensure
   File.delete(temp_full_path) if File.exist?(temp_full_path)
 end
 
+# Pagefind indexes only the elements marked data-pagefind-body, and skips a
+# page carrying none. That single attribute is what keeps the header, the
+# footer, the sidebar, the tag pages and the archive out of the results, so
+# it has to be on both branches of documents/show: a post's .post-content,
+# and a page's otherwise unwrapped body.
+post_html = ApplicationController.render(template: "documents/show", layout: false,
+                                         assigns: { document: post })
+assert_equal(true, post_html.include?("data-pagefind-body"), "a rendered post marks its body for pagefind")
+
+page_html = ApplicationController.render(template: "documents/show", layout: false,
+                                         assigns: { document: page })
+assert_equal(true, page_html.include?("data-pagefind-body"), "a rendered page marks its body for pagefind")
+
+# 404.html is a Page like any other, so without the sitemap flag it would
+# rank in its own search results.
+not_found_html = ApplicationController.render(template: "documents/show", layout: false,
+                                              assigns: { document: not_found })
+assert_equal(false, not_found_html.include?("data-pagefind-body"),
+             "a page declaring sitemap: false stays out of the search index")
+
 puts "all document assertions passed"

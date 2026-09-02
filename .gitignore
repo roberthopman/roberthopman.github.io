@@ -4,6 +4,7 @@ _site
 docs
 .claude
 build
+public/pagefind/
 log/
 tmp/
 .superpowers/

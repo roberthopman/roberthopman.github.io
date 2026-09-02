@@ -2,7 +2,7 @@
 <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
 
-  <div class="post-content e-content" itemprop="articleBody">
+  <div class="post-content e-content" itemprop="articleBody" data-pagefind-body>
     <%= raw @document.html %>
   </div>
 
@@ -10,8 +10,16 @@
 <% if Site.discourse_url %><%= render("shared/discourse_comments").chomp.html_safe %><% end %><a class="u-url" href="<%= @document.url %>" hidden></a>
 </article>
 <% else %>
-<%# _layouts/page.html is never reached in this site: every root page carries
+<%# The wrapper exists only to give Pagefind a body element to index; a
+    page's markdown has no container of its own. Pagefind indexes only
+    elements marked data-pagefind-body and skips pages carrying none, which
+    is what keeps the nav, the footer, the archive and the tag pages out of
+    the results. 404.html declares "sitemap: false" to stay out of
+    machine-facing listings (see MachineController#sitemap_page_urls); the
+    search index is one of those, so the same flag drops the attribute.
+
+    _layouts/page.html is never reached in this site: every root page carries
     "layout: default", not "layout: page". A page's rendered body goes
-    straight into the default layout's content slot, unwrapped. %>
-<%= raw @document.html %>
+    straight into the default layout's content slot. %>
+<div <%= "data-pagefind-body" if @document["sitemap"] != false %>><%= raw @document.html %></div>
 <% end %>

@@ -20,6 +20,7 @@ Parklife.application.routes do
   Page.all.each { |page| get page.url unless page.url == "/" }
 
   get "/archive/"
+  get "/search/"
   get "/tags/"
   Tag.all.each { |tag| get tag.url }
 

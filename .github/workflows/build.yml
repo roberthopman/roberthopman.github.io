@@ -37,15 +37,32 @@ jobs:
           # action and is ignored with a warning on every run.
           bundler-cache: true
 
+      # Node is what builds the search index, the same npx command AGENTS.md
+      # gives you locally. node-version-file keeps CI and local in step; this
+      # action, unlike setup-ruby, does take that input. No cache: input,
+      # because there is no package.json or lockfile to cache against.
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+
       - name: Run tests
         run: |
           bundle exec ruby test/documents_test.rb
           bundle exec ruby test/machine_test.rb
+          bundle exec ruby test/searches_test.rb
 
       - name: Build site
         env:
           TZ: UTC
         run: bin/parklife build
+
+      # Pagefind reads the built HTML and writes build/pagefind/, so it runs
+      # after the build and before the artifact check. This is the same
+      # command AGENTS.md gives you locally, minus --output-path: here the
+      # index belongs in build/, there it belongs in public/ so that
+      # bin/rails server can serve it. Bump the pin in both places together.
+      - name: Build the search index
+        run: npx --yes pagefind@1.5.2 --site build
 
       # Catches a build that "succeeds" but produces a broken or truncated
       # site, the failure mode that actually takes the site down: the tests
@@ -55,7 +72,8 @@ jobs:
           set -e
           for f in build/index.html build/404.html build/CNAME \
                    build/.well-known/security.txt build/feed.xml \
-                   build/sitemap.xml build/llms.txt; do
+                   build/sitemap.xml build/llms.txt \
+                   build/search/index.html build/pagefind/pagefind.js; do
             if [ ! -s "$f" ]; then
               echo "missing or empty: $f"
               exit 1
@@ -67,6 +85,12 @@ jobs:
             echo "only $count index.html files under build/, expected at least 130"
             exit 1
           fi
+
+          # A page with two <h1> elements reads as two documents to a screen
+          # reader. 99 pages had that until the tag views stopped repeating the
+          # heading the layout already renders; this keeps it from creeping
+          # back, in a view or in a post written with "#".
+          ruby -e 'bad = Dir["build/**/*.html"].select { |page| File.read(page).scan(/<h1[^>]*>/).size > 1 }; abort("more than one h1 on: #{bad.join(", ")}") unless bad.empty?; puts "heading check: no page carries more than one h1"'
 
       # include-hidden-files defaults to false, which adds --exclude=.[^/]* to
       # the action's tar and silently drops .well-known/ from the artifact.

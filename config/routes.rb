@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get "/archive", to: "pages#archive"
   get "/tags", to: "tags#index"
   get "/tags/:slug", to: "tags#show"
+  get "/search", to: "searches#show"
 
   get "/feed.xml", to: "machine#feed", format: false
   get "/sitemap.xml", to: "machine#sitemap", format: false

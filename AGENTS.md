@@ -32,6 +32,19 @@ build raises no error for it.
 For example, put a new image at `public/assets/images/example.png`, not at
 `assets/images/example.png`.
 
+## Controllers
+
+Use only the seven CRUD actions in a controller: `index`, `show`, `new`,
+`create`, `edit`, `update` and `destroy`. A new behaviour gets a new
+controller, not a custom action on an existing one.
+
+For example, a search page is `SearchesController#show` at `/search`, not
+`PagesController#search`.
+
+`PagesController#home`, `PagesController#archive` and the three actions in
+`MachineController` predate this rule. Leave them alone. The rule applies to
+new code.
+
 ## Build and Test
 
 Build the static site with:
@@ -47,10 +60,50 @@ Run the test suite with:
 ```bash
 bundle exec ruby test/documents_test.rb
 bundle exec ruby test/machine_test.rb
+bundle exec ruby test/searches_test.rb
 ```
 
-Both files must pass before you commit a change to `app/models/`,
-`app/controllers/machine_controller.rb`, or `app/helpers/`.
+All three files must pass before you commit a change to `app/`,
+`config/routes.rb` or `config/site.yml`.
+
+## Search
+
+Pagefind reads the built HTML and writes a static index next to it. The app
+does not generate it, and `bin/rails server` serves `public/`, not `build/`.
+So build the site once and point the index at `public/pagefind/`:
+
+```bash
+bin/parklife build && npx --yes pagefind@1.5.2 --site build --output-path public/pagefind
+```
+
+Rails then serves the index at `/pagefind/`, and `/search` works in the
+development server. The index is a snapshot: run the command again after you
+add or edit a post, or the results stay stale. `public/pagefind/` is
+gitignored and never committed.
+
+CI runs the same command, without `--output-path`, so the index lands in
+`build/` next to the pages it describes. The version is pinned in two places,
+here and in `.github/workflows/build.yml`; bump them together. The Node
+version itself comes from `.node-version`, the way Ruby comes from
+`.ruby-version`.
+
+`public/assets/js/search.js` gates every query, because Pagefind on its own
+returns results for a word that appears in no post: it falls back to a shorter
+indexed word the query starts with, so "parklife" matches the token "p". The
+gate leans on two Pagefind behaviours that a version bump could change, and no
+test covers them. A stub test would only check the branching against its own
+assumptions; catching a real change of behaviour needs a browser driving the
+real index. After you bump the version, run these four queries against
+`bin/rails server` and check the answers by hand:
+
+```
+Query       Expected
+-----       --------
+stripe      results, the Stripe post first
+stri        results, the Stripe post first (a prefix still matches)
+testing     results (the term stems to "tests")
+parklife    No results for parklife
+```
 
 ## Tutorial Writing Checklist
 

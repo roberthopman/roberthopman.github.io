@@ -1,0 +1,88 @@
+/* The search box in the site header and the /search/ page. Loaded from
+   app/views/layouts/_head.erb, the same way anchor-links.css and
+   codeblock.css are, so it is not compiled from _sass. */
+
+/* The form sits inside .site-nav .trigger, so it collapses into the hamburger
+   menu below 600px exactly like the nav links do. 600px repeats $on-palm from
+   _sass/minima/initialize.scss; keep the two in step. */
+.site-search {
+  margin: 8px 10px 4px;
+}
+
+.site-search__input {
+  width: 100%;
+  padding: 6px 10px;
+  font-size: 0.9em;
+  border: 1px solid #e8e8e8;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+@media screen and (min-width: 600px) {
+  .site-search {
+    display: inline-block;
+    margin: 0 0 0 20px;
+    vertical-align: middle;
+  }
+
+  .site-search__input {
+    width: 150px;
+  }
+}
+/* Off-screen, the same way .skip-link hides itself in
+   _sass/minima/custom-styles.scss. The heading already reads "Search", so a
+   visible label would only repeat it, but the input still needs one. */
+.search-label {
+  position: absolute;
+  left: -9999px;
+}
+
+.search-box {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 1.05em;
+  border: 1px solid #e8e8e8;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.search-status {
+  margin: 20px 0 0;
+  font-weight: 600;
+}
+
+.search-results {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.search-result {
+  padding: 20px 0;
+  border-top: 1px solid #e8e8e8;
+}
+
+.search-result__title {
+  font-size: 1.15em;
+  font-weight: 600;
+}
+
+.search-result__excerpt {
+  margin: 6px 0 0;
+  color: #424242;
+}
+
+.search-result__sections {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0 0 0 16px;
+}
+
+.search-result__sections li + li {
+  margin-top: 10px;
+}
+
+.search-results mark {
+  background: #fdf6d3;
+  padding: 0 2px;
+}
