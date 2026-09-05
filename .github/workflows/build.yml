@@ -86,11 +86,12 @@ jobs:
             exit 1
           fi
 
-          # A page with two <h1> elements reads as two documents to a screen
-          # reader. 99 pages had that until the tag views stopped repeating the
-          # heading the layout already renders; this keeps it from creeping
-          # back, in a view or in a post written with "#".
-          ruby -e 'bad = Dir["build/**/*.html"].select { |page| File.read(page).scan(/<h1[^>]*>/).size > 1 }; abort("more than one h1 on: #{bad.join(", ")}") unless bad.empty?; puts "heading check: no page carries more than one h1"'
+          # Two <h1> elements read as two documents to a screen reader, and
+          # none leaves the page with no title at all. 99 pages had the first
+          # problem and the home page had the second; every page carries
+          # exactly one now, so the check can hold that line rather than the
+          # weaker "no more than one" it started as.
+          ruby -e 'bad = Dir["build/**/*.html"].select { |page| File.read(page).scan(/<h1[^>]*>/).size != 1 }; abort("every page needs exactly one h1, these do not: #{bad.join(", ")}") unless bad.empty?; puts "heading check: every page carries exactly one h1"'
 
       # include-hidden-files defaults to false, which adds --exclude=.[^/]* to
       # the action's tar and silently drops .well-known/ from the artifact.

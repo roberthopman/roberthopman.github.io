@@ -460,3 +460,15 @@ blockquote p {
   letter-spacing: 0.01em;
   text-transform: uppercase;
 }
+// Two headings that exist for document structure, not for emphasis. Heading
+// sizes in this theme are scoped to .post-content, so without these rules the
+// browser defaults apply: 2em for the h1 and 1.5em for the h2, both of which
+// would redesign the page. 1em and 1.17em reproduce exactly what the elements
+// they replaced (a div and an h3) rendered at.
+.home-intro {
+  font-size: 1em;
+}
+
+.post-footer-links h2 {
+  font-size: 1.17em;
+}
