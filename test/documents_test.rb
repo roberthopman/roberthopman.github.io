@@ -248,4 +248,19 @@ not_found_html = ApplicationController.render(template: "documents/show", layout
 assert_equal(false, not_found_html.include?("data-pagefind-body"),
              "a page declaring sitemap: false stays out of the search index")
 
+# og:image:width and og:image:height are hardcoded in SeoHelper, so they can
+# drift from the file they describe the moment the image is re-exported. Read
+# the real dimensions out of the PNG header (IHDR puts width at byte 16 and
+# height at byte 20) and pin the constant to them.
+image_path = Rails.root.join("public", Site.image.delete_prefix("/"))
+declared = SeoHelper::SITE_IMAGE_SIZE
+actual_width, actual_height = File.binread(image_path, 8, 16).unpack("N2")
+assert_equal(declared[:width], actual_width, "og:image:width matches the real image")
+assert_equal(declared[:height], actual_height, "og:image:height matches the real image")
+
+# The "1.91:1" every platform doc quotes is their rounding of 1200x630, which
+# is really 1.9048. Pin the actual ratio: drifting off it means a shared link
+# gets cropped somewhere unpredictable on Facebook, LinkedIn and X alike.
+assert_equal(1.9, (actual_width.to_f / actual_height).round(2), "the social image keeps the 1200x630 ratio")
+
 puts "all document assertions passed"

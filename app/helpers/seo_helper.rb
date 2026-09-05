@@ -1,6 +1,13 @@
 require "cgi"
 
 module SeoHelper
+  # The pixel size of Site.image. Declaring it lets a crawler reserve the card
+  # layout without fetching the file. Only emitted when a document uses the
+  # site default: a document carrying its own image would need its own
+  # measurements, and no document does today. test/documents_test.rb pins
+  # these numbers against the real file, so the tags cannot start lying.
+  SITE_IMAGE_SIZE = { width: 1200, height: 630 }.freeze
+
   def seo_tags(document)
     page_title = seo_page_title(document)
 
@@ -16,6 +23,10 @@ module SeoHelper
     tags << tag.meta(property: "og:url", content: absolute(document.url))
     tags << tag.meta(property: "og:site_name", content: Site.title)
     tags << tag.meta(property: "og:image", content: absolute(document.image))
+    if document.image == Site.image
+      tags << tag.meta(property: "og:image:width", content: SITE_IMAGE_SIZE[:width])
+      tags << tag.meta(property: "og:image:height", content: SITE_IMAGE_SIZE[:height])
+    end
     tags << tag.meta(property: "og:type", content: document.kind == :post ? "article" : "website")
 
     if document.kind == :post
