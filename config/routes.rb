@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   root to: "pages#home"
 
   get "/archive", to: "pages#archive"
+  get "/archive/:range", to: "word_ranges#show", constraints: { range: /short|medium|long/ }
   get "/tags", to: "tags#index"
   get "/tags/:slug", to: "tags#show"
   get "/search", to: "searches#show"

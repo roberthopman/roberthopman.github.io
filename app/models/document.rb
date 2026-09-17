@@ -97,7 +97,7 @@ class Document
     @html ||= MarkdownRenderer.render(source_text)
   end
 
-  # archive.html.erb's data-words needs Jekyll's number_of_words semantics
+  # WordRangesController needs Jekyll's number_of_words semantics
   # (a count of the RENDERED content), so it calls through kramdown and
   # Rouge for every post and tagged page. #html's own @html memo cannot
   # help there: ApplicationController's reset_memo! (see .reset_memo! above)

@@ -171,10 +171,9 @@ assert_equal(original_title, restored.front_matter["title"],
 assert_equal(false, first_call.equal?(restored),
              "the post after reset is a freshly parsed instance, not the mutated one restored in place")
 
-# Document#word_count is what archive.html.erb's data-words attribute
-# calls (see Document#word_count and app/views/pages/archive.html.erb).
-# data-words is stripped from the parity comparison, so a wrong count
-# ships silently unless it is pinned here directly. These are the counts
+# Document#word_count is what WordRangesController filters on (see
+# Document#word_count and app/controllers/word_ranges_controller.rb).
+# A wrong count ships silently unless it is pinned here directly. These are the counts
 # captured from the real dev server before WORD_COUNT_CACHE existed;
 # recomputing the split rule here would let a broken cache still pass.
 diagnose_a_bug = Post.all.find { |doc| doc.path == "_posts/2026-08-09-diagnose-a-bug.md" }
@@ -262,5 +261,23 @@ assert_equal(declared[:height], actual_height, "og:image:height matches the real
 # is really 1.9048. Pin the actual ratio: drifting off it means a shared link
 # gets cropped somewhere unpredictable on Facebook, LinkedIn and X alike.
 assert_equal(1.9, (actual_width.to_f / actual_height).round(2), "the social image keeps the 1200x630 ratio")
+
+# The archive's word filter is one static page per range (see
+# WordRangesController), so a visit shows up in analytics on its own.
+route = Rails.application.routes.recognize_path("/archive/short")
+assert_equal("word_ranges", route[:controller], "/archive/short routes to the word ranges controller")
+assert_equal("show", route[:action], "/archive/short routes to a show action")
+
+status, _headers, body = Rails.application.call(Rack::MockRequest.env_for("/archive/short/", "HTTP_HOST" => "localhost"))
+short_html = +""
+body.each { |chunk| short_html << chunk }
+body.close if body.respond_to?(:close)
+assert_equal(200, status, "/archive/short/ renders")
+short_posts = Post.all.select { |post| post.word_count < 400 }
+assert_equal(true, short_html.include?("#{short_posts.size} of #{Post.all.size} posts"),
+             "the short range page counts only posts under 400 words")
+longest = Post.all.max_by(&:word_count)
+assert_equal(false, short_html.include?(%(href="#{longest.url}")),
+             "the longest post stays off the short range page")
 
 puts "all document assertions passed"

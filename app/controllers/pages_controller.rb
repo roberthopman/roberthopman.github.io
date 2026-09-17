@@ -6,9 +6,8 @@ class PagesController < ApplicationController
 
   def archive
     @document = view_page(title: "Archive", url: "/archive/", hide_author: true)
-    # archive.md computed "now - 15552000 seconds", which is 180 days, not
-    # the 18 months its own variable name claimed.
-    @cutoff = Time.now.utc - 15_552_000
+    @range = "all"
+    @posts = Post.all
     @tagged_pages = Page.all.select { |page| page.tags.any? }
   end
 end
