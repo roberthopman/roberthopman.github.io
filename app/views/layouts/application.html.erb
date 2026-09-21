@@ -15,7 +15,7 @@
           <%= yield %>
 
           <%= render "shared/share_buttons", extra_class: "share-inline--mobile" -%>
-<% if Site.discourse_url %><%= render("shared/discourse_comments").chomp.html_safe %><% end %></div>
+</div>
       </div>
 <%= "      " %><% elsif @document.kind == :post %>
       <div class="page-with-sidebar">

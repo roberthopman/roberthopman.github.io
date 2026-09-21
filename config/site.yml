@@ -32,9 +32,6 @@ social:
     - https://www.linkedin.com/in/roberthopman
     - https://x.com/roberthopman
 
-discourse:
-  url: 'https://technicalblog.discourse.group/'
-
 minima:
   social_links:
     github: roberthopman

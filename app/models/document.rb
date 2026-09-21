@@ -68,7 +68,6 @@ class Document
   def sidebar = front_matter["sidebar"]
   def hide_author? = front_matter["hide_author"] == true
   def hide_last_updated? = front_matter["hide_last_updated"] == true
-  def comments? = front_matter["comments"] != false
 
   def image
     # config/site.yml sets a default image for both posts and pages.

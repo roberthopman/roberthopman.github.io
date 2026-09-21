@@ -7,7 +7,7 @@
   </div>
 
   <%= render "shared/share_buttons", extra_class: "share-inline--mobile" -%>
-<% if Site.discourse_url %><%= render("shared/discourse_comments").chomp.html_safe %><% end %><a class="u-url" href="<%= @document.url %>" hidden></a>
+<a class="u-url" href="<%= @document.url %>" hidden></a>
 </article>
 <% else %>
 <%# The wrapper exists only to give Pagefind a body element to index; a

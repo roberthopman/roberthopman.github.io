@@ -16,7 +16,6 @@ module Site
   def image = config["image"]
   def legal_entity = config["legal_entity"]
   def google_analytics = config["google_analytics"]
-  def discourse_url = config.dig("discourse", "url")
   def author_name = config.dig("author", "name")
   def author_email = config.dig("author", "email")
   def author_url = config.dig("author", "url")
