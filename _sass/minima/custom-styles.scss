@@ -166,6 +166,15 @@ code {
   flex: 1;
 }
 
+// tags index: four columns, fewer when a column gets narrower than 10em
+.tag-list {
+  columns: 4 10em;
+
+  li {
+    break-inside: avoid;
+  }
+}
+
 // archive filters
 .archive-filters {
   margin-bottom: 20px;
