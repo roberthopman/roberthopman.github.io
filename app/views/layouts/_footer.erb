@@ -26,8 +26,8 @@
         </div>
       </div>
       <div class="footer-col"><% if @document.url != "/" && Site.data("post_footer").size > 0 %><div class="post-footer-links">
-          <h2>Popular posts</h2>
-          <ul><% Site.data("post_footer").each do |item| %><li><a href="<%= item["url"] %>"><%= item["title"] %></a></li><% end %></ul>
+          <h2>Start here</h2>
+          <ol><% Site.data("post_footer").each do |item| %><li><a href="<%= item["url"] %>"><%= item["title"] %></a></li><% end %></ol>
         </div><% end %></div>
     </div>
 

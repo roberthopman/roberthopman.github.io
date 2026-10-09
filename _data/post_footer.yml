@@ -1,9 +1,13 @@
 # Links to display at the end of blog posts
 # Add entries with title and url
 
-- title: "Ruby Syntax"
-  url: "/ruby-syntax"
+- title: "Why do we write code?"
+  url: "/why-do-we-program"
+- title: "A History of Quality in Software Engineering"
+  url: "/history-of-quality-in-software-engineering"
 - title: "How to balance maintenance and development?"
   url: "/how-to-balance-maintenance-and-development"
-- title: "How to upgrade a Ruby on Rails application?"
-  url: "/how-to-upgrade-a-ruby-on-rails-application"
+- title: "Diagnose a bug"
+  url: "/diagnose-a-bug"
+- title: "From request to e-mail"
+  url: "/from-request-to-e-mail"
