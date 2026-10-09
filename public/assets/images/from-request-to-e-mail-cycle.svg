@@ -1,0 +1,80 @@
+<svg viewBox="0 0 1040 760" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="sdlc-cycle-title sdlc-cycle-desc">
+<title id="sdlc-cycle-title">One slice, from request to e-mail</title>
+<desc id="sdlc-cycle-desc">Thirteen steps on one circle: request, evidence, real confirmed examples, plan, engineering review, build red then green, mutation check, test-quality scan, full checks, PR, merge and deploy, production check, e-mail. Five steps are blue: there the human decides. The e-mail closes the circle, because its answer is the next request.</desc>
+<defs><style>@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Inter:wght@400;500;600&amp;family=Geist+Mono:wght@400;500;600&amp;display=swap');</style>
+<marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4b5563"/></marker>
+<marker id="arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#0070f3"/></marker></defs>
+<rect width="100%" height="100%" fill="#fafaf7"/>
+<line x1="600.0" y1="103.6" x2="635.2" y2="109.6" stroke-width="1.2" stroke="#4b5563" marker-end="url(#arrow)"/>
+<line x1="759.3" y1="150.2" x2="821.5" y2="188.3" stroke-width="1.2" stroke="#4b5563" marker-end="url(#arrow)"/>
+<line x1="880.5" y1="242.3" x2="922.1" y2="318.0" stroke-width="1.2" stroke="#4b5563" marker-end="url(#arrow)"/>
+<line x1="932.2" y1="372.0" x2="917.5" y2="455.8" stroke-width="1.2" stroke="#4b5563" marker-end="url(#arrow)"/>
+<line x1="885.7" y1="509.8" x2="825.5" y2="570.1" stroke-width="1.2" stroke="#4b5563" marker-end="url(#arrow)"/>
+<line x1="724.0" y1="624.1" x2="695.0" y2="634.6" stroke-width="1.2" stroke="#4b5563" marker-end="url(#arrow)"/>
+<line x1="540.5" y1="661.6" x2="499.5" y2="661.6" stroke-width="1.2" stroke="#4b5563" marker-end="url(#arrow)"/>
+<line x1="345.0" y1="634.6" x2="316.0" y2="624.1" stroke-width="1.2" stroke="#4b5563" marker-end="url(#arrow)"/>
+<line x1="214.5" y1="570.1" x2="154.3" y2="509.8" stroke-width="1.2" stroke="#4b5563" marker-end="url(#arrow)"/>
+<line x1="122.5" y1="455.8" x2="107.8" y2="372.0" stroke-width="1.2" stroke="#4b5563" marker-end="url(#arrow)"/>
+<line x1="117.9" y1="318.0" x2="159.5" y2="242.3" stroke-width="1.2" stroke="#4b5563" marker-end="url(#arrow)"/>
+<line x1="218.5" y1="188.3" x2="280.7" y2="150.2" stroke-width="1.2" stroke="#4b5563" marker-end="url(#arrow)"/>
+<line x1="404.8" y1="109.6" x2="440.0" y2="103.6" stroke-width="1.2" stroke="#0070f3" stroke-dasharray="4 4" marker-end="url(#arrow-accent)"/>
+<text x="416" y="93" fill="#0070f3" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="end">the answer is the next request</text>
+<text x="520" y="346" fill="#6b7280" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle" letter-spacing="0.18em">ONE SLICE</text>
+<text x="520" y="380" fill="#111111" font-size="30" font-family="'Instrument Serif', Georgia, 'Times New Roman', serif" text-anchor="middle">request to e-mail</text>
+<rect x="434" y="404" width="12" height="12" rx="3" fill="#0070f3" fill-opacity="0.10" stroke="#0070f3"/>
+<text x="452" y="414" fill="#4b5563" font-size="10" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">I decide</text>
+<rect x="530" y="404" width="12" height="12" rx="3" fill="#111111" fill-opacity="0.05" stroke="#4b5563"/>
+<text x="548" y="414" fill="#4b5563" font-size="10" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">AI does it</text>
+<rect x="445.0" y="68.0" width="150" height="44" rx="6" fill="#fafaf7"/>
+<rect x="445.0" y="68.0" width="150" height="44" rx="6" fill="#0070f3" fill-opacity="0.08" stroke="#0070f3" stroke-width="1"/>
+<text x="520.0" y="84.0" fill="#0070f3" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle" letter-spacing="0.08em">01</text>
+<text x="520.0" y="101.0" fill="#111111" font-size="11.5" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">Request</text>
+<rect x="640.2" y="101.2" width="150" height="44" rx="6" fill="#fafaf7"/>
+<rect x="640.2" y="101.2" width="150" height="44" rx="6" fill="#111111" fill-opacity="0.05" stroke="#4b5563" stroke-width="1"/>
+<text x="715.2" y="117.2" fill="#6b7280" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle" letter-spacing="0.08em">02</text>
+<text x="715.2" y="134.2" fill="#111111" font-size="11.5" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">Evidence</text>
+<rect x="790.7" y="193.3" width="150" height="44" rx="6" fill="#fafaf7"/>
+<rect x="790.7" y="193.3" width="150" height="44" rx="6" fill="#0070f3" fill-opacity="0.08" stroke="#0070f3" stroke-width="1"/>
+<text x="865.7" y="209.3" fill="#0070f3" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle" letter-spacing="0.08em">03</text>
+<text x="865.7" y="226.3" fill="#111111" font-size="11.5" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">Real confirmed example</text>
+<rect x="861.9" y="323.0" width="150" height="44" rx="6" fill="#fafaf7"/>
+<rect x="861.9" y="323.0" width="150" height="44" rx="6" fill="#111111" fill-opacity="0.05" stroke="#4b5563" stroke-width="1"/>
+<text x="936.9" y="339.0" fill="#6b7280" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle" letter-spacing="0.08em">04</text>
+<text x="936.9" y="356.0" fill="#111111" font-size="11.5" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">Plan</text>
+<rect x="837.7" y="460.8" width="150" height="44" rx="6" fill="#fafaf7"/>
+<rect x="837.7" y="460.8" width="150" height="44" rx="6" fill="#0070f3" fill-opacity="0.08" stroke="#0070f3" stroke-width="1"/>
+<text x="912.7" y="476.8" fill="#0070f3" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle" letter-spacing="0.08em">05</text>
+<text x="912.7" y="493.8" fill="#111111" font-size="11.5" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">Engineering review</text>
+<rect x="723.5" y="575.1" width="150" height="44" rx="6" fill="#fafaf7"/>
+<rect x="723.5" y="575.1" width="150" height="44" rx="6" fill="#111111" fill-opacity="0.05" stroke="#4b5563" stroke-width="1"/>
+<text x="798.5" y="591.1" fill="#6b7280" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle" letter-spacing="0.08em">06</text>
+<text x="798.5" y="608.1" fill="#111111" font-size="11.5" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">Build red, green</text>
+<rect x="545.5" y="639.6" width="150" height="44" rx="6" fill="#fafaf7"/>
+<rect x="545.5" y="639.6" width="150" height="44" rx="6" fill="#111111" fill-opacity="0.05" stroke="#4b5563" stroke-width="1"/>
+<text x="620.5" y="655.6" fill="#6b7280" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle" letter-spacing="0.08em">07</text>
+<text x="620.5" y="672.6" fill="#111111" font-size="11.5" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">Mutation check</text>
+<rect x="344.5" y="639.6" width="150" height="44" rx="6" fill="#fafaf7"/>
+<rect x="344.5" y="639.6" width="150" height="44" rx="6" fill="#111111" fill-opacity="0.05" stroke="#4b5563" stroke-width="1"/>
+<text x="419.5" y="655.6" fill="#6b7280" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle" letter-spacing="0.08em">08</text>
+<text x="419.5" y="672.6" fill="#111111" font-size="11.5" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">Test-quality scan</text>
+<rect x="166.5" y="575.1" width="150" height="44" rx="6" fill="#fafaf7"/>
+<rect x="166.5" y="575.1" width="150" height="44" rx="6" fill="#111111" fill-opacity="0.05" stroke="#4b5563" stroke-width="1"/>
+<text x="241.5" y="591.1" fill="#6b7280" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle" letter-spacing="0.08em">09</text>
+<text x="241.5" y="608.1" fill="#111111" font-size="11.5" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">Full checks</text>
+<rect x="52.3" y="460.8" width="150" height="44" rx="6" fill="#fafaf7"/>
+<rect x="52.3" y="460.8" width="150" height="44" rx="6" fill="#111111" fill-opacity="0.05" stroke="#4b5563" stroke-width="1"/>
+<text x="127.3" y="476.8" fill="#6b7280" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle" letter-spacing="0.08em">10</text>
+<text x="127.3" y="493.8" fill="#111111" font-size="11.5" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">PR</text>
+<rect x="28.1" y="323.0" width="150" height="44" rx="6" fill="#fafaf7"/>
+<rect x="28.1" y="323.0" width="150" height="44" rx="6" fill="#0070f3" fill-opacity="0.08" stroke="#0070f3" stroke-width="1"/>
+<text x="103.1" y="339.0" fill="#0070f3" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle" letter-spacing="0.08em">11</text>
+<text x="103.1" y="356.0" fill="#111111" font-size="11.5" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">Merge + deploy</text>
+<rect x="99.3" y="193.3" width="150" height="44" rx="6" fill="#fafaf7"/>
+<rect x="99.3" y="193.3" width="150" height="44" rx="6" fill="#111111" fill-opacity="0.05" stroke="#4b5563" stroke-width="1"/>
+<text x="174.3" y="209.3" fill="#6b7280" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle" letter-spacing="0.08em">12</text>
+<text x="174.3" y="226.3" fill="#111111" font-size="11.5" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">Production check</text>
+<rect x="249.8" y="101.2" width="150" height="44" rx="6" fill="#fafaf7"/>
+<rect x="249.8" y="101.2" width="150" height="44" rx="6" fill="#0070f3" fill-opacity="0.08" stroke="#0070f3" stroke-width="1"/>
+<text x="324.8" y="117.2" fill="#0070f3" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle" letter-spacing="0.08em">13</text>
+<text x="324.8" y="134.2" fill="#111111" font-size="11.5" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">E-mail</text>
+</svg>
