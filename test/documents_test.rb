@@ -282,4 +282,16 @@ longest = Post.all.max_by(&:word_count)
 assert_equal(false, short_html.include?(%(href="#{longest.url}")),
              "the longest post stays off the short range page")
 
+status, _headers, body = Rails.application.call(Rack::MockRequest.env_for("/diagnose-a-bug/", "HTTP_HOST" => "localhost"))
+telegram_html = +""
+body.each { |chunk| telegram_html << chunk }
+body.close if body.respond_to?(:close)
+assert_equal(200, status, "a post renders")
+assert_equal(1, telegram_html.scan(%(class="social-movement-follow")).size, "the post has one follow block")
+follow_block = telegram_html[/<div class="social-movement-follow">.*?<\/div>/m]
+assert_equal(true, follow_block.include?(%(href="https://t.me/roberthopman")), "the follow icons link to Telegram")
+footer = telegram_html[/<footer.*<\/footer>/m]
+assert_equal(true, footer.include?(%(href="https://t.me/roberthopman")), "the footer links to Telegram")
+assert_equal(true, Site.config.dig("social", "links").include?("https://t.me/roberthopman"), "sameAs names Telegram")
+
 puts "all document assertions passed"

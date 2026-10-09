@@ -31,11 +31,13 @@ social:
     - https://github.com/roberthopman
     - https://www.linkedin.com/in/roberthopman
     - https://x.com/roberthopman
+    - https://t.me/roberthopman
 
 minima:
   social_links:
     github: roberthopman
     twitter: roberthopman
     linkedin: roberthopman
+    telegram: roberthopman
 
 google_analytics: 'G-J0HMLHK67L'
