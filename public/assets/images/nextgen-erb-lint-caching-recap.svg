@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 960 600" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="nextgen-erb-lint-caching-title nextgen-erb-lint-caching-desc">
+      <title id="nextgen-erb-lint-caching-title">Lint only the ERB files that changed</title>
+      <desc id="nextgen-erb-lint-caching-desc">Flowchart of a pre-commit hook that runs ERB Lint with the cache flag: for each file, a file unchanged since the last run reuses the cached result, a changed file is linted and its result is written to the cache, and the commit proceeds faster.</desc>
+      <defs><style>@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Inter:wght@400;500;600&amp;family=Geist+Mono:wght@400;500;600&amp;display=swap');</style>
+        <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4b5563"/></marker>
+        <marker id="arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#0070f3"/></marker>
+        <marker id="arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4b5563"/></marker>
+      </defs>
+
+      <rect width="100%" height="100%" fill="#fafaf7"/>
+
+      <!-- Arrows first, behind the nodes -->
+      <line x1="400" y1="88" x2="400" y2="120" stroke="#4b5563" stroke-width="1.2" marker-end="url(#arrow)"/>
+      <line x1="400" y1="176" x2="400" y2="208" stroke="#4b5563" stroke-width="1.2" marker-end="url(#arrow)"/>
+      <line x1="500" y1="256" x2="640" y2="256" stroke="#0070f3" stroke-width="1.4" marker-end="url(#arrow-accent)"/>
+      <line x1="400" y1="304" x2="400" y2="344" stroke="#4b5563" stroke-width="1.2" marker-end="url(#arrow)"/>
+      <line x1="400" y1="400" x2="400" y2="428" stroke="#4b5563" stroke-width="1.2" marker-end="url(#arrow)"/>
+      <path d="M 730,280 V 424 Q 730,432 722,432 H 404" fill="none" stroke="#0070f3" stroke-width="1.4" marker-end="url(#arrow-accent)"/>
+      <line x1="400" y1="436" x2="400" y2="464" stroke="#4b5563" stroke-width="1.2" marker-end="url(#arrow)"/>
+
+      <!-- Arrow labels -->
+      <rect x="556" y="236" width="28" height="12" rx="2" fill="#fafaf7"/>
+      <text x="570" y="245" fill="#0070f3" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle" letter-spacing="0.12em">NO</text>
+
+      <rect x="408" y="318" width="32" height="12" rx="2" fill="#fafaf7"/>
+      <text x="424" y="327" fill="#4b5563" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle" letter-spacing="0.12em">YES</text>
+
+      <!-- Start oval -->
+      <rect x="320" y="40" width="160" height="48" rx="24" fill="#111111" fill-opacity="0.03" stroke="#111111" stroke-opacity="0.30" stroke-width="1"/>
+      <text x="400" y="62" fill="#111111" font-size="12" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">Commit</text>
+      <text x="400" y="77" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle">git commit</text>
+
+      <!-- Step: pre-commit hook -->
+      <rect x="280" y="120" width="240" height="56" rx="6" fill="#ffffff" stroke="#111111" stroke-width="1"/>
+      <text x="400" y="143" fill="#111111" font-size="12" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">Overcommit pre-commit hook</text>
+      <text x="400" y="160" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle">bin/erb_lint --lint-all --cache</text>
+
+      <!-- Decision: file changed since the last run? -->
+      <polygon points="400,208 500,256 400,304 300,256" fill="#ffffff" stroke="#111111" stroke-width="1"/>
+      <text x="400" y="254" fill="#111111" font-size="11" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">File changed since</text>
+      <text x="400" y="268" fill="#111111" font-size="11" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">the last run?</text>
+
+      <!-- Step: reuse the cached result -->
+      <rect x="640" y="232" width="180" height="48" rx="6" fill="#ffffff" stroke="#111111" stroke-width="1"/>
+      <text x="730" y="254" fill="#111111" font-size="12" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">Reuse the cached result</text>
+      <text x="730" y="269" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle">.erb_lint_cache</text>
+
+      <!-- Step: lint the file -->
+      <rect x="300" y="344" width="200" height="56" rx="6" fill="#ffffff" stroke="#111111" stroke-width="1"/>
+      <text x="400" y="367" fill="#111111" font-size="12" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">Lint the file</text>
+      <text x="400" y="384" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle">write the result to the cache</text>
+
+      <!-- Merge point -->
+      <circle cx="400" cy="432" r="4" fill="#111111"/>
+
+      <!-- End oval -->
+      <rect x="320" y="464" width="160" height="48" rx="24" fill="#111111" fill-opacity="0.03" stroke="#111111" stroke-opacity="0.30" stroke-width="1"/>
+      <text x="400" y="486" fill="#111111" font-size="12" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">Commit proceeds</text>
+      <text x="400" y="501" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle">a faster hook</text>
+
+      <!-- Legend -->
+      <line x1="120" y1="528" x2="840" y2="528" stroke="#111111" stroke-opacity="0.10" stroke-width="0.8"/>
+      <text x="120" y="544" fill="#4b5563" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" letter-spacing="0.18em">LEGEND · SHAPE CARRIES TYPE</text>
+      <rect x="120" y="562" width="24" height="12" rx="6" fill="#111111" fill-opacity="0.03" stroke="#111111" stroke-opacity="0.30" stroke-width="1"/>
+      <text x="152" y="572" fill="#4b5563" font-size="8.5" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">Start / end</text>
+      <rect x="248" y="562" width="24" height="12" rx="2" fill="#ffffff" stroke="#111111" stroke-width="1"/>
+      <text x="280" y="572" fill="#4b5563" font-size="8.5" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">Step</text>
+      <polygon points="352,568 364,562 376,568 364,574" fill="#ffffff" stroke="#111111" stroke-width="1"/>
+      <text x="388" y="572" fill="#4b5563" font-size="8.5" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">Decision</text>
+      <circle cx="482" cy="568" r="4" fill="#111111"/>
+      <text x="496" y="572" fill="#4b5563" font-size="8.5" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">Merge point</text>
+      <line x1="600" y1="568" x2="628" y2="568" stroke="#0070f3" stroke-width="1.4" marker-end="url(#arrow-accent)"/>
+      <text x="636" y="572" fill="#4b5563" font-size="8.5" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">Cache hit, the fast path</text>
+      <line x1="800" y1="568" x2="828" y2="568" stroke="#4b5563" stroke-width="1.2" marker-end="url(#arrow)"/>
+      <text x="836" y="572" fill="#4b5563" font-size="8.5" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">Branch</text>
+    </svg>

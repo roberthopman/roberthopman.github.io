@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>One tool moves the whole history</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --color-paper:   #fafaf7;
+      --color-ink:     #111111;
+      --color-muted:   #4b5563;
+      --color-accent:  #0070f3;
+      --font-sans:     'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      --font-serif:    'Instrument Serif', Georgia, 'Times New Roman', serif;
+      --font-mono:     'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace;
+    }
+    body { font-family: var(--font-sans); background: var(--color-paper); color: var(--color-ink); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 3rem 2rem; }
+    .frame { max-width: 1200px; width: 100%; }
+    .eyebrow { font-family: var(--font-mono); font-size: 0.66rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-muted); margin-bottom: 0.5rem; }
+    h1 { font-family: var(--font-serif); font-size: clamp(1.5rem, 2.4vw + 0.75rem, 2rem); font-weight: 400; letter-spacing: -0.02em; line-height: 1.15; color: var(--color-ink); margin-bottom: 1.5rem; }
+    svg { width: 100%; min-width: 900px; display: block; }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <p class="eyebrow">Architecture · Diagram Design</p>
+    <h1>One tool moves the whole history</h1>
+
+    <svg viewBox="0 0 960 252" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="migrate-gitlab-to-github-title migrate-gitlab-to-github-desc">
+      <title id="migrate-gitlab-to-github-title">One tool moves the whole history</title>
+      <desc id="migrate-gitlab-to-github-desc">Architecture diagram of a GitLab to GitHub migration: node-gitlab-2-github reads users, commits, projects, issues, labels, milestones, merge requests and attachments from the GitLab API and writes them to the GitHub API.</desc>
+      <defs>
+        <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4b5563"/></marker>
+        <marker id="arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#0070f3"/></marker>
+        <marker id="arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4b5563"/></marker>
+      </defs>
+
+      <rect width="100%" height="100%" fill="#fafaf7"/>
+
+      <!-- Arrows first, behind the boxes. Row centre y=96 -->
+      <line x1="240" y1="96" x2="360" y2="96" stroke="#4b5563" stroke-width="1.2" marker-end="url(#arrow)"/>
+      <line x1="600" y1="96" x2="720" y2="96" stroke="#4b5563" stroke-width="1.2" marker-end="url(#arrow)"/>
+
+      <!-- Arrow labels, masked, 8px above the stroke -->
+      <rect x="272" y="76" width="56" height="12" rx="2" fill="#fafaf7"/>
+      <text x="300" y="86" fill="#4b5563" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle" letter-spacing="0.08em">API READ</text>
+
+      <rect x="632" y="76" width="56" height="12" rx="2" fill="#fafaf7"/>
+      <text x="660" y="86" fill="#4b5563" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle" letter-spacing="0.08em">API WRITE</text>
+
+      <!-- Node: GitLab (external) -->
+      <rect x="40" y="60" width="200" height="72" rx="6" fill="#fafaf7"/>
+      <rect x="40" y="60" width="200" height="72" rx="6" fill="rgba(17,17,17,0.03)" stroke="rgba(17,17,17,0.30)" stroke-width="1"/>
+      <rect x="48" y="68" width="40" height="12" rx="2" fill="transparent" stroke="rgba(17,17,17,0.22)" stroke-width="0.8"/>
+      <text x="68" y="77" fill="#6b7280" font-size="7" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle" letter-spacing="0.08em">SOURCE</text>
+      <text x="140" y="100" fill="#111111" font-size="12" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">GitLab</text>
+      <text x="140" y="115" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle">projects · issues · MRs</text>
+
+      <!-- Node: node-gitlab-2-github (focal) -->
+      <rect x="360" y="44" width="240" height="104" rx="6" fill="#fafaf7"/>
+      <rect x="360" y="44" width="240" height="104" rx="6" fill="rgba(0,112,243,0.08)" stroke="#0070f3" stroke-width="1"/>
+      <rect x="368" y="52" width="32" height="12" rx="2" fill="transparent" stroke="rgba(0,112,243,0.50)" stroke-width="0.8"/>
+      <text x="384" y="61" fill="#0070f3" font-size="7" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle" letter-spacing="0.08em">TOOL</text>
+      <text x="480" y="82" fill="#111111" font-size="12" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">node-gitlab-2-github</text>
+      <text x="480" y="100" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle">users · commits · projects</text>
+      <text x="480" y="114" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle">issues · labels · milestones</text>
+      <text x="480" y="128" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle">merge requests · attachments</text>
+
+      <!-- Node: GitHub (external) -->
+      <rect x="720" y="60" width="200" height="72" rx="6" fill="#fafaf7"/>
+      <rect x="720" y="60" width="200" height="72" rx="6" fill="rgba(17,17,17,0.03)" stroke="rgba(17,17,17,0.30)" stroke-width="1"/>
+      <rect x="728" y="68" width="40" height="12" rx="2" fill="transparent" stroke="rgba(17,17,17,0.22)" stroke-width="0.8"/>
+      <text x="748" y="77" fill="#6b7280" font-size="7" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle" letter-spacing="0.08em">TARGET</text>
+      <text x="820" y="100" fill="#111111" font-size="12" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">GitHub</text>
+      <text x="820" y="115" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle">same history · new home</text>
+
+      <!-- Legend -->
+      <line x1="40" y1="168" x2="920" y2="168" stroke="rgba(17,17,17,0.10)" stroke-width="0.8"/>
+      <text x="40" y="184" fill="#4b5563" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" letter-spacing="0.18em">LEGEND</text>
+      <rect x="40" y="202" width="14" height="10" rx="2" fill="rgba(0,112,243,0.08)" stroke="#0070f3" stroke-width="1"/>
+      <text x="60" y="210" fill="#4b5563" font-size="8.5" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">Migration tool</text>
+      <rect x="180" y="202" width="14" height="10" rx="2" fill="rgba(17,17,17,0.03)" stroke="rgba(17,17,17,0.30)" stroke-width="1"/>
+      <text x="200" y="210" fill="#4b5563" font-size="8.5" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">Git host</text>
+      <line x1="292" y1="208" x2="320" y2="208" stroke="#4b5563" stroke-width="1.2" marker-end="url(#arrow)"/>
+      <text x="328" y="210" fill="#4b5563" font-size="8.5" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">API call</text>
+    </svg>
+  </div>
+</body>
+</html>

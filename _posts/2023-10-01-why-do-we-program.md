@@ -5,6 +5,10 @@ excerpt: "Programming removes time penalties from complex tasks, automates tedio
 tags: [philosophy, programming, automation]
 ---
 
+The argument in one picture:
+
+![A diagram with three columns. Five boxes on the left name the ways we program: speed up known answers, automate tedious tasks, speed up communication, create tools and create frameworks. Arrows from all five lead to one box in the middle, make slow work fast. Two arrows lead from that box to the payoff on the right: time for more valuable things, and newly practical work.](/assets/images/why-do-we-program-recap.svg)
+
 From [http://wiki.c2.com/?GarryHamilton](http://wiki.c2.com/?GarryHamilton) on [http://wiki.c2.com/?PurposeOfProgramming](http://wiki.c2.com/?PurposeOfProgramming)
 
 Programming is the way we:

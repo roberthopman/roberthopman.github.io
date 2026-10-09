@@ -14,6 +14,10 @@ failed with error: convert-im6.q16: no images defined
 `/home/runner/.../thumbnail/foobar.jpg' @ error/convert.c/ConvertImageCommand/3229.
 ```
 
+The checks and fixes that lead from the error to a working convert:
+
+![A flowchart that starts at a failed convert with the error no images defined. The first check asks if the policy allows the PDF coder. If not, a step edits policy.xml and the flow retries. The second check asks if Ghostscript is installed. If not, a step installs Ghostscript and the flow retries. When both checks pass, convert succeeds and writes the thumbnail.](/assets/images/imagemagick-ghostscript-policy-github-action-recap.svg)
+
 Observing a possible solution here: [https://github.com/orgs/community/discussions/26600](https://github.com/orgs/community/discussions/26600)
 
 To verify, I looked at: 

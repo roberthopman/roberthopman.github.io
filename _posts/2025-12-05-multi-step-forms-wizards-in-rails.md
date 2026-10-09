@@ -6,6 +6,10 @@ tags: [ruby, rails, forms, wizard, wicked]
 description: A summary of implementing multi-step forms in Rails covering data persistence, URL strategies, model validations, and controller patterns.
 ---
 
+The whole wizard as a state machine, from the first step to the saved House row:
+
+![A state machine with four states in a row: Address info, House info, House stats and House saved. A valid step writes the attributes to the cache and moves to the next state. An invalid step loops back to the same state with a 422 re-render. The last valid step saves the House row and deletes the cache.](/assets/images/multi-step-forms-wizards-in-rails-recap.svg)
+
 ## What is a multi-step form (wizard) and why do we need it?
 
 Starting with a summary of [Rails Wizards Part 1-5](https://jonsully.net/blog/rails-wizards-part-one) by Jon Sullivan. This is a great introduction to multi-step forms in Rails. Then we'll look at different approaches to implement them in Rails.

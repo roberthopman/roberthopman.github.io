@@ -9,6 +9,10 @@ tags: [ruby, rails, performance, memory]
 When a process uses more memory than expected, you need to know which method is
 responsible. [`ObjectSpace.memsize_of_all`](#references) gives you a before/after delta.
 
+The whole trick is two snapshots around the method:
+
+![A flowchart of six boxes in one column from top to bottom. It starts at memory is too high, then collects garbage with GC.start, takes a memory snapshot before with ObjectSpace.memsize_of_all, runs the method, takes a snapshot after, and ends at the memory delta in MB, drawn in blue. A note next to the last box gives the two measured results for the same 50,000 users: map on ActiveRecord objects 681 MB, pluck 30 MB.](/assets/images/measuring-memory-for-ruby-methods-recap.svg)
+
 
 ## The Pattern
 

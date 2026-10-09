@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 960 296" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="linecounter-fast-quality-signals-for-ruby-repos-title linecounter-fast-quality-signals-for-ruby-repos-desc">
+      <title id="linecounter-fast-quality-signals-for-ruby-repos-title">One repo in, one ranked row per file out</title>
+      <desc id="linecounter-fast-quality-signals-for-ruby-repos-desc">Architecture diagram of linecounter: git history and the Prism parser each read the Ruby repo, and their churn, branch and line counts merge into one table sorted with the heaviest files on top.</desc>
+      <defs><style>@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Inter:wght@400;500;600&amp;family=Geist+Mono:wght@400;500;600&amp;display=swap');</style>
+        <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4b5563"/></marker>
+        <marker id="arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#0070f3"/></marker>
+        <marker id="arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4b5563"/></marker>
+      </defs>
+
+      <rect width="100%" height="100%" fill="#fafaf7"/>
+
+      <!-- Zone: the gem, drawn before arrows and nodes -->
+      <rect x="356" y="48" width="248" height="208" rx="8" fill="#111111" fill-opacity="0.02" stroke="#111111" stroke-opacity="0.10" stroke-width="0.8"/>
+      <rect x="364" y="52" width="72" height="12" rx="2" fill="#f5f5f2"/>
+      <text x="400" y="61" fill="#6b7280" font-size="7" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle" letter-spacing="0.14em">LINECOUNTER</text>
+
+      <!-- Arrows first, behind boxes. Repo fans out to two readers, two readers fan in to the table. -->
+      <path d="M 200,148 H 272 Q 280,148 280,140 V 116 Q 280,108 288,108 H 380" fill="none" stroke="#4b5563" stroke-width="1.2" marker-end="url(#arrow)"/>
+      <path d="M 200,164 H 292 Q 300,164 300,172 V 196 Q 300,204 308,204 H 380" fill="none" stroke="#4b5563" stroke-width="1.2" marker-end="url(#arrow)"/>
+      <path d="M 580,108 H 672 Q 680,108 680,116 V 140 Q 680,148 688,148 H 760" fill="none" stroke="#4b5563" stroke-width="1.2" marker-end="url(#arrow)"/>
+      <path d="M 580,204 H 652 Q 660,204 660,196 V 172 Q 660,164 668,164 H 760" fill="none" stroke="#4b5563" stroke-width="1.2" marker-end="url(#arrow)"/>
+
+      <!-- Node: Ruby repo (input) -->
+      <rect x="40" y="128" width="160" height="56" rx="6" fill="#fafaf7"/>
+      <rect x="40" y="128" width="160" height="56" rx="6" fill="#4b5563" fill-opacity="0.10" stroke="#6b7280" stroke-width="1"/>
+      <rect x="48" y="136" width="32" height="12" rx="2" fill="none" stroke="#6b7280" stroke-opacity="0.40" stroke-width="0.8"/>
+      <text x="64" y="145" fill="#6b7280" font-size="7" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle" letter-spacing="0.08em">REPO</text>
+      <text x="120" y="160" fill="#111111" font-size="12" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">Ruby repo</text>
+      <text x="120" y="175" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle">.rb files · .git</text>
+
+      <!-- Node: Git history (store) -->
+      <rect x="380" y="80" width="200" height="56" rx="6" fill="#fafaf7"/>
+      <rect x="380" y="80" width="200" height="56" rx="6" fill="#111111" fill-opacity="0.05" stroke="#4b5563" stroke-width="1"/>
+      <rect x="388" y="88" width="28" height="12" rx="2" fill="none" stroke="#4b5563" stroke-opacity="0.50" stroke-width="0.8"/>
+      <text x="402" y="97" fill="#4b5563" font-size="7" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle" letter-spacing="0.08em">GIT</text>
+      <text x="480" y="112" fill="#111111" font-size="12" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">Git history</text>
+      <text x="480" y="127" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle">git log · churn per file</text>
+
+      <!-- Node: Prism parser (backend) -->
+      <rect x="380" y="176" width="200" height="56" rx="6" fill="#fafaf7"/>
+      <rect x="380" y="176" width="200" height="56" rx="6" fill="#ffffff" stroke="#111111" stroke-width="1"/>
+      <rect x="388" y="184" width="28" height="12" rx="2" fill="none" stroke="#111111" stroke-opacity="0.40" stroke-width="0.8"/>
+      <text x="402" y="193" fill="#4b5563" font-size="7" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle" letter-spacing="0.08em">AST</text>
+      <text x="480" y="208" fill="#111111" font-size="12" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">Prism parser</text>
+      <text x="480" y="223" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle">branches · LOC per file</text>
+
+      <!-- Node: Ranked table (focal) -->
+      <rect x="760" y="128" width="160" height="56" rx="6" fill="#fafaf7"/>
+      <rect x="760" y="128" width="160" height="56" rx="6" fill="#0070f3" fill-opacity="0.08" stroke="#0070f3" stroke-width="1"/>
+      <rect x="768" y="136" width="40" height="12" rx="2" fill="none" stroke="#0070f3" stroke-opacity="0.50" stroke-width="0.8"/>
+      <text x="788" y="145" fill="#0070f3" font-size="7" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle" letter-spacing="0.08em">STDOUT</text>
+      <text x="840" y="160" fill="#111111" font-size="12" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">Ranked table</text>
+      <text x="840" y="175" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle">heavy files on top</text>
+    </svg>

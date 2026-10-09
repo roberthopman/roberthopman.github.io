@@ -7,6 +7,10 @@ tags: [javascript, no-code, widgets, wem]
 
 WEM is a no-code application development platform. Asked to work on widgets for a client, I entered the ecosystem. It meant learning about the platform first to get a high-level overview. Then at each step closer to the task, I started to see familiar parts. On the first step I observed a GUI to create interaction nodes for a set of DOM elements, databases, logic and information flows. A second step deeper into the platform the nodes had their own custom widget editor, consisting of a script, layout and references to the interaction node.
 
+The platform, one step at a time, from the outside to my code:
+
+![A nested diagram with four rounded frames, one inside the other. The outer frame is the WEM no-code platform. Inside it sit the interaction nodes with DOM elements, database, logic and flows. Inside a node sits the widget editor with script, layout and node references. The innermost frame holds the custom JavaScript, WEMscript and CSS, with one WEMscript conditional as an example.](/assets/images/wem-widgets-recap.svg)
+
 To work while awaiting feedback from the client, I applied a versioning convention. The WEM platform had their own 'WEMscript', so that was a thing to be figured out on the fly as well. Conditionals in WEMscript that I wrote including CSS:
 
 `<? if (@A > @B) then ?>transform: rotateY(180deg);<? end ?>`

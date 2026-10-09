@@ -10,6 +10,10 @@ description: A small Ruby gem that scans a git repo and reports per file lines o
 
 I wanted a fast way to read the quality of a Ruby repository, so I wrote a small gem called linecounter.
 
+What linecounter does with a repo:
+
+![An architecture diagram with four boxes. A Ruby repo box on the left feeds two boxes inside a zone named linecounter: Git history, which yields churn per file, and the Prism parser, which yields branches and lines of code per file. Both boxes feed one highlighted box on the right, a ranked table with the heavy files on top.](/assets/images/linecounter-fast-quality-signals-for-ruby-repos-recap.svg)
+
 ## Why bother
 
 Most files should not be too long, and most methods should not be too long. A long file is hard to hold in your head, and a long method usually hides more than one job. I wanted a quick signal for that, plus which files change the most and where the branching piles up. Not a full audit, just a first read so I know where to look next.

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Four eras of software quality</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --color-paper:   #fafaf7;
+      --color-ink:     #111111;
+      --color-muted:   #4b5563;
+      --color-accent:  #0070f3;
+      --font-sans:     'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      --font-serif:    'Instrument Serif', Georgia, 'Times New Roman', serif;
+      --font-mono:     'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace;
+    }
+    body { font-family: var(--font-sans); background: var(--color-paper); color: var(--color-ink); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 3rem 2rem; }
+    .frame { max-width: 1200px; width: 100%; }
+    .eyebrow { font-family: var(--font-mono); font-size: 0.66rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-muted); margin-bottom: 0.5rem; }
+    h1 { font-family: var(--font-serif); font-size: clamp(1.5rem, 2.4vw + 0.75rem, 2rem); font-weight: 400; letter-spacing: -0.02em; line-height: 1.15; color: var(--color-ink); margin-bottom: 1.5rem; }
+    svg { width: 100%; min-width: 900px; display: block; }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <p class="eyebrow">Gantt · Diagram Design</p>
+    <h1>Four eras of software quality</h1>
+
+    <svg viewBox="0 0 960 352" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="history-of-quality-in-software-engineering-title history-of-quality-in-software-engineering-desc">
+      <title id="history-of-quality-in-software-engineering-title">Four eras of software quality</title>
+      <desc id="history-of-quality-in-software-engineering-desc">Gantt chart of software quality practice from 1968 to 2011 in four eras: process from 1968 to the 1990s, design communication from 1994 to 1997, practice from 1996 to 2001, and lightweight communication from 2006 to 2011, with the Agile Manifesto of 2001 as the pivot.</desc>
+      <defs>
+        <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4b5563"/></marker>
+        <marker id="arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#0070f3"/></marker>
+        <marker id="arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4b5563"/></marker>
+      </defs>
+
+      <rect width="100%" height="100%" fill="#fafaf7"/>
+
+      <!-- Time axis: x = 160 + (year - 1968) * 17.2727, 1968 at 160, 2012 at 920 -->
+      <!-- Decade gridlines -->
+      <line x1="194.5" y1="80" x2="194.5" y2="252" stroke="rgba(17,17,17,0.06)" stroke-width="0.6"/>
+      <line x1="367.3" y1="80" x2="367.3" y2="252" stroke="rgba(17,17,17,0.06)" stroke-width="0.6"/>
+      <line x1="540" y1="80" x2="540" y2="252" stroke="rgba(17,17,17,0.06)" stroke-width="0.6"/>
+      <line x1="712.7" y1="80" x2="712.7" y2="252" stroke="rgba(17,17,17,0.06)" stroke-width="0.6"/>
+      <line x1="885.5" y1="80" x2="885.5" y2="252" stroke="rgba(17,17,17,0.06)" stroke-width="0.6"/>
+
+      <!-- Decade labels -->
+      <text x="194.5" y="72" fill="#6b7280" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle" letter-spacing="0.08em">1970</text>
+      <text x="367.3" y="72" fill="#6b7280" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle" letter-spacing="0.08em">1980</text>
+      <text x="540" y="72" fill="#6b7280" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle" letter-spacing="0.08em">1990</text>
+      <text x="712.7" y="72" fill="#6b7280" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle" letter-spacing="0.08em">2000</text>
+      <text x="885.5" y="72" fill="#6b7280" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle" letter-spacing="0.08em">2010</text>
+
+      <!-- Header hairline and left divider -->
+      <line x1="160" y1="80" x2="920" y2="80" stroke="rgba(17,17,17,0.20)" stroke-width="0.8"/>
+      <line x1="160" y1="80" x2="160" y2="252" stroke="rgba(17,17,17,0.20)" stroke-width="0.8"/>
+
+      <!-- Milestone marker: 2001 Agile Manifesto at x=730 (accent element 1) -->
+      <text x="730" y="48" fill="#0070f3" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle" letter-spacing="0.14em">2001 · AGILE MANIFESTO</text>
+      <line x1="730" y1="56" x2="730" y2="252" stroke="#0070f3" stroke-width="1" stroke-dasharray="4,3"/>
+
+      <!-- Row 1, y=92: Process 1968 to 1995 -->
+      <text x="40" y="111" fill="#111111" font-size="11" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">Process</text>
+      <text x="40" y="123" fill="#4b5563" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" letter-spacing="0.06em">1968-1990s</text>
+      <rect x="160" y="100" width="466.4" height="24" rx="4" fill="#fafaf7"/>
+      <rect x="160" y="100" width="466.4" height="24" rx="4" fill="rgba(75,85,99,0.15)" stroke="#4b5563" stroke-width="1"/>
+      <text x="168" y="116" fill="#111111" font-size="9" font-weight="500" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">Fagan inspections · Cleanroom · PSP</text>
+
+      <!-- Row 2, y=132: Design communication 1994 to 1997 -->
+      <text x="40" y="151" fill="#111111" font-size="11" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">Design</text>
+      <text x="40" y="163" fill="#4b5563" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" letter-spacing="0.06em">1994-1997</text>
+      <rect x="609.1" y="140" width="51.8" height="24" rx="4" fill="#fafaf7"/>
+      <rect x="609.1" y="140" width="51.8" height="24" rx="4" fill="rgba(75,85,99,0.15)" stroke="#4b5563" stroke-width="1"/>
+      <text x="668.9" y="156" fill="#111111" font-size="9" font-weight="500" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">UML 1.1</text>
+
+      <!-- Row 3, y=172: Practice 1996 to 2001 -->
+      <text x="40" y="191" fill="#111111" font-size="11" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">Practice</text>
+      <text x="40" y="203" fill="#4b5563" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" letter-spacing="0.06em">1996-2001</text>
+      <rect x="643.6" y="180" width="86.4" height="24" rx="4" fill="#fafaf7"/>
+      <rect x="643.6" y="180" width="86.4" height="24" rx="4" fill="rgba(75,85,99,0.15)" stroke="#4b5563" stroke-width="1"/>
+      <text x="738" y="196" fill="#111111" font-size="9" font-weight="500" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">XP · TDD · CI · pairing</text>
+
+      <!-- Row 4, y=212: Lightweight communication 2006 to 2011 (focal, accent element 2) -->
+      <text x="40" y="231" fill="#0070f3" font-size="11" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">Lightweight</text>
+      <text x="40" y="243" fill="#4b5563" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" letter-spacing="0.06em">2006-2011</text>
+      <rect x="816.4" y="220" width="86.4" height="24" rx="4" fill="#fafaf7"/>
+      <rect x="816.4" y="220" width="86.4" height="24" rx="4" fill="rgba(0,112,243,0.08)" stroke="#0070f3" stroke-width="1"/>
+      <text x="824.4" y="236" fill="#0070f3" font-size="9" font-weight="500" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">BDD · C4 · SbE</text>
+
+      <!-- Legend -->
+      <line x1="40" y1="268" x2="920" y2="268" stroke="rgba(17,17,17,0.10)" stroke-width="0.8"/>
+      <text x="40" y="284" fill="#4b5563" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" letter-spacing="0.18em">LEGEND</text>
+      <rect x="40" y="302" width="20" height="10" rx="3" fill="rgba(75,85,99,0.15)" stroke="#4b5563" stroke-width="1"/>
+      <text x="68" y="310" fill="#4b5563" font-size="8.5" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">Era, drawn to scale</text>
+      <rect x="180" y="302" width="20" height="10" rx="3" fill="rgba(0,112,243,0.08)" stroke="#0070f3" stroke-width="1"/>
+      <text x="208" y="310" fill="#4b5563" font-size="8.5" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">Where the post ends</text>
+      <line x1="332" y1="307" x2="360" y2="307" stroke="#0070f3" stroke-width="1" stroke-dasharray="4,3"/>
+      <text x="368" y="310" fill="#4b5563" font-size="8.5" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">The pivot from heavy to light</text>
+    </svg>
+  </div>
+</body>
+</html>

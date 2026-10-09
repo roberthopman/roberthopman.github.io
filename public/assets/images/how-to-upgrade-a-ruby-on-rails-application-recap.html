@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upgrade one version at a time</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --color-paper:   #fafaf7;
+      --color-ink:     #111111;
+      --color-muted:   #4b5563;
+      --color-accent:  #0070f3;
+      --font-sans:     'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      --font-serif:    'Instrument Serif', Georgia, 'Times New Roman', serif;
+      --font-mono:     'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace;
+    }
+    body { font-family: var(--font-sans); background: var(--color-paper); color: var(--color-ink); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 3rem 2rem; }
+    .frame { max-width: 1200px; width: 100%; }
+    .eyebrow { font-family: var(--font-mono); font-size: 0.66rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-muted); margin-bottom: 0.5rem; }
+    h1 { font-family: var(--font-serif); font-size: clamp(1.5rem, 2.4vw + 0.75rem, 2rem); font-weight: 400; letter-spacing: -0.02em; line-height: 1.15; color: var(--color-ink); margin-bottom: 1.5rem; }
+    svg { width: 100%; min-width: 900px; display: block; }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <p class="eyebrow">Flowchart · Diagram Design</p>
+    <h1>Upgrade one version at a time</h1>
+
+    <svg viewBox="0 0 960 852" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="how-to-upgrade-a-ruby-on-rails-application-title how-to-upgrade-a-ruby-on-rails-application-desc">
+      <title id="how-to-upgrade-a-ruby-on-rails-application-title">Upgrade one version at a time</title>
+      <desc id="how-to-upgrade-a-ruby-on-rails-application-desc">Flowchart of a Rails upgrade: set the goal, cover the critical business processes with tests, upgrade one Ruby or Rails version, run the checks, fix what fails, repeat until the target version is reached, then deploy.</desc>
+      <defs>
+        <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4b5563"/></marker>
+        <marker id="arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#0070f3"/></marker>
+        <marker id="arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4b5563"/></marker>
+      </defs>
+
+      <rect width="100%" height="100%" fill="#fafaf7"/>
+
+      <!-- Arrows, drawn before the nodes. Main column at x=480 -->
+      <line x1="480" y1="96" x2="480" y2="136" stroke="#4b5563" stroke-width="1.2" marker-end="url(#arrow)"/>
+      <line x1="480" y1="192" x2="480" y2="232" stroke="#4b5563" stroke-width="1.2" marker-end="url(#arrow)"/>
+      <line x1="480" y1="288" x2="480" y2="328" stroke="#4b5563" stroke-width="1.2" marker-end="url(#arrow)"/>
+      <line x1="480" y1="384" x2="480" y2="424" stroke="#4b5563" stroke-width="1.2" marker-end="url(#arrow)"/>
+      <!-- Decision 1, YES down -->
+      <line x1="480" y1="520" x2="480" y2="560" stroke="#4b5563" stroke-width="1.2" marker-end="url(#arrow)"/>
+      <!-- Decision 1, NO right to Fix -->
+      <line x1="580" y1="472" x2="680" y2="472" stroke="#4b5563" stroke-width="1.2" marker-end="url(#arrow)"/>
+      <!-- Fix back up into Run the checks, right edge -->
+      <path d="M760,444 V364 Q760,356 752,356 H580" fill="none" stroke="#4b5563" stroke-width="1.2" marker-end="url(#arrow)"/>
+      <!-- Decision 2, YES down -->
+      <line x1="480" y1="656" x2="480" y2="696" stroke="#4b5563" stroke-width="1.2" marker-end="url(#arrow)"/>
+      <!-- Decision 2, NO back up into Upgrade one version, left edge (focal loop) -->
+      <path d="M380,608 H248 Q240,608 240,600 V268 Q240,260 248,260 H380" fill="none" stroke="#0070f3" stroke-width="1.4" marker-end="url(#arrow-accent)"/>
+
+      <!-- Arrow labels, masked, 8px clear of the stroke -->
+      <rect x="618" y="452" width="24" height="12" rx="2" fill="#fafaf7"/>
+      <text x="630" y="462" fill="#4b5563" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle" letter-spacing="0.12em">NO</text>
+
+      <rect x="644" y="336" width="44" height="12" rx="2" fill="#fafaf7"/>
+      <text x="666" y="346" fill="#4b5563" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle" letter-spacing="0.12em">RERUN</text>
+
+      <rect x="488" y="534" width="32" height="12" rx="2" fill="#fafaf7"/>
+      <text x="504" y="544" fill="#4b5563" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle" letter-spacing="0.12em">YES</text>
+
+      <rect x="300" y="588" width="24" height="12" rx="2" fill="#fafaf7"/>
+      <text x="312" y="598" fill="#0070f3" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle" letter-spacing="0.12em">NO</text>
+
+      <rect x="488" y="670" width="32" height="12" rx="2" fill="#fafaf7"/>
+      <text x="504" y="680" fill="#4b5563" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle" letter-spacing="0.12em">YES</text>
+
+      <!-- Start oval -->
+      <rect x="380" y="40" width="200" height="56" rx="28" fill="#fafaf7"/>
+      <rect x="380" y="40" width="200" height="56" rx="28" fill="rgba(17,17,17,0.03)" stroke="rgba(17,17,17,0.30)" stroke-width="1"/>
+      <text x="480" y="66" fill="#111111" font-size="12" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">Set the goal</text>
+      <text x="480" y="81" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle">keep it simple · tell the team</text>
+
+      <!-- Step: cover the critical processes -->
+      <rect x="380" y="136" width="200" height="56" rx="6" fill="#fafaf7"/>
+      <rect x="380" y="136" width="200" height="56" rx="6" fill="#ffffff" stroke="#111111" stroke-width="1"/>
+      <text x="480" y="162" fill="#111111" font-size="12" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">Cover critical processes</text>
+      <text x="480" y="177" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle">tests, or a manual test plan</text>
+
+      <!-- Step: upgrade one version (focal) -->
+      <rect x="380" y="232" width="200" height="56" rx="6" fill="#fafaf7"/>
+      <rect x="380" y="232" width="200" height="56" rx="6" fill="rgba(0,112,243,0.08)" stroke="#0070f3" stroke-width="1"/>
+      <text x="480" y="258" fill="#111111" font-size="12" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">Upgrade one version</text>
+      <text x="480" y="273" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle">next Ruby or Rails · railsbump</text>
+
+      <!-- Step: run the checks -->
+      <rect x="380" y="328" width="200" height="56" rx="6" fill="#fafaf7"/>
+      <rect x="380" y="328" width="200" height="56" rx="6" fill="#ffffff" stroke="#111111" stroke-width="1"/>
+      <text x="480" y="354" fill="#111111" font-size="12" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">Run the checks</text>
+      <text x="480" y="369" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle">test suite · deprecation output</text>
+
+      <!-- Decision 1 -->
+      <polygon points="480,424 580,472 480,520 380,472" fill="#fafaf7"/>
+      <polygon points="480,424 580,472 480,520 380,472" fill="#ffffff" stroke="#111111" stroke-width="1"/>
+      <text x="480" y="470" fill="#111111" font-size="11" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">Critical processes</text>
+      <text x="480" y="484" fill="#111111" font-size="11" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">still work?</text>
+
+      <!-- Step: fix -->
+      <rect x="680" y="444" width="160" height="56" rx="6" fill="#fafaf7"/>
+      <rect x="680" y="444" width="160" height="56" rx="6" fill="#ffffff" stroke="#111111" stroke-width="1"/>
+      <text x="760" y="470" fill="#111111" font-size="12" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">Fix the failures</text>
+      <text x="760" y="485" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle">gems · rails app:update</text>
+
+      <!-- Decision 2 -->
+      <polygon points="480,560 580,608 480,656 380,608" fill="#fafaf7"/>
+      <polygon points="480,560 580,608 480,656 380,608" fill="#ffffff" stroke="#111111" stroke-width="1"/>
+      <text x="480" y="606" fill="#111111" font-size="11" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">Target version</text>
+      <text x="480" y="620" fill="#111111" font-size="11" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">reached?</text>
+
+      <!-- End oval -->
+      <rect x="380" y="696" width="200" height="56" rx="28" fill="#fafaf7"/>
+      <rect x="380" y="696" width="200" height="56" rx="28" fill="rgba(17,17,17,0.03)" stroke="rgba(17,17,17,0.30)" stroke-width="1"/>
+      <text x="480" y="722" fill="#111111" font-size="12" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">Deploy</text>
+      <text x="480" y="737" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle">acceptance first, then production</text>
+
+      <!-- Legend -->
+      <line x1="40" y1="768" x2="920" y2="768" stroke="rgba(17,17,17,0.10)" stroke-width="0.8"/>
+      <text x="40" y="784" fill="#4b5563" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" letter-spacing="0.18em">LEGEND · SHAPE CARRIES TYPE</text>
+      <rect x="40" y="798" width="24" height="12" rx="6" fill="rgba(17,17,17,0.03)" stroke="rgba(17,17,17,0.30)" stroke-width="1"/>
+      <text x="72" y="808" fill="#4b5563" font-size="8.5" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">Start / end</text>
+      <rect x="180" y="798" width="24" height="12" rx="2" fill="#ffffff" stroke="#111111" stroke-width="1"/>
+      <text x="212" y="808" fill="#4b5563" font-size="8.5" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">Step</text>
+      <polygon points="312,798 324,804 312,810 300,804" fill="#ffffff" stroke="#111111" stroke-width="1"/>
+      <text x="332" y="808" fill="#4b5563" font-size="8.5" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">Decision</text>
+      <rect x="440" y="798" width="24" height="12" rx="2" fill="rgba(0,112,243,0.08)" stroke="#0070f3" stroke-width="1"/>
+      <text x="472" y="808" fill="#4b5563" font-size="8.5" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">One version, Ruby or Rails</text>
+      <line x1="680" y1="804" x2="708" y2="804" stroke="#0070f3" stroke-width="1.4" marker-end="url(#arrow-accent)"/>
+      <text x="716" y="808" fill="#4b5563" font-size="8.5" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">Next version, same checks</text>
+    </svg>
+  </div>
+</body>
+</html>

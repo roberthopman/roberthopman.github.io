@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 960 392" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="net-http-versus-httparty-track-pod-title net-http-versus-httparty-track-pod-desc">
+      <title id="net-http-versus-httparty-track-pod-title">Two ways to make an HTTP request in Ruby</title>
+      <desc id="net-http-versus-httparty-track-pod-desc">Layer stack with HTTParty on top of Net::HTTP on top of the TCP socket. Your code calls HTTParty with one call for simplicity, or builds the request with Net::HTTP step by step for control.</desc>
+      <defs><style>@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Inter:wght@400;500;600&amp;family=Geist+Mono:wght@400;500;600&amp;display=swap');</style>
+        <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4b5563"/></marker>
+        <marker id="arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#0070f3"/></marker>
+        <marker id="arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4b5563"/></marker>
+      </defs>
+
+      <rect width="100%" height="100%" fill="#fafaf7"/>
+
+      <!-- Direction column, right margin, outside the stack -->
+      <text x="920" y="68" fill="#4b5563" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="end" letter-spacing="0.18em">SIMPLICITY</text>
+      <line x1="912" y1="84" x2="912" y2="268" stroke="#111111" stroke-opacity="0.30" stroke-width="1"/>
+      <polygon points="908,84 916,84 912,76" fill="#4b5563"/>
+      <polygon points="908,268 916,268 912,276" fill="#4b5563"/>
+      <text x="920" y="292" fill="#4b5563" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="end" letter-spacing="0.18em">CONTROL</text>
+
+      <!-- Call paths, drawn before the boxes -->
+      <line x1="200" y1="112" x2="320" y2="112" stroke="#4b5563" stroke-width="1.2" marker-end="url(#arrow)"/>
+      <line x1="200" y1="176" x2="320" y2="176" stroke="#4b5563" stroke-width="1.2" marker-end="url(#arrow)"/>
+
+      <!-- Arrow labels, masked, 8px above the stroke -->
+      <rect x="232" y="92" width="56" height="12" rx="2" fill="#fafaf7"/>
+      <text x="260" y="102" fill="#4b5563" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle" letter-spacing="0.08em">ONE CALL</text>
+      <rect x="222" y="156" width="76" height="12" rx="2" fill="#fafaf7"/>
+      <text x="260" y="166" fill="#4b5563" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle" letter-spacing="0.08em">STEP BY STEP</text>
+
+      <!-- Stack: three full-width bands, alternating fills, hairline dividers -->
+      <rect x="320" y="80" width="560" height="64" fill="#ffffff"/>
+      <rect x="320" y="144" width="560" height="64" fill="#f3f4f6"/>
+      <rect x="320" y="208" width="560" height="64" fill="#ffffff"/>
+      <line x1="320" y1="144" x2="880" y2="144" stroke="#111111" stroke-opacity="0.12" stroke-width="1"/>
+      <line x1="320" y1="208" x2="880" y2="208" stroke="#111111" stroke-opacity="0.12" stroke-width="1"/>
+      <rect x="320" y="80" width="560" height="192" rx="4" fill="none" stroke="#4b5563" stroke-width="1"/>
+
+      <!-- Layer: HTTParty -->
+      <text x="336" y="115" fill="#4b5563" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" letter-spacing="0.14em">GEM</text>
+      <text x="392" y="117" fill="#111111" font-size="14" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">HTTParty</text>
+      <text x="864" y="116" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="end" letter-spacing="0.06em">parsed_response · ResponseError · middleware</text>
+
+      <!-- Layer: Net::HTTP -->
+      <text x="336" y="179" fill="#4b5563" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" letter-spacing="0.14em">STDLIB</text>
+      <text x="392" y="181" fill="#111111" font-size="14" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">Net::HTTP</text>
+      <text x="864" y="180" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="end" letter-spacing="0.06em">Get.new · request · response.code · JSON.parse</text>
+
+      <!-- Layer: socket -->
+      <text x="336" y="243" fill="#4b5563" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" letter-spacing="0.14em">IO</text>
+      <text x="392" y="245" fill="#111111" font-size="14" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">TCP socket</text>
+      <text x="864" y="244" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="end" letter-spacing="0.06em">TCPSocket · OpenSSL · api.example.com</text>
+
+      <!-- Your code: the focal node, it makes the choice -->
+      <rect x="40" y="88" width="160" height="112" rx="6" fill="#fafaf7"/>
+      <rect x="40" y="88" width="160" height="112" rx="6" fill="#0070f3" fill-opacity="0.08" stroke="#0070f3" stroke-width="1"/>
+      <rect x="48" y="96" width="28" height="12" rx="2" fill="none" stroke="#0070f3" stroke-opacity="0.50" stroke-width="0.8"/>
+      <text x="62" y="105" fill="#0070f3" font-size="7" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle" letter-spacing="0.08em">APP</text>
+      <text x="120" y="146" fill="#111111" font-size="12" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">Your code</text>
+      <text x="120" y="161" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle">one GET request</text>
+
+      <!-- Legend -->
+      <line x1="40" y1="308" x2="920" y2="308" stroke="#111111" stroke-opacity="0.10" stroke-width="0.8"/>
+      <text x="40" y="324" fill="#4b5563" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" letter-spacing="0.18em">LEGEND</text>
+      <rect x="40" y="338" width="14" height="10" rx="2" fill="#0070f3" fill-opacity="0.08" stroke="#0070f3" stroke-width="1"/>
+      <text x="60" y="346" fill="#4b5563" font-size="8.5" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">Your code makes the choice</text>
+      <rect x="240" y="338" width="14" height="10" rx="2" fill="#ffffff" stroke="#4b5563" stroke-width="1"/>
+      <text x="260" y="346" fill="#4b5563" font-size="8.5" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">Library layer, a higher layer needs less code</text>
+      <line x1="500" y1="343" x2="528" y2="343" stroke="#4b5563" stroke-width="1.2" marker-end="url(#arrow)"/>
+      <text x="536" y="346" fill="#4b5563" font-size="8.5" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">Call path</text>
+    </svg>

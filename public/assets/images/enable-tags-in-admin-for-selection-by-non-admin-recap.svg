@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 960 452" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="enable-tags-in-admin-for-selection-by-non-admin-title enable-tags-in-admin-for-selection-by-non-admin-desc">
+      <title id="enable-tags-in-admin-for-selection-by-non-admin-title">The admin decides which tags the user can pick</title>
+      <desc id="enable-tags-in-admin-for-selection-by-non-admin-desc">Swimlane diagram with an admin lane, a data lane and a user lane. The admin creates a tag and archives or unarchives it in the tag_settings table. Only active settings reach the dropdown in the publication form, and the user's selection is saved as taggings.</desc>
+      <defs><style>@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Inter:wght@400;500;600&amp;family=Geist+Mono:wght@400;500;600&amp;display=swap');</style>
+        <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4b5563"/></marker>
+        <marker id="arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#0070f3"/></marker>
+        <marker id="arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4b5563"/></marker>
+      </defs>
+
+      <rect width="100%" height="100%" fill="#fafaf7"/>
+
+      <!-- Lane dividers -->
+      <line x1="40" y1="64" x2="920" y2="64" stroke="#111111" stroke-opacity="0.22" stroke-width="1"/>
+      <line x1="40" y1="160" x2="920" y2="160" stroke="#111111" stroke-opacity="0.10" stroke-width="1"/>
+      <line x1="40" y1="256" x2="920" y2="256" stroke="#111111" stroke-opacity="0.10" stroke-width="1"/>
+      <line x1="40" y1="352" x2="920" y2="352" stroke="#111111" stroke-opacity="0.22" stroke-width="1"/>
+      <!-- Actor column divider -->
+      <line x1="160" y1="64" x2="160" y2="352" stroke="#111111" stroke-opacity="0.22" stroke-width="1"/>
+
+      <!-- Lane labels -->
+      <text x="60" y="116" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" letter-spacing="0.18em">ADMIN</text>
+      <text x="60" y="212" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" letter-spacing="0.18em">DATA</text>
+      <text x="60" y="308" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" letter-spacing="0.18em">USER</text>
+
+      <!-- Arrows, drawn before the boxes -->
+      <!-- Create a tag → Archive or unarchive, within the admin lane -->
+      <line x1="400" y1="112" x2="440" y2="112" stroke="#4b5563" stroke-width="1.2" marker-end="url(#arrow)"/>
+      <!-- Create a tag → TagSetting, down then right into the left edge -->
+      <path d="M300,140 V200 Q300,208 308,208 H440" fill="none" stroke="#4b5563" stroke-width="1.2" marker-end="url(#arrow)"/>
+      <!-- Archive or unarchive → TagSetting, straight down -->
+      <line x1="540" y1="140" x2="540" y2="180" stroke="#4b5563" stroke-width="1.2" marker-end="url(#arrow)"/>
+      <!-- TagSetting → Publication form, the focal handoff: active settings only -->
+      <line x1="540" y1="236" x2="540" y2="276" stroke="#0070f3" stroke-width="1.4" marker-end="url(#arrow-accent)"/>
+      <!-- Publication form → Taggings, right then up into the bottom edge -->
+      <path d="M640,304 H772 Q780,304 780,296 V236" fill="none" stroke="#4b5563" stroke-width="1.2" marker-end="url(#arrow)"/>
+
+      <!-- Arrow labels, masked, 8px clear of the stroke -->
+      <rect x="352" y="188" width="44" height="12" rx="2" fill="#fafaf7"/>
+      <text x="374" y="198" fill="#4b5563" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle" letter-spacing="0.08em">CREATE</text>
+
+      <rect x="548" y="154" width="72" height="12" rx="2" fill="#fafaf7"/>
+      <text x="584" y="164" fill="#4b5563" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle" letter-spacing="0.08em">ARCHIVED_AT</text>
+
+      <rect x="548" y="250" width="72" height="12" rx="2" fill="#fafaf7"/>
+      <text x="584" y="260" fill="#0070f3" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle" letter-spacing="0.08em">ACTIVE ONLY</text>
+
+      <rect x="676" y="284" width="60" height="12" rx="2" fill="#fafaf7"/>
+      <text x="706" y="294" fill="#4b5563" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle" letter-spacing="0.08em">SAVE TAGS</text>
+
+      <!-- Admin: create a tag -->
+      <rect x="200" y="84" width="200" height="56" rx="6" fill="#fafaf7"/>
+      <rect x="200" y="84" width="200" height="56" rx="6" fill="#ffffff" stroke="#111111" stroke-width="1"/>
+      <text x="300" y="110" fill="#111111" font-size="12" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">Create a tag</text>
+      <text x="300" y="125" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle">Tag.find_or_create_by!</text>
+
+      <!-- Admin: archive or unarchive -->
+      <rect x="440" y="84" width="200" height="56" rx="6" fill="#fafaf7"/>
+      <rect x="440" y="84" width="200" height="56" rx="6" fill="#ffffff" stroke="#111111" stroke-width="1"/>
+      <text x="540" y="110" fill="#111111" font-size="12" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">Archive or unarchive</text>
+      <text x="540" y="125" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle">archive! · un_archive!</text>
+
+      <!-- Data: tag_settings -->
+      <rect x="440" y="180" width="200" height="56" rx="6" fill="#fafaf7"/>
+      <rect x="440" y="180" width="200" height="56" rx="6" fill="#111111" fill-opacity="0.05" stroke="#4b5563" stroke-width="1"/>
+      <text x="540" y="206" fill="#111111" font-size="12" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">TagSetting</text>
+      <text x="540" y="221" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle">target_type · archived_at</text>
+
+      <!-- Data: taggings -->
+      <rect x="680" y="180" width="200" height="56" rx="6" fill="#fafaf7"/>
+      <rect x="680" y="180" width="200" height="56" rx="6" fill="#111111" fill-opacity="0.05" stroke="#4b5563" stroke-width="1"/>
+      <text x="780" y="206" fill="#111111" font-size="12" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">Taggings</text>
+      <text x="780" y="221" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle">acts_as_taggable_on</text>
+
+      <!-- User: publication form, the focal outcome -->
+      <rect x="440" y="276" width="200" height="56" rx="6" fill="#fafaf7"/>
+      <rect x="440" y="276" width="200" height="56" rx="6" fill="#0070f3" fill-opacity="0.08" stroke="#0070f3" stroke-width="1"/>
+      <text x="540" y="302" fill="#111111" font-size="12" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">Publication form</text>
+      <text x="540" y="317" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle">dropdown · publication_tag_list</text>
+
+      <!-- Legend -->
+      <line x1="40" y1="368" x2="920" y2="368" stroke="#111111" stroke-opacity="0.10" stroke-width="0.8"/>
+      <text x="40" y="384" fill="#4b5563" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" letter-spacing="0.18em">LEGEND</text>
+      <rect x="40" y="398" width="14" height="10" rx="2" fill="#ffffff" stroke="#111111" stroke-width="1"/>
+      <text x="60" y="406" fill="#4b5563" font-size="8.5" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">Admin action</text>
+      <rect x="160" y="398" width="14" height="10" rx="2" fill="#111111" fill-opacity="0.05" stroke="#4b5563" stroke-width="1"/>
+      <text x="180" y="406" fill="#4b5563" font-size="8.5" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">Table</text>
+      <rect x="240" y="398" width="14" height="10" rx="2" fill="#0070f3" fill-opacity="0.08" stroke="#0070f3" stroke-width="1"/>
+      <text x="260" y="406" fill="#4b5563" font-size="8.5" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">What the user sees</text>
+      <line x1="380" y1="403" x2="408" y2="403" stroke="#4b5563" stroke-width="1.2" marker-end="url(#arrow)"/>
+      <text x="416" y="406" fill="#4b5563" font-size="8.5" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">Data flow</text>
+      <line x1="500" y1="403" x2="528" y2="403" stroke="#0070f3" stroke-width="1.4" marker-end="url(#arrow-accent)"/>
+      <text x="536" y="406" fill="#4b5563" font-size="8.5" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">Active settings gate the dropdown</text>
+    </svg>

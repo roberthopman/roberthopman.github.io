@@ -176,6 +176,8 @@ assert_equal(false, first_call.equal?(restored),
 # A wrong count ships silently unless it is pinned here directly. These are the counts
 # captured from the real dev server before WORD_COUNT_CACHE existed;
 # recomputing the split rule here would let a broken cache still pass.
+# nextgen-erb-lint-caching was re-pinned on 2026-09-17 after its recap
+# diagram went in: the caption and the alt text count as rendered words.
 diagnose_a_bug = Post.all.find { |doc| doc.path == "_posts/2026-08-09-diagnose-a-bug.md" }
 assert_equal(1218, diagnose_a_bug.word_count, "word count: diagnose-a-bug")
 
@@ -183,7 +185,7 @@ drawing_svg = Post.all.find { |doc| doc.path == "_posts/2026-05-31-drawing-open-
 assert_equal(2391, drawing_svg.word_count, "word count: drawing-open-circular-cycle-diagrams-in-svg")
 
 erb_lint_caching = Post.all.find { |doc| doc.path == "_posts/2025-11-29-nextgen-erb-lint-caching.md" }
-assert_equal(223, erb_lint_caching.word_count, "word count: nextgen-erb-lint-caching")
+assert_equal(304, erb_lint_caching.word_count, "word count: nextgen-erb-lint-caching")
 
 ai_page = Page.all.find { |doc| doc.path == "ai.md" }
 assert_equal(384, ai_page.word_count, "word count: ai.md")
