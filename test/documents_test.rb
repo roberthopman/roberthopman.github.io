@@ -294,4 +294,22 @@ footer = telegram_html[/<footer.*<\/footer>/m]
 assert_equal(true, footer.include?(%(href="https://t.me/roberthopman")), "the footer links to Telegram")
 assert_equal(true, Site.config.dig("social", "links").include?("https://t.me/roberthopman"), "sameAs names Telegram")
 
+def rendered(path)
+  status, _headers, body = Rails.application.call(Rack::MockRequest.env_for(path, "HTTP_HOST" => "localhost"))
+  html = +""
+  body.each { |chunk| html << chunk }
+  body.close if body.respond_to?(:close)
+  [status, html]
+end
+
+edit_base = "https://github.com/roberthopman/roberthopman.github.io/edit/master/"
+_status, comment_post_html = rendered("/diagnose-a-bug/")
+assert_equal(true, comment_post_html.include?(%(href="#{edit_base}_posts/2026-08-09-diagnose-a-bug.md")),
+             "a post invites a comment through a pull request on its own file")
+_status, comment_page_html = rendered("/author/")
+assert_equal(true, comment_page_html.include?(%(href="#{edit_base}author.md")),
+             "a page invites a comment through a pull request on its own file")
+_status, comment_404_html = rendered("/404.html")
+assert_equal(false, comment_404_html.include?(edit_base), "the 404 page has no comment invitation")
+
 puts "all document assertions passed"
