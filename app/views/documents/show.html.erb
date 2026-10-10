@@ -6,6 +6,8 @@
     <%= raw @document.html %>
   </div>
 
+  <%= render "shared/comment_invite", document: @document %>
+
   <%= render "shared/share_buttons", extra_class: "share-inline--mobile" -%>
 <a class="u-url" href="<%= @document.url %>" hidden></a>
 </article>
@@ -22,4 +24,5 @@
     "layout: default", not "layout: page". A page's rendered body goes
     straight into the default layout's content slot. %>
 <div <%= "data-pagefind-body" if @document["sitemap"] != false %>><%= raw @document.html %></div>
+<%= render "shared/comment_invite", document: @document if @document["sitemap"] != false %>
 <% end %>
