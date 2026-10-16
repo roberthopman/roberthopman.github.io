@@ -1,0 +1,11 @@
+<% author = comment["author"] == Site.config.dig("minima", "social_links", "github") %>
+<div class="<%= ["comment", modifier, ("comment--author" if author)].compact.join(" ") %>">
+  <span class="comment-avatar" aria-hidden="true"><%= comment["author"].to_s[0, 2].upcase %></span>
+  <div>
+    <div class="comment-meta">
+      <strong><%= comment["author"] %></strong> <%= verb %> on <time datetime="<%= comment["date"]&.iso8601 %>"><%= comment["date"]&.strftime("%-d %b %Y") %></time>
+      <% if author %><span class="comment-author-badge">Author</span><% end %>
+    </div>
+    <p><%= comment["body"] %></p>
+  </div>
+</div>

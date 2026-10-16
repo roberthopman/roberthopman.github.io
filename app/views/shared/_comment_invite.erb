@@ -1,4 +1,27 @@
+<% edit_url = "https://github.com/roberthopman/roberthopman.github.io/edit/master/#{document.path}" %>
+<% count = document.comments.sum { |comment| 1 + Array(comment["replies"]).size } %>
 <aside class="comment-invite">
-  <h2>Comments</h2>
-  <p>This site has no comment box. To leave a comment, <a href="https://github.com/roberthopman/roberthopman.github.io/edit/master/<%= document.path %>">edit this page on GitHub</a>, add your comment at the bottom, and open a pull request. I read each one. You can also send me a message on <a href="https://t.me/roberthopman">Telegram</a>.</p>
+  <h2>Comments<%= " (#{count})" if count.positive? %> <small><%= document.path %></small></h2>
+  <% if document.comments.any? %>
+  <ol class="comment-threads">
+    <% document.comments.each do |comment| %>
+    <% replies = Array(comment["replies"]) %>
+    <li class="comment-thread">
+      <%= render "shared/comment", comment: comment, verb: "commented", modifier: nil %>
+      <% replies.each do |reply| %>
+      <%= render "shared/comment", comment: reply, verb: "replied", modifier: "comment--reply" %>
+      <% end %>
+      <div class="comment-thread-foot">
+        <span><%= replies.empty? ? "No replies yet" : pluralize(replies.size, "reply", plural: "replies") %></span>
+        <a href="<%= edit_url %>">Reply</a>
+      </div>
+    </li>
+    <% end %>
+  </ol>
+  <% end %>
+  <pre class="comment-invite__diff">+ comments:
++   - author: your-github-name
++     date: <%= Date.current.iso8601 %>
++     body: Your comment.</pre>
+  <p>This site has no comment box. To leave a comment, <a href="<%= edit_url %>">edit this page on GitHub</a>, add your comment to the <code>comments</code> list at the top of the file, and open a pull request. I read each one. You can also send me a message on <a href="https://t.me/roberthopman">Telegram</a>.</p>
 </aside>

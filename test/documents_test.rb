@@ -311,5 +311,34 @@ assert_equal(true, comment_page_html.include?(%(href="#{edit_base}author.md")),
              "a page invites a comment through a pull request on its own file")
 _status, comment_404_html = rendered("/404.html")
 assert_equal(false, comment_404_html.include?(edit_base), "the 404 page has no comment invitation")
+assert_equal(true, comment_post_html.include?("<h2>Comments <small>"), "a post without comments has a heading without a count")
+assert_equal(false, comment_post_html.include?(%(class="comment-thread")), "a post without comments renders no thread")
+
+commented = Document.allocate
+commented.instance_variable_set(:@path, "_posts/2024-07-01-transactional-email-provider.md")
+commented.instance_variable_set(:@front_matter, {
+  "comments" => [
+    { "author" => "jdevries", "date" => Date.new(2026, 9, 2), "body" => "Postmark support answers <b>fast</b>.",
+      "replies" => [{ "author" => "roberthopman", "date" => Date.new(2026, 9, 3), "body" => "Same here." }] },
+    { "author" => "mkowalski", "date" => Date.new(2026, 9, 20), "body" => "Lettermint?",
+      "replies" => [
+        { "author" => "tvandam", "date" => Date.new(2026, 9, 22), "body" => "First reply." },
+        { "author" => "sarah-builds", "date" => Date.new(2026, 9, 23), "body" => "Second reply." }
+      ] },
+    { "author" => "sarah-builds", "date" => Date.new(2026, 10, 16), "body" => "Resend works well." }
+  ]
+})
+thread_html = ApplicationController.render(partial: "shared/comment_invite", locals: { document: commented })
+assert_equal(true, thread_html.include?("<h2>Comments (6) <small>"), "the heading counts comments and replies")
+assert_equal(3, thread_html.scan(%(class="comment-thread")).size, "each comment opens its own thread")
+assert_equal(3, thread_html.scan(%(class="comment comment--reply)).size, "replies sit inside their thread")
+assert_equal(["1 reply", "2 replies", "No replies yet"], thread_html.scan(/<span>(\d+ repl\w+|No replies yet)<\/span>/).flatten,
+             "each thread counts its own replies")
+assert_equal(1, thread_html.scan(%(class="comment-author-badge")).size, "only the site author gets the Author badge")
+assert_equal(true, thread_html.index("First reply.") < thread_html.index("Second reply."), "replies keep their order")
+assert_equal(true, thread_html.include?(%(<time datetime="2026-09-02">2 Sep 2026</time>)), "a comment shows its date")
+assert_equal(true, thread_html.include?("&lt;b&gt;fast&lt;/b&gt;"), "a comment body is escaped")
+assert_equal(4, thread_html.scan(%(href="#{edit_base}_posts/2024-07-01-transactional-email-provider.md")).size,
+             "each thread has a reply link to the edit page, next to the invite link")
 
 puts "all document assertions passed"

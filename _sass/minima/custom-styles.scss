@@ -453,3 +453,132 @@ blockquote p {
 .post-footer-links h2 {
   font-size: 1.17em;
 }
+
+.comment-invite {
+  margin-top: 3rem;
+  border: 1px solid #D0D7DE;
+  border-radius: 6px;
+  overflow: hidden;
+
+  > h2 {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.25rem 0.75rem;
+    margin: 0;
+    padding: 0.6rem 1rem;
+    background: #F6F8FA;
+    border-bottom: 1px solid #D0D7DE;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  > h2 small {
+    font-family: $code-font-family;
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: #57606A;
+    overflow-wrap: anywhere;
+  }
+
+  > p {
+    margin: 0;
+    padding: 0.9rem 1rem 1rem;
+    font-size: 0.95rem;
+  }
+
+  .comment-invite__diff {
+    margin: 0;
+    padding: 0.4rem 1rem;
+    background: #E6FFEC;
+    color: #1A7F37;
+    font-family: $code-font-family;
+    font-size: 0.8rem;
+    border: 0;
+    border-bottom: 1px solid #D0D7DE;
+    border-radius: 0;
+    overflow-x: auto;
+  }
+}
+
+.comment-threads {
+  display: grid;
+  gap: 1rem;
+  margin: 0;
+  padding: 1rem;
+  list-style: none;
+  border-bottom: 1px solid #D0D7DE;
+}
+
+.comment-thread {
+  margin: 0;
+  border: 1px solid #D0D7DE;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.comment {
+  display: grid;
+  grid-template-columns: 24px minmax(0, 1fr);
+  gap: 0.6rem;
+  padding: 0.75rem;
+
+  & + & { border-top: 1px solid #D0D7DE; }
+  &--reply { padding-left: 2.6rem; background: #FBFCFD; }
+  &--author { background: #F1F8FF; }
+
+  p { margin: 0.2rem 0 0; font-size: 0.92rem; }
+}
+
+.comment-avatar {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #57606A;
+  color: #FFFFFF;
+  font-size: 0.6rem;
+  font-weight: 700;
+
+  .comment--author & { background: $brand-color; }
+}
+
+.comment-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem 0.4rem;
+  font-size: 0.8rem;
+  color: #57606A;
+
+  strong { color: $text-color; font-weight: 600; }
+  time { font-variant-numeric: tabular-nums; }
+}
+
+.comment-author-badge {
+  margin-left: auto;
+  padding: 0.2rem 0.45rem;
+  border: 1px solid #D0D7DE;
+  border-radius: 999px;
+  background: #FFFFFF;
+  font-size: 0.68rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.comment-thread-foot {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.45rem 0.75rem;
+  border-top: 1px solid #D0D7DE;
+  background: #F6F8FA;
+  font-size: 0.8rem;
+  color: #57606A;
+
+  a { font-weight: 600; }
+}
+
+@media (max-width: 480px) {
+  .comment--reply { padding-left: 1.5rem; }
+}
