@@ -23,3 +23,4 @@ A curated list of transactional email service providers.
   - Unresponsive customer support
 - [Smtp](https://Smtp.com)
 - [Smtp2go](https://Smtp2go.com)
+- [Yournotify](https://yournotify.com/)
