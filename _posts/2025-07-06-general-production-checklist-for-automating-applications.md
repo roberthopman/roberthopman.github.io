@@ -9,6 +9,10 @@ This is a concept checklist to ensure that an application is production ready.
 
 [The gist at github.](https://gist.github.com/roberthopman/fdeeb94e74b7c6b7e67857916f241714)
 
+The whole checklist in one view, from the servers up to the team:
+
+![A layer stack with six layers. From the bottom up: Hosting with servers, access and SSH keys, disk space, backups and CDN; Monitoring and logging; Domains, SSL and 3rd parties; Application with docs, deploy scripts, an API subdomain and config in environment variables; Development with version control, code review, tests, CI and deploys; and Coordination with shared knowledge, work hours and communication channels. An arrow on the left points up from servers to team. The Hosting layer is highlighted as the layer with the longest list.](/assets/images/general-production-checklist-for-automating-applications-recap.svg)
+
 ## Hosting
   * Hosting
     * Locations

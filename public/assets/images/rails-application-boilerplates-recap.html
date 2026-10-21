@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Every Rails boilerplate ships the same stack</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --color-paper:   #fafaf7;
+      --color-ink:     #111111;
+      --color-muted:   #4b5563;
+      --color-accent:  #0070f3;
+      --font-sans:     'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      --font-serif:    'Instrument Serif', Georgia, 'Times New Roman', serif;
+      --font-mono:     'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace;
+    }
+    body { font-family: var(--font-sans); background: var(--color-paper); color: var(--color-ink); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 3rem 2rem; }
+    .frame { max-width: 1200px; width: 100%; }
+    .eyebrow { font-family: var(--font-mono); font-size: 0.66rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-muted); margin-bottom: 0.5rem; }
+    h1 { font-family: var(--font-serif); font-size: clamp(1.5rem, 2.4vw + 0.75rem, 2rem); font-weight: 400; letter-spacing: -0.02em; line-height: 1.15; color: var(--color-ink); margin-bottom: 1.5rem; }
+    svg { width: 100%; min-width: 900px; display: block; }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <p class="eyebrow">Layer stack · Diagram Design</p>
+    <h1>Every Rails boilerplate ships the same stack</h1>
+
+    <svg viewBox="0 0 960 468" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="rails-application-boilerplates-title rails-application-boilerplates-desc">
+      <title id="rails-application-boilerplates-title">Every Rails boilerplate ships the same stack</title>
+      <desc id="rails-application-boilerplates-desc">Layer stack of a Rails boilerplate: deployment, tooling and CI, background jobs, accounts and billing, and frontend are the layers every boilerplate ships, and your application is the top layer that you write.</desc>
+      <defs>
+        <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4b5563"/></marker>
+        <marker id="arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#0070f3"/></marker>
+        <marker id="arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4b5563"/></marker>
+      </defs>
+
+      <rect width="100%" height="100%" fill="#fafaf7"/>
+
+      <!-- Direction column, left margin -->
+      <text x="40" y="60" fill="#4b5563" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" letter-spacing="0.18em">YOUR CODE</text>
+      <line x1="64" y1="80" x2="64" y2="408" stroke="rgba(17,17,17,0.30)" stroke-width="1"/>
+      <polygon points="60,80 68,80 64,72" fill="#4b5563"/>
+      <text x="40" y="428" fill="#4b5563" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" letter-spacing="0.18em">SHARED STACK</text>
+
+      <!-- Layer fills, top to bottom. Stack x 128 to 920, rows 56 high -->
+      <rect x="128" y="72" width="792" height="56" fill="rgba(0,112,243,0.08)"/>
+      <rect x="128" y="128" width="792" height="56" fill="#ffffff"/>
+      <rect x="128" y="184" width="792" height="56" fill="#f3f4f6"/>
+      <rect x="128" y="240" width="792" height="56" fill="#ffffff"/>
+      <rect x="128" y="296" width="792" height="56" fill="#f3f4f6"/>
+      <rect x="128" y="352" width="792" height="56" fill="#ffffff"/>
+
+      <!-- Dividers and silhouette -->
+      <line x1="128" y1="128" x2="920" y2="128" stroke="rgba(17,17,17,0.12)" stroke-width="1"/>
+      <line x1="128" y1="184" x2="920" y2="184" stroke="rgba(17,17,17,0.12)" stroke-width="1"/>
+      <line x1="128" y1="240" x2="920" y2="240" stroke="rgba(17,17,17,0.12)" stroke-width="1"/>
+      <line x1="128" y1="296" x2="920" y2="296" stroke="rgba(17,17,17,0.12)" stroke-width="1"/>
+      <line x1="128" y1="352" x2="920" y2="352" stroke="rgba(17,17,17,0.12)" stroke-width="1"/>
+      <rect x="128" y="72" width="792" height="336" fill="none" stroke="rgba(17,17,17,0.30)" stroke-width="1"/>
+      <rect x="128" y="72" width="792" height="56" fill="none" stroke="#0070f3" stroke-width="1"/>
+
+      <!-- L6: Your application (focal) -->
+      <text x="144" y="103" fill="#0070f3" font-size="8" font-weight="600" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" letter-spacing="0.14em">L6</text>
+      <text x="232" y="105" fill="#111111" font-size="14" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">Your application</text>
+      <text x="904" y="104" fill="#0070f3" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="end" letter-spacing="0.08em">domain models · your features</text>
+
+      <!-- L5: Frontend -->
+      <text x="144" y="159" fill="#4b5563" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" letter-spacing="0.14em">L5</text>
+      <text x="232" y="161" fill="#111111" font-size="14" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">Frontend</text>
+      <text x="904" y="160" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="end" letter-spacing="0.08em">Tailwind CSS · Hotwire / Turbo</text>
+
+      <!-- L4: Accounts and billing -->
+      <text x="144" y="215" fill="#4b5563" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" letter-spacing="0.14em">L4</text>
+      <text x="232" y="217" fill="#111111" font-size="14" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">Accounts &amp; billing</text>
+      <text x="904" y="216" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="end" letter-spacing="0.08em">Devise · OmniAuth · Pundit · teams · Stripe</text>
+
+      <!-- L3: Background jobs -->
+      <text x="144" y="271" fill="#4b5563" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" letter-spacing="0.14em">L3</text>
+      <text x="232" y="273" fill="#111111" font-size="14" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">Background jobs</text>
+      <text x="904" y="272" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="end" letter-spacing="0.08em">Sidekiq · Solid Queue</text>
+
+      <!-- L2: Tooling and CI -->
+      <text x="144" y="327" fill="#4b5563" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" letter-spacing="0.14em">L2</text>
+      <text x="232" y="329" fill="#111111" font-size="14" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">Tooling &amp; CI</text>
+      <text x="904" y="328" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="end" letter-spacing="0.08em">RSpec · RuboCop · Brakeman · GitHub Actions</text>
+
+      <!-- L1: Deployment -->
+      <text x="144" y="383" fill="#4b5563" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" letter-spacing="0.14em">L1</text>
+      <text x="232" y="385" fill="#111111" font-size="14" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">Deployment</text>
+      <text x="904" y="384" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="end" letter-spacing="0.08em">Kamal · Render · Heroku · Fly.io</text>
+    </svg>
+  </div>
+</body>
+</html>

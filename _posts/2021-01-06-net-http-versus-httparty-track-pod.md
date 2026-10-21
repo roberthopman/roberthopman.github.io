@@ -7,6 +7,10 @@ tags: [ruby, http, api, comparison, gems]
 
 A short comparison of the pros and cons of two popular libraries for making HTTP requests in Ruby: `Net::HTTP` and `HTTParty`. These libraries serve similar purposes but have some differences in terms of ease of use, features, and community support.
 
+The two libraries differ in how much code you write before the request reaches the socket:
+
+![A layer stack diagram with three bands: HTTParty on top, Net::HTTP in the middle, and the TCP socket at the bottom. A box named Your code stands to the left with two arrows. The upper arrow, labelled one call, enters the HTTParty layer. The lower arrow, labelled step by step, enters the Net::HTTP layer. An axis on the right reads simplicity at the top and control at the bottom.](/assets/images/net-http-versus-httparty-track-pod-recap.svg)
+
 ### Net::HTTP
 
 Pros:

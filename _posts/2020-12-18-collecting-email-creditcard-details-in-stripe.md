@@ -9,6 +9,10 @@ tags: [stripe, rails, payments, api, tutorial]
 
 SetupIntent is the process of saving a customer's payment credentials for future payments [source](https://stripe.com/docs/api/setup_intents). 
 
+The whole flow, from the card form to a later charge without the customer present:
+
+![A sequence diagram with three lifelines: Customer, Rails app and Stripe. The customer opens the card form, the app creates a SetupIntent and passes the client secret back with the form, the customer confirms the card with Stripe directly, and Stripe answers that the payment method is saved. A box marked later, when charging, shows the app creating a PaymentIntent with the saved payment method and Stripe confirming the off-session payment.](/assets/images/collecting-email-creditcard-details-in-stripe-recap.svg)
+
 **Why is it important?**
 
 As a business owner, you want to get creditcard details, in order to enable a [Payment](https://stripe.com/docs/api/payment_intents) in the future.

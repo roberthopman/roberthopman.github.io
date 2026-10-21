@@ -8,6 +8,10 @@ tags: [ruby, jupyter, tutorial, workflow]
 
 This post documents how to set up Jupyter notebooks with Ruby support and embed them in blog posts.
 
+The whole path, from a notebook cell to the embedded HTML in a post:
+
+![An architecture diagram with five boxes in a row: Jupyter Lab with the IRuby kernel, the notebook file, nbconvert, the HTML fragment and the blog post. Each arrow hands the work to the next box: write the notebook, convert it to HTML, extract the main element, and embed it in the post with codeblock.css.](/assets/images/jupyter-notebooks-with-ruby-recap.svg)
+
 ## Pre-conditions
 
 ```bash

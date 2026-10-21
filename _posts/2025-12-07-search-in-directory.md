@@ -7,6 +7,10 @@ tags: [terminal, grep, git grep, ripgrep, find]
 
 You can search for a word in a repo using several command line tools.
 
+The tool to pick, by what you match and where you look:
+
+![A flowchart with two decisions in a column. The first decision asks if you search by file name, and yes leads to find. The second asks if you search only tracked files, and yes leads to git grep. No on both leads to ripgrep or grep -r, which search the content of every file.](/assets/images/search-in-directory-recap.svg)
+
 ### grep
 
 ```bash

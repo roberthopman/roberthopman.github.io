@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 960 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="transactional-email-provider-title transactional-email-provider-desc">
+      <title id="transactional-email-provider-title">One provider between your app and the inbox</title>
+      <desc id="transactional-email-provider-desc">Architecture diagram of transactional email: the application hands each message to one email service provider picked from the list, the provider delivers it to the recipient's inbox, and a note marks Brevo and Sendgrid as the two names on the list that carry a warning.</desc>
+      <defs><style>@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Inter:wght@400;500;600&amp;family=Geist+Mono:wght@400;500;600&amp;display=swap');</style>
+        <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4b5563"/></marker>
+        <marker id="arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#0070f3"/></marker>
+        <marker id="arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4b5563"/></marker>
+      </defs>
+
+      <rect width="100%" height="100%" fill="#fafaf7"/>
+
+      <!-- Arrows first, behind the boxes -->
+      <line x1="280" y1="68" x2="400" y2="68" stroke="#4b5563" stroke-width="1.2" marker-end="url(#arrow)"/>
+      <line x1="560" y1="68" x2="680" y2="68" stroke="#4b5563" stroke-width="1.2" marker-end="url(#arrow)"/>
+
+      <!-- Arrow labels, masked, 8px above the stroke -->
+      <rect x="308" y="48" width="64" height="12" rx="2" fill="#fafaf7"/>
+      <text x="340" y="58" fill="#4b5563" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle" letter-spacing="0.08em">SMTP · API</text>
+
+      <rect x="592" y="48" width="56" height="12" rx="2" fill="#fafaf7"/>
+      <text x="620" y="58" fill="#4b5563" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle" letter-spacing="0.08em">DELIVERS</text>
+
+      <!-- Node: Your app (input) -->
+      <rect x="120" y="40" width="160" height="56" rx="6" fill="#fafaf7"/>
+      <rect x="120" y="40" width="160" height="56" rx="6" fill="#4b5563" fill-opacity="0.10" stroke="#6b7280" stroke-width="1"/>
+      <rect x="128" y="48" width="28" height="12" rx="2" fill="none" stroke="#6b7280" stroke-opacity="0.40" stroke-width="0.8"/>
+      <text x="142" y="57" fill="#6b7280" font-size="7" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle" letter-spacing="0.08em">APP</text>
+      <text x="200" y="72" fill="#111111" font-size="12" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">Your app</text>
+      <text x="200" y="87" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle">signup · reset · receipt</text>
+
+      <!-- Node: Email provider (focal) -->
+      <rect x="400" y="40" width="160" height="56" rx="6" fill="#fafaf7"/>
+      <rect x="400" y="40" width="160" height="56" rx="6" fill="#0070f3" fill-opacity="0.08" stroke="#0070f3" stroke-width="1"/>
+      <rect x="408" y="48" width="28" height="12" rx="2" fill="none" stroke="#0070f3" stroke-opacity="0.50" stroke-width="0.8"/>
+      <text x="422" y="57" fill="#0070f3" font-size="7" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle" letter-spacing="0.08em">ESP</text>
+      <text x="480" y="72" fill="#111111" font-size="12" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">Email provider</text>
+      <text x="480" y="87" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle">one of 21 on the list</text>
+
+      <!-- Node: Recipient (external) -->
+      <rect x="680" y="40" width="160" height="56" rx="6" fill="#fafaf7"/>
+      <rect x="680" y="40" width="160" height="56" rx="6" fill="#111111" fill-opacity="0.03" stroke="#111111" stroke-opacity="0.30" stroke-width="1"/>
+      <rect x="688" y="48" width="28" height="12" rx="2" fill="none" stroke="#111111" stroke-opacity="0.22" stroke-width="0.8"/>
+      <text x="702" y="57" fill="#6b7280" font-size="7" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle" letter-spacing="0.08em">EXT</text>
+      <text x="760" y="72" fill="#111111" font-size="12" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">Recipient</text>
+      <text x="760" y="87" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle">inbox</text>
+
+      <!-- Callout, bottom-left margin, dashed leader to the provider -->
+      <text x="120" y="164" fill="#111111" font-size="14" font-style="italic" font-family="'Instrument Serif', Georgia, 'Times New Roman', serif">Two names on the list carry a warning: Brevo and Sendgrid.</text>
+      <path d="M 476,150 Q 480,128 480,104" fill="none" stroke="#111111" stroke-opacity="0.40" stroke-width="1" stroke-dasharray="4,3"/>
+      <circle cx="480" cy="100" r="2" fill="#111111"/>
+
+      <!-- Legend -->
+      <line x1="120" y1="200" x2="840" y2="200" stroke="#111111" stroke-opacity="0.10" stroke-width="0.8"/>
+      <text x="120" y="216" fill="#4b5563" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" letter-spacing="0.18em">LEGEND</text>
+      <rect x="120" y="234" width="14" height="10" rx="2" fill="#0070f3" fill-opacity="0.08" stroke="#0070f3" stroke-width="1"/>
+      <text x="140" y="242" fill="#4b5563" font-size="8.5" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">The provider you pick from the list</text>
+      <rect x="340" y="234" width="14" height="10" rx="2" fill="#4b5563" fill-opacity="0.10" stroke="#6b7280" stroke-width="1"/>
+      <text x="360" y="242" fill="#4b5563" font-size="8.5" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">Your application</text>
+      <rect x="500" y="234" width="14" height="10" rx="2" fill="#111111" fill-opacity="0.03" stroke="#111111" stroke-opacity="0.30" stroke-width="1"/>
+      <text x="520" y="242" fill="#4b5563" font-size="8.5" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">Recipient</text>
+      <line x1="640" y1="240" x2="668" y2="240" stroke="#4b5563" stroke-width="1.2" marker-end="url(#arrow)"/>
+      <text x="676" y="242" fill="#4b5563" font-size="8.5" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">Email flow</text>
+    </svg>

@@ -11,6 +11,10 @@ Using:
 - Minitest - [https://github.com/minitest/minitest](https://github.com/minitest/minitest)
 
 
+What the debug test does when a line fails:
+
+![A flowchart with two decisions. The test runs with DEBUG_TESTS set. When the flag is not set, the test returns. When the flag is set, the test runs the happy path. When the happy path passes, the test is green. When it raises an error, the test prints the backtrace, takes a screenshot and opens a debug session.](/assets/images/enter-debugging-session-when-tests-fails-recap.svg)
+
 In a local development environment, when a line in this code fails, the execution stops:
 
 ```rb

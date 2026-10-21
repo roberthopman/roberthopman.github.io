@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 960 512" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="building-a-b2b-crud-app-with-postgres-and-javascript-title building-a-b2b-crud-app-with-postgres-and-javascript-desc">
+      <title id="building-a-b2b-crud-app-with-postgres-and-javascript-title">One request, four questions, one database</title>
+      <desc id="building-a-b2b-crud-app-with-postgres-and-javascript-desc">Layer stack of the b2b-crud-app request path: route, controller, service, repository, Prisma client and PostgreSQL, with the file and the question each layer answers, and the service layer marked as focal.</desc>
+      <defs><style>@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Inter:wght@400;500;600&amp;family=Geist+Mono:wght@400;500;600&amp;display=swap');</style>
+        <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4b5563"/></marker>
+        <marker id="arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#0070f3"/></marker>
+        <marker id="arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4b5563"/></marker>
+      </defs>
+
+      <rect width="100%" height="100%" fill="#fafaf7"/>
+
+      <!-- Direction column (left margin): the request travels down the stack -->
+      <text x="40" y="68" fill="#4b5563" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" letter-spacing="0.18em">REQUEST</text>
+      <line x1="80" y1="80" x2="80" y2="416" stroke="#111111" stroke-opacity="0.30" stroke-width="1"/>
+      <polygon points="76,416 84,416 80,424" fill="#4b5563"/>
+      <text x="40" y="440" fill="#4b5563" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" letter-spacing="0.18em">SQL</text>
+
+      <!-- 01 Route -->
+      <rect x="120" y="80" width="800" height="56" fill="#f3f4f6"/>
+      <line x1="120" y1="136" x2="920" y2="136" stroke="#111111" stroke-opacity="0.12" stroke-width="1"/>
+      <text x="140" y="112" fill="#4b5563" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" letter-spacing="0.14em">01</text>
+      <text x="200" y="104" fill="#111111" font-size="14" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">Route</text>
+      <text x="200" y="120" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace">routes/users.ts</text>
+      <text x="900" y="112" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="end" letter-spacing="0.08em">which function handles this URL?</text>
+
+      <!-- 02 Controller -->
+      <rect x="120" y="136" width="800" height="56" fill="#fafaf7"/>
+      <line x1="120" y1="192" x2="920" y2="192" stroke="#111111" stroke-opacity="0.12" stroke-width="1"/>
+      <text x="140" y="168" fill="#4b5563" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" letter-spacing="0.14em">02</text>
+      <text x="200" y="160" fill="#111111" font-size="14" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">Controller</text>
+      <text x="200" y="176" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace">controllers/userController.ts</text>
+      <text x="900" y="168" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="end" letter-spacing="0.08em">how do I handle this HTTP request?</text>
+
+      <!-- 03 Service (focal: the layer the tests target first) -->
+      <rect x="120" y="192" width="800" height="56" fill="#0070f3" fill-opacity="0.08"/>
+      <rect x="120" y="192" width="800" height="56" fill="none" stroke="#0070f3" stroke-width="1"/>
+      <text x="140" y="224" fill="#0070f3" font-size="8" font-weight="600" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" letter-spacing="0.14em">03</text>
+      <text x="200" y="216" fill="#111111" font-size="14" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">Service</text>
+      <text x="200" y="232" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace">services/userService.ts</text>
+      <text x="900" y="224" fill="#0070f3" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="end" letter-spacing="0.08em">what business operation should happen?</text>
+
+      <!-- 04 Repository -->
+      <rect x="120" y="248" width="800" height="56" fill="#fafaf7"/>
+      <line x1="120" y1="304" x2="920" y2="304" stroke="#111111" stroke-opacity="0.12" stroke-width="1"/>
+      <text x="140" y="280" fill="#4b5563" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" letter-spacing="0.14em">04</text>
+      <text x="200" y="272" fill="#111111" font-size="14" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">Repository</text>
+      <text x="200" y="288" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace">repositories/userRepo.ts</text>
+      <text x="900" y="280" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="end" letter-spacing="0.08em">how do I get or save data?</text>
+
+      <!-- 05 Prisma client -->
+      <rect x="120" y="304" width="800" height="56" fill="#f3f4f6"/>
+      <line x1="120" y1="360" x2="920" y2="360" stroke="#111111" stroke-opacity="0.12" stroke-width="1"/>
+      <text x="140" y="336" fill="#4b5563" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" letter-spacing="0.14em">05</text>
+      <text x="200" y="328" fill="#111111" font-size="14" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">Prisma client</text>
+      <text x="200" y="344" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace">lib/prisma.ts · schema.prisma</text>
+      <text x="900" y="336" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="end" letter-spacing="0.08em">typed queries via adapter-pg</text>
+
+      <!-- 06 PostgreSQL -->
+      <rect x="120" y="360" width="800" height="56" fill="#fafaf7"/>
+      <text x="140" y="392" fill="#4b5563" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" letter-spacing="0.14em">06</text>
+      <text x="200" y="384" fill="#111111" font-size="14" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">PostgreSQL</text>
+      <text x="200" y="400" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace">docker compose · 5433:5432</text>
+      <text x="900" y="392" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="end" letter-spacing="0.08em">User · Project · ProjectMember</text>
+
+      <!-- Outer silhouette -->
+      <rect x="120" y="80" width="800" height="336" fill="none" stroke="#4b5563" stroke-width="1"/>
+
+      <!-- Callout -->
+      <text x="120" y="472" fill="#4b5563" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" letter-spacing="0.18em">FOUR STAGES</text>
+      <text x="220" y="472" fill="#4b5563" font-size="14" font-style="italic" font-family="'Instrument Serif', Georgia, 'Times New Roman', serif">Stage 1 was one route handler. Stages 2, 3 and 4 split out the service, the controller and the repository.</text>
+    </svg>

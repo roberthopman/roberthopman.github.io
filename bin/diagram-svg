@@ -1,0 +1,41 @@
+#!/usr/bin/env python3
+"""Export the diagram of a diagram-design HTML file to a standalone SVG.
+
+Usage: bin/diagram-svg public/assets/images/<slug>-recap.html
+
+Follows references/export.md of https://github.com/cathrynlavery/diagram-design:
+the first <svg> only, made standalone, Google Fonts imported, rgba() colours
+normalised for strict SVG 1.1 readers, written next to the source as .svg.
+"""
+import pathlib
+import re
+import sys
+
+FONTS = ("@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1"
+         "&amp;family=Inter:wght@400;500;600&amp;family=Geist+Mono:wght@400;500;600&amp;display=swap');")
+
+src = pathlib.Path(sys.argv[1])
+html = src.read_text()
+match = re.search(r"<svg\b.*?</svg>", html, re.S)
+if not match:
+    sys.exit(f"{src}: no <svg> block found")
+svg = match.group(0)
+if 'xmlns="http://www.w3.org/2000/svg"' not in svg:
+    svg = svg.replace("<svg", '<svg xmlns="http://www.w3.org/2000/svg"', 1)
+if "viewBox=" not in svg.split(">", 1)[0]:
+    sys.exit(f"{src}: the <svg> has no viewBox")
+style = f"<style>{FONTS}</style>"
+if "<defs>" in svg:
+    svg = svg.replace("<defs>", f"<defs>{style}", 1)
+else:
+    svg = re.sub(r"(</desc>)", rf"\1<defs>{style}</defs>", svg, count=1)
+svg = re.sub(
+    r'(fill|stroke)="rgba\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d*\.?\d+)\s*\)"',
+    lambda m: '{0}="#{1:02x}{2:02x}{3:02x}" {0}-opacity="{4}"'.format(
+        m.group(1), int(m.group(2)), int(m.group(3)), int(m.group(4)), m.group(5)),
+    svg,
+)
+svg = re.sub(r'(fill|stroke)="transparent"', r'\1="none"', svg)
+out = src.with_suffix(".svg")
+out.write_text('<?xml version="1.0" encoding="UTF-8"?>\n' + svg + "\n")
+print(out)

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Two snapshots around the method</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --color-paper:   #fafaf7;
+      --color-ink:     #111111;
+      --color-muted:   #4b5563;
+      --color-accent:  #0070f3;
+      --font-sans:     'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      --font-serif:    'Instrument Serif', Georgia, 'Times New Roman', serif;
+      --font-mono:     'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace;
+    }
+    body { font-family: var(--font-sans); background: var(--color-paper); color: var(--color-ink); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 3rem 2rem; }
+    .frame { max-width: 1200px; width: 100%; }
+    .eyebrow { font-family: var(--font-mono); font-size: 0.66rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-muted); margin-bottom: 0.5rem; }
+    h1 { font-family: var(--font-serif); font-size: clamp(1.5rem, 2.4vw + 0.75rem, 2rem); font-weight: 400; letter-spacing: -0.02em; line-height: 1.15; color: var(--color-ink); margin-bottom: 1.5rem; }
+    svg { width: 100%; min-width: 900px; display: block; }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <p class="eyebrow">Flowchart · Diagram Design</p>
+    <h1>Two snapshots around the method</h1>
+
+    <svg viewBox="0 0 960 636" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="measuring-memory-for-ruby-methods-title measuring-memory-for-ruby-methods-desc">
+      <title id="measuring-memory-for-ruby-methods-title">Two snapshots around the method</title>
+      <desc id="measuring-memory-for-ruby-methods-desc">Flowchart of the memory measurement pattern: run GC.start, take a snapshot with ObjectSpace.memsize_of_all, run the method, take a second snapshot, and subtract the two for the delta in MB; map on ActiveRecord objects cost 681 MB and pluck cost 30 MB for the same 50,000 users.</desc>
+      <defs>
+        <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4b5563"/></marker>
+        <marker id="arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#0070f3"/></marker>
+        <marker id="arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4b5563"/></marker>
+      </defs>
+
+      <rect width="100%" height="100%" fill="#fafaf7"/>
+
+      <!-- Arrows first, behind the nodes. Column centre x=360 -->
+      <line x1="360" y1="96" x2="360" y2="128" stroke="#4b5563" stroke-width="1.2" marker-end="url(#arrow)"/>
+      <line x1="360" y1="184" x2="360" y2="216" stroke="#4b5563" stroke-width="1.2" marker-end="url(#arrow)"/>
+      <line x1="360" y1="272" x2="360" y2="304" stroke="#4b5563" stroke-width="1.2" marker-end="url(#arrow)"/>
+      <line x1="360" y1="360" x2="360" y2="392" stroke="#4b5563" stroke-width="1.2" marker-end="url(#arrow)"/>
+      <line x1="360" y1="448" x2="360" y2="480" stroke="#0070f3" stroke-width="1.4" marker-end="url(#arrow-accent)"/>
+
+      <!-- Start oval -->
+      <rect x="240" y="40" width="240" height="56" rx="28" fill="rgba(17,17,17,0.03)" stroke="rgba(17,17,17,0.30)" stroke-width="1"/>
+      <text x="360" y="68" fill="#111111" font-size="12" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">Memory is too high</text>
+      <text x="360" y="84" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle">which method is responsible?</text>
+
+      <!-- Step: collect garbage -->
+      <rect x="240" y="128" width="240" height="56" rx="6" fill="#ffffff" stroke="#111111" stroke-width="1"/>
+      <text x="360" y="156" fill="#111111" font-size="12" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">Collect garbage first</text>
+      <text x="360" y="172" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle">GC.start</text>
+
+      <!-- Step: snapshot before -->
+      <rect x="240" y="216" width="240" height="56" rx="6" fill="#ffffff" stroke="#111111" stroke-width="1"/>
+      <text x="360" y="244" fill="#111111" font-size="12" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">Snapshot before</text>
+      <text x="360" y="260" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle">before = ObjectSpace.memsize_of_all</text>
+
+      <!-- Step: run the method -->
+      <rect x="240" y="304" width="240" height="56" rx="6" fill="#ffffff" stroke="#111111" stroke-width="1"/>
+      <text x="360" y="332" fill="#111111" font-size="12" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">Run the method</text>
+      <text x="360" y="348" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle">the code under suspicion</text>
+
+      <!-- Step: snapshot after -->
+      <rect x="240" y="392" width="240" height="56" rx="6" fill="#ffffff" stroke="#111111" stroke-width="1"/>
+      <text x="360" y="420" fill="#111111" font-size="12" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">Snapshot after</text>
+      <text x="360" y="436" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle">after = ObjectSpace.memsize_of_all</text>
+
+      <!-- End oval, focal -->
+      <rect x="240" y="480" width="240" height="56" rx="28" fill="rgba(0,112,243,0.08)" stroke="#0070f3" stroke-width="1"/>
+      <text x="360" y="508" fill="#111111" font-size="12" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">Memory delta</text>
+      <text x="360" y="524" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle">(after - before) in MB</text>
+
+      <!-- Annotation callout: the measured result, in the right margin -->
+      <text x="560" y="500" fill="#111111" font-size="14" font-style="italic" font-family="'Instrument Serif', Georgia, 'Times New Roman', serif">Same 50,000 users, two ways:</text>
+      <text x="560" y="520" fill="#111111" font-size="14" font-style="italic" font-family="'Instrument Serif', Georgia, 'Times New Roman', serif">map on AR objects 681 MB, pluck 30 MB.</text>
+      <path d="M 552 508 H 488" fill="none" stroke="rgba(17,17,17,0.40)" stroke-width="1" stroke-dasharray="4,3"/>
+      <circle cx="484" cy="508" r="2" fill="#111111"/>
+
+      <!-- Legend -->
+      <line x1="40" y1="552" x2="920" y2="552" stroke="rgba(17,17,17,0.10)" stroke-width="0.8"/>
+      <text x="40" y="568" fill="#4b5563" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" letter-spacing="0.18em">LEGEND · SHAPE CARRIES TYPE</text>
+      <rect x="40" y="580" width="24" height="12" rx="6" fill="rgba(17,17,17,0.03)" stroke="rgba(17,17,17,0.30)" stroke-width="1"/>
+      <text x="72" y="590" fill="#4b5563" font-size="8.5" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">Start / end (oval)</text>
+      <rect x="200" y="580" width="24" height="12" rx="2" fill="#ffffff" stroke="#111111" stroke-width="1"/>
+      <text x="232" y="590" fill="#4b5563" font-size="8.5" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">Step (rectangle)</text>
+      <line x1="340" y1="586" x2="368" y2="586" stroke="#0070f3" stroke-width="1.4" marker-end="url(#arrow-accent)"/>
+      <text x="376" y="590" fill="#4b5563" font-size="8.5" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">The answer</text>
+    </svg>
+  </div>
+</body>
+</html>

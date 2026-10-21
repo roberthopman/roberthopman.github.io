@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pick the search tool by what you match</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --color-paper:   #fafaf7;
+      --color-ink:     #111111;
+      --color-muted:   #4b5563;
+      --color-accent:  #0070f3;
+      --font-sans:     'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      --font-serif:    'Instrument Serif', Georgia, 'Times New Roman', serif;
+      --font-mono:     'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace;
+    }
+    body { font-family: var(--font-sans); background: var(--color-paper); color: var(--color-ink); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 3rem 2rem; }
+    .frame { max-width: 1200px; width: 100%; }
+    .eyebrow { font-family: var(--font-mono); font-size: 0.66rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-muted); margin-bottom: 0.5rem; }
+    h1 { font-family: var(--font-serif); font-size: clamp(1.5rem, 2.4vw + 0.75rem, 2rem); font-weight: 400; letter-spacing: -0.02em; line-height: 1.15; color: var(--color-ink); margin-bottom: 1.5rem; }
+    svg { width: 100%; min-width: 900px; display: block; }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <p class="eyebrow">Flowchart · Diagram Design</p>
+    <h1>Pick the search tool by what you match</h1>
+
+    <svg viewBox="0 0 960 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="search-in-directory-title search-in-directory-desc">
+      <title id="search-in-directory-title">Pick the search tool by what you match</title>
+      <desc id="search-in-directory-desc">Flowchart that picks a search tool: find for file names, git grep for tracked files only, and ripgrep or grep -r for the content of every file in the directory.</desc>
+      <defs>
+        <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4b5563"/></marker>
+        <marker id="arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#0070f3"/></marker>
+        <marker id="arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4b5563"/></marker>
+      </defs>
+
+      <rect width="100%" height="100%" fill="#fafaf7"/>
+
+      <!-- Arrows first, behind nodes. Column centre x=480 -->
+      <line x1="480" y1="88" x2="480" y2="120" stroke="#4b5563" stroke-width="1.2" marker-end="url(#arrow)"/>
+      <line x1="580" y1="168" x2="640" y2="168" stroke="#4b5563" stroke-width="1.2" marker-end="url(#arrow)"/>
+      <line x1="480" y1="216" x2="480" y2="264" stroke="#4b5563" stroke-width="1.2" marker-end="url(#arrow)"/>
+      <line x1="580" y1="312" x2="640" y2="312" stroke="#4b5563" stroke-width="1.2" marker-end="url(#arrow)"/>
+      <line x1="480" y1="360" x2="480" y2="408" stroke="#0070f3" stroke-width="1.4" marker-end="url(#arrow-accent)"/>
+
+      <!-- Branch labels: above a horizontal segment, beside a vertical one -->
+      <rect x="596" y="148" width="32" height="12" rx="2" fill="#fafaf7"/>
+      <text x="612" y="158" fill="#4b5563" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle" letter-spacing="0.12em">YES</text>
+
+      <rect x="488" y="232" width="24" height="12" rx="2" fill="#fafaf7"/>
+      <text x="500" y="242" fill="#4b5563" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle" letter-spacing="0.12em">NO</text>
+
+      <rect x="596" y="292" width="32" height="12" rx="2" fill="#fafaf7"/>
+      <text x="612" y="302" fill="#4b5563" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle" letter-spacing="0.12em">YES</text>
+
+      <rect x="488" y="376" width="24" height="12" rx="2" fill="#fafaf7"/>
+      <text x="500" y="386" fill="#0070f3" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle" letter-spacing="0.12em">NO</text>
+
+      <!-- Start oval -->
+      <rect x="400" y="40" width="160" height="48" rx="24" fill="#fafaf7"/>
+      <rect x="400" y="40" width="160" height="48" rx="24" fill="rgba(17,17,17,0.03)" stroke="rgba(17,17,17,0.30)" stroke-width="1"/>
+      <text x="480" y="68" fill="#111111" font-size="12" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">Search a repo</text>
+
+      <!-- Decision 1: file name or content -->
+      <polygon points="480,120 580,168 480,216 380,168" fill="#ffffff" stroke="#111111" stroke-width="1"/>
+      <text x="480" y="166" fill="#111111" font-size="11" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">Search by</text>
+      <text x="480" y="180" fill="#111111" font-size="11" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">file name?</text>
+
+      <!-- Outcome: find -->
+      <rect x="640" y="144" width="160" height="48" rx="24" fill="#fafaf7"/>
+      <rect x="640" y="144" width="160" height="48" rx="24" fill="rgba(17,17,17,0.03)" stroke="rgba(17,17,17,0.30)" stroke-width="1"/>
+      <text x="720" y="168" fill="#111111" font-size="12" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">find</text>
+      <text x="720" y="182" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle">find . -name "*.rb"</text>
+
+      <!-- Decision 2: tracked files only -->
+      <polygon points="480,264 580,312 480,360 380,312" fill="#ffffff" stroke="#111111" stroke-width="1"/>
+      <text x="480" y="310" fill="#111111" font-size="11" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">Only tracked</text>
+      <text x="480" y="324" fill="#111111" font-size="11" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">files?</text>
+
+      <!-- Outcome: git grep -->
+      <rect x="640" y="288" width="160" height="48" rx="24" fill="#fafaf7"/>
+      <rect x="640" y="288" width="160" height="48" rx="24" fill="rgba(17,17,17,0.03)" stroke="rgba(17,17,17,0.30)" stroke-width="1"/>
+      <text x="720" y="312" fill="#111111" font-size="12" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">git grep</text>
+      <text x="720" y="326" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle">git grep "term"</text>
+
+      <!-- Outcome: ripgrep or grep -r (focal) -->
+      <rect x="400" y="408" width="160" height="56" rx="28" fill="#fafaf7"/>
+      <rect x="400" y="408" width="160" height="56" rx="28" fill="rgba(0,112,243,0.08)" stroke="#0070f3" stroke-width="1"/>
+      <text x="480" y="434" fill="#111111" font-size="12" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">ripgrep or grep -r</text>
+      <text x="480" y="450" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle">rg term · grep -r term .</text>
+
+      <!-- Legend -->
+      <line x1="40" y1="480" x2="920" y2="480" stroke="rgba(17,17,17,0.10)" stroke-width="0.8"/>
+      <text x="40" y="496" fill="#4b5563" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" letter-spacing="0.18em">LEGEND · SHAPE CARRIES TYPE</text>
+      <rect x="40" y="514" width="24" height="12" rx="6" fill="rgba(17,17,17,0.03)" stroke="rgba(17,17,17,0.30)" stroke-width="1"/>
+      <text x="72" y="522" fill="#4b5563" font-size="8.5" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">Start or outcome</text>
+      <polygon points="212,520 224,514 236,520 224,526" fill="#ffffff" stroke="#111111" stroke-width="1"/>
+      <text x="248" y="522" fill="#4b5563" font-size="8.5" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">Decision</text>
+      <rect x="340" y="514" width="24" height="12" rx="6" fill="rgba(0,112,243,0.08)" stroke="#0070f3" stroke-width="1"/>
+      <text x="372" y="522" fill="#4b5563" font-size="8.5" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">Default for file content</text>
+      <line x1="520" y1="520" x2="548" y2="520" stroke="#4b5563" stroke-width="1.2" marker-end="url(#arrow)"/>
+      <text x="556" y="522" fill="#4b5563" font-size="8.5" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">Branch</text>
+    </svg>
+  </div>
+</body>
+</html>

@@ -5,6 +5,10 @@ excerpt: "Build a tag management system with Rails and ActsAsTaggableOn allowing
 tags: [rails, ruby, activerecord, admin, tutorial]
 ---
 
+In one picture, the admin configures the tags and the user selects from the active ones:
+
+![A swimlane diagram with three lanes: admin, data and user. In the admin lane, Create a tag leads to Archive or unarchive. Both write to the TagSetting table in the data lane. A blue arrow labelled active only carries the active settings from the table to the Publication form in the user lane. From the form, an arrow labelled save tags leads to the Taggings table.](/assets/images/enable-tags-in-admin-for-selection-by-non-admin-recap.svg)
+
 
 Step 1: add a migration, assuming usage of `ActsAsTaggableOn` - though any `Tag` model would work. 
 

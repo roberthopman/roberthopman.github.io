@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 960 248" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="jupyter-notebooks-with-ruby-title jupyter-notebooks-with-ruby-desc">
+      <title id="jupyter-notebooks-with-ruby-title">From a Ruby notebook to a blog post</title>
+      <desc id="jupyter-notebooks-with-ruby-desc">Architecture diagram of the publish pipeline: Jupyter Lab with the IRuby kernel writes a notebook file, nbconvert turns it into HTML, the main element is cut out, and the blog post embeds it together with the Jupyter stylesheet.</desc>
+      <defs><style>@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Inter:wght@400;500;600&amp;family=Geist+Mono:wght@400;500;600&amp;display=swap');</style>
+        <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4b5563"/></marker>
+        <marker id="arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#0070f3"/></marker>
+        <marker id="arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4b5563"/></marker>
+      </defs>
+
+      <rect width="100%" height="100%" fill="#fafaf7"/>
+
+      <!-- Arrows first, behind nodes. Nodes sit at y 88 to 152, mid 120 -->
+      <line x1="168" y1="120" x2="236" y2="120" stroke="#4b5563" stroke-width="1.2" marker-end="url(#arrow)"/>
+      <line x1="348" y1="120" x2="416" y2="120" stroke="#4b5563" stroke-width="1.2" marker-end="url(#arrow)"/>
+      <line x1="528" y1="120" x2="596" y2="120" stroke="#4b5563" stroke-width="1.2" marker-end="url(#arrow)"/>
+      <line x1="724" y1="120" x2="792" y2="120" stroke="#0070f3" stroke-width="1.4" marker-end="url(#arrow-accent)"/>
+
+      <!-- Arrow labels, masked, 6px above the stroke -->
+      <rect x="184" y="102" width="36" height="12" rx="2" fill="#fafaf7"/>
+      <text x="202" y="112" fill="#4b5563" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle" letter-spacing="0.08em">WRITE</text>
+
+      <rect x="360" y="102" width="44" height="12" rx="2" fill="#fafaf7"/>
+      <text x="382" y="112" fill="#4b5563" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle" letter-spacing="0.08em">TO HTML</text>
+
+      <rect x="540" y="102" width="44" height="12" rx="2" fill="#fafaf7"/>
+      <text x="562" y="112" fill="#4b5563" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle" letter-spacing="0.08em">EXTRACT</text>
+
+      <rect x="740" y="102" width="36" height="12" rx="2" fill="#fafaf7"/>
+      <text x="758" y="112" fill="#0070f3" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle" letter-spacing="0.08em">EMBED</text>
+
+      <!-- Node: Jupyter Lab -->
+      <rect x="40" y="88" width="128" height="64" rx="6" fill="#fafaf7"/>
+      <rect x="40" y="88" width="128" height="64" rx="6" fill="#ffffff" stroke="#111111" stroke-width="1"/>
+      <rect x="48" y="96" width="28" height="12" rx="2" fill="none" stroke="#111111" stroke-opacity="0.40" stroke-width="0.8"/>
+      <text x="62" y="105" fill="#4b5563" font-size="7" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle" letter-spacing="0.08em">APP</text>
+      <text x="104" y="126" fill="#111111" font-size="12" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">Jupyter Lab</text>
+      <text x="104" y="141" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle">IRuby kernel</text>
+
+      <!-- Node: Notebook file -->
+      <rect x="236" y="88" width="112" height="64" rx="6" fill="#fafaf7"/>
+      <rect x="236" y="88" width="112" height="64" rx="6" fill="#111111" fill-opacity="0.05" stroke="#4b5563" stroke-width="1"/>
+      <rect x="244" y="96" width="28" height="12" rx="2" fill="none" stroke="#4b5563" stroke-opacity="0.50" stroke-width="0.8"/>
+      <text x="258" y="105" fill="#4b5563" font-size="7" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle" letter-spacing="0.08em">FILE</text>
+      <text x="292" y="126" fill="#111111" font-size="12" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">Notebook</text>
+      <text x="292" y="141" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle">notebook.ipynb</text>
+
+      <!-- Node: nbconvert -->
+      <rect x="416" y="88" width="112" height="64" rx="6" fill="#fafaf7"/>
+      <rect x="416" y="88" width="112" height="64" rx="6" fill="#ffffff" stroke="#111111" stroke-width="1"/>
+      <rect x="424" y="96" width="28" height="12" rx="2" fill="none" stroke="#111111" stroke-opacity="0.40" stroke-width="0.8"/>
+      <text x="438" y="105" fill="#4b5563" font-size="7" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle" letter-spacing="0.08em">CLI</text>
+      <text x="472" y="126" fill="#111111" font-size="12" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">nbconvert</text>
+      <text x="472" y="141" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle">--to html</text>
+
+      <!-- Node: HTML fragment -->
+      <rect x="596" y="88" width="128" height="64" rx="6" fill="#fafaf7"/>
+      <rect x="596" y="88" width="128" height="64" rx="6" fill="#111111" fill-opacity="0.05" stroke="#4b5563" stroke-width="1"/>
+      <rect x="604" y="96" width="28" height="12" rx="2" fill="none" stroke="#4b5563" stroke-opacity="0.50" stroke-width="0.8"/>
+      <text x="618" y="105" fill="#4b5563" font-size="7" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle" letter-spacing="0.08em">HTML</text>
+      <text x="660" y="126" fill="#111111" font-size="12" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">HTML fragment</text>
+      <text x="660" y="141" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle">&lt;main&gt; only</text>
+
+      <!-- Node: Blog post (focal) -->
+      <rect x="792" y="88" width="128" height="64" rx="6" fill="#fafaf7"/>
+      <rect x="792" y="88" width="128" height="64" rx="6" fill="#0070f3" fill-opacity="0.08" stroke="#0070f3" stroke-width="1"/>
+      <rect x="800" y="96" width="28" height="12" rx="2" fill="none" stroke="#0070f3" stroke-opacity="0.50" stroke-width="0.8"/>
+      <text x="814" y="105" fill="#0070f3" font-size="7" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle" letter-spacing="0.08em">POST</text>
+      <text x="856" y="126" fill="#111111" font-size="12" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">Blog post</text>
+      <text x="856" y="141" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle">md + codeblock.css</text>
+
+      <!-- Legend -->
+      <line x1="40" y1="168" x2="920" y2="168" stroke="#111111" stroke-opacity="0.10" stroke-width="0.8"/>
+      <text x="40" y="184" fill="#4b5563" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" letter-spacing="0.18em">LEGEND</text>
+      <rect x="40" y="202" width="14" height="10" rx="2" fill="#0070f3" fill-opacity="0.08" stroke="#0070f3" stroke-width="1"/>
+      <text x="60" y="210" fill="#4b5563" font-size="8.5" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">The post that embeds it</text>
+      <rect x="200" y="202" width="14" height="10" rx="2" fill="#ffffff" stroke="#111111" stroke-width="1"/>
+      <text x="220" y="210" fill="#4b5563" font-size="8.5" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">Tool</text>
+      <rect x="272" y="202" width="14" height="10" rx="2" fill="#111111" fill-opacity="0.05" stroke="#4b5563" stroke-width="1"/>
+      <text x="292" y="210" fill="#4b5563" font-size="8.5" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">File</text>
+      <line x1="344" y1="207" x2="372" y2="207" stroke="#4b5563" stroke-width="1.2" marker-end="url(#arrow)"/>
+      <text x="380" y="210" fill="#4b5563" font-size="8.5" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">Hand-off</text>
+      <line x1="448" y1="207" x2="476" y2="207" stroke="#0070f3" stroke-width="1.4" marker-end="url(#arrow-accent)"/>
+      <text x="484" y="210" fill="#4b5563" font-size="8.5" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">Embed in the post</text>
+    </svg>

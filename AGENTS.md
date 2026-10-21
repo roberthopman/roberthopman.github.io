@@ -105,6 +105,25 @@ testing     results (the term stems to "tests")
 parklife    No results for parklife
 ```
 
+## Diagrams
+
+Make a post diagram with the diagram-design skill
+(https://github.com/cathrynlavery/diagram-design). The blog's skin is the
+profile `roberthopman`, selected by the `.diagram-design` marker in the repo
+root and stored at `~/.diagram-design/profiles/roberthopman.md`.
+
+Write the source as `public/assets/images/<slug>-recap.html` and export the
+SVG next to it:
+
+```bash
+bin/diagram-svg public/assets/images/<slug>-recap.html
+```
+
+Embed the SVG in the post with `![<alt text>](/assets/images/<slug>-recap.svg)`,
+after the intro paragraph and before the first `##` heading. The SVG is shown
+through `<img>`, so it cannot load web fonts: keep the local fallback fonts in
+every `font-family`. Preview with `rsvg-convert -w 950 -o out.png <svg>`.
+
 ## Tutorial Writing Checklist
 
 When writing or reviewing blog posts that are tutorials (step-by-step guides, how-tos), check against these rules. 

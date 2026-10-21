@@ -5,6 +5,10 @@ last_modified_at: 2026-05-26
 tags: [ruby, rails]
 ---
 
+The stack that every boilerplate in this list ships:
+
+![A layer stack with six horizontal bands. From the bottom up: Deployment, Tooling and CI, Background jobs, Accounts and billing, Frontend, and Your application at the top. Each band names the common choices, such as Kamal, RSpec, Sidekiq, Devise, Pundit and Tailwind CSS. An arrow in the left margin points up from the shared stack to your code.](/assets/images/rails-application-boilerplates-recap.svg)
+
 ## Open source
 
 - May 2026 — [shakacode/react_on_rails](https://github.com/shakacode/react_on_rails)

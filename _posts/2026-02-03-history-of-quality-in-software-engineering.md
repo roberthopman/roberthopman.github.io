@@ -10,6 +10,10 @@ Software quality practices have evolved over six decades. What began as a respon
 to the "software crisis" of the 1960s has grown into collaborative specification
 techniques that bridge the gap between business and technical teams.
 
+Four eras, drawn to scale on one time axis:
+
+![A Gantt style chart with four rows on one time axis from 1968 to 2012. The Process era bar runs from 1968 to the 1990s and holds Fagan inspections, Cleanroom and PSP. The Design era bar covers 1994 to 1997 with UML 1.1. The Practice era bar covers 1996 to 2001 with XP, TDD, CI and pairing. A dashed vertical line marks the Agile Manifesto in 2001. The Lightweight era bar, in blue, covers 2006 to 2011 with BDD, C4 and SbE.](/assets/images/history-of-quality-in-software-engineering-recap.svg)
+
 
 ## Contents
 

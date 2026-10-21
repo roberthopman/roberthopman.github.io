@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Production readiness, from the servers up to the team</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --color-paper:   #fafaf7;
+      --color-ink:     #111111;
+      --color-muted:   #4b5563;
+      --color-accent:  #0070f3;
+      --font-sans:     'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      --font-serif:    'Instrument Serif', Georgia, 'Times New Roman', serif;
+      --font-mono:     'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace;
+    }
+    body { font-family: var(--font-sans); background: var(--color-paper); color: var(--color-ink); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 3rem 2rem; }
+    .frame { max-width: 1200px; width: 100%; }
+    .eyebrow { font-family: var(--font-mono); font-size: 0.66rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-muted); margin-bottom: 0.5rem; }
+    h1 { font-family: var(--font-serif); font-size: clamp(1.5rem, 2.4vw + 0.75rem, 2rem); font-weight: 400; letter-spacing: -0.02em; line-height: 1.15; color: var(--color-ink); margin-bottom: 1.5rem; }
+    svg { width: 100%; min-width: 900px; display: block; }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <p class="eyebrow">Layer stack · Diagram Design</p>
+    <h1>Production readiness, from the servers up to the team</h1>
+
+    <svg viewBox="0 0 960 496" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="general-production-checklist-for-automating-applications-title general-production-checklist-for-automating-applications-desc">
+      <title id="general-production-checklist-for-automating-applications-title">Production readiness, from the servers up to the team</title>
+      <desc id="general-production-checklist-for-automating-applications-desc">Layer stack of the production checklist, six layers from hosting at the bottom up through monitoring and logging, domains and third parties, the application, the development process and team coordination at the top, with hosting highlighted as the layer with the longest list.</desc>
+      <defs>
+        <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4b5563"/></marker>
+        <marker id="arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#0070f3"/></marker>
+        <marker id="arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4b5563"/></marker>
+      </defs>
+
+      <rect width="100%" height="100%" fill="#fafaf7"/>
+
+      <!-- Direction column, left margin -->
+      <text x="56" y="52" fill="#4b5563" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" letter-spacing="0.18em">TEAM</text>
+      <polygon points="76,72 84,72 80,64" fill="#4b5563"/>
+      <line x1="80" y1="72" x2="80" y2="408" stroke="rgba(17,17,17,0.30)" stroke-width="1"/>
+      <text x="56" y="424" fill="#4b5563" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" letter-spacing="0.18em">SERVERS</text>
+
+      <!-- L6 Coordination -->
+      <rect x="120" y="72" width="800" height="56" fill="#fafaf7"/>
+      <text x="140" y="103" fill="#4b5563" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" letter-spacing="0.14em">L6</text>
+      <text x="200" y="105" fill="#111111" font-size="14" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">Coordination</text>
+      <text x="900" y="105" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="end">shared knowledge · work hours and locations · Slack, email, phone</text>
+      <line x1="120" y1="128" x2="920" y2="128" stroke="rgba(17,17,17,0.12)" stroke-width="1"/>
+
+      <!-- L5 Development -->
+      <rect x="120" y="128" width="800" height="56" fill="#fafaf7"/>
+      <text x="140" y="159" fill="#4b5563" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" letter-spacing="0.14em">L5</text>
+      <text x="200" y="161" fill="#111111" font-size="14" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">Development</text>
+      <text x="900" y="161" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="end">version control · code review · tests green · CI · deploy Mon to Thu · runs locally</text>
+      <line x1="120" y1="184" x2="920" y2="184" stroke="rgba(17,17,17,0.12)" stroke-width="1"/>
+
+      <!-- L4 Application -->
+      <rect x="120" y="184" width="800" height="56" fill="#fafaf7"/>
+      <text x="140" y="215" fill="#4b5563" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" letter-spacing="0.14em">L4</text>
+      <text x="200" y="217" fill="#111111" font-size="14" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">Application</text>
+      <text x="900" y="217" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="end">docs for the team · deploy scripts · api.example.com · config in env vars, no passwords in the DB</text>
+      <line x1="120" y1="240" x2="920" y2="240" stroke="rgba(17,17,17,0.12)" stroke-width="1"/>
+
+      <!-- L3 Domains, SSL and 3rd parties -->
+      <rect x="120" y="240" width="800" height="56" fill="#fafaf7"/>
+      <text x="140" y="271" fill="#4b5563" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" letter-spacing="0.14em">L3</text>
+      <text x="200" y="273" fill="#111111" font-size="14" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">Domains, SSL and 3rd parties</text>
+      <text x="900" y="273" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="end">DNS · SSL renewal · transactional email · integrations: list, access, payment</text>
+      <line x1="120" y1="296" x2="920" y2="296" stroke="rgba(17,17,17,0.12)" stroke-width="1"/>
+
+      <!-- L2 Monitoring and logging -->
+      <rect x="120" y="296" width="800" height="56" fill="#fafaf7"/>
+      <text x="140" y="327" fill="#4b5563" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" letter-spacing="0.14em">L2</text>
+      <text x="200" y="329" fill="#111111" font-size="14" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">Monitoring and logging</text>
+      <text x="900" y="329" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="end">errors · server, database, Redis, jobs · uptime checks · log rotation, retention</text>
+      <line x1="120" y1="352" x2="920" y2="352" stroke="rgba(17,17,17,0.12)" stroke-width="1"/>
+
+      <!-- L1 Hosting (focal) -->
+      <rect x="120" y="352" width="800" height="56" fill="rgba(0,112,243,0.08)"/>
+      <rect x="120" y="352" width="800" height="56" fill="none" stroke="#0070f3" stroke-width="1"/>
+      <text x="140" y="383" fill="#0070f3" font-size="8" font-weight="600" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" letter-spacing="0.14em">L1</text>
+      <text x="200" y="385" fill="#111111" font-size="14" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">Hosting</text>
+      <text x="900" y="385" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="end">servers · access and SSH keys · disk space · backups: how often, where, restore test · CDN</text>
+
+      <!-- Outer silhouette -->
+      <rect x="120" y="72" width="800" height="336" fill="none" stroke="#4b5563" stroke-width="1"/>
+
+      <!-- Caption -->
+      <text x="120" y="456" fill="#4b5563" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" letter-spacing="0.18em">FOCAL LAYER</text>
+      <text x="220" y="456" fill="#4b5563" font-size="8.5" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">Hosting carries the longest list: who has access, how much disk is left, and a backup that someone has restored.</text>
+    </svg>
+  </div>
+</body>
+</html>

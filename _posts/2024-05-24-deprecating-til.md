@@ -5,6 +5,10 @@ excerpt: "Today I Learned (TIL) is a collection of insights around debugging and
 tags: [ruby, debugging, prototyping, ai, til]
 ---
 
+The prototyping loop from the notes below, in one picture:
+
+![A flowchart of a loop. A new prototype starts with a spec file and a git repository. The AI agent builds one feature. When it works, the feature is appended to the spec and committed, and the loop returns to the next feature. When it does not work, a fix is made by hand or by the agent, and the check runs again. After several failures in a row, the loop exits: write a new, more integrated spec and rebuild from it.](/assets/images/deprecating-til-recap.svg)
+
 ### General
 
 <a href="https://ruby-doc.org/3.3.4/Kernel.html#method-i-tap">Kernel#tap</a> is a method that yields self to the block and returns self. It is useful for debugging or for chaining methods together.

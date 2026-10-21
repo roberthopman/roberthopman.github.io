@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A template turns a loose report into a structured issue</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --color-paper:   #fafaf7;
+      --color-ink:     #111111;
+      --color-muted:   #4b5563;
+      --color-accent:  #0070f3;
+      --font-sans:     'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      --font-serif:    'Instrument Serif', Georgia, 'Times New Roman', serif;
+      --font-mono:     'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace;
+    }
+    body { font-family: var(--font-sans); background: var(--color-paper); color: var(--color-ink); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 3rem 2rem; }
+    .frame { max-width: 1200px; width: 100%; }
+    .eyebrow { font-family: var(--font-mono); font-size: 0.66rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-muted); margin-bottom: 0.5rem; }
+    h1 { font-family: var(--font-serif); font-size: clamp(1.5rem, 2.4vw + 0.75rem, 2rem); font-weight: 400; letter-spacing: -0.02em; line-height: 1.15; color: var(--color-ink); margin-bottom: 1.5rem; }
+    svg { width: 100%; min-width: 900px; display: block; }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <p class="eyebrow">Data flow · Diagram Design</p>
+    <h1>A template turns a loose report into a structured issue</h1>
+
+    <svg viewBox="0 0 960 440" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="bug-report-template-title bug-report-template-desc">
+      <title id="bug-report-template-title">A template turns a loose report into a structured issue</title>
+      <desc id="bug-report-template-desc">Data flow across three roles: a reporter's loose report meets the bug_report.md template in .github/ISSUE_TEMPLATE, GitHub turns the answers into a structured issue with expected and actual behavior, given-when-then steps, severity and environment, and the developer reproduces the bug with the steps already in hand.</desc>
+      <defs>
+        <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4b5563"/></marker>
+        <marker id="arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#0070f3"/></marker>
+        <marker id="arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4b5563"/></marker>
+      </defs>
+
+      <rect width="100%" height="100%" fill="#fafaf7"/>
+
+      <!-- Lane tints on lanes 0 and 2, then dividers -->
+      <rect x="40" y="80" width="880" height="96" fill="rgba(17,17,17,0.018)"/>
+      <rect x="40" y="272" width="880" height="96" fill="rgba(17,17,17,0.018)"/>
+      <line x1="40" y1="80" x2="920" y2="80" stroke="rgba(17,17,17,0.12)" stroke-width="0.8"/>
+      <line x1="40" y1="176" x2="920" y2="176" stroke="rgba(17,17,17,0.12)" stroke-width="0.8"/>
+      <line x1="40" y1="272" x2="920" y2="272" stroke="rgba(17,17,17,0.12)" stroke-width="0.8"/>
+      <line x1="40" y1="368" x2="920" y2="368" stroke="rgba(17,17,17,0.12)" stroke-width="0.8"/>
+      <line x1="192" y1="80" x2="192" y2="368" stroke="rgba(17,17,17,0.12)" stroke-width="0.8"/>
+
+      <!-- Step header: 01 REPORT, 02 TEMPLATE, 03 ISSUE, 04 DEBUG -->
+      <rect x="264" y="44" width="32" height="16" rx="8" fill="rgba(17,17,17,0.12)"/>
+      <text x="280" y="55" fill="#111111" font-size="7" font-weight="600" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle">01</text>
+      <text x="280" y="72" fill="#4b5563" font-size="7" font-weight="500" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle" letter-spacing="0.12em">REPORT</text>
+      <rect x="440" y="44" width="32" height="16" rx="8" fill="rgba(17,17,17,0.12)"/>
+      <text x="456" y="55" fill="#111111" font-size="7" font-weight="600" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle">02</text>
+      <text x="456" y="72" fill="#4b5563" font-size="7" font-weight="500" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle" letter-spacing="0.12em">TEMPLATE</text>
+      <rect x="616" y="44" width="32" height="16" rx="8" fill="rgba(17,17,17,0.12)"/>
+      <text x="632" y="55" fill="#111111" font-size="7" font-weight="600" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle">03</text>
+      <text x="632" y="72" fill="#4b5563" font-size="7" font-weight="500" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle" letter-spacing="0.12em">ISSUE</text>
+      <rect x="792" y="44" width="32" height="16" rx="8" fill="rgba(17,17,17,0.12)"/>
+      <text x="808" y="55" fill="#111111" font-size="7" font-weight="600" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle">04</text>
+      <text x="808" y="72" fill="#4b5563" font-size="7" font-weight="500" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle" letter-spacing="0.12em">DEBUG</text>
+
+      <!-- Lane labels -->
+      <text x="116" y="131" fill="#4b5563" font-size="8" font-weight="500" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle" letter-spacing="0.14em">REPORTER</text>
+      <text x="116" y="227" fill="#4b5563" font-size="8" font-weight="500" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle" letter-spacing="0.14em">GITHUB</text>
+      <text x="116" y="323" fill="#4b5563" font-size="8" font-weight="500" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle" letter-spacing="0.14em">DEVELOPER</text>
+
+      <!-- Connectors first. Single bend, r=8. -->
+      <path d="M360,128 H448 Q456,128 456,136 V188" fill="none" stroke="#0070f3" stroke-width="1.2" marker-end="url(#arrow-accent)"/>
+      <path d="M536,224 H552" fill="none" stroke="#4b5563" stroke-width="1" marker-end="url(#arrow)"/>
+      <path d="M712,224 H800 Q808,224 808,232 V284" fill="none" stroke="#4b5563" stroke-width="1" marker-end="url(#arrow)"/>
+
+      <!-- Focal arrow label, masked on the tinted lane, 8px above the stroke -->
+      <rect x="372" y="108" width="64" height="12" rx="2" fill="#f6f6f3"/>
+      <text x="404" y="118" fill="#0070f3" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle" letter-spacing="0.08em">NEW ISSUE</text>
+
+      <!-- Reporter: Loose report -->
+      <rect x="200" y="92" width="160" height="72" rx="6" fill="#fafaf7" stroke="rgba(17,17,17,0.25)" stroke-width="1"/>
+      <rect x="206" y="98" width="24" height="12" rx="3" fill="rgba(17,17,17,0.12)"/>
+      <text x="218" y="107" fill="#111111" font-size="7" font-weight="600" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle">REP</text>
+      <text x="280" y="126" fill="#111111" font-size="12" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">Loose report</text>
+      <text x="280" y="141" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle">“the save button breaks”</text>
+      <text x="280" y="154" fill="#6b7280" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle">chat · email · hallway</text>
+
+      <!-- GitHub: bug_report.md (focal) -->
+      <rect x="376" y="188" width="160" height="72" rx="6" fill="rgba(0,112,243,0.08)" stroke="#0070f3" stroke-width="1.2"/>
+      <rect x="382" y="194" width="24" height="12" rx="3" fill="rgba(0,112,243,0.20)"/>
+      <text x="394" y="203" fill="#0070f3" font-size="7" font-weight="600" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle">GH</text>
+      <text x="456" y="222" fill="#111111" font-size="12" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">bug_report.md</text>
+      <text x="456" y="237" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle">expected · actual · steps</text>
+      <text x="456" y="250" fill="#6b7280" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle">.github/ISSUE_TEMPLATE/</text>
+
+      <!-- GitHub: Structured issue -->
+      <rect x="552" y="188" width="160" height="72" rx="6" fill="#fafaf7" stroke="rgba(17,17,17,0.25)" stroke-width="1"/>
+      <rect x="558" y="194" width="24" height="12" rx="3" fill="rgba(17,17,17,0.12)"/>
+      <text x="570" y="203" fill="#111111" font-size="7" font-weight="600" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle">GH</text>
+      <text x="632" y="222" fill="#111111" font-size="12" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">Structured issue</text>
+      <text x="632" y="237" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle">given · when · then</text>
+      <text x="632" y="250" fill="#6b7280" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle">severity · environment</text>
+
+      <!-- Developer: Reproduce and fix -->
+      <rect x="728" y="284" width="160" height="72" rx="6" fill="#fafaf7" stroke="rgba(17,17,17,0.25)" stroke-width="1"/>
+      <rect x="734" y="290" width="24" height="12" rx="3" fill="rgba(17,17,17,0.12)"/>
+      <text x="746" y="299" fill="#111111" font-size="7" font-weight="600" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle">DEV</text>
+      <text x="808" y="318" fill="#111111" font-size="12" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">Reproduce and fix</text>
+      <text x="808" y="333" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle">steps already in hand</text>
+      <text x="808" y="346" fill="#6b7280" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle">hours of debugging saved</text>
+
+      <!-- Legend: steps -->
+      <text x="184" y="388" fill="#4b5563" font-size="8" font-weight="500" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="end" letter-spacing="0.12em">STEPS</text>
+      <rect x="200" y="379" width="24" height="12" rx="6" fill="rgba(17,17,17,0.12)"/>
+      <text x="212" y="388" fill="#111111" font-size="7" font-weight="600" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle">01</text>
+      <text x="232" y="388" fill="#4b5563" font-size="8.5" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">Report</text>
+      <rect x="300" y="379" width="24" height="12" rx="6" fill="rgba(17,17,17,0.12)"/>
+      <text x="312" y="388" fill="#111111" font-size="7" font-weight="600" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle">02</text>
+      <text x="332" y="388" fill="#4b5563" font-size="8.5" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">Template</text>
+      <rect x="412" y="379" width="24" height="12" rx="6" fill="rgba(17,17,17,0.12)"/>
+      <text x="424" y="388" fill="#111111" font-size="7" font-weight="600" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle">03</text>
+      <text x="444" y="388" fill="#4b5563" font-size="8.5" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">Issue</text>
+      <rect x="504" y="379" width="24" height="12" rx="6" fill="rgba(17,17,17,0.12)"/>
+      <text x="516" y="388" fill="#111111" font-size="7" font-weight="600" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle">04</text>
+      <text x="536" y="388" fill="#4b5563" font-size="8.5" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">Debug</text>
+
+      <!-- Legend: key -->
+      <text x="184" y="412" fill="#4b5563" font-size="8" font-weight="500" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="end" letter-spacing="0.12em">KEY</text>
+      <rect x="200" y="404" width="14" height="10" rx="2" fill="rgba(0,112,243,0.08)" stroke="#0070f3" stroke-width="1"/>
+      <text x="220" y="412" fill="#4b5563" font-size="8.5" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">The template</text>
+      <line x1="320" y1="409" x2="348" y2="409" stroke="#0070f3" stroke-width="1.2" marker-end="url(#arrow-accent)"/>
+      <text x="356" y="412" fill="#4b5563" font-size="8.5" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">The report meets the template</text>
+      <line x1="516" y1="409" x2="544" y2="409" stroke="#4b5563" stroke-width="1" marker-end="url(#arrow)"/>
+      <text x="552" y="412" fill="#4b5563" font-size="8.5" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">Handoff</text>
+    </svg>
+  </div>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enter a debug session when the test fails</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --color-paper:   #fafaf7;
+      --color-ink:     #111111;
+      --color-muted:   #4b5563;
+      --color-accent:  #0070f3;
+      --font-sans:     'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      --font-serif:    'Instrument Serif', Georgia, 'Times New Roman', serif;
+      --font-mono:     'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace;
+    }
+    body { font-family: var(--font-sans); background: var(--color-paper); color: var(--color-ink); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 3rem 2rem; }
+    .frame { max-width: 1200px; width: 100%; }
+    .eyebrow { font-family: var(--font-mono); font-size: 0.66rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-muted); margin-bottom: 0.5rem; }
+    h1 { font-family: var(--font-serif); font-size: clamp(1.5rem, 2.4vw + 0.75rem, 2rem); font-weight: 400; letter-spacing: -0.02em; line-height: 1.15; color: var(--color-ink); margin-bottom: 1.5rem; }
+    svg { width: 100%; min-width: 900px; display: block; }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <p class="eyebrow">Flowchart · Diagram Design</p>
+    <h1>Enter a debug session when the test fails</h1>
+
+    <svg viewBox="0 0 960 692" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="enter-debugging-session-when-tests-fails-title enter-debugging-session-when-tests-fails-desc">
+      <title id="enter-debugging-session-when-tests-fails-title">Enter a debug session when the test fails</title>
+      <desc id="enter-debugging-session-when-tests-fails-desc">Flowchart of a debug-only system test: when DEBUG_TESTS is set, it runs the happy path, and on an error it prints the test backtrace, takes a screenshot and opens a debug session.</desc>
+      <defs>
+        <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4b5563"/></marker>
+        <marker id="arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#0070f3"/></marker>
+        <marker id="arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4b5563"/></marker>
+      </defs>
+
+      <rect width="100%" height="100%" fill="#fafaf7"/>
+
+      <!-- Arrows first, behind the nodes. Main column x=332, right column ovals at x=572 -->
+      <line x1="332" y1="88" x2="332" y2="120" stroke="#4b5563" stroke-width="1.2" marker-end="url(#arrow)"/>
+      <line x1="432" y1="168" x2="572" y2="168" stroke="#4b5563" stroke-width="1.2" marker-end="url(#arrow)"/>
+      <line x1="332" y1="216" x2="332" y2="248" stroke="#4b5563" stroke-width="1.2" marker-end="url(#arrow)"/>
+      <line x1="332" y1="296" x2="332" y2="328" stroke="#4b5563" stroke-width="1.2" marker-end="url(#arrow)"/>
+      <line x1="432" y1="376" x2="572" y2="376" stroke="#4b5563" stroke-width="1.2" marker-end="url(#arrow)"/>
+      <line x1="332" y1="424" x2="332" y2="456" stroke="#4b5563" stroke-width="1.2" marker-end="url(#arrow)"/>
+      <line x1="332" y1="504" x2="332" y2="536" stroke="#0070f3" stroke-width="1.4" marker-end="url(#arrow-accent)"/>
+
+      <!-- Branch labels, masked, 8px clear of the stroke -->
+      <rect x="490" y="148" width="24" height="12" rx="2" fill="#fafaf7"/>
+      <text x="502" y="158" fill="#4b5563" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle" letter-spacing="0.12em">NO</text>
+
+      <rect x="340" y="226" width="32" height="12" rx="2" fill="#fafaf7"/>
+      <text x="356" y="236" fill="#4b5563" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle" letter-spacing="0.12em">YES</text>
+
+      <rect x="490" y="356" width="24" height="12" rx="2" fill="#fafaf7"/>
+      <text x="502" y="366" fill="#4b5563" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle" letter-spacing="0.12em">NO</text>
+
+      <rect x="340" y="434" width="32" height="12" rx="2" fill="#fafaf7"/>
+      <text x="356" y="444" fill="#4b5563" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle" letter-spacing="0.12em">YES</text>
+
+      <!-- Start oval -->
+      <rect x="252" y="40" width="160" height="48" rx="24" fill="#fafaf7"/>
+      <rect x="252" y="40" width="160" height="48" rx="24" fill="rgba(17,17,17,0.03)" stroke="rgba(17,17,17,0.30)" stroke-width="1"/>
+      <text x="332" y="62" fill="#111111" font-size="12" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">Run the test</text>
+      <text x="332" y="77" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle">DEBUG_TESTS=true</text>
+
+      <!-- Decision 1 -->
+      <polygon points="332,120 432,168 332,216 232,168" fill="#ffffff" stroke="#111111" stroke-width="1"/>
+      <text x="332" y="166" fill="#111111" font-size="11" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">DEBUG_TESTS</text>
+      <text x="332" y="180" fill="#111111" font-size="11" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">set?</text>
+
+      <!-- End oval: skip -->
+      <rect x="572" y="144" width="160" height="48" rx="24" fill="#fafaf7"/>
+      <rect x="572" y="144" width="160" height="48" rx="24" fill="rgba(17,17,17,0.03)" stroke="rgba(17,17,17,0.30)" stroke-width="1"/>
+      <text x="652" y="166" fill="#111111" font-size="12" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">Skip the test</text>
+      <text x="652" y="181" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle">return</text>
+
+      <!-- Step: run the happy path -->
+      <rect x="252" y="248" width="160" height="48" rx="6" fill="#fafaf7"/>
+      <rect x="252" y="248" width="160" height="48" rx="6" fill="#ffffff" stroke="#111111" stroke-width="1"/>
+      <text x="332" y="270" fill="#111111" font-size="12" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">Run the happy path</text>
+      <text x="332" y="285" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle">test_the_happy_path</text>
+
+      <!-- Decision 2 -->
+      <polygon points="332,328 432,376 332,424 232,376" fill="#ffffff" stroke="#111111" stroke-width="1"/>
+      <text x="332" y="374" fill="#111111" font-size="11" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">Raises an</text>
+      <text x="332" y="388" fill="#111111" font-size="11" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">error?</text>
+
+      <!-- End oval: passes -->
+      <rect x="572" y="352" width="160" height="48" rx="24" fill="#fafaf7"/>
+      <rect x="572" y="352" width="160" height="48" rx="24" fill="rgba(17,17,17,0.03)" stroke="rgba(17,17,17,0.30)" stroke-width="1"/>
+      <text x="652" y="374" fill="#111111" font-size="12" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">Test passes</text>
+      <text x="652" y="389" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle">green</text>
+
+      <!-- Step: collect evidence -->
+      <rect x="252" y="456" width="160" height="48" rx="6" fill="#fafaf7"/>
+      <rect x="252" y="456" width="160" height="48" rx="6" fill="#ffffff" stroke="#111111" stroke-width="1"/>
+      <text x="332" y="478" fill="#111111" font-size="12" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">Collect evidence</text>
+      <text x="332" y="493" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle">backtrace · screenshot</text>
+
+      <!-- Focal end oval: debug session -->
+      <rect x="252" y="536" width="160" height="56" rx="28" fill="#fafaf7"/>
+      <rect x="252" y="536" width="160" height="56" rx="28" fill="rgba(0,112,243,0.08)" stroke="#0070f3" stroke-width="1"/>
+      <text x="332" y="562" fill="#111111" font-size="12" font-weight="600" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" text-anchor="middle">Debug session</text>
+      <text x="332" y="577" fill="#4b5563" font-size="9" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" text-anchor="middle">debug(binding)</text>
+
+      <!-- Legend -->
+      <line x1="40" y1="608" x2="920" y2="608" stroke="rgba(17,17,17,0.10)" stroke-width="0.8"/>
+      <text x="40" y="624" fill="#4b5563" font-size="8" font-family="'Geist Mono', Menlo, Consolas, 'Liberation Mono', monospace" letter-spacing="0.18em">LEGEND · SHAPE CARRIES TYPE</text>
+      <rect x="40" y="640" width="24" height="12" rx="6" fill="rgba(17,17,17,0.03)" stroke="rgba(17,17,17,0.30)" stroke-width="1"/>
+      <text x="72" y="650" fill="#4b5563" font-size="8.5" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">Start / end (oval)</text>
+      <rect x="220" y="640" width="24" height="12" rx="2" fill="#ffffff" stroke="#111111" stroke-width="1"/>
+      <text x="252" y="650" fill="#4b5563" font-size="8.5" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">Step (rectangle)</text>
+      <polygon points="412,646 424,640 436,646 424,652" fill="#ffffff" stroke="#111111" stroke-width="1"/>
+      <text x="448" y="650" fill="#4b5563" font-size="8.5" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">Decision (diamond)</text>
+      <line x1="604" y1="646" x2="632" y2="646" stroke="#4b5563" stroke-width="1.2" marker-end="url(#arrow)"/>
+      <text x="640" y="650" fill="#4b5563" font-size="8.5" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">Branch</text>
+      <line x1="720" y1="646" x2="748" y2="646" stroke="#0070f3" stroke-width="1.4" marker-end="url(#arrow-accent)"/>
+      <text x="756" y="650" fill="#4b5563" font-size="8.5" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">Into the debugger</text>
+    </svg>
+  </div>
+</body>
+</html>

@@ -11,6 +11,10 @@ Why bother building a simple B2B CRUD app with Postgres and TypeScript?
 
 Well for example, time tracking and invoicing. It's a classic example.
 
+The request path that this post builds, one layer per stage:
+
+![A layer stack of six bands, top to bottom: Route, Controller, Service, Repository, Prisma client and PostgreSQL. An arrow on the left shows the request moving down the stack to SQL. Each band names its file and the question it answers, and the Service band is highlighted. A note below says that stage 1 was one route handler and that stages 2, 3 and 4 split out the service, the controller and the repository.](/assets/images/building-a-b2b-crud-app-with-postgres-and-javascript-recap.svg)
+
 What are the steps to build?
 
 ## Initial Steps 

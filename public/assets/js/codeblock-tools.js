@@ -154,7 +154,7 @@ function getLanguage(codeBlock) {
 function createChatGptButton(codeBlock) {
   const button = document.createElement('a');
   const code = codeBlock.textContent;
-  const prompt = `Please read the following ruby syntax documentation and help me understand it:\n\n${code}`;
+  const prompt = `Help me understand:\n\n${code}`;
 
   button.href = `https://chatgpt.com/?q=${encodeURIComponent(prompt)}`;
   button.className = 'codeblock-tool chatgpt-button';
@@ -167,7 +167,7 @@ function createChatGptButton(codeBlock) {
 function createClaudeButton(codeBlock) {
   const button = document.createElement('a');
   const code = codeBlock.textContent;
-  const prompt = `Please read the following ruby syntax documentation and help me understand it:\n\n${code}`;
+  const prompt = `Help me understand:\n\n${code}`;
 
   button.href = `https://claude.ai/new?q=${encodeURIComponent(prompt)}`;
   button.className = 'codeblock-tool claude-button';

@@ -8,6 +8,10 @@ tags: [ruby, rails, upgrade, maintenance, testing, deployment]
 
 First, we'll limit the scope to the technical part: upgrading the application.
 
+The whole loop, one version per step, with the checks after every step:
+
+![A flowchart that runs from top to bottom. It starts at Set the goal, then Cover critical processes, then Upgrade one version, then Run the checks. A decision asks if the critical processes still work. No leads to Fix the failures and back to Run the checks. Yes leads to a second decision that asks if the target version is reached. No leads back up to Upgrade one version. Yes leads to Deploy, acceptance first, then production.](/assets/images/how-to-upgrade-a-ruby-on-rails-application-recap.svg)
+
 Production parts to be considered which could impact the upgrade of the application:
 - server
 - database

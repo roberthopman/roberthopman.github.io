@@ -176,6 +176,8 @@ assert_equal(false, first_call.equal?(restored),
 # A wrong count ships silently unless it is pinned here directly. These are the counts
 # captured from the real dev server before WORD_COUNT_CACHE existed;
 # recomputing the split rule here would let a broken cache still pass.
+# nextgen-erb-lint-caching was re-pinned on 2026-09-17 after its recap
+# diagram went in: the caption and the alt text count as rendered words.
 diagnose_a_bug = Post.all.find { |doc| doc.path == "_posts/2026-08-09-diagnose-a-bug.md" }
 assert_equal(1218, diagnose_a_bug.word_count, "word count: diagnose-a-bug")
 
@@ -183,7 +185,7 @@ drawing_svg = Post.all.find { |doc| doc.path == "_posts/2026-05-31-drawing-open-
 assert_equal(2391, drawing_svg.word_count, "word count: drawing-open-circular-cycle-diagrams-in-svg")
 
 erb_lint_caching = Post.all.find { |doc| doc.path == "_posts/2025-11-29-nextgen-erb-lint-caching.md" }
-assert_equal(223, erb_lint_caching.word_count, "word count: nextgen-erb-lint-caching")
+assert_equal(304, erb_lint_caching.word_count, "word count: nextgen-erb-lint-caching")
 
 ai_page = Page.all.find { |doc| doc.path == "ai.md" }
 assert_equal(384, ai_page.word_count, "word count: ai.md")
@@ -279,5 +281,64 @@ assert_equal(true, short_html.include?("#{short_posts.size} of #{Post.all.size} 
 longest = Post.all.max_by(&:word_count)
 assert_equal(false, short_html.include?(%(href="#{longest.url}")),
              "the longest post stays off the short range page")
+
+status, _headers, body = Rails.application.call(Rack::MockRequest.env_for("/diagnose-a-bug/", "HTTP_HOST" => "localhost"))
+telegram_html = +""
+body.each { |chunk| telegram_html << chunk }
+body.close if body.respond_to?(:close)
+assert_equal(200, status, "a post renders")
+assert_equal(1, telegram_html.scan(%(class="social-movement-follow")).size, "the post has one follow block")
+follow_block = telegram_html[/<div class="social-movement-follow">.*?<\/div>/m]
+assert_equal(true, follow_block.include?(%(href="https://t.me/roberthopman")), "the follow icons link to Telegram")
+footer = telegram_html[/<footer.*<\/footer>/m]
+assert_equal(true, footer.include?(%(href="https://t.me/roberthopman")), "the footer links to Telegram")
+assert_equal(true, Site.config.dig("social", "links").include?("https://t.me/roberthopman"), "sameAs names Telegram")
+
+def rendered(path)
+  status, _headers, body = Rails.application.call(Rack::MockRequest.env_for(path, "HTTP_HOST" => "localhost"))
+  html = +""
+  body.each { |chunk| html << chunk }
+  body.close if body.respond_to?(:close)
+  [status, html]
+end
+
+edit_base = "https://github.com/roberthopman/roberthopman.github.io/edit/master/"
+_status, comment_post_html = rendered("/diagnose-a-bug/")
+assert_equal(true, comment_post_html.include?(%(href="#{edit_base}_posts/2026-08-09-diagnose-a-bug.md")),
+             "a post invites a comment through a pull request on its own file")
+_status, comment_page_html = rendered("/author/")
+assert_equal(true, comment_page_html.include?(%(href="#{edit_base}author.md")),
+             "a page invites a comment through a pull request on its own file")
+_status, comment_404_html = rendered("/404.html")
+assert_equal(false, comment_404_html.include?(edit_base), "the 404 page has no comment invitation")
+assert_equal(true, comment_post_html.include?("<h2>Comments <small>"), "a post without comments has a heading without a count")
+assert_equal(false, comment_post_html.include?(%(class="comment-thread")), "a post without comments renders no thread")
+
+commented = Document.allocate
+commented.instance_variable_set(:@path, "_posts/2024-07-01-transactional-email-provider.md")
+commented.instance_variable_set(:@front_matter, {
+  "comments" => [
+    { "author" => "jdevries", "date" => Date.new(2026, 9, 2), "body" => "Postmark support answers <b>fast</b>.",
+      "replies" => [{ "author" => "roberthopman", "date" => Date.new(2026, 9, 3), "body" => "Same here." }] },
+    { "author" => "mkowalski", "date" => Date.new(2026, 9, 20), "body" => "Lettermint?",
+      "replies" => [
+        { "author" => "tvandam", "date" => Date.new(2026, 9, 22), "body" => "First reply." },
+        { "author" => "sarah-builds", "date" => Date.new(2026, 9, 23), "body" => "Second reply." }
+      ] },
+    { "author" => "sarah-builds", "date" => Date.new(2026, 10, 16), "body" => "Resend works well." }
+  ]
+})
+thread_html = ApplicationController.render(partial: "shared/comment_invite", locals: { document: commented })
+assert_equal(true, thread_html.include?("<h2>Comments (6) <small>"), "the heading counts comments and replies")
+assert_equal(3, thread_html.scan(%(class="comment-thread")).size, "each comment opens its own thread")
+assert_equal(3, thread_html.scan(%(class="comment comment--reply)).size, "replies sit inside their thread")
+assert_equal(["1 reply", "2 replies", "No replies yet"], thread_html.scan(/<span>(\d+ repl\w+|No replies yet)<\/span>/).flatten,
+             "each thread counts its own replies")
+assert_equal(1, thread_html.scan(%(class="comment-author-badge")).size, "only the site author gets the Author badge")
+assert_equal(true, thread_html.index("First reply.") < thread_html.index("Second reply."), "replies keep their order")
+assert_equal(true, thread_html.include?(%(<time datetime="2026-09-02">2 Sep 2026</time>)), "a comment shows its date")
+assert_equal(true, thread_html.include?("&lt;b&gt;fast&lt;/b&gt;"), "a comment body is escaped")
+assert_equal(4, thread_html.scan(%(href="#{edit_base}_posts/2024-07-01-transactional-email-provider.md")).size,
+             "each thread has a reply link to the edit page, next to the invite link")
 
 puts "all document assertions passed"

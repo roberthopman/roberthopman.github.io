@@ -33,11 +33,21 @@
   font-size: 0.78rem;
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
+  padding-left: 0;
+}
+
+.sidebar-header {
+  padding-left: 0;
+}
+
+.sidebar-header,
+.sidebar-nav {
+  margin-right: 0.75rem;
 }
 
 /* Wrapper inside left sidebar */
 .sidebar-extra {
-  padding: 0.75rem;
+  padding: 0 0.75rem 0.75rem 0;
   font-size: 0.85rem;
 }
 

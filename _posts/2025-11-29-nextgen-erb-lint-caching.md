@@ -10,6 +10,10 @@ description: A small contribution to nextgen that enables ERB Lint caching
 
 I recently submitted a [pull request](https://github.com/mattbrictson/nextgen/pull/178) to Matt Brictson's nextgen gem. 
 
+What the `--cache` flag changes in the pre-commit hook:
+
+![A flowchart that starts at a commit. The Overcommit pre-commit hook runs bin/erb_lint --lint-all --cache. A decision asks whether the file changed since the last run. No leads right to Reuse the cached result from .erb_lint_cache, and this fast path is highlighted. Yes leads down to Lint the file and write the result to the cache. Both paths merge and the commit proceeds with a faster hook.](/assets/images/nextgen-erb-lint-caching-recap.svg)
+
 ## Why Bother
 
 Pre-commit hooks are becoming annoyingly slow when they check all erb files.
